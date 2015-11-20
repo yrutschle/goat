@@ -1,0 +1,95 @@
+#! /usr/bin/perl -w
+
+# Goat: Gentil Organisateur et Administrateur de Tournois
+# Copyright (C) 2006-2007  Yves Rutschle
+# 
+# This program is free software; you can redistribute it
+# and/or modify it under the terms of the GNU General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later
+# version.
+# 
+# This program is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied
+# warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+# PURPOSE.  See the GNU General Public License for more
+# details.
+# 
+# The full text for the General Public License is here:
+# http://www.gnu.org/licenses/gpl.html
+
+=head1 NAME
+
+ add_player -- registers one additional player to a tournament
+
+=head1 SYNOPSIS
+
+ add_player [--getech] [-f file] <additionalplayers.txt>
+
+=head1 DESCRIPTION
+
+B<add_player> adds the specified players to the tournament
+file. It's essentially the same as B<register>, except it
+works on an existing file. Maybe only one tool should exist.
+
+=cut
+
+# Processes registrations:
+# - Input file: muttrc-syntax alias file; echelle file
+# - Output file: Tournament object in file toperm
+
+use strict;
+use locale;
+use Getopt::Long;
+use Pod::Usage;
+
+# Check we have the right environment variables to find
+# the modules, and add to @INC.
+BEGIN {
+    die "Environment variable GOAT_DIR and WORK_DIR must be defined\n" 
+        if not defined $ENV{GOAT_DIR} or not defined $ENV{WORK_DIR};
+
+    push @INC, $ENV{GOAT_DIR};
+}
+
+use Tournament;
+use GoatLib;
+
+my $ECHELLE_FILE = "ech_ffg.txt";
+
+my ($param_file, $help);
+GetOptions(
+    'help' => \$help,
+    'file=s' => \$param_file,
+) or die pod2usage();
+
+die pod2usage(-verbose=>2) if defined $help;
+die "No tournament file specified. Use -f <file>.\n" unless defined $param_file;
+
+my @registered;
+
+while (<>) {
+    next if /^#/ or /^$/;
+    my $player = FFGPlayer->new_from_alias($_, $ECHELLE_FILE);
+    push @registered, $player if defined $player;;
+}
+
+# Sort by level
+@registered = sort { $b->level <=> $a->level } @registered;
+
+# Sort by registration level
+#@registered = 
+#   map { $_->[1] } 
+#   sort { $b->[0] <=> $a->[0] } 
+#   map { [(stone_to_level $_->registering_level), $_] }
+#   @registered;
+
+# Tournament object
+my $t = load Tournament "$param_file";
+foreach my $p (@registered) {
+    $t->add_player($p);
+    warn "registering ".$p->fulladdress."\n";
+}
+$t->save($param_file);
+
+warn "Registered ".(scalar @registered)." more players.\n";

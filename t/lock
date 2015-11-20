@@ -1,0 +1,11 @@
+#! /usr/bin/perl -w
+# Test script: lock a file for 5s.
+
+use Fcntl ':flock';
+
+my ($file, $time) = @ARGV;
+
+open $fh, $file or die "$file: $!\n";
+flock $fh, LOCK_EX or die "$file: $!\n";
+
+sleep $time;

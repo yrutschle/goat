@@ -1,0 +1,242 @@
+#! /usr/bin/perl
+#########################
+# Run test suite for Goat. From Goat's dir, just:
+# export PERLLIB=`pwd`
+# t/run
+# of t/run x  to run just test x
+#
+# Coverage reports is in t/tmp/cover_db/coverage.html
+#
+
+use strict;
+use warnings;
+
+my @tests;
+
+mkdir "t/tmp" unless -e "t/tmp" or die "Can't create test directory t/tmp: $!\n";
+
+$ENV{GOAT_DIR} = $ENV{PWD};
+$ENV{WORK_DIR} = "$ENV{PWD}/t/tmp";
+
+my $coverage = 0; # Set to 1 to do code coverage analysis
+
+my $perl_opts = ''; # Options passed to Perl
+$perl_opts .= '-MDevel::Cover="-silent,on"' if $coverage;
+
+push @tests, 
+
+# update_level: check it all works
+{
+    'run' => "cp ../ech_ffg2.txt ech_ffg.txt; cp ../toperm.in.8 toperm; perl $perl_opts ../../update_level --no-getech -f toperm 2> out.20",
+    'test' => 'diff -u ../out.20 out.20',
+    'doc' => 'Update data from echelle',
+},
+
+   # register: register some players
+   # Tests REGISTER_1, REGISTER_2, REGISTER_3, REGISTER_4,
+   # REGISTER_5
+   { 'run' => "cp ../mutt1 mutt; cp ../ech_ffg.txt .; perl $perl_opts ../../register -f toperm mutt 2> out.0 ; perl $perl_opts ../../goat --list-players >> out.0",
+       'test' => 'diff -u ../out.0 out.0',
+       'doc' => 'Register players',
+   },
+   # pair: create a new round
+   # Tests PAIR_1, PAIR_2, PAIR_3, PAIR_5
+   { 'run' => " export TEST_TIME=1122737400; cp ../toperm_in.1 toperm; perl $perl_opts ../../pair --test -f toperm > out.1 2>&1 ; perl $perl_opts ../../goat --status >> out.1",
+       'test' => 'diff -u ../out.1 out.1',
+       'doc' => 'New round',
+   },
+   # pair: fail because of odd number of players 
+   # Tests PAIR_4
+   { 'run' => "cp ../toperm_in.1 toperm; " .
+       "echo 'alias newplayer New Player <newplayer\@example.org> #6k' | perl $perl_opts ../../add_player -f toperm > out.1b 2>&1 ; ".
+       "perl $perl_opts ../../pair -f toperm >> out.1b 2>&1 ; perl $perl_opts ../../goat --status >> out.1b",
+       'test' => 'diff -u ../out.1b out.1b',
+       'doc' => 'New round with odd number of players',
+   },
+   # pair: pair with a bye player
+   # Tests PAIR_4
+   { 'run' => "cp ../toperm_in.1 toperm; " .
+       "echo 'alias newplayer New Player <newplayer\@example.org> #6k' | perl $perl_opts ../../add_player -f toperm > out.1c 2>&1 ; ".
+       "perl $perl_opts ../../pair -f toperm --bye newplayer\@example.org >> out.1c 2>&1 ; perl $perl_opts ../../goat --status >> out.1c",
+       'test' => 'diff -u ../out.1c out.1c',
+       'doc' => 'New round with bye player',
+   },
+   # del_game: remove a game
+    { 'run' => "cp ../toperm_in.2 toperm; perl $perl_opts ../../del_game -f toperm yves\@example.org > out.1d 2>&1 ; " .
+        "perl $perl_opts ../../goat --status >> out.1d 2>&1",
+      'test' => 'diff -u ../out.1d out.1d',
+      'doc' => 'Remove a game',
+  },
+  # add_game: adds a game (with 2 new players)
+   { 'run' => "cp ../toperm_in.2 toperm; " .
+       "echo 'alias newplayer1 New Player <newplayer1\@example.org> #6k' | perl $perl_opts ../../add_player -f toperm > out.1e 2>&1 ; ".
+       "echo 'alias newplayer2 New Player2 <newplayer2\@example.org> #6k' | perl $perl_opts ../../add_player -f toperm > out.1e 2>&1 ; ".
+       "perl $perl_opts ../../add_game -f toperm --black newplayer1\@example.org --white newplayer2\@example.org --handicap 2 >> out.1e 2>&1 ; perl $perl_opts ../../goat --status >> out.1e",
+       'test' => 'diff -u ../out.1e out.1e',
+       'doc' => 'Add a game to an existing round',
+   },
+   # del_player: removes a player
+    { 'run' => "cp ../toperm_in.1 toperm; perl $perl_opts ../../del_player -f toperm yves\@example.org > out.1f 2>&1 ; " .
+        "perl $perl_opts ../../goat --list-all >> out.1f 2>&1",
+      'test' => 'diff -u ../out.1f out.1f',
+      'doc' => 'Remove a player',
+  },
+
+   
+   
+   # 1: challenges and timing
+   # Test GOAT_1, GOAT_2, GOAT_3, GOAT_4
+    { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.2 toperm; perl $perl_opts ../../goat --test --reminders > out.2 2>&1 ; " .
+        "perl $perl_opts ../../goat --status >> out.2 2>&1",
+      'test' => 'diff -u ../out.2 out.2',
+      'doc' => 'Timing',
+  },
+
+  # 5: result error on colour
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.10 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.5",
+      'test' => 'diff -u ../out.5 out.5',
+      'doc' => 'wrong colour',
+  },
+  # 6: schedule error on date (reuse *.2 test files except out.6, as pairs shouldn't change)
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.11 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.6",
+      'test' => 'diff -u ../out.6 out.6',
+      'doc' => 'schedule a game with invalid date',
+  },
+  # 7: schedule error on player (reuse *.2)
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.12 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.7",
+      'test' => 'diff -u ../out.7 out.7',
+      'doc' => 'schedule a game with invalid player',
+  },
+  # 8: schedule error date in past (reuse *.5, and pairs_in.5
+  # as pairs shouldn't change)
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.3 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.8",
+      'test' => 'diff -u ../out.8 out.8',
+      'doc' => 'schedule a game in past',
+  },
+  # 10: We get a result!
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.13 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.10",
+      'test' => 'diff -u ../out.10 out.10',
+      'doc' => 'Receive results',
+  },
+  # Check for loops
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.14 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.12",
+      'test' => 'diff -u ../out.12 out.12',
+      'doc' => 'Check for loops',
+  },
+  # Drop messages from postmasters (otherwise we'll loop
+  # with them)
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.15 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.13",
+      'test' => 'diff -u ../out.13 out.13', 
+      'doc' => 'Drop mail from postmasters',
+  },
+  # Drop messages with no from
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.16 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.14",
+      'test' => 'diff -u ../out.14 out.14',
+      'doc' => 'Drop mail without from address',
+  },
+  # Scheduling, command in subject
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.17 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.15 ; perl $perl_opts ../../goat --status >> out.15 2>&1",
+      'test' => 'diff -u ../out.15b out.15',
+      'doc' => 'Successful game scheduling',
+  },
+  # Scheduling with command in the body of the e-mail
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.18 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.15 ; perl $perl_opts ../../goat --status >> out.15 2>&1",
+      'test' => 'diff -u ../out.15 out.15',
+      'doc' => 'game scheduling with command in body of mail (UTF8)',
+  },
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.18b letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.15 ; perl $perl_opts ../../goat --status >> out.15 2>&1",
+      'test' => 'diff -u ../out.15 out.15',
+      'doc' => 'game scheduling with command in body of mail (ISO-8859-1)',
+  },
+  # Same test as previous, with multi-part e-mail
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.19 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.15 ; perl $perl_opts ../../goat --status >> out.15 2>&1",
+      'test' => 'diff -u ../out.15 out.15',
+      'doc' => 'game scheduling with command in body of multi-part mail',
+  },
+
+  # 11: TOU output
+  { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.6 toperm; perl $perl_opts ../../goat -f toperm --tou full --test > out.200 2>&1",
+      'test' => 'diff -u ../out.200 out.200',
+      'doc' => 'Generate TOU',
+  },
+  # 11: TOU output for one single round (remove players who
+  # didn't play, and still use players who got deleted)
+  { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.7 toperm; perl $perl_opts ../../goat -f toperm --tou --round 1 --test > out.201 2>&1",
+      'test' => 'diff -u ../out.201 out.201',
+      'doc' => 'Generate TOU for a single round',
+  },
+
+
+  # Tests for mail_out
+  # 16: mail_in_illegal
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.1 letter; cat letter | perl $perl_opts ../../mail_in -t > out.70",
+      'test' => 'diff -u ../out.70 out.70',
+      'doc' => 'mail_out illegal mail and attach',
+  },
+  # 17: issue-challenge
+    { 'run' => "export TEST_TIME=1122737400; perl $perl_opts ../../mail_out --no-send --issue-challenge \"joe\@bar.com,jack\@baz.com,2,1125329400\" > out.71",
+      'test' => 'diff -u ../out.71 out.71',
+      'doc' => 'mail_out issue challenge',
+  },
+  ;
+
+#use Test::More tests => 42;
+  use Test::More;
+
+chdir "t/tmp" || die "Can't chdir to my test directory";
+
+system "cover -delete" if $coverage;
+die "Unable to clear coverage analysis.\n" if $?;
+
+my $index = 1;
+
+my $test = shift;
+
+# run -l to list all tests and exit
+if (defined $test and $test =~ /^-l/) {
+    foreach my $test(@tests) {
+        print $index++ . " => " . $test->{'doc'} . "\n";;
+    }
+    exit 0;
+}
+
+@tests = ($tests[$test-1]) if defined $test;
+
+
+foreach my $test ( @tests ) {
+    my ($val,$name);
+
+    print "running ".$index++."\n";
+    my $cmd=$test->{'run'};
+    $val=system($cmd);
+
+    $name=$test->{'doc'}.' runs';
+    ok($val == 0,$name);
+    diag($test->{'run'}) unless ($val == 0);
+
+    SKIP: {
+    	skip ("Command didn't run, can't test the validity of its return",1)
+	     if $val;
+        $val=system($test->{'test'});	
+    	$name=$test->{'doc'}.' returns what is expected';
+        ok($val == 0,$name);
+	unless ($val == 0) {
+	    diag ("Failed (retval=$val) on:");
+	    diag ($test->{'test'});
+	    diag ("Was created with:");
+	    diag ($test->{'run'});
+	}
+    }
+}
+
+done_testing($index);
+
+if ($coverage) {
+    system "cover"; 
+    die "Unable to generate coverage status.\n" if $?;
+    warn "Coverage report generated\n";
+}
+
+chdir "../.." || die "Can't chdir back to my root";
+
+0;

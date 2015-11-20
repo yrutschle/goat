@@ -1,0 +1,65 @@
+REGISTER_1
+        register shall accept mutt-like aliases, optionnaly
+        augmented with a stone rating as a comment. The
+        stone rating shall be of the form '\d+[kd]'
+
+        E.g.:
+        alias jb Joe Bloggs <email@joeblog.org> #5k
+
+        The license can also be explicitly specified:
+
+        alias jb Joe Bloggs <email@joeblog.org> #5k 1012345
+
+
+REGISTER_2
+        If no level is specified in the alias, register
+        shall use the rating found in the echelle file.
+
+REGISTER_3
+        If no rating is specified in the echelle file,
+        register shall use -1600.
+
+REGISTER_4
+        register shall get club, license and other player
+        information from the echelle file.
+
+
+
+PAIR_1        
+        pair shall generate a new round in a tournament.
+
+PAIR_2
+        pair shall only pair players who haven't played
+        together before.
+
+PAIR_3
+        pair shall minimize the level difference between
+        opponents.
+
+PAIR_4
+        pair shall exit if the number of player in the
+        tournament is odd and no bye player is selected.
+
+
+GOAT_1
+        goat shall send a notification of games that have
+        not yet been notified.
+
+GOAT_2
+        goat shall send a new notification once a week
+        when no result or hasn't been scheduled.
+
+GOAT_3
+        goat shall send a request for result for games which
+        have no result and were scheduled more than one day
+        ago.
+
+GOAT_4
+        goat shall send a reminder one day before the day a
+        game is scheduled
+
+OUT_1
+        goat shall export tournament information in the TOU
+        file format. Players that have played no games in
+        the exported rounds shall not be included in the
+        exported file.

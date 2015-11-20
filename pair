@@ -1,0 +1,233 @@
+#! /usr/bin/perl -w
+
+# Goat: Gentil Organisateur et Administrateur de Tournois
+# Copyright (C) 2006-2015 Yves Rutschle
+# 
+# This program is free software; you can redistribute it
+# and/or modify it under the terms of the GNU General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later
+# version.
+# 
+# This program is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied
+# warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+# PURPOSE.  See the GNU General Public License for more
+# details.
+# 
+# The full text for the General Public License is here:
+# http://www.gnu.org/licenses/gpl.html
+
+=head1 NAME
+
+pair -- compute a new round in a tournament
+
+=head1 SYNOPSIS
+
+pair [--bye [<bye_player>|'random']] [--date <date>] --file <toperm>
+
+=head1 DESCRIPTION
+
+I<pair> computes a new round based on the specified
+tournament file. If the number of players in the file is
+odd, it'll complain and you need to specify the e-mail
+address of a 'bye' player, who won't take part in this
+round. Alternatively you can specify 'random', in which case
+the bye player will be randomly picked among those that
+haven't played their game in the previous round.
+
+If the B<date> is specified, it will be displayed in
+all reminders. If not specified, one month from now is
+picked.
+
+=cut
+
+use strict;
+use Algorithm::Pair::Best2;
+use Pod::Usage;
+
+
+package main;
+
+# Check we have the right environment variables to find
+# the modules, and add to @INC.
+BEGIN {
+    die "Environment variable GOAT_DIR and WORK_DIR must be defined\n" 
+        if not defined $ENV{GOAT_DIR} or not defined $ENV{WORK_DIR};
+
+    push @INC, $ENV{GOAT_DIR};
+}
+
+use Tournament;
+use Getopt::Long;
+
+# Interpret command line
+my ($testing, $param_file, $param_bye, $param_final_date, $help);
+GetOptions(
+    'test' => \$testing,
+    'help' => \$help,
+    'file=s' => \$param_file,
+    'date=s' => \$param_final_date,
+    'bye=s' => \$param_bye,
+) or die pod2usage();
+
+die pod2usage(-verbose=>2) if defined $help;
+die "No tournament file specified. Use -f <file>.\n" unless defined $param_file;
+my $Tournament = Tournament->load($param_file);
+
+
+#Equivalent to time(), except if $testing is true it will
+#pick the time in $ENV{TEST_TIME}. This allows regression
+#testing.
+sub my_time {
+    if ($testing) {
+        die "TEST_TIME not set while in testing mode\n" if not defined $ENV{TEST_TIME};
+        return $ENV{TEST_TIME};
+    }
+    return time;
+}
+
+# Applies function to all games in a tournament. Game is
+# passed as first parameter to function, e.g. remove all
+# handicaps:
+# map_game { $_[0]->handi(0) } $tournament
+sub map_game (&@) {
+    my ($cref, $tournament) = @_;
+
+    foreach my $round ($Tournament->rounds) {
+        foreach my $game ($round->games) {
+            &$cref($game);
+        }
+    }
+}
+
+=head2 Pairing criteria
+
+Pairing is based on the "best fit" algorithm (see
+Pair::Algorithm, module on which this program is based).
+Lower is better.  The following criteria are used:
+
+=head3 Level difference
+
+Each point of difference in level decreases the desirability
+of the pairing (remembering that there is 100 points per
+stone). E.g. pairing a -875 with a -1450, this criterion
+will produce a score of 575.
+
+=cut
+sub level_diff {
+    my ($p1, $p2, $explain) = @_;
+
+    my $diff = abs($p1->level - $p2->level);
+
+    my $score = $diff;
+
+    return $score;
+}
+
+=head3 Already played
+
+Players who have already played together during this
+tournament get a +10000 to their pairing score.
+
+=cut
+sub already_played {
+    my ($p1, $p2, $explain) = @_;
+
+    my $played = 0;
+
+    map_game {
+        my $g = $_[0]; 
+        $played++ if 
+        $g->white->id eq $p1->id and $g->black->id eq $p2->id or
+        $g->white->id eq $p2->id and $g->black->id eq $p1->id;
+    } $Tournament;
+
+    my $score = 10000 * $played;
+    return $score;
+}
+
+
+sub score {
+    my ($a, $b) = @_;
+
+    my $exp = 0; # Explain (not implemented)
+    return already_played($a, $b, $exp) + level_diff($a, $b, $exp);
+}
+
+my $matchmaker = Algorithm::Pair::Best2->new(
+    scoreSub => \&score,
+    window => 6,
+);
+
+
+
+
+# Test for odd number of players -- request to remove one
+my @players = $Tournament->players;
+if (1 & @players) {
+    if (defined $param_bye and $param_bye eq 'random') {
+        my @games_not_played = grep { not ($_->is_finished or $_->is_canceled) } $Tournament->curr_round->games;
+        my @players_not_played = map { $_->white, $_->black } @games_not_played;
+        my $bye = @players_not_played[ rand @players_not_played ];
+        warn "Randomly picking ".$bye->fullname." as bye player\n";;
+        @players = grep { $_->id ne $bye->id } @players;
+    } else {
+        die "Odd number of players -- specify a bye with:\n".
+        "\tpair --bye <email>\n" unless defined $param_bye;
+
+        @players = grep { $_->email ne $param_bye } @players;
+        die "$param_bye not found\n" if (1 & @players);
+    }
+}
+
+# Add all players to the pairing object. 
+foreach my $p (reverse sort {$a->level <=> $b->level} @players) {
+    $matchmaker->add($p);
+}
+
+# Find the longest name+address
+my $max_name_length = (sort { $a <=> $b } map { length $_->fulladdress } @players)[-1];
+
+use Data::Dumper;
+my $round_num = ($Tournament->round_number || 0) + 1;
+print "Round $round_num\n";
+
+my $bl = length "Noir";
+my $wl = length "Blanc";
+print "Noir". " " x ($max_name_length - $bl) . 
+      " Blanc"." " x($max_name_length - $wl) . 
+      " handicap\n";
+
+
+my $round = Round->new($round_num);
+if (defined $param_final_date) {
+    die "--date not implemented\n";
+} else {
+    $param_final_date = my_time() + 30 * 24 * 3600; # one month in the future
+}
+$round->final_date($param_final_date);
+$Tournament->add_round($round_num, $round);
+
+my @res = $matchmaker->pick();
+while (@res) {
+    my $p1 = shift @res;
+    my $p2 = shift @res;
+
+    # Weaker player is black
+    my ($black, $white) = ($p1->level > $p2->level) ? ($p2, $p1) : ($p1, $p2);
+    my $handi = int(($white->level - $black->level)/100);
+    $handi -= 1 if $handi > 0;
+    my $g = new GoGame $black, $white, $handi;
+
+    # Print out a formated line
+    my $bl = length $black->fulladdress;
+    my $wl = length $white->fulladdress;
+    print $black->fulladdress . " " x ($max_name_length - $bl) . " " . 
+          $white->fulladdress . " " x($max_name_length - $wl) . " $handi\n";
+
+    $Tournament->curr_round->add_game($g);
+}
+
+$Tournament->save($param_file);
+

@@ -1,0 +1,48 @@
+#! /usr/bin/perl -w
+
+# remove a player from next rounds (played games and score
+# remain)
+
+use strict;
+use locale;
+
+# Check we have the right environment variables to find
+# the modules, and add to @INC.
+BEGIN {
+    die "Environment variable GOAT_DIR and WORK_DIR must be defined\n" 
+        if not defined $ENV{GOAT_DIR} or not defined $ENV{WORK_DIR};
+
+    push @INC, $ENV{GOAT_DIR};
+}
+
+use Tournament;
+use Getopt::Long;
+use Pod::Usage;
+
+my ($param_file, $help);
+GetOptions(
+    'help' => \$help,
+    'file=s' => \$param_file,
+) or die pod2usage();
+
+die pod2usage(-verbose=>2) if defined $help;
+die "No tournament file specified. Use -f <file>.\n" unless defined $param_file;
+
+
+my $t = load Tournament "$param_file";
+
+my $p = $t->find_player_by_email(shift);
+$t->del_player($p);
+print "deleting ".$p->fullname." <".$p->email.">\n";
+
+$t->save($param_file);
+
+=head1 NAME
+
+ del_player
+
+=SYNOPSIS
+
+ del_player -f <tournament file> <player email>
+
+

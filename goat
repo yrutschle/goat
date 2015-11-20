@@ -1,0 +1,799 @@
+#! /usr/bin/perl -w
+
+# Goat: Gentil Organisateur et Administrateur de Tournois
+# Copyright (C) 2006-2007  Yves Rutschle
+# 
+# This program is free software; you can redistribute it
+# and/or modify it under the terms of the GNU General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later
+# version.
+# 
+# This program is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied
+# warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+# PURPOSE.  See the GNU General Public License for more
+# details.
+# 
+# The full text for the General Public License is here:
+# http://www.gnu.org/licenses/gpl.html
+
+
+use strict;
+use File::Copy;
+
+use Getopt::Long;
+use Pod::Usage;
+use Time::ParseDate;  # This is in Debian's libtime-modules-perl package
+use Date::Parse;
+use Date::Language;
+
+use Mail::Address;
+
+use Fcntl qw/SEEK_SET LOCK_EX LOCK_UN/;
+
+# Check we have the right environment variables to find
+# the modules, and add to @INC.
+BEGIN {
+    die "Environment variable GOAT_DIR and WORK_DIR must be defined\n" 
+        if not defined $ENV{GOAT_DIR} or not defined $ENV{WORK_DIR};
+
+    push @INC, $ENV{GOAT_DIR};
+}
+use GoatConfig;
+
+use Tournament;
+use Round;
+use GoGame;
+use FFGPlayer;
+
+=head1 NAME
+
+goat -- gentil organisateur et adminstrateur de tournois
+        Great Organiser and Assistant for Tournaments
+
+=head1 SYNOPSIS
+
+goat [--test] [--simulate]
+     [--file <pairing file>]
+     [--round <num>]
+     [--submitting-results]
+     [--tou [full][,submitted]]
+     [--schedule player,date,location]
+     [--results player,winner]
+     [--rated=<yes|no>]
+     [--cancel <player>]
+     [--chhand <player>,<handicap>]
+     [--status]
+     [--score]
+     [--reminders]
+     [--list-unplayed]
+     [--list-unlicensed]
+     [--list-all]
+
+=head1 DESCRIPTION
+
+Goat is a tournament organiser assistant. It is designed to
+help run long tournaments that are primarily organised by
+e-mail, such as Toulouse's Permanent Go Tournament: a round
+is played each month, and it's up to the players to arrange
+their meeting time and place. Experience has shown that
+players need reminders to play their games, give results
+etc: basically, they need babysitting all along. As soon as
+the number of players grows, it becomes unpractical to
+manage this by hand. This is where Goat comes in: after
+pairing the players, the tournament admin will enter the
+pairing data into Goat, and Goat will take over all the
+remaining business.
+
+Combined with additional scripts to parse e-mail from the
+players and send notifications, a round can be run with no
+human intervention.  Combined with additional scripts to do
+the pairing, an entire tournament could be run with no human
+intervention.  With additional scripts to let players
+register themselves, pass for a round etc, tournaments could
+be run forever with no human intervention. We could even
+replace the players with Go programs, thus having
+tournaments with no humans at all.  Oh wait, I just went too
+far.
+
+=head1 A TYPICAL TOURNAMENT
+
+A typical tournament would run like this:
+
+=over 4
+
+=item Collect the player information (if using Mutt, simply
+make an alias for each player into a file).
+
+=item Register all the players:
+
+ register -f toperm < mutt.aliases
+
+=item Pair the players:
+
+ pair -f toperm
+
+or if there is an odd number of players, select one bye
+player:
+
+ pair -f toperm ­-bye poor@player.com
+
+=item That's it. Goat will send mails, reminders, collect
+results. Once all the results are in (or the time has come
+to start the next round:
+
+=item Create the results file (and send it to your favourite
+federation):
+
+ goat --submitting-results --tou > results
+
+=item Add and remove players, if necessary:
+
+ add_players -f toperm < mutt.newaliases
+ del_player -f toperm sore@loser.com
+
+=item Update the player's levels (fetching from the
+Internet):
+
+ update_levels -f toperm
+
+=item Create the new round:
+
+ pair -f toperm
+
+=back
+
+And repeat for as many round as there are. Refer to the
+documentation of each command for more detailed information.
+
+You can read on to learn about I<goat>'s options, but really
+it is normally only called either by the I<cron> or
+I<mail_in>.
+
+=head1 OPTIONS
+
+Options can be shortened in the usual GNU way. Exactly one
+action must be specified (e.g. --status), and only that
+actions is executed.
+
+=over 4
+
+=item --file
+
+Specify which tournament file to use. The default is 'toperm',
+which is used by the other scripts included in the
+distribution.
+
+=item --round
+
+Specify which round of the tournament we're working on.
+Default is the last round.
+
+=item --schedule player,date,location
+
+Note that players have schedule their game, along with the
+location and the date (The date is parsed with
+Time::DateParse(3) first, then if that fails Date::Parse(3)
+is used over French dates. Additionnaly accents are fixed
+up. As a result, such dates should all be valid: '30/7/2005
+17:30' '30 july 2005 17:30', '30/7/2005 5:30pm', '28 fev
+2005 17:00', '28 fév 2005 17:00). If the date format is
+invalid, notify the submitter that it didn't work. If all is
+fine, notify both players that the game is now scheduled.
+
+Player is identified by e-mail address.
+
+=item --reminders
+
+Send out reminders if needed (Typically: to people who
+haven't set up their game yet; to people who have played but
+haven't given their result; the day before the game)
+
+=item --list-players
+
+Lists all players registered at this point.
+
+=item --list-unplayed
+
+Lists the name and e-mail addresses of players that haven't
+played their game yet, in a format that's hopefully easily
+usuable in your favourite e-mail program. This is convenient
+to send out human reminders, which sometimes are stronger
+than robot reminders.
+
+=item --list-all
+
+Lists the e-mail addresses of all players. This is
+convenient to create a list for hand mass-mailing.
+
+=item --list-unlicensed
+
+Lists e-mail addresses of players who no longer have a valid
+license.
+
+=item --result player,winning color
+
+Record the winner of a game.
+
+=item --rated yes|no
+
+Makes the game rated or not. This affects the way the result
+is printed (in brackets) and the TOU file output.
+
+=item --cancel I<player>
+
+Cancels the game containing I<player> (e-mail address). A
+canceled game receives no reminders, and is not output in
+result files.
+
+=item --chhand I<player>,I<handicap>
+
+Changes the handicap of the game containing the specified
+player.
+
+=item --status
+
+Prints out the status of all games in the round. The round
+number can be specified with --round n.
+
+=item --score
+
+Prints the score of each players, ordered from top to
+bottom.
+
+=item --submitting-results
+
+Only useful with --tou: marks games that are output in the
+.TOU file as having been 'submitted' (i.e. sent to your
+club, federation, or otherwise taken in account into the
+rating system). This means next time a .TOU file is
+produced, these games will not be included.  This allows for
+submitting partial results and having Goat track which games
+have been submitted and which haven't.
+
+=item --tou [full][,submitted]
+
+Prints the status of the tournament as a .TOU file. By
+default only the last round is printed. Specify 'full' to
+print the full tournament (but be warned that if
+registration levels have moved during the tournament, you
+won't know about it).  Specify 'submitted' to also output
+results of games that have already been submitted.
+
+The round number can be specified with --round n.
+
+See --submitting-results for partial submissions.
+
+=item --simulate
+
+Do not send out e-mail notifications or modify data file,
+instead display a summary of what would be done. Typically
+use this to check that Goat will do the right thing without
+sending out bogus remainders.
+
+The data file, as it would be if everything had been done,
+will be saved in the temporary directory.
+
+=item --test
+
+This option is used for regression testing (e.g. it causes
+times to be extracted from the environment variable
+$TEST_TIME instead of using the real time).
+
+=back
+
+=head1 LIMITATION
+
+The API is limiting: a player can only play one game in each
+round. Technically, there is no reason several games could
+not be played by the same player, however the --schedule and
+--result commands would need to be changed.
+
+Also, only one round can be running at the same time. It
+actually is a problem: in real life, it's common to have a
+couple of games played weeks after the next round started.
+
+=head1 SUPPORT SCRIPTS
+
+=over 4
+
+=item mail_in
+
+processes incoming e-mail and calls B<goat>.
+
+=item mail_out
+
+is called by B<mail_in> and B<goat> for all
+outgoing messages.
+
+=back
+
+=head1 IMPLEMENTATION
+
+The rest is development documentation, and describes the
+internals of the program. Users should not need to read any
+further.
+
+
+=head2 The pairing file
+
+The pairing file is a Data::Dumper of a Tournament object;
+See Tournament, Round and GoGame for explanations.
+
+=cut
+
+################################################################################
+# Add local directory to path, to access mail_out easily
+
+$ENV{PATH} .= ":$INSTALL_DIR";
+
+################################################################################
+# Global variables
+
+# command line parameters
+my ($testing, $toperm_file, $param_round, $param_schedule,
+    $param_result, $param_rated, $param_status,
+    $param_cancel, $param_chhand, $param_score,
+    $param_reminders, $param_submitting, $param_tou, $help, $simulate,
+    $param_list_unplayed, $param_list_all, $param_list_unlicensed, $param_list_players
+    );
+
+################################################################################
+# Command line parsing
+
+GetOptions(
+    'test' => \$testing,
+    'simulate' => \$simulate,
+    'file=s' => \$toperm_file,
+    'round=s' => \$param_round,
+    'schedule=s' => \$param_schedule,
+    'reminders' => \$param_reminders,
+    'list-unplayed' => \$param_list_unplayed,
+    'list-all' => \$param_list_all,
+    'list-players' => \$param_list_players,
+    'list-unlicensed' => \$param_list_unlicensed,
+    'results=s' => \$param_result,
+    'rated=s'  => \$param_rated,
+    'cancel=s' => \$param_cancel,
+    'chhand=s' => \$param_chhand,
+    'score'    => \$param_score,
+    'status'   => \$param_status,
+    'submitting-results' => \$param_submitting,
+    'tou:s'      => \$param_tou,
+    'help' => \$help,
+) or die pod2usage();
+
+die pod2usage(-verbose=>2) if defined $help;
+$toperm_file="$WORK_DIR/toperm" unless defined $toperm_file;
+
+my $mail_out_opts = "";
+if (defined $testing) {
+    $mail_out_opts = '--no-send';
+    $BIN_MAIL_OUT = "perl -MDevel::Cover=\"-silent,on\" $BIN_MAIL_OUT";
+    $TIMEZONE = 'GMT'; # we don't really want to test daylight savings
+}
+
+my $today = &my_time; # Now
+my $local_today = scalar localtime($today); # Now, in string form
+
+=head1 FUNCTIONS
+
+=head2 my_time
+
+Equivalent to time(), except if $testing is true it will
+pick the time in $ENV{TEST_TIME}. This allows regression
+testing.
+
+=cut
+sub my_time {
+    if ($testing) {
+        die "TEST_TIME not set while in testing mode\n" if not defined $ENV{TEST_TIME};
+        return $ENV{TEST_TIME};
+    }
+    return time;
+}
+
+=head2 challenge
+
+Issue a challenge for the game passed in parameter. Changes
+the game's state to 'challenged' and saves the date.
+
+In: Reference to a game
+
+=cut
+sub challenge {
+    my ($r_game, $final_date) = @_;
+
+    my ($black, $white, $handi) = ($r_game->black, $r_game->white, $r_game->handicap);
+
+    my $bn = $black->fulladdress;
+    my $wn = $white->fulladdress;
+
+
+    system("$BIN_MAIL_OUT $mail_out_opts --issue-challenge '$bn,$wn,$handi,$final_date'") unless $simulate;
+    print "$local_today: $bn plays black against $wn with $handi stones\n";
+
+    $r_game->challenged(my_time);
+    $r_game->reminder_date(my_time);
+}
+
+=head2 remind_challenge
+
+Sends a reminder for a challenge
+
+=cut
+sub remind_challenge {
+    my ($r_game, $final_date) = @_;
+    my ($black, $white, $handi) = ($r_game->black, $r_game->white, $r_game->handicap);
+
+    my $bn = $black->fulladdress;
+    my $wn = $white->fulladdress;
+
+    $r_game->reminder_date(my_time);
+
+    system("$BIN_MAIL_OUT $mail_out_opts --remind-challenge '$bn,$wn,$handi,$final_date'") unless $simulate;
+    print "$local_today: $bn and $wn haven't set up the challenge yet.\n";
+}
+
+=head2 remind_getresults
+
+Sends a reminder for players to send the results for their
+game, after the game
+
+=cut
+sub remind_getresults {
+    my ($r_game) = @_;
+
+    my ($black, $white, $date) = ($r_game->black, $r_game->white, $r_game->scheduled_date);
+
+    my $bn = $black->fulladdress;
+    my $wn = $white->fulladdress;
+
+    $r_game->reminder_date(my_time);
+
+    system("$BIN_MAIL_OUT $mail_out_opts --ask-result '$bn,$wn,$date'") unless $simulate;
+    print "$local_today: $bn and $wn please give your results\n";
+}
+
+=head2 remind_game_coming_up
+
+Sends a reminder for players to play their game tomorrow.
+
+=cut
+sub remind_game_coming_up {
+    my ($r_game) = @_;
+
+    my ($black, $white, $date, $handi, $location) = 
+        ($r_game->black, $r_game->white, $r_game->scheduled_date, 
+            $r_game->handicap, $r_game->location);
+
+    my $bn = $black->fulladdress;
+    my $wn = $white->fulladdress;
+
+    system("$BIN_MAIL_OUT $mail_out_opts --coming-up '$bn,$wn,$handi,$date,$location'") 
+        unless $simulate;
+    print "$local_today: game coming up: $bn and $wn\n";
+}
+
+=head2 notify_not_registered
+
+Sends the specified e-mail recipient that their e-mail
+address can't be found.
+
+=cut
+sub notify_not_registered { 
+    my ($player) = @_; 
+    print "$local_today: notify $player that their game cannot be found\n"; 
+
+    system("$BIN_MAIL_OUT $mail_out_opts --player-unknown '$player'");
+}
+
+=head2 fixup_accents
+
+Fix up accents in dates, so sloppy French writers can get
+away with 'fev' instead of 'fév' etc.
+
+=cut
+sub fixup_accents {
+    my %fixups = (
+        'fevrier'  => 'février',
+        'aout'     => 'août',
+        'decembre' => 'décembre',
+    );
+    my ($date) = @_;
+
+    foreach my $k (keys %fixups) {
+        my $v = $fixups{$k};
+        $date =~ s/$k/$v/; #  Substitute whole words
+
+        $k = substr $k, 0, 3;
+        $v = substr $v, 0, 3;
+        $date =~ s/$k/$v/; # Substitute 3-letter abbreviations
+    }
+    return $date;
+}
+
+########## ########## ########## ########## ########## ########## ##########
+# Main
+
+my $Tournament; # Reference to the Tournament object, that contains all the data
+
+# Hmmm, there is no locking anymore, I'm not fond of that.
+$Tournament = load Tournament "$toperm_file";
+
+# Select round if needed
+$Tournament->round_number($param_round) if defined $param_round;
+
+
+# Check if there is an action to perform
+########## Scheduling a game
+if (defined $param_schedule) {
+    my ($player, $date_str, $location) = split /\s*,\s*/, $param_schedule;
+
+    # First, find the game 
+    my $game = $Tournament->find_game_by_email($player);
+
+    unless (defined $game) {
+        notify_not_registered $player;
+        exit; # Action has failed -- nothing more to do
+    }
+
+    # First try to parse with Time::ParseDate (it's more
+    # powerful and does DD/MM/YY correctly)
+    my $date = parsedate(
+        $date_str, 
+        UK => 1, 
+        VALIDATE => 1, 
+        PREFER_FUTURE => 1
+    );
+
+    $date_str = Encode::decode("utf8", $date_str);
+
+    # Date::ParseDate only works with English: Try French if
+    # it didn't work
+    if (not defined $date) {
+        my $lang = Date::Language->new('French');
+        eval {  # str2time dies on illegal dates: we really don't want that.
+            $date = $lang->str2time(fixup_accents $date_str, $TIMEZONE);
+        };
+    }
+
+    unless (defined $date) {
+        print "$local_today: notify $player that '$date_str' is invalid\n";
+        system("$BIN_MAIL_OUT $mail_out_opts --baddate '$player,$date_str'");
+        exit;
+    }
+
+    if ($date < $today) {
+        print "$local_today: notify $player that '$date_str' is in the past\n";
+        system("$BIN_MAIL_OUT $mail_out_opts --pastdate '$player,$date_str'");
+        exit;
+    }
+
+    my ($black, $white, $handi) = ($game->black, $game->white, $game->handicap);
+
+    my $b = $black->fulladdress;
+    my $w = $white->fulladdress;
+
+    print "$local_today: notify $b and $w that their game has been scheduled on "
+            .scalar localtime($date)." in $location by $player\n";
+
+
+    system("$BIN_MAIL_OUT $mail_out_opts --notify-schedule '$b,$w,$handi,$date,$location,$player'");
+
+    $game->scheduled($date, $location);
+
+########## Recording the result for a game
+} elsif (defined $param_result) {
+    my ($player, $winning_colour) = split /,/, $param_result;
+
+    my $game = $Tournament->find_game_by_email($player);
+
+    unless (defined $game) {
+        notify_not_registered $player;
+        exit;
+    }
+
+    if ($winning_colour =~ /(white|black|blanc|noir)/i) {
+        my $res = "\L$1";
+        $res = 'white' if $res eq 'blanc';
+        $res = 'black' if $res eq 'noir';
+        $game->finished($res);
+
+        my ($black, $white, $result) = ($game->black, $game->white, $game->result);
+
+        my ($b, $w) = ($game->black->fulladdress, $game->white->fulladdress);
+
+        print "$local_today: notify $b and $w their game is finished and $result won; result given by $player\n";
+        system("$BIN_MAIL_OUT $mail_out_opts --give-results='$b,$w,$result,$player'");
+
+    } else {
+        print "$local_today: notify $player that '$winning_colour' is invalid\n";
+        system("$BIN_MAIL_OUT $mail_out_opts --badcolour='$player,$winning_colour'");
+    }
+
+    if (defined $param_rated) {
+        my $rated = 0;
+        $rated = 1 if $param_rated =~ /yes|1/i;
+        $game->rated($rated);
+        print "game: ".$rated.".\n";
+    }
+
+########## Cancel the game
+} elsif (defined $param_cancel) {
+    my ($player) = $param_cancel;
+
+    my $game = $Tournament->find_game_by_email($player);
+
+    unless (defined $game) {
+        print "$player not found.\n";
+        exit;
+    }
+
+    $game->cancel;
+
+########## Change handicap
+} elsif (defined $param_chhand) {
+    $param_chhand =~ /(\S*),(\d+)/;
+    my ($player, $hand) = ($1, $2);
+
+    unless (defined $player and defined $hand) {
+        print "usage: <player>,<handicap>\n";
+        exit;
+    }
+    my $game = $Tournament->find_game_by_email($player);
+
+    unless (defined $game) {
+        print "$player not found\n";
+        exit;
+    }
+    $game->handicap($hand);
+    
+########## Print out status of the round
+} elsif (defined $param_status) {
+    print "Tournament: ". $Tournament->name."\n";
+    my $round = $Tournament->round_number;
+    $round ||= 0;
+    print "Round $round\n";
+    if (defined $Tournament->curr_round) {
+        foreach my $game ($Tournament->curr_round->games) {
+            print $game->text_status;
+        }
+    }
+
+########## Print out TOU tournament results
+} elsif (defined $param_tou) {
+    my %opts;
+    $opts{full} = 1 if $param_tou =~ /full/;
+    $opts{submitted} = 1 if $param_tou =~ /submitted/;
+    $opts{round} = $param_round if defined $param_round;
+    $opts{submitting} = $param_submitting;
+    print $Tournament->tou( %opts );
+
+########## Print out who hasn't played their game yet
+} elsif (defined $param_list_unplayed) {
+    foreach my $game ($Tournament->curr_round->games) {
+        unless ($game->is_finished or $game->is_canceled) {
+            print $game->white->email . " " .  $game->black->email . " ";
+        }
+    }
+    print "\n";
+
+########## Print out who hasn't played their game yet
+} elsif (defined $param_list_all) {
+    foreach my $player ($Tournament->players) {
+        print $player->email." ";
+    }
+    print "\n";
+
+########## Print out players with no license
+} elsif (defined $param_list_unlicensed) {
+    foreach my $player ($Tournament->players) {
+        print $player->email." " unless $player->is_licensed;
+    }
+    print "\n";
+
+########## Print out all players
+} elsif (defined $param_list_players) {
+    foreach my $player ($Tournament->players) {
+        print $player->fulladdress . " ". $player->level . 
+              " ". $player->license . " " . $player->club .
+              " " . $player->status .
+              "\n";
+    }
+    print "\n";
+
+########## Print out the score
+} elsif (defined $param_score) {
+    foreach ($Tournament->score) {
+        write;
+    }
+
+########## Check if reminders need to be sent
+} elsif (defined $param_reminders) { 
+
+    # Now according to state...
+    foreach my $game ($Tournament->curr_round->games) {
+        if ($game->is_challenge_sent) {
+            # Is it time to remind them?
+            if ($today - $game->reminder_date > CHALLENGED_TIMEOUT) {
+                remind_challenge $game, $Tournament->curr_round->final_date;
+                next;
+            }
+            # If not, there is nothing to do
+            next;
+        }
+
+        if ($game->is_scheduled) {
+            # Is it after the game?
+            if ($today - $game->reminder_date > SCHEDULED_TIMEOUT) {
+                # Ask for results
+                remind_getresults $game;
+            }
+            # Is it just before the game?
+            if (($today < $game->scheduled_date)  # game is in future
+                    and abs($today - $game->scheduled_date) < 24 * 3600) {
+                remind_game_coming_up $game;
+            }
+            next;
+        }
+
+        next if $game->is_finished or $game->is_canceled;
+
+        # No state or state = 'undef': 
+        challenge $game, $Tournament->curr_round->final_date;
+    }
+} else {
+    warn "You must specify an action\n";
+    die pod2usage();
+}
+
+
+my $fh;
+
+# XML::Structured seems to have changed in Squeeze -- this
+# needs to be updated or something
+# Update the XML state file
+#open $fh, ">:utf8", "toperm.xml" or die "toperm.xml: $!\n";
+#print $fh <<EOF;
+#<?xml version="1.0" encoding="utf8"?>
+#<?xml-stylesheet type="text/xsl" href="toperm.xsl"?>
+#EOF
+#{
+#    local $; undef $; # XML::Structured hates empty fields
+#    print $fh $Tournament->as_XML;
+#}
+#close $fh;
+
+# Update the HTML state file
+open $fh, "> toperm.html" or die "toperm.html: $!\n";
+print $fh $Tournament->as_HTML;
+close $fh;
+
+# Everything done -- update the file
+my $temp_file = "/tmp/goat$$";
+$Tournament->save($temp_file);
+if ($simulate) {
+    warn "New file is in $temp_file\n";
+} else {
+    move $temp_file, $toperm_file or die "Move $temp_file to $toperm_file: $!\n";
+}
+
+
+# Formats for score printing. This isn't good and should be
+# abstracted somehow.
+format STDOUT_TOP =
+Name                     Wins SOS
+----------------------------------
+.
+
+format STDOUT =
+@<<<<<<<<<<<<<<<<<<<<    @<<< @<<<
+$_->[0], $_->[1], $_->[2]
+.
+
+
+=head1 AUTHOR
+
+Yves Rutschle <goat_dev@rutschle.net>

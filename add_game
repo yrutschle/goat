@@ -1,0 +1,94 @@
+#! /usr/bin/perl -w
+
+# Goat: Gentil Organisateur et Administrateur de Tournois
+# Copyright (C) 2006-2008  Yves Rutschle
+# 
+# This program is free software; you can redistribute it
+# and/or modify it under the terms of the GNU General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later
+# version.
+# 
+# This program is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied
+# warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+# PURPOSE.  See the GNU General Public License for more
+# details.
+# 
+# The full text for the General Public License is here:
+# http://www.gnu.org/licenses/gpl.html
+
+=head1 NAME
+
+add_game -- pair a single player pair
+
+=head1 SYNOPSIS
+
+add_game --file <toperm> 
+         --black <player> 
+         --white <player>
+         [--handicap <0-9>]
+
+=head1 DESCRIPTION
+
+Despite all the automation, sometimes you just need to pair
+players by hand. This typically happens when someone resigns
+from the tournament half-round, or several players join
+during a round and you want them to start playing before the
+next round. I<add_game> is designed just for this purpose.
+You'll need to have added the players beforehand with
+I<add_player>.
+
+The options are self-explanatory. The players are specfied
+using their e-mail addresses. If handicap is not specified,
+"level difference - 1" is the default.
+
+=cut
+
+use strict;
+use Pod::Usage;
+
+# Check we have the right environment variables to find
+# the modules, and add to @INC.
+BEGIN {
+    die "Environment variable GOAT_DIR and WORK_DIR must be defined\n" 
+        if not defined $ENV{GOAT_DIR} or not defined $ENV{WORK_DIR};
+
+    push @INC, $ENV{GOAT_DIR};
+}
+
+use Tournament;
+use Getopt::Long;
+
+# Interpret command line
+my ($param_file, $param_black, $param_white, $param_handi, $help);
+GetOptions(
+    'help' => \$help,
+    'file=s' => \$param_file,
+    'black=s' => \$param_black,
+    'white=s' => \$param_white,
+    'handicap=i' => \$param_handi,
+) or die pod2usage();
+
+die pod2usage(-verbose=>2) if defined $help;
+die "No tournament file specified. Use -f <file>.\n" unless defined $param_file;
+my $Tournament = Tournament->load($param_file);
+
+my $black = $Tournament->find_player_by_email($param_black);
+die "$param_black not found in $param_file.\n" unless defined $black;
+my $white = $Tournament->find_player_by_email($param_white);
+die "$param_white not found in $param_file.\n" unless defined $white;
+
+unless (defined $param_handi) {
+    $param_handi = int(($white->level - $black->level)/100);
+    $param_handi -= 1 if $param_handi > 1;
+}
+
+use Data::Dumper;
+
+my $game = new GoGame $black, $white, $param_handi;
+print $game->text_status(summary=>1);
+$Tournament->curr_round->add_game($game);
+
+$Tournament->save($param_file);
+

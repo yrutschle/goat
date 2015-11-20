@@ -1,0 +1,530 @@
+#! /usr/bin/perl -w
+
+# Goat: Gentil Organisateur et Administrateur de Tournois
+# Copyright (C) 2006-2007  Yves Rutschle
+# 
+# This program is free software; you can redistribute it
+# and/or modify it under the terms of the GNU General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later
+# version.
+# 
+# This program is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied
+# warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+# PURPOSE.  See the GNU General Public License for more
+# details.
+# 
+# The full text for the General Public License is here:
+# http://www.gnu.org/licenses/gpl.html
+
+use strict;
+
+=head1 NAME
+
+mail_out -- goat's e-mail sender
+
+=head1 SYNOPSIS
+
+mail_out [--mail-in-illegal <rcpt>,<file>]
+         [--issue-challenge <black>,<white>,<handi>]
+         [--remind-challenge <p1>,<p2>,<handi>,<final_date>]
+         [--ask-results <p1>,<p2>]
+         [--player-unknown <p1>]
+         [--notify-schedule <b>,<w>,<handi>,<date>,<location>,<setter>]
+         [--coming-up <b>,<w>,<handi>,<date>,<location>,<setter>]
+         [--baddate <rcpt>,<date_str>]
+         [--pastdate <rcpt>,<date_str>]
+         [--give-results <p1>,<p2>,<reporter>,<winner>]
+         [--badcolour <rcpt>,<colour_str>]
+         [--attach <attachement>]
+
+         [--no-send]
+
+=head1 DESCRIPTION
+
+Mail_out groups all of Goat's outgoing e-mail messages. This
+concentrates all the e-mail management here, and allows for
+easy translating or customising of outgoing messages.
+(Translation support needs to be added though).
+
+=cut
+
+use Getopt::Long;
+use Pod::Usage;
+use Mail::Send;
+use DateTime;  # package libdatetime-perl
+use DateTime::Locale; # package libdatetime-locale-perl
+use POSIX;
+
+# Check we have the right environment variables to find
+# the modules, and add to @INC.
+BEGIN {
+    die "Environment variable GOAT_DIR and WORK_DIR must be defined\n" 
+        if not defined $ENV{GOAT_DIR} or not defined $ENV{WORK_DIR};
+    # This is necessary when called from .forward, in order
+    # to find our .pm files.
+    push @INC, $ENV{GOAT_DIR};
+}
+use GoatConfig;
+
+use GoatConfig;
+
+my (
+     $param_mail_in_illegal,
+     $param_remind_challenge,
+     $param_ask_result,
+     $param_player_unknown,
+     $param_issue_challenge,
+     $param_notify_schedule,
+     $param_coming_up,
+     $param_baddate,
+     $param_pastdate,
+     $param_give_results,
+     $param_badcolour,
+     $param_attach,
+     $no_send,
+     $help,
+ );
+
+GetOptions(
+    'mail-in-illegal=s'         => \$param_mail_in_illegal,
+    'remind-challenge=s'        => \$param_remind_challenge,
+    'ask-result=s'              => \$param_ask_result,
+    'player-unknown=s'          => \$param_player_unknown,
+    'issue-challenge=s'         => \$param_issue_challenge,
+    'notify-schedule=s'         => \$param_notify_schedule,
+    'coming-up=s'               => \$param_coming_up,
+    'baddate=s'                 => \$param_baddate,
+    'pastdate=s'                => \$param_pastdate,
+    'give-results=s'            => \$param_give_results,
+    'badcolour=s'               => \$param_badcolour,
+    'attach=s'                  => \$param_attach,
+    'no-send'                   => \$no_send,
+    'help'                      => \$help,
+) or die pod2usage();
+
+die pod2usage(-verbose=>2) if defined $help;
+
+my $LOGFILE = "$LOG_DIR/mail_out.log";
+
+# record a line in a log file.
+my ($logfile);
+open $logfile, ">> $LOGFILE" or die "$LOGFILE: $!\n";
+sub record {
+    foreach (@_) {
+        print $logfile (gmtime).": $_\n";
+    }
+}
+
+# Turn a UTC time_t into a localised timezoned string
+sub utc2str {
+    my $loc = DateTime::Locale->load($LOCALE);
+    my $o = DateTime->from_epoch(epoch => $_[0], locale => $LOCALE, time_zone=>$TIMEZONE);
+    my $date = $o->strftime("%A %d %B %Y %R");
+}
+
+
+# Send mail to one or several recipients:
+# sendmail "hello world", ['bob@foo.com', 'joe@bar.com'], @lines;
+# if $param_attach is defined, collate the content of the
+# file specified in $param_attach in the body of the email
+sub sendmail {
+    my ($subject, $r_to, @body) = @_;
+
+    $r_to = [$r_to] unless ref $r_to;
+
+    if (defined $param_attach) {
+        if (open my $attch, "$param_attach") {
+            push @body, $_ while (<$attch>);
+        } else {
+            record "Attach: $param_attach: $!";
+        }
+    }
+
+    if ($no_send) {
+        print "To: @$r_to\n@body";
+        return;
+    }
+
+    # Happy debugger warning: this code is never tested by
+    # the test suite, because we don't want it to *actually*
+    # send e-mail. This means one must be extra careful when
+    # editing it, and that it'll appear as not covered
+    # during test (because, well, it isn't).
+    my $msg = new Mail::Send Subject=>$subject, To=>join ",", @$r_to;
+    $msg->set('From' => $GOAT_ADDRESS);
+    $msg->set('Return-path' => $GOAT_ADDRESS);
+    $msg->set('X-Loop' => $GOAT_ADDRESS);
+    $msg->set('Content-Type' => 'text/plain; charset=utf-8');
+    my $fh = $msg->open or record "SMTP open: $!";
+    print $fh @body;
+    $fh->close;
+}
+
+# Header to be written before every e-mail
+my $header = <<"EOF";
+Vous avez reçu ce courrier car vous êtes inscrit au tournoi
+permanent de Toulouse. Si vous avez reçu ce mail par erreur,
+merci de contacter Yves Rutschle <go\@rutschle.net>
+EOF
+
+# Tells the user how to use the mail front-end.
+my $usage = <<"EOF";
+Les commandes doivent être écrites dans l'objet du courrier
+envoyé à Goat. Le corps du message est ignoré.
+
+Goat gère les commandes suivantes:
+
+rendezvous <date>, <lieu>
+resultat <couleur gagnante>
+
+rendezvous: Utilisez cette commande afin d'informer Goat de
+la date et du lieu choisi pour votre partie.
+
+resultat: Après la partie, indiquez la couleur du joueur qui
+a gagné la partie.
+
+EOF
+
+=head2 OPTIONS
+
+=over 4
+
+=item --mail-in-illegal <rcpt>,<command>
+
+Called from mail_in on an illegal or unknwon command. 
+
+=cut
+if (defined $param_mail_in_illegal and
+    $param_mail_in_illegal =~ /([^,]*),(.*)/) {
+
+    my ($rcpt, $file) = ($1, $2);
+
+    my $contents = `cat $file`;
+
+    sendmail "[goat] Commande illégale", $rcpt, <<"EOF";
+$header
+
+Votre commande n'a pas pu être interpretée correctement.
+
+$usage
+
+---- Votre message :
+$contents
+EOF
+    exit 0;
+}
+
+=item --issue-challenge <black,white,handicap>
+
+Sends players their pairing.
+
+=cut
+
+if (defined $param_issue_challenge) {
+    my ($black, $white,$handi,$final_date) = split /\s*,\s*/, $param_issue_challenge;
+
+    my $date = utc2str $final_date;
+
+    sendmail "[goat] Votre appariement", [$white, $black], <<"EOF";
+$header
+
+Voici votre appariement pour la prochaine ronde, à jouer
+pour le $date :
+
+Noir: $black
+Blanc: $white
+Handicap: $handi
+
+Merci de répondre à ce courrier dès que vous aurez arrangé la
+rencontre, en remplissant le sujet de votre réponse de la
+façon suivante :
+
+rendezvous <date>, <lieu>
+
+Par exemple:
+
+rendezvous 12 mars 2008 21:00, Cool à Flo
+
+Vous pouvez également rapporter directement le résultat si
+vous avez omis de prévenir Goat de votre partie:
+
+resultat <couleur gagnante>
+
+Par exemple :
+
+resultat blanc
+
+
+EOF
+
+    exit 0;
+}
+
+=item --remind-challenge <black,white,handicap,final_date>
+
+Remind players who haven't scheduled their game yet to do
+so.
+
+B<final_date> is UTC UNIX date.
+
+=cut
+
+if (defined $param_remind_challenge) {
+    my ($black, $white,$handi,$final_date) = split /\s*,\s*/, $param_remind_challenge;
+
+    my $date = utc2str $final_date;
+
+    sendmail "[goat] N'oubliez pas d'organiser votre partie!", [$white, $black], <<"EOF";
+$header
+
+Vous n'avez pas encore arrangé votre partie. Les parties de
+cette ronde sont à jouer pour le $date.
+
+Noir: $black
+Blanc: $white
+Handicap: $handi
+
+Merci de répondre à ce courrier dès que vous aurez arrangé la
+rencontre, en remplissant le sujet de votre réponse de la
+façon suivante :
+
+rendezvous <date>, <lieu>
+
+Par exemple :
+
+rendezvous 12 mars 2007 12:00, Cool à Flo
+
+EOF
+
+    exit 0;
+}
+
+=item --ask-results <black,white,date>
+
+Ask players who had scheduled their game at I<date> that
+they need to publish their results.
+
+=cut
+
+if (defined $param_ask_result) {
+    my ($p1, $p2, $time) = split /\s*,\s*/, $param_ask_result;
+
+    $ENV{LANG} = $LOCALE;
+
+    my $date = utc2str $time;
+
+    sendmail "[goat] Résultat de votre partie", [$p1,$p2], <<"EOF";
+$header
+
+Votre partie était prévue le $date, 
+mais vous n'avez pas encore publié le résultat. Merci de
+répondre à ce courrier en remplissant le sujet de votre
+réponse de la façon
+suivante :
+
+resultat <couleur gagnante>
+
+Par exemple :
+
+resultat blanc
+
+EOF
+    exit 0;
+
+}
+
+=item --player-unknown <address>
+
+Notifies I<address> that that address is unknown. (Game
+schedules and results must be sent from the e-mail address
+that Goat knows about).
+
+=cut
+
+if (defined $param_player_unknown) {
+    my ($p1) = $param_player_unknown;
+
+    sendmail "[goat] Adresse inconnue", $p1, <<"EOF";
+
+L'adresse que vous avez utilisée est inconnue. Vous devez
+envoyer vos courriers à Goat en utilisant l'adresse avec
+laquelle vous vous êtes enregistré.
+
+EOF
+
+    exit 0;
+}
+
+=item --notify-schedule <black,white,handicap,date,location,setter>
+
+Notify players that I<setter> has scheduled the game to take
+place on I<date> in I<location>
+
+=cut
+
+if (defined $param_notify_schedule) {
+
+    my ($black,$white,$handi,$time,$location,$setter) = split /\s*,\s*/, $param_notify_schedule;
+
+    my $date = utc2str $time;
+
+    sendmail "[goat] Partie: $location, $date", [$black, $white], <<"EOF";
+$header
+
+$setter a programmé votre partie:
+
+Lieu: $location
+Date: $date
+Noir: $black
+Blanc: $white
+Handicap: $handi
+
+Après la partie, merci de publier le résultat en répondant à
+ce mail en remplissant le sujet de votre réponse de la façon
+suivante :
+
+resultat <couleur gagnante>
+
+Par exemple :
+
+resultat blanc
+
+EOF
+
+    exit 0;
+}
+
+=item --coming-up <black,white,handicap,date,location>
+
+Notify players that their game is scheduled to take
+place on I<date> (soon) in I<location>
+
+=cut
+if (defined $param_coming_up) {
+    my ($black,$white,$handi,$time,$location,$setter) = split /\s*,\s*/, $param_coming_up;
+
+    my $date = utc2str $time;
+
+    sendmail "[goat] Partie: $location, $date", [$black, $white], <<"EOF";
+$header
+
+N'oubliez pas de jouer votre partie:
+
+Lieu: $location
+Date: $date
+Noir: $black
+Blanc: $white
+Handicap: $handi
+
+Après la partie, merci de publier le résultat en répondant à
+ce mail en remplissant le sujet de votre réponse de la façon
+suivante :
+
+resultat <couleur gagnante>
+
+Par exemple :
+
+resultat blanc
+
+EOF
+
+    exit 0;
+}
+
+=item --baddate <rcpt,date>
+
+Notify I<rcpt> that I<date> is invalid.
+
+=cut
+
+if (defined $param_baddate) {
+    my ($rcpt,$date) = split /\s*,\s*/, $param_baddate;
+
+    sendmail "[goat] Erreur de date", $rcpt, <<"EOF";
+$header
+
+La date que vous avez spécifiée: "$date", n'est pas une date
+légale. Merci d'essayer à nouveau, en suivant un des formats
+suivants:
+
+30/07/2005 17:30
+30 juillet 2005 17:30
+30 jul 2005 17:30
+
+EOF
+}
+
+=item --pastdate <rcpt,date>
+
+Notify I<rcpt> that I<date> is already past.
+
+=cut
+
+if (defined $param_pastdate) {
+    my ($rcpt,$date) = split /\s*,\s*/, $param_pastdate;
+
+    sendmail "[goat] Erreur de date", $rcpt, <<"EOF";
+$header
+
+La date que vous avez spécifiée: "$date", est déjà passée.
+Merci d'essayer à nouveau, en suivant un des formats
+suivants:
+
+30/07/2005 17:30
+30 juillet 2005 17:30
+30 jul 2005 17:30
+
+EOF
+}
+
+=item --give-results <black,white,result,reporter>
+
+Notify the players that I<reporter> has reported the result
+of the game.
+
+=cut
+
+if (defined $param_give_results) {
+    my ($black,$white,$res,$player) = split /\s*,\s*/, $param_give_results;
+
+    my $winner = $res eq 'black' ? $black : $white;
+
+    sendmail "[goat] Résultat de votre ronde", [$black, $white], <<"EOF";
+$header
+
+Le résultat de votre partie a été enregistré.
+$black contre $white, victoire pour $winner.
+
+Le résultat a été rapporté par $player.
+EOF
+
+    exit 0;
+}
+
+=item --badcolour <rcpt,colour>
+
+Notify I<rcpt> that I<colour> is not a valid color.
+
+=cut
+
+if (defined $param_badcolour) {
+    my ($rcpt,$colour) = split /\s*,\s*/, $param_badcolour;
+
+    sendmail "[goat] Erreur de couleur", $rcpt, <<"EOF";
+$header
+
+La couleur: "$colour" que vous avez indiquée en résultat
+n'est pas légale. Merci d'essayer à nouveau, en utilisant:
+
+blanc
+noir
+
+EOF
+
+    exit 0;
+}
+
+
+record "No action: ARGV=@ARGV";

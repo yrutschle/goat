@@ -1,0 +1,31 @@
+#! /usr/bin/perl -w
+
+use strict;
+
+# Converts a Tournament to HTML. If I could be bothered to
+# learn the technology, this could be an XSLT program. I
+# just fail to understand how XSLT benefits anyone.
+
+use Tournament;
+
+use Getopt::Long;
+use Pod::Usage;
+use CGI qw/:standard/;
+use HTML::Table;  # apt-get install libhtml-table-perl
+
+#################################################################################
+# Command line options
+
+my $tournament_fn;
+
+GetOptions(
+    'file=s' => \$tournament_fn,
+) or die pod2usage();
+
+$tournament_fn ||= "toperm";
+
+#################################################################################
+
+my $tournament = Tournament->load($tournament_fn);
+
+print $tournament->as_HTML;

@@ -1,0 +1,225 @@
+#! /usr/bin/perl -w
+
+# Goat: Gentil Organisateur et Administrateur de Tournois
+# Copyright (C) 2006-2013  Yves Rutschle
+# 
+# This program is free software; you can redistribute it
+# and/or modify it under the terms of the GNU General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later
+# version.
+# 
+# This program is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied
+# warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+# PURPOSE.  See the GNU General Public License for more
+# details.
+# 
+# The full text for the General Public License is here:
+# http://www.gnu.org/licenses/gpl.html
+
+=head1 NAME
+
+mail_in -- goat's e-mail input frontend
+
+=head1 DESCRIPTION
+
+Goat is designed to run under its own user, both for
+convenience (e-mail can be delivered to goat easily) and
+security (security breach in goat's code won't result in too
+much damage).
+
+Mail_in is called from goat's .forward. It parses the input
+e-mail and calls goat accordingly. Mail_in only handles
+delivery-related errors: it doesn't check that arguments are
+valid.
+
+=cut
+
+use strict;
+use Mail::Audit;   # Package libmail-audit-perl
+use Mail::Address;
+use Email::Valid;  # Package libemail-valid-perl
+
+use Encode;
+
+use Getopt::Long;
+
+# Check we have the right environment variables to find
+# the modules, and add to @INC.
+BEGIN {
+    die "Environment variable GOAT_DIR and WORK_DIR must be defined\n" 
+        if not defined $ENV{GOAT_DIR} or not defined $ENV{WORK_DIR};
+    # This is necessary when called from .forward, in order
+    # to find our .pm files.
+    push @INC, $ENV{GOAT_DIR};
+}
+use GoatConfig;
+
+my $testing = '';
+
+GetOptions(
+    'test' => \$testing,
+);
+
+my ($goat_opts, $mail_out_opts);
+
+if ($testing) {
+    $goat_opts = '--test';
+    $mail_out_opts = '--no-send';
+    $BIN_GOAT = "perl -MDevel::Cover=\"-silent,on\" $BIN_GOAT";
+    $BIN_MAIL_OUT = "perl -MDevel::Cover=\"-silent,on\" $BIN_MAIL_OUT";
+    $TIMEZONE = 'GMT'; # we don't really want to test daylight savings
+}
+
+# Use pairing file 'toperm'
+$goat_opts .= ' --file toperm';
+
+#Where to log things? Mail_in needs to log errors, as there
+#are no other way to report them.
+
+my $LOGFILE = "$LOG_DIR/mail_in.log";
+
+# record a line in a log file.
+my ($logfile);
+open $logfile, ">> $LOGFILE" or die "$LOGFILE: $!\n";
+sub record {
+    foreach (@_) {
+        print $logfile (gmtime).": $_\n";
+    }
+}
+
+# Records the mail in a temp file; returns the name of the
+# file
+sub make_tmpfile {
+    my ($mail) = @_;
+    my $tmp_fn = "$TMP_DIR/mail_in.$$";
+    open my $fh, "> $tmp_fn" or do { 
+        print "makeTmpfile $tmp_fn: $!\n";
+        record "make_tmpfile $tmp_fn: $!";
+        return;
+    };
+    print $fh $mail->header."\n".(join "\n", @{$mail->body});
+    return $tmp_fn;
+}
+
+my $mail = Mail::Audit->new;
+
+# When maintaining, reject all incoming mail
+if (0) {
+    $mail->reply(body=>"GOAT est en maintenance. Veuillez essayer plus tard\n");
+    exit;
+}
+
+# First log the entire mail (maybe remove this when we gain
+# confidence in the system?)
+record "Got mail";
+print $logfile $mail->header."\n".(join '', @{$mail->body});
+
+# Forward all incoming mail to administrator
+$mail->noexit(1);
+$mail->resend($ADMIN_ADDRESS) unless $testing;
+
+# avoid loops
+if ($mail->get('X-Loop') eq $GOAT_ADDRESS) {
+    print "Loop detected -- dropping mail\n";
+    record "Loop detected -- dropping mail";
+    exit 0;
+}
+
+# if we get mail from postmaster, something went wrong
+if ($mail->from =~ /postmaster|daemon/i) {
+    print "mail from postmaster -- dropping\n";
+    record "mail from postmaster -- dropping\n";
+    exit 0;
+}
+
+my $from = $mail->from;
+# Unfold FROM field, otherwise Email::Valid doesn't work
+$from = join ' ', split /\n/, $from;
+$from = Email::Valid->address($from);
+
+if (not defined $from) {
+    # FROM mail address is not valid -- we probably can't
+    # even send an error message, so just log it.
+    print "Illegal sender\n";
+    record "Illegal sender (header contain '".$mail->from."', failed: $Email::Valid::Details)";
+    exit 0;
+}
+
+=head1 Commands
+
+The commands apply to the game in which the sender of the
+mail plays.
+
+=over 4
+
+=item Subject: schedule|rendezvous <date>, <location>
+
+Schedule my game for <date>, <location>
+
+=over 4
+
+=item result <winner>
+
+Indicates who won the game.
+
+=cut
+
+# Tries to match a command in the line passed as parameter
+# Returns the command to execute, or undef if no match
+sub parse_command {
+    my ($line) = @_;
+    my $exec;
+
+    if ($line =~ /(schedule|rendez[ -]?vous|rdv)\S*\s+(.*?)\s*,\s*(.*)/i) {
+        my ($cmd, $date, $location) = ($1, $2, $3);
+
+        $exec = "$BIN_GOAT $goat_opts --schedule \"$from, $date, $location\"";
+    } elsif ($line =~ /(r.sult)/i) { 
+        my ($cmd, $winner) = split /\s+/, $line;
+        $exec = "$BIN_GOAT $goat_opts --result \"$from,$winner\"";
+
+    } elsif ($line =~ /(sans\s*nouvelles?|no\s*news)/i) {
+        $exec = "$BIN_GOAT $goat_opts --nonews \"$from\"";
+
+    } else {
+    }
+
+    return $exec;
+}
+
+# First try to parse the mail subject line
+my $exec = parse_command scalar decode("MIME-Header", $mail->subject);
+
+# If that didn't work, try to parse each line of the e-mail
+if (not defined $exec) {
+    my @lines;
+    if ($mail->parts) {
+        foreach my $p ($mail->parts) {
+            push @lines, split /\n/, scalar decode($p->head->mime_attr('content-type.charset'),$p->bodyhandle->as_string);
+        }
+    } else {
+        my ($charset) = $mail->get('content-type') =~ /charset=(\S*)/i;
+        push @lines, map { decode $charset, $_ } @{$mail->body};
+    }
+    my @out = grep { defined $_ } map { parse_command $_ } @lines;
+    if (@out) {
+        $exec = shift @out; # keep first command
+    }
+}
+
+if (not defined $exec) {
+    my $tmp_fn = make_tmpfile $mail; # Pass the mail for bouncing
+
+    # Instead, bounce an error message.
+    record "No command found, bouncing mail";
+    $exec = "$BIN_MAIL_OUT $mail_out_opts --mail-in-illegal \"$from,$tmp_fn\"";
+}
+
+
+#warn "*>>>$exec\n";
+my $r = system $exec;
+if ($r) {
+    record "system($exec): returned $? $!";
+} 

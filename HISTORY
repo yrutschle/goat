@@ -1,0 +1,45 @@
+12APR2012
+
+Added support for submitting partial results: new option to
+mark games that have been submitted, and result report
+ignores those when creating a new report.
+
+11NOV2010
+
+Remove players who played no games from tournament
+reporting, and report non-played games as 0= instead of ?
+
+03NOV2009
+
+Added a reminder before when the game is scheduled.
+
+03SEP2009
+
+Added game cancellation, tournament scoring, changed test
+strategy to not test toperm file. Registering can use
+licence number.
+
+22DEC2008
+
+So many changes. Added add_game and del_game.
+
+14AUG2007
+
+Added non-rated games: results are reported in brackets, and
+not included in TOU files.
+
+13MAY2007
+
+Got rid of XML as data storage (still exported for Web usage
+at the moment) updated all tests; basically should be close
+to working, with a multi-round tournament file. Added .TOU
+writing. Imported into svn's trunk.
+
+
+12NOV2006 
+
+Added XML throughout, most tests converted (until
+I realised XML is not the way to go).
+Data is mostly objectised now.
+
+29JUL2006 v1.0 -- original release

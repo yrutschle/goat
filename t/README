@@ -1,0 +1,18 @@
+Files are named along the following rules:
+
+- Scenario number as extension
+- "_in" for input file, "_out" for output file
+ (Typically, "pairs_in" and "pairs_out")
+- out.x for expected stdout
+
+Check 'run' to see what files correspond to what scenario
+
+The general philosophy is to check the output of commands
+rather than the contents of the files: the files represent
+internal states, and testing against the specification
+should be enough. That way it's easy to change file format,
+too.
+
+To run all the tests:
+t/run
+from the top directory.

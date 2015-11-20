@@ -1,0 +1,136 @@
+#! /usr/bin/perl -w
+
+# Goat: Gentil Organisateur et Administrateur de Tournois
+# Copyright (C) 2006-2007  Yves Rutschle
+# 
+# This program is free software; you can redistribute it
+# and/or modify it under the terms of the GNU General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later
+# version.
+# 
+# This program is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied
+# warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+# PURPOSE.  See the GNU General Public License for more
+# details.
+# 
+# The full text for the General Public License is here:
+# http://www.gnu.org/licenses/gpl.html
+
+=head1 NAME
+
+ register -- processes tournament registrations
+
+=head1 SYNOPSIS
+
+ register [--getech] [-f file] inscrits
+
+=head1 DESCRIPTION
+
+Tournament registration is handled by the tournament
+operator adding players to a file directly from mutt, using
+'a' to create aliases for them. The operator must take care
+that the players' names are complete enough to let
+B<register> find them in the Echelle database.
+
+This registering method has three advantages: there can be no
+mistake in e-mail addresses, it's simple to do from the mail
+program, and the operator is left with a mutt-usable list of
+players for further mass-mailing.
+
+B<register> takes the registered player list on its standard
+input or command line, and outputs a Tournament object in a
+file specified with -f.
+
+B<--getech> forces downloading the echelle file.
+
+The format of each line is as follows:
+
+ alias <alias name> <full name> <<email address>> # additional information
+
+Additional information can be the licence number (useful in
+case there are several players with the same name) or the
+level (useful if a player hasn't played yet).
+
+For example:
+
+ alias joe Joe Bloggs <joe@blogs.net> # 0242149 3k
+
+This will register Joe Bloggs, licence number 0242149, at
+250 points. In most cases, the additional information does
+not need to be specified.
+
+=cut
+
+# Processes registrations:
+# - Input file: muttrc-syntax alias file; echelle file
+# - Output file: Tournament object in file toperm
+
+use strict;
+use locale;
+use Getopt::Long;
+use Pod::Usage;
+
+# Check we have the right environment variables to find
+# the modules, and add to @INC.
+BEGIN {
+    die "Environment variable GOAT_DIR and WORK_DIR must be defined\n" 
+        if not defined $ENV{GOAT_DIR} or not defined $ENV{WORK_DIR};
+
+    push @INC, $ENV{GOAT_DIR};
+}
+
+use Tournament;
+use GoatLib;
+
+my $ECHELLE_FILE = "ech_ffg.txt";
+
+my ($param_file, $param_force_getech, $help);
+GetOptions(
+    'help' => \$help,
+    'file=s' => \$param_file,
+    'getech' => \$param_force_getech,
+) or die pod2usage();
+
+die pod2usage(-verbose=>2) if defined $help;
+die "No tournament file specified. Use -f <file>.\n" unless defined $param_file;
+
+my @registered;
+
+download_echelle($ECHELLE_FILE) if $param_force_getech;
+
+
+while (<>) {
+    next if /^#/ or /^$/;
+
+    my $player = FFGPlayer->new_from_alias($_, $ECHELLE_FILE);
+
+    next unless defined $player;
+
+    push @registered, $player;
+}
+
+# Sort by level
+@registered = sort { $b->level <=> $a->level } @registered;
+
+# Sort by registration level
+#@registered = 
+#   map { $_->[1] } 
+#   sort { $b->[0] <=> $a->[0] } 
+#   map { [(stone_to_level $_->registering_level), $_] }
+#   @registered;
+
+# Tournament object
+my $t = new Tournament (
+    name => 'tpToulouse',
+    city => 'Toulouse',
+    comments=> 'Tournoi permanent de Toulouse',
+    time=> 60,
+    size=> 19,
+    komi=> 7.5,
+    FFGPlayer=> \@registered,
+);
+$t->save($param_file);
+
+warn "Registered ".(scalar @registered)." players.\n";
