@@ -34,7 +34,8 @@ odd, it'll complain and you need to specify the e-mail
 address of a 'bye' player, who won't take part in this
 round. Alternatively you can specify 'random', in which case
 the bye player will be randomly picked among those that
-haven't played their game in the previous round.
+haven't played their game in the previous round (or among
+all players, if all have played their game).
 
 If the B<date> is specified, it will be displayed in
 all reminders. If not specified, one month from now is
@@ -167,9 +168,13 @@ my $matchmaker = Algorithm::Pair::Best2->new(
 my @players = $Tournament->players;
 if (1 & @players) {
     if (defined $param_bye and $param_bye eq 'random') {
+        # Find players that haven't played their last game
         my @games_not_played = grep { not ($_->is_finished or $_->is_canceled) } $Tournament->curr_round->games;
-        my @players_not_played = map { $_->white, $_->black } @games_not_played;
-        my $bye = @players_not_played[ rand @players_not_played ];
+        my @bye_candidates = map { $_->white, $_->black } @games_not_played;
+        # If all have played, select from all players
+        @bye_candidates = @players unless @bye_candidates;
+
+        my $bye = @bye_candidates[ rand @bye_candidates ];
         warn "Randomly picking ".$bye->fullname." as bye player\n";;
         @players = grep { $_->id ne $bye->id } @players;
     } else {
