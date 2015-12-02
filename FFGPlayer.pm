@@ -103,33 +103,41 @@ sub parse_additional_info {
 }
 
 
-# grep_echelle($filename, ["31Ba", "31To", "31Pi"], "John", "Doe");
-# Search $filename for players belonging to said clubs, which name contains the
-# list at the end. Here it'd find all John Doe's in the Toulouse area.
+# grep_echelle($filename, "John Doe");
+# Search $filename for players which name contains the list at the end. Here
+# it'd find all John Doe's
+# License is not currently used (could be used to disambiguate or speed up
+# later)
 sub grep_echelle {
-    my ($fn, $r_clubs, @names) = @_;
+    my ($fn, $names, $license) = @_;
 
     my $verbose_search = 1;
     my $checked = 0; # Counter for progress bar
 
-    my @out;
+    my @names = split /\s+/, $names;
     my $ech;
     open $ech, $fn or die "$fn: $!\n";
     my @haystack;
     @haystack = <$ech>;
 
-    # The (bizarre?) algorithm:
-    # Grep for clubs, then see if names as Unicode
-    # (Unicode matching is *extremely* expensive so try to limit as much as
-    # possible)
-
-    my $regex = join "|", @$r_clubs;
-    @haystack = grep /$regex/, @haystack;
 
     print "searching for ".(join " ", @names)."\n" if $verbose_search;
+    # First we search with ASCII as it's fastest
     foreach my $line (@haystack) {
-        my $Collator = Unicode::Collate->new(normalization => undef, level => 1);
-
+        my $match = 1;
+        foreach my $name (@names) {
+            if ($line !~ /$name/i) {
+                $match = 0;
+                last;
+            }
+        }
+        if ($match) {
+            return $line;
+        }
+    }
+    # If ASCII failed, try Unicode collation (pretty slow)
+    my $Collator = Unicode::Collate->new(normalization => undef, level => 1);
+    foreach my $line (@haystack) {
         my $match = 1;
         foreach my $name (@names) {
             if ($Collator->index($line, $name) == -1) {
@@ -140,15 +148,13 @@ sub grep_echelle {
 
         if ($match) {
             print "\rmatch: $line" if $verbose_search;
-            push @out, $line;
-            last;  # Don't check if we have several contenders... usually we don't
+            return $line;
         }
         $| = 1;
         printf("\r%2.f%%",(100 * $checked / scalar @haystack) ) if $verbose_search;
         $checked++;
     }
-    print "\n" if $verbose_search;
-    return @out;
+    return undef;
 }
 
 
@@ -174,8 +180,7 @@ sub new_from_alias {
     }
 
     $licence ||= "";
-    # Clubs to be abstracted in configuration...
-    my @from_echelle = grep_echelle($echelle_file, ["31Ba", "31Pi", "31To"], (split /\s+/, $name), $licence);
+    my @from_echelle = grep_echelle($echelle_file, $name, $licence);
 
     if (@from_echelle > 1) {
         warn "Ambiguous name \"$name\":\n @from_echelle\n";
