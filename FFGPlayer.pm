@@ -150,8 +150,10 @@ sub grep_echelle {
             print "\rmatch: $line" if $verbose_search;
             return $line;
         }
-        $| = 1;
-        printf("\r%2.f%%",(100 * $checked / scalar @haystack) ) if $verbose_search;
+        {
+            local $|; $| = 1;
+            printf("\r%2.f%%",(100 * $checked / scalar @haystack) ) if $verbose_search;
+        }
         $checked++;
     }
     return undef;
