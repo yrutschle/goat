@@ -172,6 +172,8 @@ sub parse_command {
     my ($line) = @_;
     my $exec;
 
+    return undef if $line =~ /^> /;
+
     if ($line =~ /(schedule|rendez[ -]?vous|rdv)\S*\s+(.*?)\s*,\s*(.*)/i) {
         my ($cmd, $date, $location) = ($1, $2, $3);
 
