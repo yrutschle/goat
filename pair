@@ -148,12 +148,25 @@ sub already_played {
     return $score;
 }
 
+=head3 Different club
+
+Players who belong to the same club get points to encourage
+variety 
+
+=cut
+sub same_club {
+    my ($p1, $p2, $explain) = @_;
+
+    return 500 if $p1->club eq $p2->club;
+    return 0;
+}
+
 
 sub score {
     my ($a, $b) = @_;
 
     my $exp = 0; # Explain (not implemented)
-    return already_played($a, $b, $exp) + level_diff($a, $b, $exp);
+    return already_played($a, $b, $exp) + level_diff($a, $b, $exp) + same_club($a, $b, $exp);
 }
 
 my $matchmaker = Algorithm::Pair::Best2->new(
@@ -169,9 +182,12 @@ my @players = $Tournament->players;
 if (1 & @players) {
     if (defined $param_bye and $param_bye eq 'random') {
         # Find players that haven't played their last game
-        my @games_not_played = grep { not ($_->is_finished or $_->is_canceled) } $Tournament->curr_round->games;
-        my @bye_candidates = map { $_->white, $_->black } @games_not_played;
-        # If all have played, select from all players
+        my @bye_candidates;
+        if (defined $Tournament->curr_round) {
+            my @games_not_played = grep { not ($_->is_finished or $_->is_canceled) } $Tournament->curr_round->games;
+            @bye_candidates = map { $_->white, $_->black } @games_not_played;
+        }
+        # If all have played or tournament not started, select from all players
         @bye_candidates = @players unless @bye_candidates;
 
         my $bye = @bye_candidates[ rand @bye_candidates ];
@@ -193,6 +209,7 @@ foreach my $p (reverse sort {$a->level <=> $b->level} @players) {
 
 # Find the longest name+address
 my $max_name_length = (sort { $a <=> $b } map { length $_->fulladdress } @players)[-1];
+$max_name_length += 7; # For the club label
 
 use Data::Dumper;
 my $round_num = ($Tournament->round_number || 0) + 1;
@@ -226,10 +243,12 @@ while (@res) {
     my $g = new GoGame $black, $white, $handi;
 
     # Print out a formated line
-    my $bl = length $black->fulladdress;
-    my $wl = length $white->fulladdress;
-    print $black->fulladdress . " " x ($max_name_length - $bl) . " " . 
-          $white->fulladdress . " " x($max_name_length - $wl) . " $handi\n";
+    my $bt = $black->fulladdress . " (".$black->club.")";
+    my $wt = $white->fulladdress . " (".$white->club.")";
+    my $bl = length $bt;
+    my $wl = length $wt;
+    print $bt . " " x ($max_name_length - $bl) . " " . 
+          $wt . " " x($max_name_length - $wl) . " $handi\n";
 
     $Tournament->curr_round->add_game($g);
 }

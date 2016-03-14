@@ -460,7 +460,7 @@ sub as_HTML {
 
     # Player list
     my $table = new HTML::Table(-cols=>3, -border=>1);
-    $table->addRow('Nom', 'Prénom', 'Niveau');
+    $table->addRow('Nom', 'Prénom', 'Niveau', 'Club');
     foreach my $player 
     (
         sort {$a->sortname cmp $b->sortname} $obj->players
@@ -468,7 +468,8 @@ sub as_HTML {
         $table->addRow(
             $player->familyname,
             $player->givenname,
-            $player->level . '(' . $player->stones . ')'
+            $player->level . '(' . $player->stones . ')',
+            $player->club
         );
     }
     $html .= $table;
@@ -487,8 +488,8 @@ sub as_HTML {
             my $white_level = $game->white->register_level($round_num) || $game->white->level || "NC";
             my $black_level = $game->black->register_level($round_num) || $game->black->level || "NC";
             $table->addRow(
-                $game->white->fullname."($white_level)",
-                $game->black->fullname."($black_level)",
+                $game->white->fullname." ($white_level) ".$game->white->club,
+                $game->black->fullname." ($black_level) ".$game->black->club,
                 $game->handicap,
                 $result
             );

@@ -490,13 +490,15 @@ sub notify_not_registered {
     system("$BIN_MAIL_OUT $mail_out_opts --player-unknown '$player'");
 }
 
-=head2 fixup_accents
+=head2 fixup_frenchisms
 
 Fix up accents in dates, so sloppy French writers can get
 away with 'fev' instead of 'fév' etc.
 
+Also change '18h32' to '18:32'
+
 =cut
-sub fixup_accents {
+sub fixup_frenchisms {
     my %fixups = (
         'fevrier'  => 'février',
         'aout'     => 'août',
@@ -512,6 +514,7 @@ sub fixup_accents {
         $v = substr $v, 0, 3;
         $date =~ s/$k/$v/; # Substitute 3-letter abbreviations
     }
+    $date =~ s/(\d\d)h(\d\d)/$1:$2/;
     return $date;
 }
 
@@ -543,14 +546,16 @@ if (defined $param_schedule) {
     $date_str = Encode::decode("utf8", $date_str);
 
     my $date;
+
     my $lang = Date::Language->new('French');
-    eval {  # str2time dies on illegal dates: we really don't want that.
-        $date = $lang->str2time(fixup_accents $date_str);
+    eval {  # str2time and others die on illegal dates: we really don't want that.
+        $date_str = fixup_frenchisms $date_str;
+        $date = $lang->str2time($date_str);
+        # Compute date in UTC using timezone in configuration
+        my $tz = DateTime::TimeZone->new(name => $TIMEZONE);
+        my $dt = DateTime->from_epoch(epoch => $date);
+        $date -= $tz->offset_for_datetime($dt);
     };
-    # Compute date in UTC using timezone in configuration
-    my $tz = DateTime::TimeZone->new(name => $TIMEZONE);
-    my $dt = DateTime->from_epoch(epoch => $date);
-    $date -= $tz->offset_for_datetime($dt);
 
     unless (defined $date) {
         print "$local_today: notify $player that '$date_str' is invalid\n";

@@ -160,6 +160,8 @@ sub sendmail {
     my $fh = $msg->open or record "SMTP open: $!";
     print $fh @body;
     $fh->close;
+
+    record("@$r_to: $subject");
 }
 
 # Header to be written before every e-mail

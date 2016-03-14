@@ -136,27 +136,32 @@ sub grep_echelle {
         }
     }
     # If ASCII failed, try Unicode collation (pretty slow)
-    my $Collator = Unicode::Collate->new(normalization => undef, level => 1);
-    foreach my $line (@haystack) {
-        my $match = 1;
-        foreach my $name (@names) {
-            if ($Collator->index($line, $name) == -1) {
-                $match = 0;
-                last;
+    # (Actually I think this is not necessary if running UTF8 as pattern
+    # matching works right. Disabling for now).
+    if (0) {
+        my $Collator = Unicode::Collate->new(normalization => undef, level => 1);
+        foreach my $line (@haystack) {
+            my $match = 1;
+            foreach my $name (@names) {
+                if ($Collator->index($line, $name) == -1) {
+                    $match = 0;
+                    last;
+                }
             }
-        }
 
-        if ($match) {
-            print "\rmatch: $line" if $verbose_search;
-            return $line;
+            if ($match) {
+                print "\rmatch: $line" if $verbose_search;
+                return $line;
+            }
+            {
+                local $|; $| = 1;
+                printf("\r%2.f%%",(100 * $checked / scalar @haystack) ) if $verbose_search;
+            }
+            $checked++;
         }
-        {
-            local $|; $| = 1;
-            printf("\r%2.f%%",(100 * $checked / scalar @haystack) ) if $verbose_search;
-        }
-        $checked++;
     }
-    return undef;
+
+return undef;
 }
 
 
