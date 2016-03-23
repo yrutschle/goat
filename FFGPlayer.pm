@@ -52,7 +52,7 @@ sub new_from_ech {
     $line =~ /^(\S+)\s+    # Name
                (\S+)\s+    # 1st name
                ([-\d]+)\s     # Rank
-               (.)\s          # status: L: has a valid license; e: foreigner; -: no license
+               (.)\s          # status: L: has a valid license; e: foreigner; -: no license ; X: ? ; C: licence loisir?
                ([\w-]{7})\s   # License number
                (.{4})         # Club
              /x or (warn "Illegal echelle line: $line") and return undef;
@@ -113,6 +113,7 @@ sub grep_echelle {
 
     my $verbose_search = 1;
     my $checked = 0; # Counter for progress bar
+    my @out;
 
     my @names = split /\s+/, $names;
     my $ech;
@@ -132,9 +133,11 @@ sub grep_echelle {
             }
         }
         if ($match) {
-            return $line;
+            push @out, $line;
         }
     }
+    return @out;
+
     # If ASCII failed, try Unicode collation (pretty slow)
     # (Actually I think this is not necessary if running UTF8 as pattern
     # matching works right. Disabling for now).
@@ -180,6 +183,7 @@ sub new_from_alias {
     }
 
     $name =~ s/\s*$//; # suppress trailing spaces
+    $name =~ s/[^\w -]//g; # Only keep letters, dash and space
 
     # If there is a registration level, finish extracting it
     if (defined $niv) {
@@ -194,7 +198,7 @@ sub new_from_alias {
         warn "Try to add licence number to the end of the alias line.\n";
         return undef;
     }
-    if (@from_echelle == 0) {
+    if (not defined $from_echelle[0]) {
         warn "Not found \"$name\" in echelle -- adding anyway\n";
         # Fake echelle entry
         $niv ||= -1600;
