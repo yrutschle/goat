@@ -24,6 +24,10 @@ http://www.gnu.org/licenses/gpl.html
 
 HOW TO INSTALL?
 
+Install the dependencies:
+
+         apt-get install libtime-modules-perl libemail-filter-perl libemail-valid-perl libdatetime-locale-perl libhtml-table-perl libdatetime-timezone-perl
+
 Check out GoatConfig.pm for configuration options.
 
 Goat is called in 2 ways: on receiving a mail that contains
