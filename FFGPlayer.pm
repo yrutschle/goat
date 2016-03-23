@@ -111,7 +111,7 @@ sub parse_additional_info {
 sub grep_echelle {
     my ($fn, $names, $license) = @_;
 
-    my $verbose_search = 1;
+    my $verbose_search = 0;
     my $checked = 0; # Counter for progress bar
     my @out;
 
