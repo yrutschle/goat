@@ -1,15 +1,15 @@
 To: yves@example.org
-Vous avez reçu ce courrier car vous êtes inscrit au tournoi
-permanent de Toulouse. Si vous avez reçu ce mail par erreur,
+Vous avez reÃ§u ce courrier car vous Ãªtes inscrit au tournoi
+permanent de Toulouse. Si vous avez reÃ§u ce mail par erreur,
 merci de contacter Yves Rutschle <go@rutschle.net>
 
 
-Votre commande n'a pas pu être interpretée correctement.
+Votre commande n'a pas pu Ãªtre interpretÃ©e correctement.
 
-Les commandes doivent être écrites dans l'objet du courrier
-envoyé à Goat. Le corps du message est ignoré.
+Les commandes doivent Ãªtre Ã©crites dans l'objet du courrier
+envoyÃ© Ã  Goat. Le corps du message est ignorÃ©.
 
-Goat gère les commandes suivantes:
+Goat gÃ¨re les commandes suivantes:
 
 rendezvous <date>, <lieu>
 resultat <couleur gagnante>
@@ -17,8 +17,8 @@ resultat <couleur gagnante>
 rendezvous: Utilisez cette commande afin d'informer Goat de
 la date et du lieu choisi pour votre partie.
 
-resultat: Après la partie, indiquez la couleur du joueur qui
-a gagné la partie.
+resultat: AprÃ¨s la partie, indiquez la couleur du joueur qui
+a gagnÃ© la partie.
 
 
 
