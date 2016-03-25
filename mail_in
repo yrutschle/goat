@@ -178,7 +178,9 @@ sub parse_command {
         $exec = "$BIN_GOAT $goat_opts --schedule \"$from, $date,KGS\"";
     } elsif ($line =~ /(r.sult)/i) { 
         my ($cmd, $winner) = split /\s+/, $line;
-        return undef if $winner !~ /(blanc|noir|white|black)/i;
+        # The following test breaks test 10: bad colour requires a
+        # preoper error message /YR25MAR2016
+        #  return undef if $winner !~ /(blanc|noir|white|black)/i;
         $exec = "$BIN_GOAT $goat_opts --result \"$from,$winner\"";
     } elsif ($line =~ /(sans\s*nouvelles?|no\s*news)/i) {
         $exec = "$BIN_GOAT $goat_opts --nonews \"$from\"";
