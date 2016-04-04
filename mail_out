@@ -55,6 +55,7 @@ use Pod::Usage;
 use Mail::Send;
 use DateTime;  # package libdatetime-perl
 use DateTime::Locale; # package libdatetime-locale-perl
+use Template;
 use POSIX;
 
 # Check we have the right environment variables to find
@@ -66,7 +67,6 @@ BEGIN {
     # to find our .pm files.
     push @INC, $ENV{GOAT_DIR};
 }
-use GoatConfig;
 
 use GoatConfig;
 
@@ -117,6 +117,11 @@ sub record {
     }
 }
 
+my $tt = Template->new({ 
+        INCLUDE_PATH => "$TEMPLATE_DIR",
+    });
+
+
 # Turn a UTC time_t into a localised timezoned string
 sub utc2str {
     my $loc = DateTime::Locale->load($LOCALE);
@@ -124,26 +129,50 @@ sub utc2str {
     my $date = $o->strftime("%A %d %B %Y %R");
 }
 
+# Makes a hash from a list
+# $names: ref to list of names
+# $vals: ref to list of vals
+# Returns: hash of names => vals
+sub make_hash {
+    my ($names, $vals) = @_;
+    my %h;
+
+    map {$h{shift @$names} = $_ } @$vals;
+    return %h;
+}
+
 
 # Send mail to one or several recipients:
-# sendmail "hello world", ['bob@foo.com', 'joe@bar.com'], @lines;
+# sendmail ['bob@foo.com', 'joe@bar.com'], $template, # \%data;
 # if $param_attach is defined, collate the content of the
 # file specified in $param_attach in the body of the email
 sub sendmail {
-    my ($subject, $r_to, @body) = @_;
+    my ($r_to, $template, $r_data) = @_;
+
+    my $body;
+    $tt->process($template, $r_data, \$body) or die $tt->error;
+
+    # Remove header lines
+    $body =~ s/^(.*?)\n\n//s;
+    my $hdrs = $1;
+    my %hdr;
+    foreach my $hdr (split /\n/, $hdrs) {
+        $hdr =~ /(.*?): (.*)/;
+        $hdr{$1} = lc $2;
+    } 
 
     $r_to = [$r_to] unless ref $r_to;
 
     if (defined $param_attach) {
         if (open my $attch, "$param_attach") {
-            push @body, $_ while (<$attch>);
+            $body .= $_ while (<$attch>);
         } else {
             record "Attach: $param_attach: $!";
         }
     }
 
     if ($no_send) {
-        print "To: @$r_to\n@body";
+        print "To: @$r_to\n$body";
         return;
     }
 
@@ -152,42 +181,17 @@ sub sendmail {
     # send e-mail. This means one must be extra careful when
     # editing it, and that it'll appear as not covered
     # during test (because, well, it isn't).
-    my $msg = new Mail::Send Subject=>$subject, To=>join ",", @$r_to;
+    my $msg = new Mail::Send Subject=>$hdr{subject}, To=>join ",", @$r_to;
     $msg->set('From' => $GOAT_ADDRESS);
     $msg->set('Return-path' => $GOAT_ADDRESS);
     $msg->set('X-Loop' => $GOAT_ADDRESS);
     $msg->set('Content-Type' => 'text/plain; charset=utf-8');
     my $fh = $msg->open or record "SMTP open: $!";
-    print $fh @body;
+    print $fh $body;
     $fh->close;
 
-    record("@$r_to: $subject");
+    record("@$r_to: $hdr{subject}");
 }
-
-# Header to be written before every e-mail
-my $header = <<"EOF";
-Vous avez reçu ce courrier car vous êtes inscrit au tournoi
-permanent de Toulouse. Si vous avez reçu ce mail par erreur,
-merci de contacter Yves Rutschle <go\@rutschle.net>
-EOF
-
-# Tells the user how to use the mail front-end.
-my $usage = <<"EOF";
-Les commandes doivent être écrites dans l'objet du courrier
-envoyé à Goat. Le corps du message est ignoré.
-
-Goat gère les commandes suivantes:
-
-rendezvous <date>, <lieu>
-resultat <couleur gagnante>
-
-rendezvous: Utilisez cette commande afin d'informer Goat de
-la date et du lieu choisi pour votre partie.
-
-resultat: Après la partie, indiquez la couleur du joueur qui
-a gagné la partie.
-
-EOF
 
 =head2 OPTIONS
 
@@ -205,16 +209,7 @@ if (defined $param_mail_in_illegal and
 
     my $contents = `cat $file`;
 
-    sendmail "[goat] Commande illégale", $rcpt, <<"EOF";
-$header
-
-Votre commande n'a pas pu être interpretée correctement.
-
-$usage
-
----- Votre message :
-$contents
-EOF
+    sendmail $rcpt, "badcmd.tt", { contents => $contents };
     exit 0;
 }
 
@@ -228,39 +223,9 @@ if (defined $param_issue_challenge) {
     my ($black, $white,$handi,$final_date) = split /\s*,\s*/, $param_issue_challenge;
 
     my $date = utc2str $final_date;
+    my %data = make_hash( [qw/black white handi date/], [$black, $white, $handi, $date]);
 
-    sendmail "[goat] Votre appariement", [$white, $black], <<"EOF";
-$header
-
-Voici votre appariement pour la prochaine ronde, à jouer
-pour le $date :
-
-Noir: $black
-Blanc: $white
-Handicap: $handi
-
-Merci de répondre à ce courrier dès que vous aurez arrangé la
-rencontre, en remplissant le sujet de votre réponse de la
-façon suivante :
-
-rendezvous <date>, <lieu>
-
-Par exemple:
-
-rendezvous 12 mars 2008 21:00, Cool à Flo
-
-Vous pouvez également rapporter directement le résultat si
-vous avez omis de prévenir Goat de votre partie:
-
-resultat <couleur gagnante>
-
-Par exemple :
-
-resultat blanc
-
-
-EOF
-
+    sendmail [$white, $black], "pairing.tt", \%data;
     exit 0;
 }
 
@@ -277,29 +242,9 @@ if (defined $param_remind_challenge) {
     my ($black, $white,$handi,$final_date) = split /\s*,\s*/, $param_remind_challenge;
 
     my $date = utc2str $final_date;
+    my %data = make_hash( [qw/black white handi date/], [$black, $white, $handi, $date]);
 
-    sendmail "[goat] N'oubliez pas d'organiser votre partie!", [$white, $black], <<"EOF";
-$header
-
-Vous n'avez pas encore arrangé votre partie. Les parties de
-cette ronde sont à jouer pour le $date.
-
-Noir: $black
-Blanc: $white
-Handicap: $handi
-
-Merci de répondre à ce courrier dès que vous aurez arrangé la
-rencontre, en remplissant le sujet de votre réponse de la
-façon suivante :
-
-rendezvous <date>, <lieu>
-
-Par exemple :
-
-rendezvous 12 mars 2007 12:00, Cool à Flo
-
-EOF
-
+    sendmail [$white, $black], "organise.tt", \%data;
     exit 0;
 }
 
@@ -313,26 +258,11 @@ they need to publish their results.
 if (defined $param_ask_result) {
     my ($p1, $p2, $time) = split /\s*,\s*/, $param_ask_result;
 
-    $ENV{LANG} = $LOCALE;
-
     my $date = utc2str $time;
 
-    sendmail "[goat] Résultat de votre partie", [$p1,$p2], <<"EOF";
-$header
+    my %data = make_hash( [qw/date/], [$date]);
 
-Votre partie était prévue le $date, 
-mais vous n'avez pas encore publié le résultat. Merci de
-répondre à ce courrier en remplissant le sujet de votre
-réponse de la façon
-suivante :
-
-resultat <couleur gagnante>
-
-Par exemple :
-
-resultat blanc
-
-EOF
+    sendmail [$p1,$p2], "ask_result.tt", \%data;
     exit 0;
 
 }
@@ -348,14 +278,7 @@ that Goat knows about).
 if (defined $param_player_unknown) {
     my ($p1) = $param_player_unknown;
 
-    sendmail "[goat] Adresse inconnue", $p1, <<"EOF";
-
-L'adresse que vous avez utilisée est inconnue. Vous devez
-envoyer vos courriers à Goat en utilisant l'adresse avec
-laquelle vous vous êtes enregistré.
-
-EOF
-
+    sendmail $p1, "unknown_address.tt";
     exit 0;
 }
 
@@ -372,29 +295,8 @@ if (defined $param_notify_schedule) {
 
     my $date = utc2str $time;
 
-    sendmail "[goat] Partie: $location, $date", [$black, $white], <<"EOF";
-$header
-
-$setter a programmé votre partie:
-
-Lieu: $location
-Date: $date
-Noir: $black
-Blanc: $white
-Handicap: $handi
-
-Après la partie, merci de publier le résultat en répondant à
-ce mail en remplissant le sujet de votre réponse de la façon
-suivante :
-
-resultat <couleur gagnante>
-
-Par exemple :
-
-resultat blanc
-
-EOF
-
+    my %data = make_hash( [qw/ black white handi date location setter/ ],  [$black,$white,$handi,$date,$location,$setter]);
+    sendmail [$black, $white], "scheduled.tt", \%data;
     exit 0;
 }
 
@@ -405,33 +307,12 @@ place on I<date> (soon) in I<location>
 
 =cut
 if (defined $param_coming_up) {
-    my ($black,$white,$handi,$time,$location,$setter) = split /\s*,\s*/, $param_coming_up;
+    my ($black,$white,$handi,$time,$location) = split /\s*,\s*/, $param_coming_up;
 
     my $date = utc2str $time;
 
-    sendmail "[goat] Partie: $location, $date", [$black, $white], <<"EOF";
-$header
-
-N'oubliez pas de jouer votre partie:
-
-Lieu: $location
-Date: $date
-Noir: $black
-Blanc: $white
-Handicap: $handi
-
-Après la partie, merci de publier le résultat en répondant à
-ce mail en remplissant le sujet de votre réponse de la façon
-suivante :
-
-resultat <couleur gagnante>
-
-Par exemple :
-
-resultat blanc
-
-EOF
-
+    my %data = make_hash([qw(black white handi date location)], [$black,$white,$handi,$date,$location]);
+    sendmail [$black, $white], "game_reminder.tt", \%data;
     exit 0;
 }
 
@@ -444,18 +325,8 @@ Notify I<rcpt> that I<date> is invalid.
 if (defined $param_baddate) {
     my ($rcpt,$date) = split /\s*,\s*/, $param_baddate;
 
-    sendmail "[goat] Erreur de date", $rcpt, <<"EOF";
-$header
-
-La date que vous avez spécifiée: "$date", n'est pas une date
-légale. Merci d'essayer à nouveau, en suivant un des formats
-suivants:
-
-30/07/2005 17:30
-30 juillet 2005 17:30
-30 jul 2005 17:30
-
-EOF
+    sendmail $rcpt, "baddate.tt", {date => "$date" };
+    exit 0;
 }
 
 =item --pastdate <rcpt,date>
@@ -467,18 +338,8 @@ Notify I<rcpt> that I<date> is already past.
 if (defined $param_pastdate) {
     my ($rcpt,$date) = split /\s*,\s*/, $param_pastdate;
 
-    sendmail "[goat] Erreur de date", $rcpt, <<"EOF";
-$header
-
-La date que vous avez spécifiée: "$date", est déjà passée.
-Merci d'essayer à nouveau, en suivant un des formats
-suivants:
-
-30/07/2005 17:30
-30 juillet 2005 17:30
-30 jul 2005 17:30
-
-EOF
+    sendmail $rcpt, "pastdate.tt", {date => "$date" };
+    exit 0;
 }
 
 =item --give-results <black,white,result,reporter>
@@ -493,15 +354,9 @@ if (defined $param_give_results) {
 
     my $winner = $res eq 'black' ? $black : $white;
 
-    sendmail "[goat] Résultat de votre ronde", [$black, $white], <<"EOF";
-$header
-
-Le résultat de votre partie a été enregistré.
-$black contre $white, victoire pour $winner.
-
-Le résultat a été rapporté par $player.
-EOF
-
+    my %data = make_hash([qw(black white winner player)], 
+                           [$black, $white, $winner, $player]);
+    sendmail [$black, $white], "results.tt", \%data;
     exit 0;
 }
 
@@ -514,17 +369,7 @@ Notify I<rcpt> that I<colour> is not a valid color.
 if (defined $param_badcolour) {
     my ($rcpt,$colour) = split /\s*,\s*/, $param_badcolour;
 
-    sendmail "[goat] Erreur de couleur", $rcpt, <<"EOF";
-$header
-
-La couleur: "$colour" que vous avez indiquée en résultat
-n'est pas légale. Merci d'essayer à nouveau, en utilisant:
-
-blanc
-noir
-
-EOF
-
+    sendmail $rcpt, "badcolour.tt", { colour => $colour };
     exit 0;
 }
 

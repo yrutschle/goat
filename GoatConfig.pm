@@ -11,6 +11,8 @@ $INSTALL_DIR $WORK_DIR $LOG_DIR $TMP_DIR
 
 $GOAT_ADDRESS $ADMIN_ADDRESS
 
+$TEMPLATE_DIR
+
 $LOCALE $TIMEZONE
 
 $BIN_MAIL_OUT $BIN_MAIL_IN $BIN_GOAT
@@ -49,6 +51,10 @@ use constant GAME_COMINGUP_TIMEOUT => 1 * 24 * 3600; # 1 day
 # Where is goat installed? This will usually be a home
 # directory, e.g. /home/goat.
 our $INSTALL_DIR = "$ENV{GOAT_DIR}";
+
+# Directory to get templates for outgoing e-mails
+our $TEMPLATE_DIR = "$INSTALL_DIR/fr";
+
 
 # Where to put working files? Typically log/ and tmp/
 our $WORK_DIR=$ENV{WORK_DIR};

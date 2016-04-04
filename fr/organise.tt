@@ -1,0 +1,21 @@
+Subject: [goat] N'oubliez pas d'organiser votre partie!
+
+[% INCLUDE header.tt %]
+
+Vous n'avez pas encore arrangé votre partie. Les parties de
+cette ronde sont à jouer pour le [% date %].
+
+Noir: [% black %]
+Blanc: [% white %]
+Handicap: [% handi %]
+
+Merci de répondre à ce courrier dès que vous aurez arrangé la
+rencontre, en remplissant le sujet de votre réponse de la
+façon suivante :
+
+rendezvous <date>, <lieu>
+
+Par exemple :
+
+rendezvous 12 mars 2007 12:00, Cool à Flo
+

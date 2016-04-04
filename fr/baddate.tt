@@ -1,0 +1,12 @@
+Subject: [goat] Erreur de date
+
+[% INCLUDE header.tt %]
+
+La date que vous avez spécifiée: "[% date %]", n'est pas une date
+légale. Merci d'essayer à nouveau, en suivant un des formats
+suivants:
+
+30/07/2005 17:30
+30 juillet 2005 17:30
+30 jul 2005 17:30
+
