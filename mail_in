@@ -202,7 +202,8 @@ if (not defined $exec) {
             push @lines, split /\n/, scalar decode($p->head->mime_attr('content-type.charset'),$p->bodyhandle->as_string);
         }
     } else {
-        my ($charset) = $mail->get('content-type') =~ /charset=(\S*)/i;
+        my ($cp) = grep /charset/, split /;/, $mail->get('content-type');
+        my ($fieldname,$charset) = split /=/, $cp;
         push @lines, map { decode $charset, $_ } @{$mail->body};
     }
     my @out = grep { defined $_ } map { parse_command $_ } @lines;
