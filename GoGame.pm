@@ -4,7 +4,6 @@ use strict;
 use locale;
 
 use FFGPlayer;
-use XML::Structured; # Installed from CPAN
 
 =head1 DESCRIPTION
 
@@ -14,28 +13,6 @@ everything might be defined (e.g. result might be undefined if the game hasn't
 be played yet).
 
 =cut
-
-# For XML storage
-my $player_dtd = FFGPlayer->dtd;
-my $game_dtd = [
-'GoGame' => [],
-          'handicap',
-          'challenge_date',
-          'scheduled_date',
-          'reminder_date',
-          'location',
-          'status',
-          'result',
-          'rated',
-          'submitted',
-          ['white', $player_dtd],
-          ['black', $player_dtd],
-];
-
-# Returns the DTD for this object
-sub dtd {
-    $game_dtd;
-}
 
 =head2 The state machine
 
@@ -165,18 +142,12 @@ sub handicap {
 sub black {
     my ($obj, $r) = @_;
     $obj->{black}->{FFGPlayer} = $r if $r;
-    # The GoGame object may have been created from an XML string that also
-    # contains FFGPlayer info. We need to bless that data into FFGPlayer if it
-    # hasn't been done. It feels quite wrong to do that in GoGame, be it here
-    # or in the new_* subroutines.
-    bless $obj->{black}->{FFGPlayer}, 'FFGPlayer' unless $obj->isa('FFGPlayer');
     $obj->{black}->{FFGPlayer};
 }
 
 sub white {
     my ($obj, $r) = @_;
     $obj->{white}->{FFGPlayer} = $r if $r;
-    bless $obj->{white}->{FFGPlayer}, 'FFGPlayer' unless $obj->isa('FFGPlayer');
     $obj->{white}->{FFGPlayer};
 }
 

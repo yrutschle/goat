@@ -4,7 +4,6 @@ use strict;
 use locale;
 
 use GoGame;
-use XML::Structured; # Installed from CPAN
 
 =head1 DESCRIPTION
 
@@ -12,18 +11,6 @@ Round contains all the information about a round played in a tournament:
 list of games, dates, and so on.
 
 =cut
-
-# For XML storage
-my $round_dtd = [
-'Round' => 
-        'number',
-        [GoGame->dtd],
-];
-
-# Returns the DTD for this object
-sub dtd {
-    $round_dtd;
-}
 
 BEGIN {
     my $subs;

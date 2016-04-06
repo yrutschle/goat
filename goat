@@ -750,20 +750,6 @@ if (defined $param_schedule) {
 
 my $fh;
 
-# XML::Structured seems to have changed in Squeeze -- this
-# needs to be updated or something
-# Update the XML state file
-#open $fh, ">:utf8", "toperm.xml" or die "toperm.xml: $!\n";
-#print $fh <<EOF;
-#<?xml version="1.0" encoding="utf8"?>
-#<?xml-stylesheet type="text/xsl" href="toperm.xsl"?>
-#EOF
-#{
-#    local $; undef $; # XML::Structured hates empty fields
-#    print $fh $Tournament->as_XML;
-#}
-#close $fh;
-
 # Update the HTML state file
 open $fh, "> toperm.html" or die "toperm.html: $!\n";
 print $fh $Tournament->as_HTML;

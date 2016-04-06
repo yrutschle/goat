@@ -6,7 +6,6 @@ use English;
 
 use FFGPlayer;
 use Round;
-use XML::Structured; # Installed from CPAN
 use Data::Dumper;
 use Mail::Address;
 use GoatLib;
@@ -20,27 +19,6 @@ List of rounds, dates, and so on.
 This is designed to easily translate into a FFG .TOU tournament result file, even though maybe not everything makes sense (e.g. 'date' doesn't make sense for Toulouse's permanent tournament, 'city' doesn't make sense for an Internet tournament etc.).
 
 =cut
-
-# For XML storage
-my $tournament_dtd = [
-'Tournament' => 
-        'name',
-        'date',
-        'city',
-        'comments',
-        'prog',
-        'time',
-        'size',
-        'komi',
-        'round_number', # Currently active round (what's set in the file is ignored)
-        [FFGPlayer->dtd],  # List of all players
-        [Round->dtd],      # List of all pairings
-];
-
-# Returns the DTD for this object
-sub dtd {
-    $tournament_dtd;
-}
 
 use vars qw/@attributes/;
 
@@ -436,11 +414,6 @@ sub tou {
     $str .= $obj->tou_results(\%opts, \@players, \@rounds);
 
     return $str;
-}
-
-# Returns the tournament as a XML string
-sub as_XML {
-    XMLout(dtd, $_[0]);
 }
 
 # Returns the tournament as a HTML string

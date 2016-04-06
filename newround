@@ -8,7 +8,6 @@
 
 use strict;
 use locale;
-use XML::Structured;
 use Data::Dumper;
 use FFGPlayer;
 use GoGame;
