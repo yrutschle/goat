@@ -37,7 +37,7 @@ valid.
 =cut
 
 use strict;
-use Mail::Audit;   # Package libmail-audit-perl
+use Email::Filter; # package libemail-filter-perl
 use Mail::Address;
 use Email::Valid;  # Package libemail-valid-perl
 
@@ -99,11 +99,11 @@ sub make_tmpfile {
         record "make_tmpfile $tmp_fn: $!";
         return;
     };
-    print $fh $mail->header."\n".(join "\n", @{$mail->body});
+    print $fh $mail->simple->as_string;
     return $tmp_fn;
 }
 
-my $mail = Mail::Audit->new;
+my $mail = Email::Filter->new;
 
 # When maintaining, reject all incoming mail
 if (0) {
@@ -114,14 +114,15 @@ if (0) {
 # First log the entire mail (maybe remove this when we gain
 # confidence in the system?)
 record "Got mail";
-print $logfile $mail->header."\n".(join '', @{$mail->body});
+print $logfile $mail->simple->as_string;
 
 # Forward all incoming mail to administrator
 $mail->noexit(1);
 $mail->resend($ADMIN_ADDRESS) unless $testing;
 
 # avoid loops
-if ($mail->get('X-Loop') eq $GOAT_ADDRESS) {
+my $loop = $mail->header('X-Loop');
+if (defined $loop and $loop eq $GOAT_ADDRESS) {
     print "Loop detected -- dropping mail\n";
     record "Loop detected -- dropping mail";
     exit 0;
@@ -202,9 +203,9 @@ if (not defined $exec) {
             push @lines, split /\n/, scalar decode($p->head->mime_attr('content-type.charset'),$p->bodyhandle->as_string);
         }
     } else {
-        my ($cp) = grep /charset/, split /;/, $mail->get('content-type');
+        my ($cp) = grep /charset/, split /;/, $mail->header('content-type');
         my ($fieldname,$charset) = split /=/, $cp;
-        push @lines, map { decode $charset, $_ } @{$mail->body};
+        push @lines, map { decode $charset, $_ } $mail->body;
     }
     my @out = grep { defined $_ } map { parse_command $_ } @lines;
     if (@out) {

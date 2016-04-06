@@ -23,7 +23,6 @@ a gagné la partie.
 
 
 ---- Votre message :
-From yves@example.org Thu Jul 13 22:36:02 2006
 Received: from yves by localhost with local (Exim 4.50)
 	id 1G17uk-0003eY-55
 	for goat@example.org; Thu, 13 Jul 2006 22:36:02 +0200
@@ -36,5 +35,7 @@ Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 User-Agent: Mutt/1.5.9i
 From: Yves <yves@example.org>
+
+
 
 
