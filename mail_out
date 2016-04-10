@@ -133,11 +133,12 @@ sub utc2str {
 # $names: ref to list of names
 # $vals: ref to list of vals
 # Returns: hash of names => vals
+# Hash key names are lower-cased
 sub make_hash {
     my ($names, $vals) = @_;
     my %h;
 
-    map {$h{shift @$names} = $_ } @$vals;
+    map {$h{lc shift @$names} = $_ } @$vals;
     return %h;
 }
 
@@ -158,7 +159,7 @@ sub sendmail {
     my %hdr;
     foreach my $hdr (split /\n/, $hdrs) {
         $hdr =~ /(.*?): (.*)/;
-        $hdr{$1} = lc $2;
+        $hdr{lc $1} = $2;
     } 
 
     $r_to = [$r_to] unless ref $r_to;
@@ -172,7 +173,7 @@ sub sendmail {
     }
 
     if ($no_send) {
-        print "To: @$r_to\n$body";
+        print "To: @$r_to\nSubject: $hdr{subject}\n$body";
         return;
     }
 
