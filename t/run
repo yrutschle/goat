@@ -17,6 +17,7 @@ mkdir "t/tmp" unless -e "t/tmp" or die "Can't create test directory t/tmp: $!\n"
 
 $ENV{GOAT_DIR} = $ENV{PWD};
 $ENV{WORK_DIR} = "$ENV{PWD}/t/tmp";
+$ENV{TZ} = "GMT"; # Keep logs to local time, but fix timezone for testing...
 
 my $coverage = 0; # Set to 1 to do code coverage analysis
 

@@ -128,23 +128,26 @@ if (defined $loop and $loop eq $GOAT_ADDRESS) {
     exit 0;
 }
 
-# if we get mail from postmaster, something went wrong
-if ($mail->from =~ /postmaster|daemon/i) {
-    print "mail from postmaster -- dropping\n";
-    record "mail from postmaster -- dropping\n";
-    exit 0;
-}
-
 my $from = $mail->from;
-# Unfold FROM field, otherwise Email::Valid doesn't work
-$from = join ' ', split /\n/, $from;
-$from = Email::Valid->address($from);
+
+if (defined $from) {
+    # Unfold FROM field, otherwise Email::Valid doesn't work
+    $from = join ' ', split /\n/, $from;
+    $from = Email::Valid->address($from);
+}
 
 if (not defined $from) {
     # FROM mail address is not valid -- we probably can't
     # even send an error message, so just log it.
     print "Illegal sender\n";
-    record "Illegal sender (header contain '".$mail->from."', failed: $Email::Valid::Details)";
+    record "Illegal sender ($Email::Valid::Details)";
+    exit 0;
+}
+
+# if we get mail from postmaster, something went wrong
+if ($from =~ /postmaster|daemon/i) {
+    print "mail from postmaster -- dropping\n";
+    record "mail from postmaster -- dropping\n";
     exit 0;
 }
 
@@ -195,11 +198,16 @@ sub parse_command {
 # First try to parse the mail subject line
 my $exec = parse_command scalar decode("MIME-Header", $mail->subject);
 
+use MIME::Parser;
+
 # If that didn't work, try to parse each line of the e-mail
 if (not defined $exec) {
     my @lines;
-    if ($mail->isa('MIME::Entity') and $mail->parts) {
-        foreach my $p ($mail->parts) {
+
+    # If it's multi-part, descend into each part
+    my $mime = MIME::Parser->new->parse_data($mail->simple->as_string);
+    if ($mime->parts) {
+        foreach my $p ($mime->parts) {
             push @lines, split /\n/, scalar decode($p->head->mime_attr('content-type.charset'),$p->bodyhandle->as_string);
         }
     } else {
