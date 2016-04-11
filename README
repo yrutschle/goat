@@ -26,7 +26,7 @@ HOW TO INSTALL?
 
 Install the dependencies:
 
-         apt-get install libtime-modules-perl libemail-filter-perl libemail-valid-perl libdatetime-perl libdatetime-locale-perl libhtml-table-perl libdatetime-timezone-perl libdevel-cover-perl libtemplate-perl libmime-tools-perl
+         apt-get install libtime-modules-perl libemail-filter-perl libemail-valid-perl libdatetime-perl libdatetime-locale-perl libhtml-table-perl libdatetime-timezone-perl libdevel-cover-perl libtemplate-perl libmime-tools-perl libemail-reply-perl libemail-sender-perl
         cpan Algorithm::Pair::Best2
 
 Check out GoatConfig.pm for configuration options.
