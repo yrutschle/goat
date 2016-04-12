@@ -183,7 +183,7 @@ sub new_from_alias {
     }
 
     $name =~ s/\s*$//; # suppress trailing spaces
-    $name =~ s/[^\w -]//g; # Only keep letters, dash and space
+    $name =~ s/[\\\",]//g; # remove weird characters from Airbus names
 
     # If there is a registration level, finish extracting it
     if (defined $niv) {
