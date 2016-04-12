@@ -2,6 +2,8 @@ package GoatConfig;
 
 use strict;
 
+use YAML qw/LoadFile/;
+
 require Exporter;
 
 use vars qw/ @EXPORT @ISA/;
@@ -24,19 +26,6 @@ GAME_COMINGUP_TIMEOUT
 die "Environment variable GOAT_DIR not set.\n" unless defined $ENV{GOAT_DIR};
 die "Environment variable WORK_DIR not set.\n" unless defined $ENV{WORK_DIR};
 
-# Which address receives for Goat?
-our $GOAT_ADDRESS = "GO Assistant <goat\@rutschle.net>";
-
-# What is the tournament admin address?
-our $ADMIN_ADDRESS = "Yves Rutschle <yves\@rutschle.net>";
-
-# Tournament name
-our $TOURNAMENT_NAME = "Tournoi permanent de Toulouse";
-
-# What locale and timezone should be used for date parsing and writing?
-our $LOCALE = 'fr_FR';
-our $TIMEZONE = 'Europe/Paris';
-
 # Period at which to send reminders of a forgotten challenge
 use constant CHALLENGED_TIMEOUT => 7 * 24 * 3600; # 7 days
 
@@ -55,8 +44,17 @@ use constant GAME_COMINGUP_TIMEOUT => 1 * 24 * 3600; # 1 day
 # directory, e.g. /home/goat.
 our $INSTALL_DIR = "$ENV{GOAT_DIR}";
 
+my $cfg = LoadFile("$INSTALL_DIR/goat.cfg");
+our $GOAT_ADDRESS = $cfg->{goat_address};
+our $ADMIN_ADDRESS = $cfg->{admin_address};
+our $TOURNAMENT_NAME = $cfg->{tournament_name};
+our $LOCALE = $cfg->{locale};
+our $TIMEZONE = $cfg->{timezone};
+my $template_name = $cfg->{template_name};
+
+
 # Directory to get templates for outgoing e-mails
-our $TEMPLATE_DIR = "$INSTALL_DIR/fr";
+our $TEMPLATE_DIR = "$INSTALL_DIR/$template_name";
 
 
 # Where to put working files? Typically log/ and tmp/
