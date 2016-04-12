@@ -1,0 +1,15 @@
+Les commandes doivent être écrites dans l'objet du courrier
+envoyé à Goat. Le corps du message est ignoré.
+
+Goat gère les commandes suivantes:
+
+rendezvous <date>[, <lieu]
+resultat <couleur gagnante>
+
+rendezvous: Utilisez cette commande afin d'informer Goat de
+la date et du lieu choisi pour votre partie. Si le lieu
+n'est pas indiqué, c'est KGS qui est sélectionné.
+
+resultat: Après la partie, indiquez la couleur du joueur qui
+a gagné la partie.
+

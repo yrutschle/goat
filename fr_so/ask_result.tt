@@ -1,0 +1,16 @@
+Subject: [goat] Résultat de votre partie
+
+[% INCLUDE header.tt %]
+
+Votre partie était prévue le [% date %], 
+mais vous n'avez pas encore publié le résultat. Merci de
+répondre à ce courrier en remplissant le sujet de votre
+réponse de la façon
+suivante :
+
+resultat <couleur gagnante>
+
+Par exemple :
+
+resultat blanc
+

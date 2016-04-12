@@ -153,6 +153,11 @@ push @tests,
       'test' => 'diff -u ../out.15 out.15',
       'doc' => 'game scheduling with command in body of mail (utf-8)',
   },
+  # Scheduling, no location
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.18d letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.15c ; perl $perl_opts ../../goat --status >> out.15c 2>&1",
+      'test' => 'diff -u ../out.15c out.15c',
+      'doc' => 'Game scheduling with no location',
+  },
   # Same test as previous, with multi-part e-mail
     { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.19 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.15 ; perl $perl_opts ../../goat --status >> out.15 2>&1",
       'test' => 'diff -u ../out.15 out.15',

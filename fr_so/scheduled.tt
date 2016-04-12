@@ -1,0 +1,22 @@
+Subject: [goat] Partie: [% location %], [% date %]
+
+[% INCLUDE header.tt %]
+
+[% setter %] a programmé votre partie:
+
+Lieu: [% location %]
+Date: [% date %]
+Noir: [% black %]
+Blanc: [% white %]
+Handicap: [% handi %]
+
+Après la partie, merci de publier le résultat en répondant à
+ce mail en remplissant le sujet de votre réponse de la façon
+suivante :
+
+resultat <couleur gagnante>
+
+Par exemple :
+
+resultat blanc
+
