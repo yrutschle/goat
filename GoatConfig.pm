@@ -9,7 +9,7 @@ use vars qw/ @EXPORT @ISA/;
 @EXPORT=qw/ 
 $INSTALL_DIR $WORK_DIR $LOG_DIR $TMP_DIR 
 
-$GOAT_ADDRESS $ADMIN_ADDRESS
+$GOAT_ADDRESS $ADMIN_ADDRESS $TOURNAMENT_NAME
 
 $TEMPLATE_DIR
 
@@ -29,6 +29,9 @@ our $GOAT_ADDRESS = "GO Assistant <goat\@rutschle.net>";
 
 # What is the tournament admin address?
 our $ADMIN_ADDRESS = "Yves Rutschle <yves\@rutschle.net>";
+
+# Tournament name
+our $TOURNAMENT_NAME = "Tournoi permanent de Toulouse";
 
 # What locale and timezone should be used for date parsing and writing?
 our $LOCALE = 'fr_FR';

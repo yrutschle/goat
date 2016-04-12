@@ -136,8 +136,8 @@ push @tests,
       'doc' => 'Drop mail without from address',
   },
   # Scheduling, command in subject
-    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.17 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.15 ; perl $perl_opts ../../goat --status >> out.15 2>&1",
-      'test' => 'diff -u ../out.15b out.15',
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.17 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.15b ; perl $perl_opts ../../goat --status >> out.15b 2>&1",
+      'test' => 'diff -u ../out.15b out.15b',
       'doc' => 'Successful game scheduling',
   },
   # Scheduling with command in the body of the e-mail

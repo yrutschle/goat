@@ -151,6 +151,10 @@ sub sendmail {
     my ($r_to, $template, $r_data) = @_;
 
     my $body;
+
+    $r_data->{goat_address} = $GOAT_ADDRESS;
+    $r_data->{admin_address} = $ADMIN_ADDRESS;
+    $r_data->{tournament_name} = $TOURNAMENT_NAME;
     $tt->process($template, $r_data, \$body) or die $tt->error;
 
     # Remove header lines
