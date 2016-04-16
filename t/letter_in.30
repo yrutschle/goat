@@ -1,0 +1,52 @@
+Return-path: <yves@example.org>
+Received: from yves by hood.rutschle.net with local (Exim 4.84)
+	(envelope-from <yves@example.org>)
+	id 1aqPBV-0001Fn-28
+	for goat@rutschle.net; Wed, 13 Apr 2016 18:06:37 +0000
+Date: Wed, 13 Apr 2016 18:06:36 +0000
+From: Yves Rutschle <yves@example.org>
+To: GO Assistant <goat@example.org>
+Subject: blah
+Message-ID: <20160413180636.GA5240@example.org>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="f2QGlHpHGjS2mn6Y"
+Content-Disposition: inline
+User-Agent: Mutt/1.5.23 (2014-03-12)
+
+
+--f2QGlHpHGjS2mn6Y
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+
+
+--f2QGlHpHGjS2mn6Y
+Content-Type: application/x-go-sgf
+Content-Disposition: attachment; filename="fan-hui-vs-alphago-20151009-commentary-an-younggil-1.sgf"
+Content-Transfer-Encoding: quoted-printable
+
+(;=0AGM[1]=0AFF[4]=0ACA[UTF-8]=0ASZ[19]=0AEV[AlphaGo vs Fan Hui five game m=
+atch]=0ARO[Game 5]=0APC[London, England]=0ADT[2015-10-09]=0ARU[Chinese]=0AK=
+M[7.5]=0ATM[3600.0]=0AOT[3x30 byo-yomi]=0APB[Fan Hui]=0ABT[Human]=0ABR[2p]=
+=0APW[AlphaGo]=0AWT[Computer]=0ARE[W+Resign]=0A;B[pd];W[dd];B[qp];W[dp];B[f=
+q]=0A;W[cn];B[kq];W[qj];B[qk];W[pk]=0A;B[ql];W[pj];B[pl];W[qf];B[ok]=0A;W[n=
+c];B[oe];W[qc];B[qh];W[ph]=0A;B[qd];W[pc];B[pg];W[qg];B[oh]=0A;W[pi];B[rh];=
+W[ri];B[pf];W[rg]=0A;B[md];W[mc];B[ld];W[kc];B[dr]=0A;W[cq];B[hp];W[oq];B[p=
+q];W[pr]=0A;B[op];W[qq];B[pp];W[rr];B[or]=0A;W[nq];B[nr];W[rp];B[ps];W[qr]=
+=0A;B[ro];W[sq];B[oi];W[rk];B[rl]=0A;W[np];B[mr];W[kp];B[jp];W[lq]=0A;B[lr]=
+;W[jq];B[kr];W[gp];B[jo]=0A;W[gq];B[go];W[fp];B[hr];W[hq]=0A;B[iq];W[ho];B[=
+sk];W[re];B[hn]=0A;W[ip];B[jr];W[oj];B[nj];W[nk]=0A;B[rj];W[ol];B[si];W[mj]=
+;B[ni]=0A;W[on];B[no];W[mi];B[qi];W[ok]=0A;B[ng];W[ll];B[jk];W[rd];B[kj]=0A=
+;W[nn];B[mo];W[lh];B[jh];W[kg]=0A;B[je];W[jg];B[ig];W[if];B[jf]=0A;W[ih];B[=
+hg];W[ji];B[hh];W[ii]=0A;B[ki];W[kh];B[hi];W[ij];B[gk]=0A;W[il];B[jl];W[hj]=
+;B[gj];W[hl]=0A;B[io];W[gm];B[he];W[cg];B[fo]=0A;W[eo];B[hp];W[nd];B[lf];W[=
+ne]=0A;B[mf];W[em];B[gr];W[ep];B[cc]=0A;W[cd];B[dc];W[ec];B[eb];W[fb]=0A;B[=
+bd];W[be];B[ed];W[fc];B[bb]=0A;W[ad];B[ac];W[bc];B[mh];W[li]=0A;B[bd];W[db]=
+;B[cb];W[bc];B[fl]=0A;W[fm];B[bd];W[gf];B[hf];W[bc]=0A;B[mk];W[lk];B[bd];W[=
+qo];B[ae]=0A;W[oo];B[ee];W[dj];B[hb];W[df]=0A;B[bf];W[ef];B[ge];W[fi];B[gi]=
+=0A;W[jb];B[ci];W[di];B[cj];W[ck]=0A;B[bh];W[bk];B[ib];W[ic];B[hc]=0A;W[id]=
+;B[hd];W[bg];B[ag];W[ch]=0A;B[de];W[bi];B[cr];W[br];B[bs]=0A;W[bq];B[eq];W[=
+lc];B[mq];W[po]=0A;B[ln];W[ml];B[rn];W[km];B[jm]=0A;W[kn];B[ko];W[od];B[pe]=
+;W[nf]=0A;B[kd];W[jc];B[ie];W[fe])
+--f2QGlHpHGjS2mn6Y--
+

@@ -1,7 +1,7 @@
 #! /usr/bin/perl -w
 
 # Goat: Gentil Organisateur et Administrateur de Tournois
-# Copyright (C) 2006-2007  Yves Rutschle
+# Copyright (C) 2006-2016  Yves Rutschle
 # 
 # This program is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public
@@ -30,6 +30,7 @@ use Date::Language;
 use DateTime::TimeZone;
 
 use Mail::Address;
+use Games::Go::SGF;
 
 use Fcntl qw/SEEK_SET LOCK_EX LOCK_UN/;
 
@@ -62,6 +63,7 @@ goat [--test] [--simulate]
      [--tou [full][,submitted]]
      [--schedule player,date,location]
      [--results player,winner]
+     [--sfg-result file.sgf]
      [--rated=<yes|no>]
      [--cancel <player>]
      [--chhand <player>,<handicap>]
@@ -334,7 +336,7 @@ $ENV{PATH} .= ":$INSTALL_DIR";
 
 # command line parameters
 my ($testing, $toperm_file, $param_round, $param_schedule,
-    $param_result, $param_rated, $param_status,
+    $param_result, $param_rated, $param_status, $param_sgf,
     $param_cancel, $param_chhand, $param_score,
     $param_reminders, $param_submitting, $param_tou, $help, $simulate,
     $param_list_unplayed, $param_list_all, $param_list_unlicensed, $param_list_players
@@ -355,6 +357,7 @@ GetOptions(
     'list-players' => \$param_list_players,
     'list-unlicensed' => \$param_list_unlicensed,
     'results=s' => \$param_result,
+    'sgf-result=s' => \$param_sgf,
     'rated=s'  => \$param_rated,
     'cancel=s' => \$param_cancel,
     'chhand=s' => \$param_chhand,
@@ -377,6 +380,9 @@ if (defined $testing) {
 
 my $today = &my_time; # Now
 my $local_today = scalar localtime($today); # Now, in string form
+
+my $Tournament; # Reference to the Tournament object, that contains all the data
+
 
 =head1 FUNCTIONS
 
@@ -518,10 +524,41 @@ sub fixup_frenchisms {
     return $date;
 }
 
+
+# Process a game result
+# submitter: e-mail address of player submitting the result
+# winning_color: 'black' or 'white'
+# Both parameters are expected to have been validated first
+sub finish_game {
+    my ($submitter, $winning_colour) = @_;
+
+    my $game = $Tournament->find_game_by_email($submitter);
+
+    unless (defined $game) {
+        notify_not_registered $submitter;
+        exit;
+    }
+    $game->finished($winning_colour);
+
+    my ($black, $white, $result) = ($game->black, $game->white, $game->result);
+
+    my ($b, $w) = ($game->black->fulladdress, $game->white->fulladdress);
+
+    if (defined $param_rated) {
+        my $rated = 0;
+        $rated = 1 if $param_rated =~ /yes|1/i;
+        $game->rated($rated);
+        print "game: ".$rated.".\n";
+    }
+
+    print "$local_today: notify $b and $w their game is finished and $winning_colour won; result given by $submitter\n";
+    system("$BIN_MAIL_OUT $mail_out_opts --give-results='$b,$w,$winning_colour,$submitter'");
+
+}
+
+
 ########## ########## ########## ########## ########## ########## ##########
 # Main
-
-my $Tournament; # Reference to the Tournament object, that contains all the data
 
 # Hmmm, there is no locking anymore, I'm not fond of that.
 $Tournament = load Tournament "$toperm_file";
@@ -586,36 +623,29 @@ if (defined $param_schedule) {
 } elsif (defined $param_result) {
     my ($player, $winning_colour) = split /,/, $param_result;
 
-    my $game = $Tournament->find_game_by_email($player);
-
-    unless (defined $game) {
-        notify_not_registered $player;
-        exit;
-    }
-
     if ($winning_colour =~ /(white|black|blanc|noir)/i) {
         my $res = "\L$1";
         $res = 'white' if $res eq 'blanc';
         $res = 'black' if $res eq 'noir';
-        $game->finished($res);
-
-        my ($black, $white, $result) = ($game->black, $game->white, $game->result);
-
-        my ($b, $w) = ($game->black->fulladdress, $game->white->fulladdress);
-
-        print "$local_today: notify $b and $w their game is finished and $result won; result given by $player\n";
-        system("$BIN_MAIL_OUT $mail_out_opts --give-results='$b,$w,$result,$player'");
-
+        finish_game($player, $res);
     } else {
         print "$local_today: notify $player that '$winning_colour' is invalid\n";
         system("$BIN_MAIL_OUT $mail_out_opts --badcolour='$player,$winning_colour'");
     }
+########## Recording the result with a SGF
+} elsif (defined $param_sgf) {
+    my ($submitter, $sgf) = split /,/, $param_sgf;
+    $sgf = new Games::Go::SGF $sgf;
 
-    if (defined $param_rated) {
-        my $rated = 0;
-        $rated = 1 if $param_rated =~ /yes|1/i;
-        $game->rated($rated);
-        print "game: ".$rated.".\n";
+    $sgf->RE =~ /^(W)/;
+    my $res = $1;
+    if ($res eq 'W') {
+        finish_game($submitter, 'white');
+    }
+    elsif ($res eq 'B') {
+        finish_game($submitter, 'black');
+    } else {
+        print "Invalid SGF (or no result)?!\n";
     }
 
 ########## Cancel the game

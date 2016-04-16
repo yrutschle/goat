@@ -38,10 +38,12 @@ valid.
 
 use strict;
 use Email::Filter; # package libemail-filter-perl
+use Email::MIME;
 use Mail::Address;
 use Email::Valid;  # Package libemail-valid-perl
 use Email::Reply;  # Package libemail-reply-perl
 use Email::Sender::Simple qw/sendmail/; # Package libemail-sender-perl
+use File::Temp qw/tempfile/;
 use MIME::Parser;
 
 use Encode;
@@ -106,6 +108,35 @@ sub make_tmpfile {
     return $tmp_fn;
 }
 
+# Executes a command and log
+sub my_exec {
+    my ($exec) = @_;
+    record "exec `$exec`";
+    my $r = system $exec;
+    if ($r) {
+        record "system($exec): returned $? $!";
+    } 
+}
+
+# Searches attachments for an SGF. If one is found, pass it
+# to goat
+sub process_sgf {
+    my ($from, $mail) = @_;
+
+    my $mime = Email::MIME->new($mail->simple->as_string);
+
+    foreach my $part ($mime->parts) {
+        if (($part->content_type =~ /x-go-sgf/) or
+            ($part->filename =~ /\.sgf$/)) {
+            my ($fh, $filename) = tempfile();
+            print $fh $part->body;
+            close $fh;
+            my_exec("$BIN_GOAT $goat_opts --sgf-result $from,$filename");
+            exit(0);
+        }
+    }
+}
+
 my $mail = Email::Filter->new;
 
 # First log the entire mail (maybe remove this when we gain
@@ -153,6 +184,11 @@ if ($from =~ /postmaster|daemon/i) {
     record "mail from postmaster -- dropping\n";
     exit 0;
 }
+
+# If there is an SGF attached, extract it and pass to goat
+process_sgf($from, $mail);
+
+# Otherwise, search the mail for commands
 
 =head1 Commands
 
@@ -209,6 +245,7 @@ if (not defined $exec) {
     my @lines;
 
     # If it's multi-part, descend into each part
+    # TODO: remove and use Email::MIME at some point
     my $mime = MIME::Parser->new->parse_data($mail->simple->as_string);
     if ($mime->parts) {
         foreach my $p ($mime->parts) {
@@ -234,8 +271,5 @@ if (not defined $exec) {
 }
 
 
-record "exec `$exec`";
-my $r = system $exec;
-if ($r) {
-    record "system($exec): returned $? $!";
-} 
+my_exec($exec);
+

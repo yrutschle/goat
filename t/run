@@ -119,6 +119,11 @@ push @tests,
       'test' => 'diff -u ../out.10 out.10',
       'doc' => 'Receive results',
   },
+  # Receive an SGF: extract result and archive
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.30 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.30",
+      'test' => 'diff -u ../out.30 out.30',
+      'doc' => 'Receive SGF',
+  },
   # Check for loops
     { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.14 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.12",
       'test' => 'diff -u ../out.12 out.12',
