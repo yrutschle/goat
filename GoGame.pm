@@ -99,11 +99,15 @@ want games that haven't been played to count towards the rating system).
 True if the game was submitted to the rating system. This is to keep track of
 what has already be submitted and ease partial submissions.
 
+=item sgf
+
+Path to the SGF file of the finished game, if any.
+
 =cut
 
 BEGIN {
     my $subs;
-    foreach my $data ( qw/challenge_date scheduled_date reminder_date location result rated submitted/ ) {
+    foreach my $data ( qw/challenge_date scheduled_date reminder_date location result rated submitted sgf/ ) {
         $subs .= qq{
             sub $data {
                 defined \$_[1] ? \$_[0]->{$data} = \$_[1] : \$_[0]->{$data};

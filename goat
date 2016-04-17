@@ -530,14 +530,8 @@ sub fixup_frenchisms {
 # winning_color: 'black' or 'white'
 # Both parameters are expected to have been validated first
 sub finish_game {
-    my ($submitter, $winning_colour) = @_;
+    my ($game, $submitter, $winning_colour) = @_;
 
-    my $game = $Tournament->find_game_by_email($submitter);
-
-    unless (defined $game) {
-        notify_not_registered $submitter;
-        exit;
-    }
     $game->finished($winning_colour);
 
     my ($black, $white, $result) = ($game->black, $game->white, $game->result);
@@ -621,32 +615,49 @@ if (defined $param_schedule) {
 
 ########## Recording the result for a game
 } elsif (defined $param_result) {
-    my ($player, $winning_colour) = split /,/, $param_result;
+    my ($submitter, $winning_colour) = split /,/, $param_result;
+
+    my $game = $Tournament->find_game_by_email($submitter);
+    unless (defined $game) {
+        notify_not_registered $submitter;
+        exit;
+    }
 
     if ($winning_colour =~ /(white|black|blanc|noir)/i) {
         my $res = "\L$1";
         $res = 'white' if $res eq 'blanc';
         $res = 'black' if $res eq 'noir';
-        finish_game($player, $res);
+        finish_game($game, $submitter, $res);
     } else {
-        print "$local_today: notify $player that '$winning_colour' is invalid\n";
-        system("$BIN_MAIL_OUT $mail_out_opts --badcolour='$player,$winning_colour'");
+        print "$local_today: notify $submitter that '$winning_colour' is invalid\n";
+        system("$BIN_MAIL_OUT $mail_out_opts --badcolour='$submitter,$winning_colour'");
     }
 ########## Recording the result with a SGF
 } elsif (defined $param_sgf) {
-    my ($submitter, $sgf) = split /,/, $param_sgf;
-    $sgf = new Games::Go::SGF $sgf;
+    my ($submitter, $sgf_name) = split /,/, $param_sgf;
+    my $sgf = new Games::Go::SGF $sgf_name;
 
+    my $game = $Tournament->find_game_by_email($submitter);
+    unless (defined $game) {
+        notify_not_registered $submitter;
+        exit;
+    }
+
+    my $sgf_date = $sgf->DT;
     $sgf->RE =~ /^(W)/;
     my $res = $1;
     if ($res eq 'W') {
-        finish_game($submitter, 'white');
+        finish_game($game, $submitter, 'white');
     }
     elsif ($res eq 'B') {
-        finish_game($submitter, 'black');
+        finish_game($game, $submitter, 'black');
     } else {
         print "Invalid SGF (or no result)?!\n";
     }
+
+    my $target_file = $SGF_DIR . "/$sgf_date-" . $game->white->givenname . "-". $game->black->givenname .  ".sgf";
+    move($sgf_name, $target_file) or die "mv $sgf $target_file: $!\n";
+    $game->sgf($target_file);
 
 ########## Cancel the game
 } elsif (defined $param_cancel) {

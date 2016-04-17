@@ -9,6 +9,7 @@ use Round;
 use Data::Dumper;
 use Mail::Address;
 use GoatLib;
+use GoatConfig;
 use File::Copy;
 
 =head1 DESCRIPTION
@@ -427,7 +428,7 @@ use HTML::Table;  # apt-get install libhtml-table-perl
 sub as_HTML {
     my ($obj, %opts) = @_;
 
-    my $html = start_html("Tournoi permanent"), h1($obj->name);
+    my $html = start_html($TOURNAMENT_NAME), h1($obj->name);
 
     $html .= "<h1>".$obj->name."</h1><h2>Inscrits</h2>";
 
@@ -453,18 +454,20 @@ sub as_HTML {
         my $round_num = $round->number;
         $html .= "<h2>Appariements pour la ronde $round_num</h2>\n";
         $table = new HTML::Table (-cols=>4, -border=>1 );
-        $table->addRow('Blanc', 'Noir', 'Handicap', 'Résultat');
+        $table->addRow('Blanc', 'Noir', 'Handicap', 'Résultat', 'SGF');
         foreach my $game ($round->games) {
             my $result = $game->result;
             $result = 'NC' unless defined $result;
             $result = "($result)" unless $game->rated;
             my $white_level = $game->white->register_level($round_num) || $game->white->level || "NC";
             my $black_level = $game->black->register_level($round_num) || $game->black->level || "NC";
+            my $sgf = $game->sgf;
             $table->addRow(
                 $game->white->fullname." ($white_level) ".$game->white->club,
                 $game->black->fullname." ($black_level) ".$game->black->club,
                 $game->handicap,
-                $result
+                $result,
+                defined $sgf ?  a({href=> "wgo.cgi?sgf=$sgf"}, 'SGF') : "",
             );
             $table->setCellBGColor($table->getTableRows,
                 { 
