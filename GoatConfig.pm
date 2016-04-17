@@ -44,7 +44,7 @@ use constant GAME_COMINGUP_TIMEOUT => 1 * 24 * 3600; # 1 day
 # directory, e.g. /home/goat.
 our $INSTALL_DIR = "$ENV{GOAT_DIR}";
 
-my $cfg = LoadFile("$INSTALL_DIR/goat.cfg");
+my $cfg = LoadFile("$ENV{WORK_DIR}/goat.cfg");
 our $GOAT_ADDRESS = $cfg->{goat_address};
 our $ADMIN_ADDRESS = $cfg->{admin_address};
 our $TOURNAMENT_NAME = $cfg->{tournament_name};

@@ -13,12 +13,16 @@ use warnings;
 
 my @tests;
 
-mkdir "t/tmp" unless -e "t/tmp" or die "Can't create test directory t/tmp: $!\n";
-mkdir "t/tmp/sgf" unless -e "t/tmp/sgf" or die "t/tmp/sgf: $!\n";
-
 $ENV{GOAT_DIR} = $ENV{PWD};
 $ENV{WORK_DIR} = "$ENV{PWD}/t/tmp";
 $ENV{TZ} = "GMT"; # Keep logs to local time, but fix timezone for testing...
+
+unless (-e "$ENV{WORK_DIR}")  {
+    mkdir "$ENV{WORK_DIR}" or die "mkdir $ENV{WORK_DIR}: $!\n";
+}
+unless (-e "t/tmp/sgf")  {
+    mkdir "t/tmp/sgf" or die "mkdir t/tmp/sgf: $!\n";
+}
 
 my $coverage = 0; # Set to 1 to do code coverage analysis
 
@@ -199,7 +203,10 @@ push @tests,
 #use Test::More tests => 42;
   use Test::More;
 
+
 chdir "t/tmp" || die "Can't chdir to my test directory";
+
+system("cp ../../example.cfg ./goat.cfg");
 
 system "cover -delete" if $coverage;
 die "Unable to clear coverage analysis.\n" if $?;
