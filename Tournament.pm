@@ -291,7 +291,7 @@ sub tou_header {
 ;size=$size
 ;komi=$komi
 ;
-;Num Nom Prénom               Niv Licence Club
+;Num Nom Pr&eacute;nom               Niv Licence Club
 EOF
 }
 
@@ -438,7 +438,7 @@ sub as_HTML {
 
     # Player list
     my $table = new HTML::Table(-cols=>3, -border=>1);
-    $table->addRow('Nom', 'Prénom', 'Niveau', 'Club');
+    $table->addRow('Nom', 'Pr&eacute;nom', 'Niveau', 'Club');
     foreach my $player 
     (
         sort {$a->sortname cmp $b->sortname} $obj->players
@@ -458,7 +458,7 @@ sub as_HTML {
         my $round_num = $round->number;
         $html .= "<h2>Appariements pour la ronde $round_num</h2>\n";
         $table = new HTML::Table (-cols=>4, -border=>1 );
-        $table->addRow('Blanc', 'Noir', 'Handicap', 'Résultat', 'SGF');
+        $table->addRow('Blanc', 'Noir', 'Handicap', 'R&eacute;sultat', 'SGF');
         foreach my $game ($round->games) {
             my $result = $game->result;
             $result = 'NC' unless defined $result;
