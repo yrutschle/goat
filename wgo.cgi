@@ -16,6 +16,7 @@ print <<EOF;
     <script type="text/javascript" src="wgo/wgo.min.js"></script>
     <script type="text/javascript" src="wgo/wgo.player.min.js"></script>
     <link type="text/css" href="wgo/wgo.player.css" rel="stylesheet" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   </head>
   <body>
     <div data-wgo="$sgf" style="width: 700px">

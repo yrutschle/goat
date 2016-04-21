@@ -428,7 +428,11 @@ use HTML::Table;  # apt-get install libhtml-table-perl
 sub as_HTML {
     my ($obj, %opts) = @_;
 
-    my $html = start_html($TOURNAMENT_NAME), h1($obj->name);
+    my $html = 
+    start_html(
+        -title => $TOURNAMENT_NAME,
+        -encoding => 'UTF-8',
+    ), h1($obj->name);
 
     $html .= "<h1>".$obj->name."</h1><h2>Inscrits</h2>";
 
