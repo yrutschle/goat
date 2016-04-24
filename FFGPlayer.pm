@@ -54,10 +54,10 @@ sub new_from_ech {
                ([-\d]+)\s     # Rank
                (.)\s          # status: L: has a valid license; e: foreigner; -: no license ; X: ? ; C: licence loisir?
                ([\w-]{7})\s   # License number
-               (.{4})         # Club
+               (.{4})?        # Club (optionnal)
              /x or (warn "Illegal echelle line: $line") and return undef;
 
-    my ($name,$surname,$level,$status,$license,$club) = ($1,$2,$3,$4,$5,$6);
+    my ($name,$surname,$level,$status,$license,$club) = ($1,$2,$3,$4,$5,$6 // "");
     my %data;
     my $ref = \%data;
     bless $ref, $class;
@@ -231,8 +231,9 @@ sub register_level {
 
 
 # True if player has a valid current license
+# This probably needs to be updated depending on tournaments
 sub is_licensed {
-    $_[0]->status eq 'L';
+    $_[0]->status ne '-';
 }
 
 use POSIX;
