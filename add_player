@@ -55,7 +55,7 @@ BEGIN {
 use Tournament;
 use GoatLib;
 
-my $ECHELLE_FILE = "ech_ffg.txt";
+my $ECHELLE_FILE = "ech_ffg_new.txt";
 
 my ($param_file, $help);
 GetOptions(

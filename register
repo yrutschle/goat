@@ -84,7 +84,7 @@ BEGIN {
 use Tournament;
 use GoatLib;
 
-my $ECHELLE_FILE = "ech_ffg.txt";
+my $ECHELLE_FILE = "ech_ffg_new.txt";
 
 my ($param_file, $param_force_getech, $help);
 GetOptions(
@@ -103,10 +103,13 @@ download_echelle($ECHELLE_FILE) if $param_force_getech;
 
 while (<>) {
     next if /^#/ or /^$/;
+    $_ = Encode::decode('UTF-8', $_);
 
     my $player = FFGPlayer->new_from_alias($_, $ECHELLE_FILE);
 
     next unless defined $player;
+
+    warn $player->fullname.": player is not licensed.\n" unless $player->is_licensed;
 
     push @registered, $player;
 }

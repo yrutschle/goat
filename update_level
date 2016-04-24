@@ -1,7 +1,7 @@
 #! /usr/bin/perl -w
 
 # Goat: Gentil Organisateur et Administrateur de Tournois
-# Copyright (C) 2006-2007  Yves Rutschle
+# Copyright (C) 2006-2016  Yves Rutschle
 # 
 # This program is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public
@@ -46,6 +46,17 @@ use strict;
 use locale;
 use Getopt::Long;
 use Pod::Usage;
+use Encode;
+
+# Check we have the right environment variables to find
+# the modules, and add to @INC.
+BEGIN {
+    die "Environment variable GOAT_DIR and WORK_DIR must be defined\n" 
+        if not defined $ENV{GOAT_DIR} or not defined $ENV{WORK_DIR};
+
+    push @INC, $ENV{GOAT_DIR};
+}
+use GoatLib qw/download_echelle/;
 
 # Check we have the right environment variables to find
 # the modules, and add to @INC.
@@ -57,7 +68,7 @@ BEGIN {
 }
 use Tournament;
 
-my $ECHELLE_FILE = "ech_ffg.txt";
+my $ECHELLE_FILE = "ech_ffg_new.txt";
 
 my ($param_file, $param_no_getech, $no_act, $help);
 GetOptions(
@@ -71,17 +82,8 @@ GetOptions(
 die pod2usage(-verbose=>2) if defined $help;
 die "No tournament file specified. Use -f <file>.\n" unless defined $param_file;
 
-# Download echelle file from ffg site -- if filename already
-# exists, delete it
-sub get_ech {
-    my ($filename) = @_;
 
-    unlink $filename;
-    `wget http://ffg.jeudego.org/echelle/echtxt/ech_ffg.txt`;
-    return -r $filename;
-}
-
-get_ech($ECHELLE_FILE) unless $param_no_getech;
+download_echelle($ECHELLE_FILE) unless $param_no_getech;
 
 my $tournament = load Tournament "$param_file";
 die "$param_file: $!\n" if not defined $tournament;
@@ -90,12 +92,12 @@ die "$param_file: $!\n" if not defined $tournament;
 my %all_players;
 my $ech;
 open $ech, $ECHELLE_FILE 
-    or get_ech($ECHELLE_FILE)  and open $ech, $ECHELLE_FILE
+    or download_echelle($ECHELLE_FILE)  and open $ech, $ECHELLE_FILE
     or die "$ECHELLE_FILE: $!\n";
 
 while (<$ech>) {
     next if /^#/;
-    my $p = new_from_ech FFGPlayer $_;
+    my $p = new_from_ech FFGPlayer decode 'ISO-8859-1', $_;
     next if not defined $p;
     $all_players{$p->id} = $p;
 }

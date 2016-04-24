@@ -742,10 +742,11 @@ if (defined $param_schedule) {
 ########## Print out all players
 } elsif (defined $param_list_players) {
     foreach my $player ($Tournament->players) {
-        print $player->fulladdress . " ". $player->level . 
-              " ". $player->license . " " . $player->club .
-              " " . $player->status .
-              "\n";
+        print# Encode::encode('UTF-8',
+            $player->fulladdress . " ". $player->level . 
+            " ". $player->license . " " . $player->club .
+            " " . $player->status .
+            "\n"; #);
     }
     print "\n";
 

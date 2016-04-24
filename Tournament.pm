@@ -73,6 +73,7 @@ sub load {
     my $data = <$f>;
     close $f;
     my $VAR1;
+    $data = "use utf8;\n$data";   # Tournament file is in UTF8. Everything is UTF8.
     eval($data);
 
     # pick the highest round number if there are any
@@ -494,7 +495,7 @@ sub as_HTML {
 
     $html .= a({href=>'index.shtml'}, 'Retour'), end_html();
 
-    return $html;
+    return Encode::encode('UTF-8', $html);
 }
 
 =item score

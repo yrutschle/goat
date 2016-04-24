@@ -43,7 +43,7 @@ sub download_echelle {
     my ($filename) = @_;
 
     unlink $filename;
-    `wget http://ffg.jeudego.org/echelle/echtxt/ech_ffg.txt`;
+    `wget http://ffg.jeudego.org/echelle/echtxt/ech_ffg_new.txt`;
     return -r $filename;
 }
 

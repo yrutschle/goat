@@ -33,7 +33,7 @@ push @tests,
 
 # update_level: check it all works
 {
-    'run' => "cp ../ech_ffg2.txt ech_ffg.txt; cp ../toperm.in.8 toperm; perl $perl_opts ../../update_level --no-getech -f toperm 2> out.20",
+    'run' => "cp ../ech_ffg_new.txt .; cp ../toperm.in.8 toperm; perl $perl_opts ../../update_level --no-getech -f toperm 2> out.20",
     'test' => 'diff -u ../out.20 out.20',
     'doc' => 'Update data from echelle',
 },
@@ -41,7 +41,7 @@ push @tests,
    # register: register some players
    # Tests REGISTER_1, REGISTER_2, REGISTER_3, REGISTER_4,
    # REGISTER_5
-   { 'run' => "cp ../mutt1 mutt; cp ../ech_ffg.txt .; perl $perl_opts ../../register -f toperm mutt 2> out.0 ; perl $perl_opts ../../goat --list-players >> out.0",
+   { 'run' => "cp ../mutt1 mutt; cp ../ech_ffg_new.txt .; perl $perl_opts ../../register -f toperm mutt 2> out.0 ; perl $perl_opts ../../goat --list-players >> out.0",
        'test' => 'diff -u ../out.0 out.0',
        'doc' => 'Register players',
    },
