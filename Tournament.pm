@@ -543,7 +543,7 @@ sub score {
         $sos{$player} = $sos;
     }
 
-    return sort { ($b->[1] <=> $a->[1]) or ($b->[2] <=> $a->[2]) } map { [$_, $score{$_}, $sos{$_} ] } keys %score;
+    return sort { ($b->[1] <=> $a->[1]) or ($b->[2] <=> $a->[2]) } map { [$_, $score{$_}, $sos{$_} ] } sort keys %score;
 }
 
 1;

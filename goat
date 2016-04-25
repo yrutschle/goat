@@ -800,6 +800,7 @@ my $fh;
 
 # Update the HTML state file
 open $fh, "> toperm.html" or die "toperm.html: $!\n";
+binmode $fh;
 print $fh $Tournament->as_HTML;
 close $fh;
 

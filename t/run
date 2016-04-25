@@ -98,6 +98,12 @@ push @tests,
       'doc' => 'Timing',
   },
 
+   # 1: HTML export
+    { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.2 toperm; perl $perl_opts ../../goat --status > out.3 2>&1 ; ",
+      'test' => 'diff -u ../toperm.3.html toperm.html',
+      'doc' => 'HTML export',
+  },
+
   # 5: result error on colour
     { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.10 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.5",
       'test' => 'diff -u ../out.5 out.5',
