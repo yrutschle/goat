@@ -25,4 +25,5 @@ cp tmp/out.1c .
 cp tmp/out.1d .
 cp tmp/out.1e .
 
+cp tmp/out.71 .
 

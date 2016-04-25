@@ -152,6 +152,11 @@ sub sendmail {
 
     my $body;
 
+    # Mails are encoded in UTF-8 (see charset below)
+    foreach my $k (keys %$r_data) {
+        $r_data->{$k} = Encode::encode('UTF-8', $r_data->{$k});
+    }
+
     $r_data->{goat_address} = $GOAT_ADDRESS;
     $r_data->{admin_address} = $ADMIN_ADDRESS;
     $r_data->{tournament_name} = $TOURNAMENT_NAME;
@@ -175,6 +180,8 @@ sub sendmail {
             record "Attach: $param_attach: $!";
         }
     }
+
+    map { $_ = Encode::encode('UTF-8', $_) } @$r_to;
 
     if ($no_send) {
         print "To: @$r_to\nSubject: $hdr{subject}\n$body";

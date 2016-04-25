@@ -46,6 +46,7 @@ picked.
 use strict;
 use Algorithm::Pair::Best2;
 use Pod::Usage;
+use open ':locale';
 
 
 package main;
@@ -211,7 +212,6 @@ foreach my $p (reverse sort {$a->level <=> $b->level} @players) {
 my $max_name_length = (sort { $a <=> $b } map { length $_->fulladdress } @players)[-1];
 $max_name_length += 7; # For the club label
 
-use Data::Dumper;
 my $round_num = ($Tournament->round_number || 0) + 1;
 print "Round $round_num\n";
 

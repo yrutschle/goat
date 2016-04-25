@@ -6,7 +6,6 @@ use English;
 
 use FFGPlayer;
 use Round;
-use Data::Dumper;
 use Mail::Address;
 use GoatLib;
 use GoatConfig;
@@ -61,7 +60,7 @@ sub new {
 
 =item Tournament->load($filename)
 
-Loads the filename, which must contain a Data:Dumper version of a Tournament
+Loads the filename, which must contain a YAML version of a Tournament
 object, and returns a Tournament.
 
 =cut
@@ -73,14 +72,15 @@ sub load {
     my $data = <$f>;
     close $f;
     my $VAR1;
-    $data = "use utf8;\n$data";   # Tournament file is in UTF8. Everything is UTF8.
-    eval($data);
+    my $t = YAML::Load($data);
 
     # pick the highest round number if there are any
-    $VAR1->round_number( $VAR1->Round->[-1]->number ) 
-        if (scalar @{$VAR1->Round});
-    return $VAR1;
+    $t->round_number( $t->Round->[-1]->number ) 
+        if (scalar @{$t->Round});
+    return $t;
 }
+
+
 
 =item Tournament->save($filename)
 
@@ -95,14 +95,13 @@ sub save {
 
     my ($data_in, $data_out);
 
-    $Data::Dumper::Purity=1;
-    $Data::Dumper::Sortkeys = 1;
-    $data_out = Dumper($obj);
+    $data_out = YAML::Dump($obj);
 
     open my $f, "> $tournament_fn.tmp" or die "$tournament_fn.tmp: $!\n";
     print $f $data_out;
     close $f;
 
+    # Check that reading again ends up with the same result
     open $f, "$tournament_fn.tmp" or die "reading $tournament_fn.tmp: $!\n";
     undef $/;
     $data_in = <$f>;
