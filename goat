@@ -662,7 +662,6 @@ if (defined $param_schedule) {
     use Encode;
     my $decomposed = NFKD( decode_utf8 $target_file );
     $decomposed =~ s/\p{NonspacingMark}//g;
-    warn "$decomposed\n";
     move($sgf_name, $decomposed) or die "mv $sgf_name $decomposed: $!\n";
     $game->sgf($decomposed);
 
