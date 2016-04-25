@@ -1,0 +1,35 @@
+#! /usr/bin/perl -w
+
+$ENV{GOAT_DIR} = $ENV{PWD};
+BEGIN {
+    die "Environment variable GOAT_DIR and WORK_DIR must be defined\n" 
+        if not defined $ENV{GOAT_DIR} or not defined $ENV{WORK_DIR};
+
+    push @INC, $ENV{GOAT_DIR};
+}
+
+use Tournament;
+
+# Function to load old files from Data::Dumper. Kill me now.
+package Tournament;
+sub load_dumped {
+    my ($class, $tournament_fn) = @_;
+    my $f;
+    local $/; undef $/;
+    open $f, "$tournament_fn" or die "$tournament_fn: $!\n";
+    my $data = <$f>;
+    close $f;
+    my $VAR1;
+    $data = "use utf8;\n$data";   # Tournament file is in UTF8. Everything is UTF8.
+    eval($data);
+
+    # pick the highest round number if there are any
+    $VAR1->round_number( $VAR1->Round->[-1]->number ) 
+        if (scalar @{$VAR1->Round});
+    return $VAR1;
+}
+
+package main;
+my $t = Tournament->load_dumped($ARGV[0]);
+
+$t->save($ARGV[1]);
