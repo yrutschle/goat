@@ -126,8 +126,10 @@ sub process_sgf {
     my $mime = Email::MIME->new($mail->simple->as_string);
 
     foreach my $part ($mime->parts) {
-        if (($part->content_type =~ /x-go-sgf/) or
-            ($part->filename =~ /\.sgf$/)) {
+        my $ct = $part->content_type // "";
+        my $fn = $part->filename // "";
+        if (($ct =~ /x-go-sgf/) or
+            ($fn =~ /\.sgf$/)) {
             my ($fh, $filename) = tempfile();
             print $fh $part->body;
             close $fh;
