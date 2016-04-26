@@ -1,6 +1,20 @@
 Sat Jul 30 15:30:00 2005: notify Jean-Jacques PORTAL <jean-jacques.portal@example.org> and Yves RUTSCHLE <yves@example.org> that their game has been scheduled on Thu Feb 12 21:00:00 2015 in Balma by yves@example.org
-To: Jean-Jacques PORTAL <jean-jacques.portal@example.org> Yves RUTSCHLE <yves@example.org>
+ <yves@example.org>
+Content-Transfer-Encoding: binary
+Content-Type: multipart/mixed; boundary="---testing42ftwtesting"
+From: GO Assistant <goat@rutschle.net>
+MIME-Version: 1.0
+Return-Path: GO Assistant <goat@rutschle.net>
 Subject: [goat] Partie: Balma, jeudi 12 février 2015 22:00
+To: Jean-Jacques PORTAL <jean-jacques.portal@example.org>,Yves RUTSCHLE
+X-Loop: GO Assistant <goat@rutschle.net>
+X-Mailer: MIME-tools 5.505 (Entity 5.505)This is a multi-part message in MIME format...
+
+-----testing42ftwtesting
+Content-Type: text/plain; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: binary
+
 Vous avez reçu ce courrier car vous êtes inscrit au Tournoi permanent de Toulouse.
 Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@rutschle.net>.
 
@@ -23,6 +37,23 @@ Par exemple :
 
 resultat blanc
 
+
+-----testing42ftwtesting
+Content-Type: text/calendar; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: base64
+
+QkVHSU46VkNBTEVOREFSDQpWRVJTSU9OOjIuMA0KUFJPRElEOkRhdGE6OklD
+YWwgMC4yMQ0KQkVHSU46VkVWRU5UDQpERVNDUklQVElPTjpub2lyOiBKZWFu
+LUphY3F1ZXMgUE9SVEFMIDxqZWFuLWphY3F1ZXMucG9ydGFsQGV4YW1wbGUu
+b3JnPlxuYmwNCiBhbmM6IFl2ZXMgUlVUU0NITEUgPHl2ZXNAZXhhbXBsZS5v
+cmc+XG5oYW5kaWNhcDogMVxuDQpEVEVORDoyMDE1MDIxMlQyMzAwMDBaDQpE
+VFNUQVJUOjIwMTUwMjEyVDIxMDAwMFoNCkxPQ0FUSU9OOkJhbG1hDQpTVU1N
+QVJZOlRvdXJub2kgcGVybWFuZW50IGRlIFRvdWxvdXNlDQpVSUQ6MDAwMDAw
+MDAtMDAwMC0wMDAwLUhFTEwtMFdPUkxEMDAwMDAwDQpFTkQ6VkVWRU5UDQpF
+TkQ6VkNBTEVOREFSDQo=
+
+-----testing42ftwtesting--
 Tournament: tpToulouse
 Round 2
 undef: Daniel DALLA_BARBA <daniel.dalla-barba@example.org>	Umberto POLVERINI <polverini@example.org>	(4 stones) 	 

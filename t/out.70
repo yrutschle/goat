@@ -1,5 +1,18 @@
-To: yves@example.org
+Content-Transfer-Encoding: binary
+Content-Type: multipart/mixed; boundary="---testing42ftwtesting"
+From: GO Assistant <goat@rutschle.net>
+MIME-Version: 1.0
+Return-Path: GO Assistant <goat@rutschle.net>
 Subject: [goat] Commande illégale
+To: yves@example.org
+X-Loop: GO Assistant <goat@rutschle.net>
+X-Mailer: MIME-tools 5.505 (Entity 5.505)This is a multi-part message in MIME format...
+
+-----testing42ftwtesting
+Content-Type: text/plain; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: binary
+
 Vous avez reçu ce courrier car vous êtes inscrit au Tournoi permanent de Toulouse.
 Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@rutschle.net>.
 
@@ -39,3 +52,5 @@ From: Yves <yves@example.org>
 
 
 
+
+-----testing42ftwtesting--

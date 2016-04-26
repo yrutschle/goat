@@ -52,9 +52,13 @@ easy translating or customising of outgoing messages.
 
 use Getopt::Long;
 use Pod::Usage;
-use Mail::Send;
+use MIME::Entity;
+use Data::ICal;
+use Data::UUID;
 use DateTime;  # package libdatetime-perl
 use DateTime::Locale; # package libdatetime-locale-perl
+use DateTime::Format::ICal; 
+use Data::ICal::Entry::Event;
 use Template;
 use POSIX;
 
@@ -99,12 +103,14 @@ GetOptions(
     'pastdate=s'                => \$param_pastdate,
     'give-results=s'            => \$param_give_results,
     'badcolour=s'               => \$param_badcolour,
-    'attach=s'                  => \$param_attach,
+    'attach=s'                  => \$param_attach, # Not implemented
     'no-send'                   => \$no_send,
     'help'                      => \$help,
 ) or die pod2usage();
 
 die pod2usage(-verbose=>2) if defined $help;
+
+my $testing = $no_send // 0; # In case we need to separate both behaviour down the line
 
 my $LOGFILE = "$LOG_DIR/mail_out.log";
 
@@ -173,34 +179,51 @@ sub sendmail {
 
     $r_to = [$r_to] unless ref $r_to;
 
-    if (defined $param_attach) {
-        if (open my $attch, "$param_attach") {
-            $body .= $_ while (<$attch>);
-        } else {
-            record "Attach: $param_attach: $!";
-        }
-    }
-
     map { $_ = Encode::encode('UTF-8', $_) } @$r_to;
 
-    if ($no_send) {
-        print "To: @$r_to\nSubject: $hdr{subject}\n$body";
-        return;
+    my %mime_parms =  (
+        'From' => $GOAT_ADDRESS,
+        'Return-Path' => $GOAT_ADDRESS,
+        'X-Loop' => $GOAT_ADDRESS,
+        'To' => (join ',', @$r_to),
+        'Subject' => $hdr{subject},
+        'Type' => 'multipart/mixed',
+    );
+    $mime_parms{Boundary} = "---testing42ftwtesting" if $testing;
+
+    my $msg = MIME::Entity->build(%mime_parms);
+    $msg->attach(
+        'Charset' => 'UTF-8',
+        'Data' => $body,
+    );
+
+    if (exists $r_data->{ics}) {
+        $msg->attach(
+            Type => 'text/calendar',
+            Encoding => 'base64',
+            Charset => 'UTF-8',
+            Data => $r_data->{ics},
+        );
     }
+
+    if ($no_send) {
+        # MIME::Entity does not output headers in a
+        # deterministic order. We care when we test, so
+        # output the headers separately and sorted
+        # alphabetically
+        print join "\n", sort split /\n/, $msg->header_as_string;
+
+        print $msg->body_as_string;
+        return;
+    } 
 
     # Happy debugger warning: this code is never tested by
     # the test suite, because we don't want it to *actually*
     # send e-mail. This means one must be extra careful when
     # editing it, and that it'll appear as not covered
     # during test (because, well, it isn't).
-    my $msg = new Mail::Send Subject=>$hdr{subject}, To=>join ",", @$r_to;
-    $msg->set('From' => $GOAT_ADDRESS);
-    $msg->set('Return-path' => $GOAT_ADDRESS);
-    $msg->set('X-Loop' => $GOAT_ADDRESS);
-    $msg->set('Content-Type' => 'text/plain; charset=utf-8');
-    my $fh = $msg->open or record "SMTP open: $!";
-    print $fh $body;
-    $fh->close;
+
+    $msg->send;
 
     record("@$r_to: $hdr{subject}");
 }
@@ -307,7 +330,29 @@ if (defined $param_notify_schedule) {
 
     my $date = utc2str $time;
 
+    my $dtstart = DateTime::Format::ICal->format_datetime(DateTime->from_epoch(epoch => $time));
+    my $dtend = DateTime::Format::ICal->format_datetime(DateTime->from_epoch(epoch => $time + 2 * 3600));
+    my $ical = Data::ICal->new();
+    my $ug = Data::UUID->new();
+    my $event = Data::ICal::Entry::Event->new();
+    $event->add_properties(
+        summary => $TOURNAMENT_NAME,
+        description => <<EOF,
+noir: $black
+blanc: $white
+handicap: $handi
+EOF
+        dtstart => $dtstart,
+        dtend => $dtend,
+        location => $location,
+        uid => $testing ? "00000000-0000-0000-HELL-0WORLD000000" : $ug->to_string($ug->create()),                                                                                                                                                                                                                                 
+    );
+    $ical->add_entry($event);
+
+
     my %data = make_hash( [qw/ black white handi date location setter/ ],  [$black,$white,$handi,$date,$location,$setter]);
+    $data{ics} = Encode::encode('UTF-8', $ical->as_string);
+
     sendmail [$black, $white], "scheduled.tt", \%data;
     exit 0;
 }
