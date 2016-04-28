@@ -135,6 +135,11 @@ push @tests,
       'test' => 'diff -u ../out.30 out.30',
       'doc' => 'Receive SGF',
   },
+  # Receive an SGF: extract result and archive
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.31 letter; cp ../toperm_in.30 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.31 ; perl $perl_opts ../../goat --status >> out.31 2>&1",
+      'test' => 'diff -u ../out.31 out.31',
+      'doc' => 'Receive SGF with UTF8 names',
+  },
   # Check for loops
     { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.14 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.12",
       'test' => 'diff -u ../out.12 out.12',

@@ -657,13 +657,9 @@ if (defined $param_schedule) {
     }
 
     my $target_file = $SGF_DIR . "/$sgf_date-" . $game->white->givenname . "-". $game->black->givenname .  ".sgf";
-    # See http://stackoverflow.com/questions/17561839/remove-accents-from-accented-characters
-    use Unicode::Normalize;
-    use Encode;
-    my $decomposed = NFKD( decode_utf8 $target_file );
-    $decomposed =~ s/\p{NonspacingMark}//g;
-    move($sgf_name, $decomposed) or die "mv $sgf_name $decomposed: $!\n";
-    $game->sgf($decomposed);
+    my $encoded = Encode::encode('UTF-8', $target_file);
+    move($sgf_name, $encoded) or die "mv $sgf_name $encoded: $!\n";
+    $game->sgf($target_file);
 
 ########## Cancel the game
 } elsif (defined $param_cancel) {
