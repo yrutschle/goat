@@ -10,6 +10,7 @@ use Mail::Address;
 use GoatLib;
 use GoatConfig;
 use File::Copy;
+use URI::Escape;
 
 =head1 DESCRIPTION
 
@@ -465,7 +466,7 @@ sub as_HTML {
             $result = "($result)" unless $game->rated;
             my $white_level = $game->white->register_level($round_num) || $game->white->level || "NC";
             my $black_level = $game->black->register_level($round_num) || $game->black->level || "NC";
-            my $sgf = $game->sgf;
+            my $sgf = uri_escape Encode::encode('UTF-8', $game->sgf);
             $table->addRow(
                 $game->white->fullname." ($white_level) ".$game->white->club,
                 $game->black->fullname." ($black_level) ".$game->black->club,

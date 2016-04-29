@@ -43,8 +43,8 @@ use Mail::Address;
 use Email::Valid;  # Package libemail-valid-perl
 use Email::Reply;  # Package libemail-reply-perl
 use Email::Sender::Simple qw/sendmail/; # Package libemail-sender-perl
-use File::Temp qw/tempfile/;
 use MIME::Parser;
+use Data::UUID;
 
 use Encode;
 
@@ -113,9 +113,15 @@ sub my_exec {
     my ($exec) = @_;
     record "exec `$exec`";
     my $r = system $exec;
-    if ($r) {
-        record "system($exec): returned $? $!";
-    } 
+    if ($? == -1) {
+        print "failed to execute: $!\n";
+    } elsif ($? & 127) {
+        printf "child died with signal %d, %s coredump\n",
+        ($? & 127),  ($? & 128) ? 'with' : 'without';
+    } else {
+        printf "child exited with value %d\n", $? >> 8;
+    }
+
 }
 
 # Searches attachments for an SGF. If one is found, pass it
@@ -130,7 +136,8 @@ sub process_sgf {
         my $fn = $part->filename // "";
         if (($ct =~ /x-go-sgf/) or
             ($fn =~ /\.sgf$/)) {
-            my ($fh, $filename) = tempfile();
+            my $filename = "$TMP_DIR/sgf.$$";
+            open my $fh, "> $filename" or record "tmpfile $filename: $!\n" and die "$filename: $!\n";
             print $fh $part->body;
             close $fh;
             my_exec("$BIN_GOAT $goat_opts --sgf-result $from,$filename");

@@ -1,10 +1,12 @@
 #! /usr/bin/perl -w
 
 use CGI;
+use URI::Escape;
+use Encode;
 
 my $q = CGI->new;
 
-my ($sgf) = $q->param('sgf');
+my ($sgf) = Encode::decode('UTF-8', uri_unescape $q->param('sgf'));
 
 print $q->header();
 

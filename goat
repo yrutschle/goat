@@ -645,7 +645,7 @@ if (defined $param_schedule) {
     }
 
     my $sgf_date = $sgf->DT;
-    $sgf->RE =~ /^(W)/;
+    $sgf->RE =~ /^([BW])/;
     my $res = $1;
     if ($res eq 'W') {
         finish_game($game, $submitter, 'white');
