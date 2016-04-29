@@ -119,7 +119,9 @@ sub my_exec {
         printf "child died with signal %d, %s coredump\n",
         ($? & 127),  ($? & 128) ? 'with' : 'without';
     } else {
-        printf "child exited with value %d\n", $? >> 8;
+        if ($? >> 8) {
+            printf "child exited with value %d\n", $? >> 8;
+        }
     }
 
 }
