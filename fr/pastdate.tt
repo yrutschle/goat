@@ -2,7 +2,7 @@ Subject: [goat] Erreur de date
 
 [% INCLUDE header.tt %]
 
-La date que vous avez spécifiée: "[% date %]", est déjà passée.
+La date que vous avez spécifiée: "[% date_str %]", est déjà passée.
 Merci d'essayer à nouveau, en suivant un des formats
 suivants:
 

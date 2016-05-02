@@ -2,7 +2,7 @@ Subject: [goat] Erreur de date
 
 [% INCLUDE header.tt %]
 
-La date que vous avez spécifiée: "[% date %]", n'est pas une date
+La date que vous avez spécifiée: "[% date_str %]", n'est pas une date
 légale. Merci d'essayer à nouveau, en suivant un des formats
 suivants:
 

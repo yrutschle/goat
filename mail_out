@@ -74,43 +74,6 @@ BEGIN {
 
 use GoatConfig;
 
-my (
-     $param_mail_in_illegal,
-     $param_remind_challenge,
-     $param_ask_result,
-     $param_player_unknown,
-     $param_issue_challenge,
-     $param_notify_schedule,
-     $param_coming_up,
-     $param_baddate,
-     $param_pastdate,
-     $param_give_results,
-     $param_badcolour,
-     $param_attach,
-     $no_send,
-     $help,
- );
-
-GetOptions(
-    'mail-in-illegal=s'         => \$param_mail_in_illegal,
-    'remind-challenge=s'        => \$param_remind_challenge,
-    'ask-result=s'              => \$param_ask_result,
-    'player-unknown=s'          => \$param_player_unknown,
-    'issue-challenge=s'         => \$param_issue_challenge,
-    'notify-schedule=s'         => \$param_notify_schedule,
-    'coming-up=s'               => \$param_coming_up,
-    'baddate=s'                 => \$param_baddate,
-    'pastdate=s'                => \$param_pastdate,
-    'give-results=s'            => \$param_give_results,
-    'badcolour=s'               => \$param_badcolour,
-    'attach=s'                  => \$param_attach, # Not implemented
-    'no-send'                   => \$no_send,
-    'help'                      => \$help,
-) or die pod2usage();
-
-die pod2usage(-verbose=>2) if defined $help;
-
-my $testing = $no_send // 0; # In case we need to separate both behaviour down the line
 
 my $LOGFILE = "$LOG_DIR/mail_out.log";
 
@@ -127,6 +90,9 @@ my $tt = Template->new({
         INCLUDE_PATH => "$TEMPLATE_DIR",
     });
 
+# Testing: to make some normally random things non-random
+# No_send: to prevent sending mail
+my ($help, $testing, $no_send); 
 
 # Turn a UTC time_t into a localised timezoned string
 sub utc2str {
@@ -134,6 +100,184 @@ sub utc2str {
     my $o = DateTime->from_epoch(epoch => $_[0], locale => $LOCALE, time_zone=>$TIMEZONE);
     my $date = $o->strftime("%A %d %B %Y %R");
 }
+
+
+=head2 OPTIONS
+
+=over 4
+
+=item --mail-in-illegal <rcpt>,<file>
+
+Called from mail_in on an illegal or unknwon command. 
+
+=item --remind-challenge <black,white,handicap,final_date>
+
+Remind players who haven't scheduled their game yet to do
+so.
+
+B<final_date> is UTC UNIX date.
+
+=item --ask-results <black,white,date>
+
+Ask players who had scheduled their game at I<date> that
+they need to publish their results.
+
+=item --player-unknown <address>
+
+Notifies I<address> that that address is unknown. (Game
+schedules and results must be sent from the e-mail address
+that Goat knows about).
+
+=item --issue-challenge <black,white,handicap,limit date>
+
+Sends players their pairing.
+
+=item --notify-schedule <black,white,handicap,date,location,setter>
+
+Notify players that I<setter> has scheduled the game to take
+place on I<date> in I<location>
+
+=item --coming-up <black,white,handicap,date,location>
+
+Notify players that their game is scheduled to take
+place on I<date> (soon) in I<location>
+
+=item --baddate <rcpt,date>
+
+Notify I<rcpt> that I<date> is invalid.
+
+=item --pastdate <rcpt,date>
+
+Notify I<rcpt> that I<date> is already past.
+
+=item --give-results <black,white,result,reporter>
+
+Notify the players that I<reporter> has reported the result
+of the game.
+
+=item --badcolour <rcpt,colour>
+
+Notify I<rcpt> that I<colour> is not a valid color.
+
+=cut
+        # process_action() turns the parameters passed to the
+        # option into a hash nameѕ after names in
+        # param_names, then if 'date' exists turns it to
+        # string, then calls postprocess if it exists
+        # passing the data hash has parameter, then
+        # processes the specified template and mails the
+        # result to the email addresses coming from the
+        # named parameters.
+        # The parameter names are passed to the template
+        # processor so they can be used directly in
+        # templates.
+my %options = (
+    'mail-in-illegal=s'         => process_action(
+        param_names => [qw/rcpt file/],
+        template => "badcmd.tt",
+        postprocess => sub {
+            my ($data) = @_;
+            $data->{contents} = `cat $data->{file}`;
+        },
+        mailto => [qw/rcpt/],
+    ),
+
+    'remind-challenge=s'        => process_action(
+        param_names => [qw/black white handi date/],
+        template => "organise.tt",
+        mailto => [qw/black white/],
+    ),
+
+    'ask-result=s'              => process_action(
+        param_names => [qw/p1 p2 date/],
+        template => "ask_result.tt",
+        mailto => [qw/p1 p2/],
+    ),
+
+    'player-unknown=s'          => process_action(
+        param_names => [qw/p1/],
+        template => "unknown_address.tt",
+        mailto => [qw/p1/],
+    ),
+
+    'issue-challenge=s'         => process_action(
+        param_names => [qw/black white handi date/],
+        template => "pairing.tt",
+        mailto => [qw/black white/],
+    ),
+
+    'notify-schedule=s'         => process_action(
+        param_names => [qw/ black white handi time location setter/],
+        postprocess => sub {
+            my ($data) = @_;
+
+            $data->{date} = utc2str $data->{time};
+            my $dtstart = DateTime::Format::ICal->format_datetime(DateTime->from_epoch(epoch => $data->{time}));
+            my $dtend = DateTime::Format::ICal->format_datetime(DateTime->from_epoch(epoch => $data->{time} + 2 * 3600));
+            my $ical = Data::ICal->new();
+            my $ug = Data::UUID->new();
+            my $event = Data::ICal::Entry::Event->new();
+            $event->add_properties(
+                summary => $TOURNAMENT_NAME,
+                description => <<EOF,
+noir: $data->{black}
+blanc: $data->{white}
+handicap: $data->{handi}
+EOF
+                dtstart => $dtstart,
+                dtend => $dtend,
+                location => $data->{location},
+                uid => $testing ? "00000000-0000-0000-HELL-0WORLD000000" : $ug->to_string($ug->create()),                                                                                                                                                                                                                                 
+            );
+            $ical->add_entry($event);
+            $data->{ics} = Encode::encode('UTF-8', $ical->as_string);
+        },
+        template => "scheduled.tt",
+        mailto => [qw/black white/],
+    ),
+
+    'coming-up=s'               => process_action(
+        param_names => [qw/black white handi date location/],
+        template => "game_reminder.tt",
+        mailto => [qw/black white/],
+    ),
+
+    'baddate=s'                 => process_action(
+        param_names => [qw/p1 date_str/],
+        template => "baddate.tt",
+        mailto => [qw/p1/],
+    ),
+
+    'pastdate=s'                => process_action(
+        param_names => [qw/p1 date_str/],
+        template => "pastdate.tt",
+        mailto => [qw/p1/],
+    ),
+
+    'give-results=s'            => process_action(
+        param_names => [qw/black white result player/],
+        template => "results.tt",
+        postprocess => sub {
+            my ($data) = @_;
+            $data->{winner} = $data->{result} eq 'black' ?  $data->{black} : $data->{white};
+        },
+        mailto => [qw/black white/],
+    ),
+
+    'badcolour=s'               => process_action(
+        param_names => [qw/p1 colour/],
+        template => "badcolour.tt",
+        mailto => [qw/p1/],
+    ),
+
+    'no-send'                   => sub { $testing = 1; $no_send = 1; },
+    'help'                      => \$help,
+);
+
+GetOptions(%options) or die pod2usage();
+
+die pod2usage(-verbose=>2) if defined $help;
+
 
 # Makes a hash from a list
 # $names: ref to list of names
@@ -151,8 +295,6 @@ sub make_hash {
 
 # Send mail to one or several recipients:
 # sendmail ['bob@foo.com', 'joe@bar.com'], $template, # \%data;
-# if $param_attach is defined, collate the content of the
-# file specified in $param_attach in the body of the email
 sub sendmail {
     my ($r_to, $template, $r_data) = @_;
 
@@ -163,9 +305,6 @@ sub sendmail {
         $r_data->{$k} = Encode::encode('UTF-8', $r_data->{$k});
     }
 
-    $r_data->{goat_address} = $GOAT_ADDRESS;
-    $r_data->{admin_address} = $ADMIN_ADDRESS;
-    $r_data->{tournament_name} = $TOURNAMENT_NAME;
     $tt->process($template, $r_data, \$body) or die $tt->error;
 
     # Remove header lines
@@ -228,207 +367,24 @@ sub sendmail {
     record("@$r_to: $hdr{subject}");
 }
 
-=head2 OPTIONS
 
-=over 4
 
-=item --mail-in-illegal <rcpt>,<command>
-
-Called from mail_in on an illegal or unknwon command. 
-
-=cut
-if (defined $param_mail_in_illegal and
-    $param_mail_in_illegal =~ /([^,]*),(.*)/) {
-
-    my ($rcpt, $file) = ($1, $2);
-
-    my $contents = `cat $file`;
-
-    sendmail $rcpt, "badcmd.tt", { contents => $contents };
-    exit 0;
+# Returns a callback that can be passed to GetOptions
+use Data::Dumper;
+sub process_action {
+    my (%action) = @_;
+    return sub {
+        my ($action_name, $params) = @_;
+        my @param_values = split /\s*,\s*/, $params;
+        my %data = make_hash($action{param_names}, \@param_values);
+        $data{date} = utc2str $data{date} if exists $data{date};
+        $data{goat_address} = $GOAT_ADDRESS;
+        $data{admin_address} = $ADMIN_ADDRESS;
+        $data{tournament_name} = $TOURNAMENT_NAME;
+        my @to = sort map {$data{$_}} @{$action{mailto}};
+        $action{postprocess}->(\%data) if exists $action{postprocess};
+        sendmail(\@to, $action{template}, \%data);
+    }
 }
-
-=item --issue-challenge <black,white,handicap>
-
-Sends players their pairing.
-
-=cut
-
-if (defined $param_issue_challenge) {
-    my ($black, $white,$handi,$final_date) = split /\s*,\s*/, $param_issue_challenge;
-
-    my $date = utc2str $final_date;
-    my %data = make_hash( [qw/black white handi date/], [$black, $white, $handi, $date]);
-
-    sendmail [$white, $black], "pairing.tt", \%data;
-    exit 0;
-}
-
-=item --remind-challenge <black,white,handicap,final_date>
-
-Remind players who haven't scheduled their game yet to do
-so.
-
-B<final_date> is UTC UNIX date.
-
-=cut
-
-if (defined $param_remind_challenge) {
-    my ($black, $white,$handi,$final_date) = split /\s*,\s*/, $param_remind_challenge;
-
-    my $date = utc2str $final_date;
-    my %data = make_hash( [qw/black white handi date/], [$black, $white, $handi, $date]);
-
-    sendmail [$white, $black], "organise.tt", \%data;
-    exit 0;
-}
-
-=item --ask-results <black,white,date>
-
-Ask players who had scheduled their game at I<date> that
-they need to publish their results.
-
-=cut
-
-if (defined $param_ask_result) {
-    my ($p1, $p2, $time) = split /\s*,\s*/, $param_ask_result;
-
-    my $date = utc2str $time;
-
-    my %data = make_hash( [qw/date/], [$date]);
-
-    sendmail [$p1,$p2], "ask_result.tt", \%data;
-    exit 0;
-
-}
-
-=item --player-unknown <address>
-
-Notifies I<address> that that address is unknown. (Game
-schedules and results must be sent from the e-mail address
-that Goat knows about).
-
-=cut
-
-if (defined $param_player_unknown) {
-    my ($p1) = $param_player_unknown;
-
-    sendmail $p1, "unknown_address.tt";
-    exit 0;
-}
-
-=item --notify-schedule <black,white,handicap,date,location,setter>
-
-Notify players that I<setter> has scheduled the game to take
-place on I<date> in I<location>
-
-=cut
-
-if (defined $param_notify_schedule) {
-
-    my ($black,$white,$handi,$time,$location,$setter) = split /\s*,\s*/, $param_notify_schedule;
-
-    my $date = utc2str $time;
-
-    my $dtstart = DateTime::Format::ICal->format_datetime(DateTime->from_epoch(epoch => $time));
-    my $dtend = DateTime::Format::ICal->format_datetime(DateTime->from_epoch(epoch => $time + 2 * 3600));
-    my $ical = Data::ICal->new();
-    my $ug = Data::UUID->new();
-    my $event = Data::ICal::Entry::Event->new();
-    $event->add_properties(
-        summary => $TOURNAMENT_NAME,
-        description => <<EOF,
-noir: $black
-blanc: $white
-handicap: $handi
-EOF
-        dtstart => $dtstart,
-        dtend => $dtend,
-        location => $location,
-        uid => $testing ? "00000000-0000-0000-HELL-0WORLD000000" : $ug->to_string($ug->create()),                                                                                                                                                                                                                                 
-    );
-    $ical->add_entry($event);
-
-
-    my %data = make_hash( [qw/ black white handi date location setter/ ],  [$black,$white,$handi,$date,$location,$setter]);
-    $data{ics} = Encode::encode('UTF-8', $ical->as_string);
-
-    sendmail [$black, $white], "scheduled.tt", \%data;
-    exit 0;
-}
-
-=item --coming-up <black,white,handicap,date,location>
-
-Notify players that their game is scheduled to take
-place on I<date> (soon) in I<location>
-
-=cut
-if (defined $param_coming_up) {
-    my ($black,$white,$handi,$time,$location) = split /\s*,\s*/, $param_coming_up;
-
-    my $date = utc2str $time;
-
-    my %data = make_hash([qw(black white handi date location)], [$black,$white,$handi,$date,$location]);
-    sendmail [$black, $white], "game_reminder.tt", \%data;
-    exit 0;
-}
-
-=item --baddate <rcpt,date>
-
-Notify I<rcpt> that I<date> is invalid.
-
-=cut
-
-if (defined $param_baddate) {
-    my ($rcpt,$date) = split /\s*,\s*/, $param_baddate;
-
-    sendmail $rcpt, "baddate.tt", {date => "$date" };
-    exit 0;
-}
-
-=item --pastdate <rcpt,date>
-
-Notify I<rcpt> that I<date> is already past.
-
-=cut
-
-if (defined $param_pastdate) {
-    my ($rcpt,$date) = split /\s*,\s*/, $param_pastdate;
-
-    sendmail $rcpt, "pastdate.tt", {date => "$date" };
-    exit 0;
-}
-
-=item --give-results <black,white,result,reporter>
-
-Notify the players that I<reporter> has reported the result
-of the game.
-
-=cut
-
-if (defined $param_give_results) {
-    my ($black,$white,$res,$player) = split /\s*,\s*/, $param_give_results;
-
-    my $winner = $res eq 'black' ? $black : $white;
-
-    my %data = make_hash([qw(black white winner player)], 
-                           [$black, $white, $winner, $player]);
-    sendmail [$black, $white], "results.tt", \%data;
-    exit 0;
-}
-
-=item --badcolour <rcpt,colour>
-
-Notify I<rcpt> that I<colour> is not a valid color.
-
-=cut
-
-if (defined $param_badcolour) {
-    my ($rcpt,$colour) = split /\s*,\s*/, $param_badcolour;
-
-    sendmail $rcpt, "badcolour.tt", { colour => $colour };
-    exit 0;
-}
-
 
 record "No action: ARGV=@ARGV";
