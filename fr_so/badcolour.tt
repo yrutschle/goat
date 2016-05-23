@@ -2,9 +2,9 @@ Subject: [goat] Erreur de couleur
 
 [% INCLUDE header.tt %]
 
-La couleur: "[% colour %]" que vous avez indiquée en résultat
-n'est pas légale. Merci d'essayer à nouveau, en utilisant:
+La commande "[% colour %]" que vous avez indiquée n'est pas
+légale. Merci d'essayer à nouveau, en utilisant:
 
-blanc
-noir
+resultat blanc
+resultat noir
 

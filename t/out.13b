@@ -1,11 +1,12 @@
-Sat Jul 30 15:30:00 2005: notify yves@example.org that 'resultat blan' is invalid
+Sat Jul 30 15:30:00 2005: notify Yves CLAIR <clairyves@wanadoo.fr> and Philippe BATAILLER <philippe.batailler@free.fr> their game is finished and black won; result given by clairyves@wanadoo.fr
+ <clairyves@wanadoo.fr>
 Content-Transfer-Encoding: binary
 Content-Type: multipart/mixed; boundary="---testing42ftwtesting"
 From: GO Assistant <goat@rutschle.net>
 MIME-Version: 1.0
 Return-Path: GO Assistant <goat@rutschle.net>
-Subject: [goat] Erreur de couleur
-To: yves@example.org
+Subject: [goat] Résultat de votre ronde
+To: Philippe BATAILLER <philippe.batailler@free.fr>,Yves CLAIR
 X-Loop: GO Assistant <goat@rutschle.net>
 X-Mailer: MIME-tools 5.505 (Entity 5.505)This is a multi-part message in MIME format...
 
@@ -18,11 +19,9 @@ Vous avez reçu ce courrier car vous êtes inscrit au Tournoi permanent de Toulo
 Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@rutschle.net>.
 
 
-La commande "resultat blan" que vous avez indiquée n'est pas
-légale. Merci d'essayer à nouveau, en utilisant:
+Le résultat de votre partie a été enregistré.
+Yves CLAIR <clairyves@wanadoo.fr> contre Philippe BATAILLER <philippe.batailler@free.fr>, victoire pour Yves CLAIR <clairyves@wanadoo.fr>.
 
-resultat blanc
-resultat noir
-
+Le résultat a été rapporté par clairyves@wanadoo.fr.
 
 -----testing42ftwtesting--

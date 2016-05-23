@@ -128,7 +128,12 @@ push @tests,
   # 10: We get a result!
     { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.13 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.10",
       'test' => 'diff -u ../out.10 out.10',
-      'doc' => 'Receive results',
+      'doc' => 'Receive results in subject',
+  },
+  # Result in the body, with quoted printable encoding
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.13b letter; cp ../toperm_in.13b toperm; cat letter | perl $perl_opts ../../mail_in -t > out.13b",
+      'test' => 'diff -u ../out.13b out.13b',
+      'doc' => 'Receive results in body',
   },
   # Receive an SGF: extract result and archive
     { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.30 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.30 ; perl $perl_opts ../../goat --status >> out.30 2>&1",

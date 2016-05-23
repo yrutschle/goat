@@ -1,0 +1,109 @@
+Received: from yves by hood.rutschle.net with local (Exim 4.84_2)
+	(envelope-from <yves@rutschle.net>)
+	id 1avtf1-0008V1-4J
+	for goat_so@rutschle.net; Thu, 28 Apr 2016 21:39:47 +0000
+Date: Thu, 28 Apr 2016 21:39:47 +0000
+From: Yves Rutschle <yves@rutschle.net>
+To: GO Assistant <goat_so@rutschle.net>
+Subject: Re: [goat] =?UTF-8?Q?R=E9sulta?= =?UTF-8?Q?t?= de votre ronde
+Message-ID: <20160428213947.GT2896@rutschle.net>
+References: <E1avtBu-00085a-GZ@hood.rutschle.net>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="ijf6z65S790CMqo8"
+Content-Disposition: inline
+In-Reply-To: <E1avtBu-00085a-GZ@hood.rutschle.net>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+
+
+--ijf6z65S790CMqo8
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+
+
+--ijf6z65S790CMqo8
+Content-Type: application/x-go-sgf
+Content-Disposition: attachment; filename="whiterabit-jfg31.sgf"
+Content-Transfer-Encoding: quoted-printable
+
+(;GM[1]FF[4]CA[UTF-8]AP[CGoban:3]ST[2]=0ARU[Chinese]SZ[19]KM[7.50]TM[3600]O=
+T[15/300 Canadian]=0APW[whiterabit]PB[jfg31]BR[10k]DT[2016-04-28]PC[The KGS=
+ Go Server at http://www.gokgs.com/]C[whiterabit [?\]: oui -- je sais pas l=
+ire =0A]RE[B+14.50]=0A;B[pd]BL[3593.038]C[jfg31 [10k\]: bonne partie !=0A]=
+=0A;W[dp]WL[3574.917]C[whiterabit [?\]: oui, j'ai mal lu -- ca commence bie=
+n :)=0A]=0A;B[pq]BL[3577.12]=0A;W[ec]WL[3567.89]=0A;B[qk]BL[3541.531]=0A;W[=
+cd]WL[3562.295]=0A;B[fq]BL[3508.345]=0A;W[fp]WL[3545.825]=0A;B[gp]BL[3496.4=
+73]=0A;W[fo]WL[3536.014]=0A;B[hq]BL[3458.845]=0A;W[eq]WL[3522.883]=0A;B[fr]=
+BL[3422.146]=0A;W[er]WL[3517.062]=0A;B[mc]BL[3361.691]=0A;W[di]WL[3496.277]=
+=0A;B[lp]BL[3333.765]=0A;W[qo]WL[3481.241]=0A;B[qp]BL[3315.7]=0A;W[oo]WL[34=
+52.055]=0A;B[op]BL[3252.961]=0A;W[nn]WL[3401.434]=0A;B[np]BL[3209.223]=0A;W=
+[qm]WL[3316.771]=0A;B[ro]BL[3140.987]=0A;W[po]WL[3152.903]=0A;B[nk]BL[3110.=
+682]=0A;W[qf]WL[3097.605]=0A;B[qh]BL[3093.44]=0A;W[of]WL[3057.484]=0A;B[oh]=
+BL[3067.391]=0A;W[rd]WL[3015.68]=0A;B[qc]BL[3054.401]=0A;W[rg]WL[2986.734]=
+=0A;B[rh]BL[3012.929]=0A;W[rc]WL[2966.371]=0A;B[rb]BL[3006.949]=0A;W[pe]WL[=
+2897.464]=0A;B[nd]BL[2928.223]=0A;W[qd]WL[2881.735]=0A;B[pc]BL[2911.055]=0A=
+;W[mf]WL[2867.987]=0A;B[jd]BL[2894.03]=0A;W[nh]WL[2851.96]=0A;B[ni]BL[2876.=
+685]=0A;W[mh]WL[2841.211]=0A;B[pg]BL[2818.423]=0A;W[mi]WL[2745.555]=0A;B[nj=
+]BL[2727.048]=0A;W[rn]WL[2683.659]=0A;B[rp]BL[2708.124]=0A;W[rl]WL[2617.873=
+]=0A;B[gc]BL[2677.819]=0A;W[ol]WL[2600.394]=0A;B[rk]BL[2656.647]=0A;W[dl]WL=
+[2565.493]=0A;B[df]BL[2652.523]=0A;W[ef]WL[2553.979]=0A;B[eg]BL[2644.882]=
+=0A;W[de]WL[2550.681]=0A;B[dg]BL[2606.748]=0A;W[fi]WL[2537.525]=0A;B[ff]BL[=
+2567.448]=0A;W[ee]WL[2529.425]=0A;B[fh]BL[2564.424]=0A;W[go]WL[2461.79]=0A;=
+B[ho]BL[2561.755]=0A;W[hn]WL[2454.312]=0A;B[in]BL[2425.709]=0A;W[hm]WL[2420=
+=2E002]=0A;B[im]BL[2422.835]=0A;W[hl]WL[2347.395]=0A;B[ln]BL[2411.131]=0A;W=
+[mo]WL[2340.983]=0A;B[lo]BL[2381.377]=0A;W[mm]WL[2328.812]=0A;B[lk]BL[2341.=
+629]=0A;W[lm]WL[2321.339]=0A;B[jk]BL[2215.231]=0A;W[jh]WL[2298.8]=0A;B[jf]B=
+L[2202.186]=0A;W[gg]WL[2254.877]=0A;B[fg]BL[2199.743]=0A;W[gh]WL[2242.17]=
+=0A;B[gf]BL[2186.874]=0A;W[le]WL[2140.566]=0A;B[bg]BL[2177.198]=0A;W[bi]WL[=
+2124.798]=0A;B[be]BL[2157.154]=0A;W[bd]WL[2116.917]=0A;B[ce]BL[2115.011]=0A=
+;W[kl]WL[2047.696]=0A;B[kk]BL[2076.37]=0A;W[ij]WL[1955.132]=0A;B[gi]BL[1998=
+=2E253]=0A;W[hi]WL[1942.369]=0A;B[ei]BL[1957.36]=0A;W[fj]WL[1853.677]=0A;B[=
+ej]BL[1939.402]=0A;W[dj]WL[1849.664]=0A;B[ek]BL[1916.703]=0A;W[el]WL[1826.2=
+7]=0A;B[dk]BL[1886.76]=0A;W[ck]WL[1817.574]=0A;B[fk]BL[1868.015]=0A;W[gj]WL=
+[1812.513]=0A;B[fl]BL[1855.42]=0A;W[fm]WL[1804.558]=0A;B[fb]BL[1649.977]=0A=
+;W[eb]WL[1787.218]=0A;B[kg]BL[1634.214]=0A;W[kh]WL[1769.784]=0A;B[lg]BL[162=
+6.34]=0A;W[mg]WL[1751.525]=0A;B[ad]BL[1613.476]=0A;W[ac]WL[1715.848]=0A;B[a=
+e]BL[1611.435]=0A;W[bb]WL[1706.57]=0A;B[es]BL[1608.595]=0A;W[ds]WL[1698.714=
+]=0A;B[fs]BL[1606.133]=0A;W[dr]WL[1697.88]=0A;B[fe]BL[1499.65]=0A;W[fd]WL[1=
+677.136]=0A;B[gd]BL[1490.368]=0A;W[fc]WL[1663.471]=0A;B[gb]BL[1485.936]=0A;=
+W[kd]WL[1573.938]=0A;B[kc]BL[1478.076]=0A;W[hf]WL[1520]=0A;B[he]BL[1427.067=
+]=0A;W[kf]WL[1509.979]=0A;B[jg]BL[1320.95]=0A;W[kn]WL[1480.651]=0A;B[jl]BL[=
+1255.066]=0A;W[io]WL[1431.583]=0A;B[hp]BL[1242.652]=0A;W[jo]WL[1427.979]=0A=
+;B[jq]BL[1138.455]=0A;W[jm]WL[1359.458]=0A;B[il]BL[1135.817]=0A;W[mp]WL[134=
+0.376]=0A;B[mq]BL[1133.066]=0A;W[nq]WL[1322.744]=0A;B[lq]BL[1113.978]=0A;W[=
+jj]WL[1272.693]=0A;B[ok]BL[1101.014]=0A;W[pl]WL[1088.038]=0A;B[pk]BL[1078.7=
+82]=0A;W[pi]WL[1069.719]=0A;B[qi]BL[961.2]=0A;W[og]WL[1034.649]=0A;B[qg]BL[=
+862.738]=0A;W[rf]WL[1028.262]=0A;B[sm]BL[834.592]=0A;W[sl]WL[944.375]=0A;B[=
+sn]BL[827.749]=0A;W[rm]WL[935.497]=0A;B[so]BL[825.785]=0A;W[pn]WL[927.541]=
+=0A;B[sk]BL[748.734]=0A;W[pp]WL[908.911]=0A;B[oq]BL[712.37]=0A;W[ig]WL[881.=
+627]=0A;B[if]BL[700.7]=0A;W[kj]WL[870.337]=0A;B[hg]BL[675.835]=0A;W[ih]WL[8=
+59.974]=0A;B[lj]BL[645.83]=0A;W[li]WL[852.084]=0A;B[mn]BL[625.457]=0A;W[no]=
+WL[845.145]=0A;B[nr]BL[622.776]=0A;W[gl]WL[819.305]=0A;B[nl]BL[605.217]=0A;=
+W[nm]WL[808.415]=0A;B[ll]BL[581.01]=0A;W[km]WL[804.059]=0A;B[bh]BL[565.505]=
+=0A;W[ch]WL[786.813]=0A;B[cg]BL[560.383]=0A;W[dh]WL[779.114]=0A;B[eh]BL[546=
+=2E229]=0A;W[cj]WL[773.266]=0A;B[cl]BL[507.407]=0A;W[cm]WL[763.719]=0A;B[bl=
+]BL[502.158]=0A;W[bm]WL[739.187]=0A;B[ai]BL[451.013]=0A;W[bk]WL[681.62]=0A;=
+B[aj]BL[431.839]=0A;W[al]WL[653.504]=0A;B[bj]BL[377.096]=0A;W[ci]WL[632.215=
+]=0A;B[ah]BL[374.726]=0A;W[hh]WL[621.725]=0A;B[hf]BL[368.537]=0A;W[sb]WL[59=
+0.804]=0A;B[ra]BL[353.124]=0A;W[md]WL[577.845]=0A;B[lc]BL[329.51]=0A;W[ne]W=
+L[567.517]=0A;B[ld]BL[276.588]=0A;W[me]WL[541.251]=0A;B[ke]BL[268.153]=0A;W=
+[lf]WL[539.826]=0A;B[od]BL[252.267]=0A;W[oe]WL[534.049]=0A;B[ea]BL[149.474]=
+=0A;W[da]WL[522.523]=0A;B[fa]BL[147.814]=0A;W[db]WL[514.8]=0A;B[jp]BL[131.7=
+76]=0A;W[jn]WL[449.365]=0A;B[ko]BL[109.975]=0A;W[ml]WL[428.636]=0A;B[ip]BL[=
+92.07]=0A;W[sh]WL[416.748]=0A;B[si]BL[86.236]=0A;W[sg]WL[415.772]=0A;B[pj]B=
+L[43.226]=0A;W[sc]WL[371.901]=0A;B[hk]BL[24.049]=0A;W[gk]WL[359.158]=0A;B[i=
+k]BL[17.866]=0A;W[hj]WL[356.008]=0A;B[mk]BL[279.825]OB[14]=0A;W[ql]WL[344.3=
+78]=0A;B[pf]BL[249.96]OB[13]=0A;W[sa]WL[326.782]=0A;B[qb]BL[248.056]OB[12]=
+=0A;W[ak]WL[292.267]=0A;B[lh]BL[233.707]OB[11]=0A;W[]WL[292.265]=0A;B[]BL[2=
+33.706]OB[10]TW[aa][ba][ca][ab][cb][bc][cc][dc][dd][ed][sd][qe][re][se][nf]=
+[sf][ng][gi][ii][ji][ki][bl][cl][am][dm][em][gm][om][pm][an][bn][cn][dn][en=
+][fn][gn][on][qn][ao][bo][co][do][eo][ap][bp][cp][ep][aq][bq][cq][dq][ar][b=
+r][cr][as][bs][cs]TB[ga][ha][ia][ja][ka][la][ma][na][oa][pa][qa][hb][ib][jb=
+][kb][lb][mb][nb][ob][pb][hc][ic][jc][nc][oc][hd][id][kd][ge][ie][je][af][b=
+f][cf][ag][ph][oi][pi][ri][oj][qj][rj][sj][kp][sp][gq][iq][kq][nq][qq][rq][=
+sq][gr][hr][ir][jr][kr][lr][mr][or][pr][qr][rr][sr][gs][hs][is][js][ks][ls]=
+[ms][ns][os][ps][qs][rs][ss]C[jfg31 [10k\]: merci pour la partie !=0Awhiter=
+abit [11k?\]: beh... belle invasion a gauche=0Awhiterabit [11k?\]: merci au=
+ssi!=0A])=0A
+--ijf6z65S790CMqo8--
+
