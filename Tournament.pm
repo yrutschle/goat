@@ -406,8 +406,9 @@ sub tou {
 
     $obj->check_unsubmitted(@rounds);
 
-    # Retrieve all players that played games not yet submitted in these rounds
+    # Retrieve all players that played rated games not yet submitted in these rounds
     my @players = uniq_players map { $_->white, $_->black } 
+                  grep { $_->rated }
                   grep {defined $_->result and (exists $opts{submitted} or not $_->submitted)} 
                   map { $_->games } @rounds;
 
