@@ -520,7 +520,7 @@ sub score {
         $score{$white} ||= 0;
         $score{$black} ||= 0;
 
-        if ($game->is_finished and not $game->is_canceled) {
+        if ($game->is_finished and defined $game->result) {
             if ($game->result eq 'white') {
                 $score{$white}++;
             } elsif ($game->result eq 'black') {
