@@ -504,6 +504,10 @@ away with 'fev' instead of 'fév' etc.
 
 Also change '18h32' to '18:32'
 
+Also change "01/02/2016" to "02/01/2016", which may be
+wrong, but there is no better way. DateTime parses US way,
+the French do dd/mm/yyyy.
+
 =cut
 sub fixup_frenchisms {
     my %fixups = (
@@ -522,6 +526,11 @@ sub fixup_frenchisms {
         $date =~ s/$k/$v/; # Substitute 3-letter abbreviations
     }
     $date =~ s/(\d\d)h(\d\d)/$1:$2/;
+
+    # Swap month and day
+    my ($d, $m, $rest) = split /\//, $date;
+    $date = "$m/$d/$rest";
+
     return $date;
 }
 
@@ -587,6 +596,7 @@ if (defined $param_schedule) {
         my $tz = DateTime::TimeZone->new(name => $TIMEZONE);
         my $dt = DateTime->from_epoch(epoch => $date);
         $date -= $tz->offset_for_datetime($dt);
+        print "$date\n";
     };
 
     unless (defined $date) {
