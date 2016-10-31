@@ -527,9 +527,9 @@ sub fixup_frenchisms {
     }
     $date =~ s/(\d\d)h(\d\d)/$1:$2/;
 
-    # Swap month and day
+    # Swap month and day if date in xx/yy/zz format
     my ($d, $m, $rest) = split /\//, $date;
-    $date = "$m/$d/$rest";
+    $date = "$m/$d/$rest" if (defined $m and defined $rest);
 
     return $date;
 }
