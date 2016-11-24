@@ -83,6 +83,7 @@ BEGIN {
 
 use Tournament;
 use GoatLib;
+use GoatConfig;
 
 my $ECHELLE_FILE = "ech_ffg_new.txt";
 
@@ -126,9 +127,9 @@ while (<>) {
 
 # Tournament object
 my $t = new Tournament (
-    name => 'tpToulouse',
-    city => 'Toulouse',
-    comments=> 'Tournoi permanent de Toulouse',
+    name => $TOURNAMENT_NAME,
+    city => $TOURNAMENT_CITY,
+    comments=> $TOURNAMENT_NAME,
     time=> 60,
     size=> 19,
     komi=> 7.5,
