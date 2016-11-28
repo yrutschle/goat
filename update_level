@@ -133,8 +133,9 @@ foreach my $player ($tournament->players) {
         warn $player->fullname.": license status changed to:". $ech_p->status."\n";
         $player->status($ech_p->status);
     }
-    if (not $player->is_licensed) {
+    if (not $player->is_licensed($TOURNAMENT_LICENSES) {
         warn $player->fullname.": player is not licensed.\n";
+        warn $player->fullname.": player license: ".$player->status." is not allowed.\n"; 
     }
 }
 

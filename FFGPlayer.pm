@@ -111,8 +111,8 @@ sub parse_additional_info {
 sub grep_echelle {
     my ($fn, $names, $license) = @_;
 
-    my $verbose_search = 0;
-    my $checked = 0; # Counter for progress bar
+    my $verbose_search = 1;
+    my $checked = 1; # Counter for progress bar
     my @out;
 
     my @names = split /\s+/, $names;
@@ -136,12 +136,13 @@ sub grep_echelle {
             push @out, $line;
         }
     }
-    return @out;
+    @out = grep /$license/, @out if defined $license;
+    return @out if @out;
 
     # If ASCII failed, try Unicode collation (pretty slow)
     # (Actually I think this is not necessary if running UTF8 as pattern
     # matching works right. Disabling for now).
-    if (0) {
+    if (1) {
         my $Collator = Unicode::Collate->new(normalization => undef, level => 1);
         foreach my $line (@haystack) {
             my $match = 1;
@@ -190,7 +191,6 @@ sub new_from_alias {
         $niv = stone_to_level $niv;
     }
 
-    $licence ||= "";
     my @from_echelle = grep_echelle($echelle_file, $name, $licence);
 
     if (@from_echelle > 1) {
@@ -231,9 +231,17 @@ sub register_level {
 
 
 # True if player has a valid current license
-# This probably needs to be updated depending on tournaments
+# $licenses: string of letters coding for allowed licenses, e.g. "LC" for normal + loisir (FFG)
 sub is_licensed {
-    $_[0]->status ne '-';
+    my ($self, $licenses) = @_;
+
+    my (@licenses) = split //, $licenses;
+
+    foreach my $l (@licenses) {
+        return 1 if $self->status eq $l;
+    }
+
+    return 0;
 }
 
 use POSIX;

@@ -110,7 +110,7 @@ while (<>) {
 
     next unless defined $player;
 
-    warn $player->fullname.": player is not licensed.\n" unless $player->is_licensed;
+    warn $player->fullname.": player license: ".$player->status." is not allowed.\n" unless $player->is_licensed($TOURNAMENT_LICENSES);
 
     push @registered, $player;
 }
