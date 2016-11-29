@@ -111,8 +111,8 @@ sub parse_additional_info {
 sub grep_echelle {
     my ($fn, $names, $license) = @_;
 
-    my $verbose_search = 1;
-    my $checked = 1; # Counter for progress bar
+    my $verbose_search = 0;
+    my $checked = 0; # Counter for progress bar
     my @out;
 
     my @names = split /\s+/, $names;
@@ -142,7 +142,7 @@ sub grep_echelle {
     # If ASCII failed, try Unicode collation (pretty slow)
     # (Actually I think this is not necessary if running UTF8 as pattern
     # matching works right. Disabling for now).
-    if (1) {
+    if (0) {
         my $Collator = Unicode::Collate->new(normalization => undef, level => 1);
         foreach my $line (@haystack) {
             my $match = 1;
