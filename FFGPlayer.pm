@@ -7,6 +7,8 @@ use Data::Dumper;
 use GoatLib;
 
 use Unicode::Collate;
+use Encode::Locale;
+use Encodee;
 
 # Objet décrivant un joueur de la fédération française de Go.
 # Il y a quelques champs supplémentaires que l'utilisateur peut remplir à la
@@ -122,7 +124,7 @@ sub grep_echelle {
     @haystack = <$ech>;
 
 
-    print "searching for ".(join " ", @names)."\n" if $verbose_search;
+    print Encode::encode("latin-1", "searching for ".(join " ", @names)."\n") if $verbose_search;
     # First we search with ASCII as it's fastest
     foreach my $line (@haystack) {
         my $match = 1;
