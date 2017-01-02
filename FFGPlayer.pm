@@ -143,7 +143,7 @@ sub grep_echelle {
     # If ASCII failed, try Unicode collation (pretty slow)
     # (Actually I think this is not necessary if running UTF8 as pattern
     # matching works right. Disabling for now).
-    if (1) {
+    if (0) {
         my $Collator = Unicode::Collate->new(normalization => undef, level => 1);
         foreach my $line (@haystack) {
             my $match = 1;

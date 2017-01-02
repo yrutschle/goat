@@ -458,7 +458,7 @@ sub as_HTML {
         next unless ref $round eq 'Round';
 
         my $round_num = $round->number;
-        $html .= "<h2>Appariements pour la ronde $round_num</h2>\n";
+        $html .= "<h2>Appariements pour la ronde $round_num</h2>\n".a({href=>"../index.shtml"}, "Retour aux r&egrave;gles<br>");
         $table = new HTML::Table (-cols=>4, -border=>1 );
         $table->addRow('Blanc', 'Noir', 'Handicap', 'R&eacute;sultat', 'SGF');
         foreach my $game ($round->games) {
@@ -492,9 +492,9 @@ sub as_HTML {
     foreach ($obj->score) {
         $table->addRow(@$_);
     }
-    $html .= "<h2>Score</h2>".$table;
+    $html .= "<h2>Score</h2>".a({href=>'../index.shtml'}, 'Retour aux r&egrave;gles<br>').$table;
 
-    $html .= a({href=>'index.shtml'}, 'Retour'), end_html();
+    $html .= a({href=>'../index.shtml'}, 'Retour'), end_html();
 
     return Encode::encode('UTF-8', $html);
 }
