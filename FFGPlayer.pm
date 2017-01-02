@@ -8,6 +8,7 @@ use GoatLib;
 
 use Unicode::Collate;
 use Encode::Locale;
+use Encode;
 
 # Objet décrivant un joueur de la fédération française de Go.
 # Il y a quelques champs supplémentaires que l'utilisateur peut remplir à la
@@ -112,8 +113,8 @@ sub parse_additional_info {
 sub grep_echelle {
     my ($fn, $names, $license) = @_;
 
-    my $verbose_search = 1;
-    my $checked = 1; # Counter for progress bar
+    my $verbose_search = 0;
+    my $checked = 0; # Counter for progress bar
     my @out;
 
     my @names = split /\s+/, $names;
