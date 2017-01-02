@@ -11,5 +11,7 @@ la date et du lieu choisi pour votre partie. Si le lieu
 n'est pas indiqué, c'est KGS qui est sélectionné.
 
 resultat: Après la partie, indiquez la couleur du joueur qui
-a gagné la partie.
+a gagné la partie. Vous pouvez aussi simplement attacher le
+fichier SGF de la partie: il sera sauvegardé, et le résultat
+sera celui indiqué dans le SGF.
 
