@@ -646,7 +646,9 @@ if (defined $param_schedule) {
 ########## Recording the result with a SGF
 } elsif (defined $param_sgf) {
     my ($submitter, $sgf_name) = split /,/, $param_sgf;
-    my $sgf = new Games::Go::SGF $sgf_name;
+    # Check we can read the file, as Games::Go:SGF just dies with no explanation
+    open my $sgf, "$sgf_name" or die "$sgf_name: $!\n";
+    $sgf  = new Games::Go::SGF $sgf_name;
 
     my $game = $Tournament->find_game_by_email($submitter);
     unless (defined $game) {
