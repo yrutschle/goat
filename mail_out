@@ -328,7 +328,12 @@ sub sendmail {
         'Subject' => $hdr{subject},
         'Type' => 'multipart/mixed',
     );
-    $mime_parms{Boundary} = "---testing42ftwtesting" if $testing;
+    if ($testing) {
+        # When testing, make MIME marker deterministic, and
+        # remove library version number
+        $mime_parms{Boundary} = "---testing42ftwtesting";
+        $mime_parms{'X-Mailer'} = "MIME-Tools with no version";
+    }
 
     my $msg = MIME::Entity->build(%mime_parms);
     $msg->attach(
