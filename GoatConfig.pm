@@ -9,7 +9,7 @@ require Exporter;
 use vars qw/ @EXPORT @ISA/;
 @ISA = qw/Exporter/;
 @EXPORT=qw/ 
-$INSTALL_DIR $WORK_DIR $LOG_DIR $TMP_DIR $SGF_DIR
+$INSTALL_DIR $WORK_DIR $LOG_DIR $TMP_DIR $SGF_URL
 
 $GOAT_ADDRESS $ADMIN_ADDRESS $TOURNAMENT_NAME $TOURNAMENT_CITY
 $TOURNAMENT_LICENSES
@@ -55,6 +55,8 @@ our $LOCALE = $cfg->{locale};
 our $TIMEZONE = $cfg->{timezone};
 my $template_name = $cfg->{template_name};
 
+our $SGF_URL = $cfg->{sgf_url};
+
 
 # Directory to get templates for outgoing e-mails
 our $TEMPLATE_DIR = "$INSTALL_DIR/$template_name";
@@ -64,7 +66,6 @@ our $TEMPLATE_DIR = "$INSTALL_DIR/$template_name";
 our $WORK_DIR=$ENV{WORK_DIR};
 our $LOG_DIR="$WORK_DIR/log";
 our $TMP_DIR="$WORK_DIR/tmp";
-our $SGF_DIR="./sgf";
 
 # Where are the binaries?
 our $BIN_GOAT = "$INSTALL_DIR/goat";

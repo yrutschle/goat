@@ -668,10 +668,11 @@ if (defined $param_schedule) {
         print "Invalid SGF (or no result)?!\n";
     }
 
-    my $target_file = $SGF_DIR . "/$sgf_date-" . $game->white->givenname . "-". $game->black->givenname .  ".sgf";
+    my $base_file = "$sgf_date-" . $game->white->givenname . "-". $game->black->givenname .  ".sgf";
+    my $target_file = "$WORK_DIR/sgf/$base_file";
     my $encoded = Encode::encode('UTF-8', $target_file);
     move($sgf_name, $encoded) or die "mv $sgf_name $encoded: $!\n";
-    $game->sgf($target_file);
+    $game->sgf(Encode::encode('UTF-8', "$SGF_URL/$base_file"));
 
 ########## Cancel the game
 } elsif (defined $param_cancel) {
@@ -743,7 +744,7 @@ if (defined $param_schedule) {
 ########## Print out players with no license
 } elsif (defined $param_list_unlicensed) {
     foreach my $player ($Tournament->players) {
-        print $player->email." " unless $player->is_licensed;
+        print $player->email." " unless $player->is_licensed($TOURNAMENT_LICENSES);
     }
     print "\n";
 

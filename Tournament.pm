@@ -473,7 +473,7 @@ sub as_HTML {
                 $game->black->fullname." ($black_level) ".$game->black->club,
                 $game->handicap,
                 $result,
-                defined $sgf ?  a({href=> "wgo.cgi?sgf=$sgf"}, 'SGF') : "",
+                defined $sgf ?  a({href=> "/wgo/wgo.cgi?sgf=$sgf"}, 'SGF') : "",
             );
             $table->setCellBGColor($table->getTableRows,
                 { 
