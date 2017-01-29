@@ -7,6 +7,8 @@ use Data::Dumper;
 use GoatLib;
 
 use Unicode::Collate;
+use Encode::Locale;
+use Encode;
 
 # Objet décrivant un joueur de la fédération française de Go.
 # Il y a quelques champs supplémentaires que l'utilisateur peut remplir à la
@@ -122,7 +124,7 @@ sub grep_echelle {
     @haystack = <$ech>;
 
 
-    print "searching for ".(join " ", @names)."\n" if $verbose_search;
+    print Encode::encode(locale => "searching for ".(join " ", @names)."\n") if $verbose_search;
     # First we search with ASCII as it's fastest
     foreach my $line (@haystack) {
         my $match = 1;
@@ -136,7 +138,8 @@ sub grep_echelle {
             push @out, $line;
         }
     }
-    return @out;
+    @out = grep /$license/, @out if defined $license;
+    return @out if @out;
 
     # If ASCII failed, try Unicode collation (pretty slow)
     # (Actually I think this is not necessary if running UTF8 as pattern
@@ -153,7 +156,7 @@ sub grep_echelle {
             }
 
             if ($match) {
-                print "\rmatch: $line" if $verbose_search;
+                print Encode::encode(locale => "\rmatch: $line") if $verbose_search;
                 return $line;
             }
             {
@@ -190,7 +193,6 @@ sub new_from_alias {
         $niv = stone_to_level $niv;
     }
 
-    $licence ||= "";
     my @from_echelle = grep_echelle($echelle_file, $name, $licence);
 
     if (@from_echelle > 1) {
@@ -231,9 +233,17 @@ sub register_level {
 
 
 # True if player has a valid current license
-# This probably needs to be updated depending on tournaments
+# $licenses: string of letters coding for allowed licenses, e.g. "LC" for normal + loisir (FFG)
 sub is_licensed {
-    $_[0]->status ne '-';
+    my ($self, $licenses) = @_;
+
+    my (@licenses) = split //, $licenses;
+
+    foreach my $l (@licenses) {
+        return 1 if $self->status eq $l;
+    }
+
+    return 0;
 }
 
 use POSIX;

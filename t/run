@@ -166,6 +166,11 @@ push @tests,
       'test' => 'diff -u ../out.15b out.15b',
       'doc' => 'Successful game scheduling',
   },
+  # Scheduling, dd/MM/yyyy date format
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.17b letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.15d ; perl $perl_opts ../../goat --status >> out.15d 2>&1",
+      'test' => 'diff -u ../out.15d out.15d',
+      'doc' => 'Successful game scheduling with dd/MM/YYYY format',
+  },
   # Scheduling with command in the body of the e-mail
     { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.18 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.15 ; perl $perl_opts ../../goat --status >> out.15 2>&1",
       'test' => 'diff -u ../out.15 out.15',

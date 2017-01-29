@@ -262,7 +262,11 @@ if (not defined $exec) {
     my $mime = MIME::Parser->new->parse_data($mail->simple->as_string);
     if ($mime->parts) {
         foreach my $p ($mime->parts) {
-            push @lines, split /\n/, scalar decode($p->head->mime_attr('content-type.charset'),$p->bodyhandle->as_string);
+            push @lines, split /\n/, 
+                defined $p->head->mime_attr('content-type.charset') ?
+                    scalar decode($p->head->mime_attr('content-type.charset'),
+                        $p->bodyhandle->as_string) :
+                    $p->bodyhandle->as_string;
         }
     } else {
         my ($cp) = grep /charset/, split /;/, $mail->header('content-type');

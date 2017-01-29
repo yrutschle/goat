@@ -406,8 +406,9 @@ sub tou {
 
     $obj->check_unsubmitted(@rounds);
 
-    # Retrieve all players that played games not yet submitted in these rounds
+    # Retrieve all players that played rated games not yet submitted in these rounds
     my @players = uniq_players map { $_->white, $_->black } 
+                  grep { $_->rated }
                   grep {defined $_->result and (exists $opts{submitted} or not $_->submitted)} 
                   map { $_->games } @rounds;
 
@@ -457,7 +458,7 @@ sub as_HTML {
         next unless ref $round eq 'Round';
 
         my $round_num = $round->number;
-        $html .= "<h2>Appariements pour la ronde $round_num</h2>\n";
+        $html .= "<h2>Appariements pour la ronde $round_num</h2>\n".a({href=>"../index.shtml"}, "Retour aux r&egrave;gles<br>");
         $table = new HTML::Table (-cols=>4, -border=>1 );
         $table->addRow('Blanc', 'Noir', 'Handicap', 'R&eacute;sultat', 'SGF');
         foreach my $game ($round->games) {
@@ -491,9 +492,9 @@ sub as_HTML {
     foreach ($obj->score) {
         $table->addRow(@$_);
     }
-    $html .= "<h2>Score</h2>".$table;
+    $html .= "<h2>Score</h2>".a({href=>'../index.shtml'}, 'Retour aux r&egrave;gles<br>').$table;
 
-    $html .= a({href=>'index.shtml'}, 'Retour'), end_html();
+    $html .= a({href=>'../index.shtml'}, 'Retour'), end_html();
 
     return Encode::encode('UTF-8', $html);
 }
@@ -519,7 +520,7 @@ sub score {
         $score{$white} ||= 0;
         $score{$black} ||= 0;
 
-        if ($game->is_finished and not $game->is_canceled) {
+        if ($game->is_finished and defined $game->result) {
             if ($game->result eq 'white') {
                 $score{$white}++;
             } elsif ($game->result eq 'black') {

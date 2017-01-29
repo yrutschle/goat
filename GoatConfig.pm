@@ -11,7 +11,8 @@ use vars qw/ @EXPORT @ISA/;
 @EXPORT=qw/ 
 $INSTALL_DIR $WORK_DIR $LOG_DIR $TMP_DIR $SGF_DIR
 
-$GOAT_ADDRESS $ADMIN_ADDRESS $TOURNAMENT_NAME
+$GOAT_ADDRESS $ADMIN_ADDRESS $TOURNAMENT_NAME $TOURNAMENT_CITY
+$TOURNAMENT_LICENSES
 
 $TEMPLATE_DIR
 
@@ -48,6 +49,8 @@ my $cfg = LoadFile("$ENV{WORK_DIR}/goat.cfg");
 our $GOAT_ADDRESS = $cfg->{goat_address};
 our $ADMIN_ADDRESS = $cfg->{admin_address};
 our $TOURNAMENT_NAME = $cfg->{tournament_name};
+our $TOURNAMENT_CITY = $cfg->{tournament_city};
+our $TOURNAMENT_LICENSES= $cfg->{tournament_licenses};
 our $LOCALE = $cfg->{locale};
 our $TIMEZONE = $cfg->{timezone};
 my $template_name = $cfg->{template_name};
