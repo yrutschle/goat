@@ -11,6 +11,7 @@ use GoatLib;
 use GoatConfig;
 use File::Copy;
 use URI::Escape;
+use Fcntl ':flock';
 
 =head1 DESCRIPTION
 
@@ -70,6 +71,7 @@ sub load {
     my $f;
     local $/; undef $/;
     open $f, "$tournament_fn" or die "$tournament_fn: $!\n";
+    flock $f, LOCK_EX or die "flock $f: $!\n";
     my $data = <$f>;
     close $f;
     my $VAR1;

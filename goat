@@ -814,13 +814,7 @@ print $fh $Tournament->as_HTML;
 close $fh;
 
 # Everything done -- update the file
-my $temp_file = "/tmp/goat$$";
-$Tournament->save($temp_file);
-if ($simulate) {
-    warn "New file is in $temp_file\n";
-} else {
-    move $temp_file, $toperm_file or die "Move $temp_file to $toperm_file: $!\n";
-}
+$Tournament->save($toperm_file) unless $simulate;
 
 
 # Formats for score printing. This isn't good and should be
