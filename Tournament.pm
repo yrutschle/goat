@@ -60,6 +60,27 @@ sub new {
     return $obj;
 }
 
+
+# Locking is done by creating a .lock file.
+# There is still a race condition between the existence check and the creation
+# of the file. It's still way better not locking, and for some reason flock()
+# doesn't want to work here.
+sub lock {
+    my ($o, $file) = @_;
+
+    my $lock = "$file.lock";
+    while (-e $lock) {
+        sleep 1;
+    }
+    open my $tmp, "> $lock" or die "$lock: $!\n";
+}
+
+sub unlock {
+    my ($o, $file) = @_;
+    my $lock = "$file.lock";
+    unlink $lock;
+}
+
 =item Tournament->load($filename)
 
 Loads the filename, which must contain a YAML version of a Tournament
@@ -68,10 +89,12 @@ object, and returns a Tournament.
 =cut
 sub load {
     my ($class, $tournament_fn) = @_;
+
+    $class->lock($tournament_fn);
+
     my $f;
     local $/; undef $/;
     open $f, "$tournament_fn" or die "$tournament_fn: $!\n";
-    flock $f, LOCK_EX or die "flock $f: $!\n";
     my $data = <$f>;
     close $f;
     my $VAR1;
@@ -112,6 +135,8 @@ sub save {
     die "error writing $tournament_fn.tmp\n" if ($data_in ne $data_out);
 
     move("$tournament_fn.tmp", $tournament_fn) or die "saving tournament file failed: $!\n";
+
+    $obj->unlock($tournament_fn);
 }
 
 =item Tournament->curr_round()
