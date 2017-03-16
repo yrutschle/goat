@@ -25,7 +25,7 @@ This is designed to easily translate into a FFG .TOU tournament result file, eve
 use vars qw/@attributes/;
 
 BEGIN {
-    @attributes = qw/name date city comments prog time size komi round_number Round FFGPlayer/;
+    @attributes = qw/name date city comments prog time size komi round_number Round FFGPlayer filename/;
     my $subs;
     foreach my $data ( @attributes ) {
         $subs .= qq{
@@ -73,13 +73,22 @@ sub lock {
         sleep 1;
     }
     open my $tmp, "> $lock" or die "$lock: $!\n";
+    print $tmp "$$\n";
 }
 
 sub unlock {
-    my ($o, $file) = @_;
+    my ($o) = @_;
+    my $file = $o->filename;
     my $lock = "$file.lock";
     unlink $lock;
 }
+
+# Always unlock the file when releasing the object
+sub DESTROY {
+    my ($t) = @_;
+    $t->unlock;
+}
+
 
 =item Tournament->load($filename)
 
@@ -103,6 +112,8 @@ sub load {
     # pick the highest round number if there are any
     $t->round_number( $t->Round->[-1]->number ) 
         if (scalar @{$t->Round});
+
+    $t->filename($tournament_fn);
     return $t;
 }
 
@@ -135,8 +146,6 @@ sub save {
     die "error writing $tournament_fn.tmp\n" if ($data_in ne $data_out);
 
     move("$tournament_fn.tmp", $tournament_fn) or die "saving tournament file failed: $!\n";
-
-    $obj->unlock($tournament_fn);
 }
 
 =item Tournament->curr_round()
