@@ -79,6 +79,7 @@ sub lock {
 sub unlock {
     my ($o) = @_;
     my $file = $o->filename;
+    return unless $file;
     my $lock = "$file.lock";
     unlink $lock;
 }
