@@ -1,0 +1,66 @@
+Received: from mail-pf0-f170.google.com ([209.85.192.170])
+	by hood.rutschle.net with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+	(Exim 4.84_2)
+	(envelope-from <haohan9223@gmail.com>)
+	id 1cuhj9-0007ba-99
+	for goat_ffg@rutschle.net; Sun, 02 Apr 2017 15:47:39 +0000
+Received: by mail-pf0-f170.google.com with SMTP id 197so11957307pfv.1
+        for <goat_ffg@rutschle.net>; Sun, 02 Apr 2017 08:47:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=message-id:date:subject:from:to:mime-version
+         :content-transfer-encoding;
+        bh=GCdWPtNRQkwAy0CU9GmXlPptSp6mehUutm9ZedwhTIU=;
+        b=Jte+WuBDzKn8/N0WLwWdGy4pZwEjyP/Hk3w+XstHsYSCnFcGVqo654bZ9Pm7zr1xEJ
+         Panhrem9ZYAqUC2jwyL2bGFwFNNYu4wfq+UqL8UjcJPMzlowy1EiA+mKoHh1yo9Kz76w
+         IOuI46z2gKFF5UdUhkvDhFkzXQVKXxD6RovG4wANJFRmwSlUnXOEnERAxF0y6/yry+QB
+         ZUCSQ04PVLvPHVZO6I40VFlh943em4qsOGKbbhLYLVb7ki4PaEfKhdCQKHtKIMkZPB9k
+         a7K9PZuT4chWZxUYeFF5zEqpUihWjAgyEOQGQPFduYIgZPIfkfwwAnuRycFhn47ABlJj
+         gmNw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:message-id:date:subject:from:to:mime-version
+         :content-transfer-encoding;
+        bh=GCdWPtNRQkwAy0CU9GmXlPptSp6mehUutm9ZedwhTIU=;
+        b=mbvgYghlmYNA/iw7yEoQx3GUd/wCGX1oYEqxWU3Dm78t1Q5i5QOUHvfZynA9apgFw8
+         lWB1U5JopME+2rAbCiTnD1IRDtO1IuogOajhxfQVI/nBq30sqeQS4om/7zDYFNK49LOw
+         IyR7Nk6XmisVp7z3VQRwCkuQdetPDlDXNdYNfOhKdj3kYxkFWpoQKEtVWjIHVxvOqxsE
+         8Al0WyPIvMYJaA0bZ3fEoaQ0uOX5djgD0bqwoQCJY1MOf7r2WTaeiM4NC+14MsRDS+dl
+         3o1uQricqcjePW/S5zBQbXXH/J9Pwz3RyYiV6dQse4MnvwPKNsPeC4JOWqrXLF0gABUe
+         1qiw==
+X-Gm-Message-State: AFeK/H3DV4dzDf0QzSc2s061YQ8gPEKSxPZXgrJwp0YBxX/QxObHWWN5kYmXNSM66VqNMg==
+X-Received: by 10.98.200.19 with SMTP id z19mr12294766pff.223.1491148050259;
+        Sun, 02 Apr 2017 08:47:30 -0700 (PDT)
+Received: from [192.168.3.61] ([222.42.97.195])
+        by smtp.gmail.com with ESMTPSA id r66sm20823313pfi.49.2017.04.02.08.47.28
+        for <goat_ffg@rutschle.net>
+        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+        Sun, 02 Apr 2017 08:47:29 -0700 (PDT)
+Message-ID: <58e11d11.c549620a.b2a4d.f68f@mx.google.com>
+Date: Sun, 02 Apr 2017 23:47:26 +0800
+Subject: Re: [goat] Votre appariement
+From: haohan9223 <haohan9223@gmail.com>
+To: GO Assistant <goat_ffg@rutschle.net>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: base64
+
+UsOpc3VsdGF0IDogYmxhbmMgZ2FnbmUKCgrlj5Hoh6o6IFZJQkUgU2hvdAoKMjAxN+W5tDPmnIgz
+MOaXpSDkuIvljYg0OjI05LqOIEdPIEFzc2lzdGFudCA8Z29hdF9mZmdAcnV0c2NobGUubmV0PuWG
+memBk++8mgo+Cj4gVm91cyBhdmV6IHJlw6d1IGNlIGNvdXJyaWVyIGNhciB2b3VzIMOqdGVzIGlu
+c2NyaXQgYXUgVG91cm5vaSBMZW50IEludGVybmV0IEZGRy4gCj4gU2kgdm91cyBhdmV6IHJlw6d1
+IGNlIG1haWwgcGFyIGVycmV1ciwgbWVyY2kgZGUgY29udGFjdGVyIFl2ZXMgUnV0c2NobGUgPGdv
+ZmZnQHJ1dHNjaGxlLm5ldD4uIAo+Cj4KPiBWb2ljaSB2b3RyZSBhcHBhcmllbWVudCBwb3VyIGxh
+IHByb2NoYWluZSByb25kZSwgw6Agam91ZXIgCj4gcG91ciBsZSB2ZW5kcmVkaSAyOCBhdnJpbCAy
+MDE3IDE5OjI5IDogCj4KPiBOb2lyOiBUaMOpbyBDw5RNRSA8dGhlb19jb21lQHlhaG9vLmZyPiAK
+PiBCbGFuYzogSGFvaGFuIExJIDxoYW9oYW45MjIzQGdtYWlsLmNvbT4gCj4gSGFuZGljYXA6IDEg
+Cj4KPiBNZXJjaSBkZSByw6lwb25kcmUgw6AgY2UgY291cnJpZXIgZMOocyBxdWUgdm91cyBhdXJl
+eiBhcnJhbmfDqSBsYSAKPiByZW5jb250cmUsIGVuIHJlbXBsaXNzYW50IGxlIHN1amV0IGRlIHZv
+dHJlIHLDqXBvbnNlIGRlIGxhIAo+IGZhw6dvbiBzdWl2YW50ZSA6IAo+Cj4gcmVuZGV6dm91cyA8
+ZGF0ZT4gCj4KPiBQYXIgZXhlbXBsZTogCj4KPiByZW5kZXp2b3VzIDEyIG1hcnMgMjAwOCAyMTow
+MCAKPgo+IFZvdXMgcG91dmV6IMOpZ2FsZW1lbnQgcmFwcG9ydGVyIGRpcmVjdGVtZW50IGxlIHLD
+qXN1bHRhdCBzaSAKPiB2b3VzIGF2ZXogb21pcyBkZSBwcsOpdmVuaXIgR29hdCBkZSB2b3RyZSBw
+YXJ0aWU6IAo+Cj4gcmVzdWx0YXQgPGNvdWxldXIgZ2FnbmFudGU+IAo+Cj4gUGFyIGV4ZW1wbGUg
+OiAKPgo+IHJlc3VsdGF0IGJsYW5jIAo+Cj4gVm91cyBwb3V2ZXogYXVzc2kgc2ltcGxlbWVudCBh
+dHRjaGVyIGxlIGZpY2hpZXIgU0dGIGRlIGxhIAo+IHBhcnRpZTogaWwgc2VyYSBzYXV2ZWdhcmTD
+qSwgZXQgbGUgcsOpc3VsdGF0IHNlcmEgY2VsdWkgCj4gaW5kaXF1w6kgZGFucyBsZSBTR0YuIAo=

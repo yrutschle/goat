@@ -135,6 +135,11 @@ push @tests,
       'test' => 'diff -u ../out.13b out.13b',
       'doc' => 'Receive results in body',
   },
+  # Result in the body, with base64 encoding
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.13c letter; cp ../toperm_in.13c toperm; cat letter | perl $perl_opts ../../mail_in -t > out.13c",
+      'test' => 'diff -u ../out.13c out.13c',
+      'doc' => 'Receive results in body in base64',
+  },
   # Receive an SGF: extract result and archive
     { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.30 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.30 ; perl $perl_opts ../../goat --status >> out.30 2>&1",
       'test' => 'diff -u ../out.30 out.30',

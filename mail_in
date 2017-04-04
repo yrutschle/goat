@@ -1,7 +1,7 @@
 #! /usr/bin/perl -w
 
 # Goat: Gentil Organisateur et Administrateur de Tournois
-# Copyright (C) 2006-2016  Yves Rutschle
+# Copyright (C) 2006-2017  Yves Rutschle
 # 
 # This program is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public
@@ -185,7 +185,8 @@ if (not defined $from) {
     # FROM mail address is not valid -- we probably can't
     # even send an error message, so just log it.
     print "Illegal sender\n";
-    record "Illegal sender ($Email::Valid::Details)";
+    my $details = Email::Valid->details // "undef";
+    record "Illegal sender ($details)";
     exit 0;
 }
 
@@ -226,6 +227,8 @@ sub parse_command {
     my ($line) = @_;
     my $exec;
 
+    return if $line =~ /^>/;
+
     if ($line =~ /(schedule|rendez[ -]?vous|rdv)\S*\s+(.*)/i) {
         my ($cmd, $rest) = ($1, $2);
         my ($date, $place) = split /\s*,\s*/, $rest;
@@ -233,8 +236,8 @@ sub parse_command {
         $place //= 'KGS';
 
         $exec = "$BIN_GOAT $goat_opts --schedule \"$from, $date,$place\"";
-    } elsif ($line =~ /(r.sult)/i) { 
-        my $winner = ($line =~ /(blanc|noir|white|black)/)[0];
+    } elsif ($line =~ /(r.*?sult).*(blanc|noir|white|black)?/i) { 
+        my $winner = $2;
         # If we couldn't find the colour, pass the whole
         # command for the error message
         if (not defined $winner) {
@@ -258,20 +261,13 @@ if (not defined $exec) {
     my @lines;
 
     # If it's multi-part, descend into each part
-    # TODO: remove and use Email::MIME at some point
-    my $mime = MIME::Parser->new->parse_data($mail->simple->as_string);
+    my $mime = Email::MIME->new($mail->simple->as_string);
+    my @parts = $mime->parts;
     if ($mime->parts) {
         foreach my $p ($mime->parts) {
-            push @lines, split /\n/, 
-                defined $p->head->mime_attr('content-type.charset') ?
-                    scalar decode($p->head->mime_attr('content-type.charset'),
-                        $p->bodyhandle->as_string) :
-                    $p->bodyhandle->as_string;
+            # body_str is decoded according to charset
+            push @lines, split /\n/, $p->body_str;
         }
-    } else {
-        my ($cp) = grep /charset/, split /;/, $mail->header('content-type');
-        my ($fieldname,$charset) = split /=/, $cp;
-        push @lines, map { decode $charset, $_ } $mail->body;
     }
     my @out = grep { defined $_ } map { parse_command $_ } @lines;
     if (@out) {
