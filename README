@@ -69,12 +69,11 @@ goat. Then add a crontab entry for the goat user:
 Now goat will run once a day to send out reminders if
 needed. 
 
-You can register users with the 'register' script.  If you
-use Gotha to pair players, you can create a round with the
-'newround' script. Otherwise, you can use Goat's built-in
-pairing algorithm using the 'pair' script (all these scripts
-are self-documented: <script> --help will hopefully give you
-all the information you need.)
+You can register users with the 'register' script.  You can
+use Goat's built-in pairing algorithm using the 'pair'
+script (all these scripts are self-documented: <script>
+--help will hopefully give you all the information you
+need.)
 
 To create a single game, use 'add_game'.
 To remove a single game, use 'del_game'.
