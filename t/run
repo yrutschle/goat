@@ -215,15 +215,26 @@ push @tests,
 
   # Tests for mail_out
   # 16: mail_in_illegal
-    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.1 letter; cat letter | perl $perl_opts ../../mail_in -t > out.70",
+  { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.1 letter; cat letter | perl $perl_opts ../../mail_in -t > out.70",
       'test' => 'diff -u ../out.70 out.70',
       'doc' => 'mail_out illegal mail and attach',
   },
   # 17: issue-challenge
-    { 'run' => "export TEST_TIME=1122737400; perl $perl_opts ../../mail_out --no-send --issue-challenge \"joe\@bar.com,jack\@baz.com,2,1125329400\" > out.71",
+  { 'run' => "export TEST_TIME=1122737400; perl $perl_opts ../../mail_out --no-send --issue-challenge \"joe\@bar.com,jack\@baz.com,2,1125329400\" > out.71",
       'test' => 'diff -u ../out.71 out.71',
       'doc' => 'mail_out issue challenge',
   },
+  # Manual pairing management
+  { 'run' => " export TEST_TIME=1122737400; cp ../toperm_in.1 toperm; ".
+      "perl $perl_opts ../../add_round -f toperm > out.21 2>&1 ; ".
+      "perl $perl_opts ../../add_game -f toperm --black polverini\@example.org --white joey\@example.org >> out.21 2>&1 ; ".
+      "perl $perl_opts ../../add_game -f toperm --black yves\@example.org --white lorl\@example.org >> out.21 2>&1 ; ".
+      "perl $perl_opts ../../goat --status >> out.21",
+      'test' => 'diff -u ../out.21 out.21',
+      'doc' => 'Manual new round',
+  },
+
+
   ;
 
 #use Test::More tests => 42;
