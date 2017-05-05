@@ -386,6 +386,10 @@ sub process_action {
         $data{goat_address} = $GOAT_ADDRESS;
         $data{admin_address} = $ADMIN_ADDRESS;
         $data{tournament_name} = $TOURNAMENT_NAME;
+        $data{subject_prefix} = 'goat';
+        if (defined $SUBJECT_PREFIX) {
+            $data{subject_prefix} = $SUBJECT_PREFIX;
+        }
         my @to = sort map {$data{$_}} @{$action{mailto}};
         # copy mail to admin adress
         if (defined $ADMIN_FORWARD and $ADMIN_FORWARD eq 'yes') {
