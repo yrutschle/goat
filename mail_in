@@ -77,8 +77,12 @@ if ($testing) {
     $TIMEZONE = 'GMT'; # we don't really want to test daylight savings
 }
 
-# Use pairing file 'toperm'
-$goat_opts .= ' --file toperm';
+# Use pairing file defined in config file, or toperm 
+my $tournament_file='toperm';
+if (defined $TOURNAMENT_FILE ) {
+    $tournament_file = $TOURNAMENT_FILE;
+}
+$goat_opts .= " --file $tournament_file";
 
 #Where to log things? Mail_in needs to log errors, as there
 #are no other way to report them.
