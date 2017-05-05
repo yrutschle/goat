@@ -157,14 +157,6 @@ print $logfile $mail->simple->as_string;
 
 $mail->exit(0);
 
-# Forward all incoming mail to administrator
-if (not $testing) {
-    my $msg = reply to => $mail->simple,
-    from => $GOAT_ADDRESS,
-    body => $mail->simple->as_string;
-    sendmail($msg);
-}
-
 # avoid loops
 my $loop = $mail->header('X-Loop');
 if (defined $loop and $loop eq $GOAT_ADDRESS) {
