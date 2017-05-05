@@ -387,6 +387,10 @@ sub process_action {
         $data{admin_address} = $ADMIN_ADDRESS;
         $data{tournament_name} = $TOURNAMENT_NAME;
         my @to = sort map {$data{$_}} @{$action{mailto}};
+        # copy mail to admin adress
+        if (defined $ADMIN_FORWARD and $ADMIN_FORWARD eq 'yes') {
+            @to = (@to, $ADMIN_ADDRESS);
+        }
         $action{postprocess}->(\%data) if exists $action{postprocess};
         sendmail(\@to, $action{template}, \%data);
     }
