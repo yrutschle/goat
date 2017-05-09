@@ -16,6 +16,8 @@ $TOURNAMENT_LICENSES
 $TOURNAMENT_FILE
 $ADMIN_FORWARD
 
+$SUBJECT_PREFIX
+
 $TEMPLATE_DIR
 
 $LOCALE $TIMEZONE
@@ -51,6 +53,7 @@ my $cfg = LoadFile("$ENV{WORK_DIR}/goat.cfg");
 our $GOAT_ADDRESS = $cfg->{goat_address};
 our $ADMIN_ADDRESS = $cfg->{admin_address};
 our $ADMIN_FORWARD = $cfg->{admin_forward};
+our $SUBJECT_PREFIX = $cfg->{subject_prefix};
 our $TOURNAMENT_NAME = $cfg->{tournament_name};
 our $TOURNAMENT_FILE = $cfg->{tournament_file};
 our $TOURNAMENT_CITY = $cfg->{tournament_city};
