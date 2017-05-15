@@ -1,4 +1,4 @@
-Subject: [goat] Commande illégale
+Subject: [[% subject_prefix %]] Commande illégale
 
 [% INCLUDE header.tt %]
 

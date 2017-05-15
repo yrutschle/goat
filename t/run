@@ -244,6 +244,7 @@ push @tests,
 chdir "t/tmp" || die "Can't chdir to my test directory";
 
 system("cp ../../example.cfg ./goat.cfg");
+unlink("toperm.lock");
 
 system "cover -delete" if $coverage;
 die "Unable to clear coverage analysis.\n" if $?;

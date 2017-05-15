@@ -1,4 +1,4 @@
-Subject: [goat] Erreur de couleur
+Subject: [[% subject_prefix %]] Erreur de couleur
 
 [% INCLUDE header.tt %]
 

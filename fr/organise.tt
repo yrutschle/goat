@@ -1,4 +1,4 @@
-Subject: [goat] N'oubliez pas d'organiser votre partie!
+Subject: [[% subject_prefix %]] N'oubliez pas d'organiser votre partie!
 
 [% INCLUDE header.tt %]
 

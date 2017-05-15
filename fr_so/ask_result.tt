@@ -1,4 +1,4 @@
-Subject: [goat] Résultat de votre partie
+Subject: [[% subject_prefix %]] Résultat de votre partie
 
 [% INCLUDE header.tt %]
 

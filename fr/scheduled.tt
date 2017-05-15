@@ -1,4 +1,4 @@
-Subject: [goat] Partie: [% location %], [% date %]
+Subject: [[% subject_prefix %]] Partie: [% location %], [% date %]
 
 [% INCLUDE header.tt %]
 

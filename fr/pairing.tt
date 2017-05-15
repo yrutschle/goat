@@ -1,4 +1,4 @@
-Subject: [goat] Votre appariement
+Subject: [[% subject_prefix %]] Votre appariement
 
 [% INCLUDE header.tt %]
 
