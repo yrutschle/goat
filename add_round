@@ -58,10 +58,11 @@ use Pod::Usage;
 
 
 # Interpret command line
-my ($testing, $param_file, $help);
+my ($testing, $param_file, $param_final_date, $help);
 GetOptions(
     'help' => \$help,
     'file=s' => \$param_file,
+    'date=s' => \$param_final_date,
 ) or die pod2usage();
 
 die pod2usage(-verbose=>2) if defined $help;
@@ -73,6 +74,15 @@ my $Tournament = Tournament->load($param_file);
 my $round_num = ($Tournament->round_number || 0) + 1;
 print "Creating round $round_num\n";
 my $round = Round->new($round_num);
+
+# make date or get from opt
+if (defined $param_final_date) {
+    die "--date not implemented\n";
+} else {
+    $param_final_date = my_time() + 30 * 24 * 3600; # one month in the future
+}
+
+
 $Tournament->add_round($round_num, $round);
 $Tournament->save($param_file);
 
