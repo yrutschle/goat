@@ -55,6 +55,7 @@ BEGIN {
 use Tournament;
 use Getopt::Long;
 use Pod::Usage;
+use GoatLib;
 
 
 # Interpret command line
@@ -76,13 +77,16 @@ print "Creating round $round_num\n";
 my $round = Round->new($round_num);
 
 # make date or get from opt
+my $finale_date;
 if (defined $param_final_date) {
-    die "--date not implemented\n";
+    $final_date = parse_datestr();
+    die "Wrong date format $param_final_date." unless defined $final_date;
 } else {
-    $param_final_date = my_time() + 30 * 24 * 3600; # one month in the future
+    $final_date = my_time() + 30 * 24 * 3600; # one month in the future
 }
 
 
+$round->final_date($final_date);
 $Tournament->add_round($round_num, $round);
 $Tournament->save($param_file);
 
