@@ -60,6 +60,7 @@ BEGIN {
     push @INC, $ENV{GOAT_DIR};
 }
 
+use GoatLib;
 use Tournament;
 use Getopt::Long;
 

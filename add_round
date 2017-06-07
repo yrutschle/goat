@@ -52,6 +52,7 @@ BEGIN {
 
     push @INC, $ENV{GOAT_DIR};
 }
+
 use Tournament;
 use Getopt::Long;
 use Pod::Usage;

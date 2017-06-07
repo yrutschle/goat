@@ -29,8 +29,6 @@ use Mail::Address;
 use Games::Go::SGF;
 use open ':locale';
 
-use GoatLib;
-
 use Fcntl qw/SEEK_SET LOCK_EX LOCK_UN/;
 
 # Check we have the right environment variables to find
@@ -42,6 +40,7 @@ BEGIN {
     push @INC, $ENV{GOAT_DIR};
 }
 use GoatConfig;
+use GoatLib;
 
 use Tournament;
 use Round;
