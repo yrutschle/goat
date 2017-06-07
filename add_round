@@ -80,7 +80,7 @@ my $round = Round->new($round_num);
 # make date or get from opt
 my $final_date;
 if (defined $param_final_date) {
-    $final_date = parse_datestr();
+    $final_date = parse_datestr($param_final_date);
     die "Wrong date format $param_final_date." unless defined $final_date;
 } else {
     $final_date = time + 30 * 24 * 3600; # one month in the future
