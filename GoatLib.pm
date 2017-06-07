@@ -10,7 +10,7 @@ use Date::Language;
 use DateTime::TimeZone;
 
 @ISA=qw(Exporter);
-@EXPORT=qw( stone_to_level level_to_stones map_game download_echelle parse_datestr);
+@EXPORT=qw( stone_to_level level_to_stones download_echelle parse_datestr);
 
 =head2 fixup_frenchisms
 
