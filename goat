@@ -24,10 +24,6 @@ use File::Copy;
 
 use Getopt::Long;
 use Pod::Usage;
-use Time::ParseDate;  # This is in Debian's libtime-modules-perl package
-use Date::Parse;
-use Date::Language;
-use DateTime::TimeZone;
 
 use Mail::Address;
 use Games::Go::SGF;
@@ -44,6 +40,7 @@ BEGIN {
     push @INC, $ENV{GOAT_DIR};
 }
 use GoatConfig;
+use GoatLib;
 
 use Tournament;
 use Round;
@@ -497,43 +494,6 @@ sub notify_not_registered {
     system("$BIN_MAIL_OUT $mail_out_opts --player-unknown '$player'");
 }
 
-=head2 fixup_frenchisms
-
-Fix up accents in dates, so sloppy French writers can get
-away with 'fev' instead of 'fév' etc.
-
-Also change '18h32' to '18:32'
-
-Also change "01/02/2016" to "02/01/2016", which may be
-wrong, but there is no better way. DateTime parses US way,
-the French do dd/mm/yyyy.
-
-=cut
-sub fixup_frenchisms {
-    my %fixups = (
-        'fevrier'  => 'février',
-        'aout'     => 'août',
-        'decembre' => 'décembre',
-    );
-    my ($date) = @_;
-
-    foreach my $k (keys %fixups) {
-        my $v = $fixups{$k};
-        $date =~ s/$k/$v/; #  Substitute whole words
-
-        $k = substr $k, 0, 3;
-        $v = substr $v, 0, 3;
-        $date =~ s/$k/$v/; # Substitute 3-letter abbreviations
-    }
-    $date =~ s/(\d\d)h(\d\d)/$1:$2/;
-
-    # Swap month and day if date in xx/yy/zz format
-    my ($d, $m, $rest) = split /\//, $date;
-    $date = "$m/$d/$rest" if (defined $m and defined $rest);
-
-    return $date;
-}
-
 
 # Process a game result
 # submitter: e-mail address of player submitting the result
@@ -584,20 +544,7 @@ if (defined $param_schedule) {
         exit; # Action has failed -- nothing more to do
     }
 
-    $date_str = Encode::decode("utf8", $date_str);
-
-    my $date;
-
-    my $lang = Date::Language->new('French');
-    eval {  # str2time and others die on illegal dates: we really don't want that.
-        $date_str = fixup_frenchisms $date_str;
-        $date = $lang->str2time($date_str);
-        # Compute date in UTC using timezone in configuration
-        my $tz = DateTime::TimeZone->new(name => $TIMEZONE);
-        my $dt = DateTime->from_epoch(epoch => $date);
-        $date -= $tz->offset_for_datetime($dt);
-        print "$date\n";
-    };
+    my $date = parse_datestr($date_str);
 
     unless (defined $date) {
         print "$local_today: notify $player that '$date_str' is invalid\n";
