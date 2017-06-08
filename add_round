@@ -24,7 +24,7 @@ add_round -- creates a new round in a tournament
 
 =head1 SYNOPSIS
 
-add_round --file <toperm>
+add_round --file <toperm> [--date <date>]
 
 =head1 DESCRIPTION
 
@@ -32,9 +32,13 @@ I<add_round> simply creates an empty round in a tournament.
 In conjunction with I<add_game>, it can be used to import
 pairings made with another program.
 
+If the B<date> is specified, it will be displayed in
+all reminders. If not specified, one month from now is
+picked. ( just like <pair>  programm ).
+
 You would go about it as such:
 
-  add_round -f toperm
+  add_round -f toperm -d "19 juin 2017"
   add_game -f toperm --black alice@example.org --white bob@example.com
   add_game -f toperm --black jack@example.org --white jane@example.net
   [...]
