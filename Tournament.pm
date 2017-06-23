@@ -499,18 +499,18 @@ sub as_HTML {
         $table = new HTML::Table (-cols=>4, -border=>1 );
         $table->addRow('Blanc', 'Noir', 'Handicap', 'R&eacute;sultat', 'SGF');
         foreach my $game ($round->games) {
-            my $result = $game->result;
-            $result = 'NC' unless defined $result;
+            my $result = $game->result // 0;
+            $result = 'NC' unless $result;
             $result = "($result)" unless $game->rated;
             my $white_level = $game->white->register_level($round_num) || $game->white->level || "NC";
             my $black_level = $game->black->register_level($round_num) || $game->black->level || "NC";
-            my $sgf = uri_escape Encode::encode('UTF-8', $game->sgf);
+            my $sgf = uri_escape Encode::encode('UTF-8', $game->sgf) // 0;
             $table->addRow(
                 $game->white->fullname." ($white_level) ".$game->white->club,
                 $game->black->fullname." ($black_level) ".$game->black->club,
                 $game->handicap,
                 $result,
-                defined $sgf ?  a({href=> "/wgo/wgo.cgi?sgf=$sgf"}, 'SGF') : "",
+                $sgf ?  a({href=> "/wgo/wgo.cgi?sgf=$sgf"}, 'SGF') : "",
             );
             $table->setCellBGColor($table->getTableRows,
                 { 
