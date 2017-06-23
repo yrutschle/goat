@@ -64,6 +64,7 @@ goat [--test] [--simulate]
      [--tou [full][,submitted]]
      [--schedule player,date,location]
      [--results player,winner]
+     [--unresult player]
      [--sfg-result player,file.sgf]
      [--rated=<yes|no>]
      [--cancel <player>]
@@ -220,6 +221,11 @@ license.
 
 Record the winner of a game.
 
+=item --unresult player
+
+Removes the result of a game, in case of accidental result
+giving. This is for interactive use only.
+
 =item --rated yes|no
 
 Makes the game rated or not. This affects the way the result
@@ -337,7 +343,7 @@ $ENV{PATH} .= ":$INSTALL_DIR";
 
 # command line parameters
 my ($testing, $toperm_file, $param_round, $param_schedule,
-    $param_result, $param_rated, $param_status, $param_sgf,
+    $param_result, $param_unresult, $param_rated, $param_status, $param_sgf,
     $param_cancel, $param_chhand, $param_score,
     $param_reminders, $param_submitting, $param_tou, $help, $simulate,
     $param_list_unplayed, $param_list_all, $param_list_unlicensed, $param_list_players
@@ -358,6 +364,7 @@ GetOptions(
     'list-players' => \$param_list_players,
     'list-unlicensed' => \$param_list_unlicensed,
     'results=s' => \$param_result,
+    'unresult=s' => \$param_unresult,
     'sgf-result=s' => \$param_sgf,
     'rated=s'  => \$param_rated,
     'cancel=s' => \$param_cancel,
@@ -643,6 +650,7 @@ if (defined $param_schedule) {
         print "$local_today: notify $submitter that '$winning_colour' is invalid\n";
         system("$BIN_MAIL_OUT $mail_out_opts --badcolour='$submitter,$winning_colour'");
     }
+
 ########## Recording the result with a SGF
 } elsif (defined $param_sgf) {
     my ($submitter, $sgf_name) = split /,/, $param_sgf;
@@ -674,6 +682,21 @@ if (defined $param_schedule) {
     move($sgf_name, $encoded) or die "mv $sgf_name $encoded: $!\n";
     $game->sgf(Encode::encode('UTF-8', "$SGF_URL/$base_file"));
 
+########## Cancel the result of a game
+} elsif (defined $param_unresult) {
+    my ($submitter) = split /,/, $param_unresult;
+
+    my $game = $Tournament->find_game_by_email($submitter);
+    die "no game found for $submitter\n" unless (defined $game);
+
+    $game->unfinish;
+    $game->rated(1);
+
+    my $sgf = $game->sgf;
+    if (defined $sgf) {
+        unlink "$WORK_DIR/sgf/$sgf" or warn "$sgf: $!\n";
+        $game->sgf(undef);
+    }
 ########## Cancel the game
 } elsif (defined $param_cancel) {
     my ($player) = $param_cancel;

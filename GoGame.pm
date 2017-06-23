@@ -184,6 +184,14 @@ sub finished {
     $obj->result($res);
 }
 
+# Unfinish a game (e.g. when fixing someone's erroneous result report).
+sub unfinish {
+    my ($obj) = @_;
+
+    $obj->status(UNDEF);
+    $obj->result(0);
+}
+
 sub cancel {
     my ($obj, $res) = @_;
 
