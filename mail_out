@@ -227,8 +227,13 @@ EOF
                 dtstart => $dtstart,
                 dtend => $dtend,
                 location => $data->{location},
-                uid => $testing ? "00000000-0000-0000-HELL-0WORLD000000" : $ug->to_string($ug->create()),                                                                                                                                                                                                                                 
+                uid => $ug->to_string($ug->create()),
             );
+            if ($testing) {
+                # Give variable / random fields fixed values
+                $ical->add_properties(prodid => "Goat test suite");
+                $event->add_properties(uid => "00000000-0000-0000-HELL-0WORLD000000");
+            }
             $ical->add_entry($event);
             $data->{ics} = Encode::encode('UTF-8', $ical->as_string);
         },
