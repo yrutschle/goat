@@ -204,6 +204,8 @@ sub new_from_alias {
         warn "Not found \"$name\" in echelle -- adding anyway\n";
         # Fake echelle entry
         $niv ||= -1600;
+        my ($first, $last) = split / /, $name;
+        $name = "$last $first";
         $from_echelle[0] = "$name    $niv - ------- ----";
     }
     my $player = new_from_ech FFGPlayer $from_echelle[0];
