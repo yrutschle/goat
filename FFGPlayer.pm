@@ -129,7 +129,7 @@ sub grep_echelle {
     foreach my $line (@haystack) {
         my $match = 1;
         foreach my $name (@names) {
-            if ($line !~ /$name/i) {
+            if ($line !~ /\b$name\b/i) {
                 $match = 0;
                 last;
             }
