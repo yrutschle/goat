@@ -60,6 +60,7 @@ BEGIN {
     push @INC, $ENV{GOAT_DIR};
 }
 
+use GoatLib;
 use Tournament;
 use Getopt::Long;
 
@@ -223,12 +224,14 @@ print "Noir". " " x ($max_name_length - $bl) .
 
 
 my $round = Round->new($round_num);
+my $final_date;
 if (defined $param_final_date) {
-    die "--date not implemented\n";
+    $final_date = parse_datestr($param_final_date);
+    die "Wrong date format $param_final_date." unless defined $final_date;
 } else {
     $param_final_date = my_time() + 30 * 24 * 3600; # one month in the future
 }
-$round->final_date($param_final_date);
+$round->final_date($final_date);
 $Tournament->add_round($round_num, $round);
 
 my @res = $matchmaker->pick();
