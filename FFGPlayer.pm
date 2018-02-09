@@ -108,12 +108,11 @@ sub parse_additional_info {
 # grep_echelle($filename, "John Doe");
 # Search $filename for players which name contains the list at the end. Here
 # it'd find all John Doe's
-# License is not currently used (could be used to disambiguate or speed up
-# later)
+# If license is specified, bypass all other matches
 sub grep_echelle {
     my ($fn, $names, $license) = @_;
 
-    my $verbose_search = 0;
+    my $verbose_search = 1;
     my $checked = 0; # Counter for progress bar
     my @out;
 
@@ -127,6 +126,11 @@ sub grep_echelle {
     print Encode::encode(locale => "searching for ".(join " ", @names)."\n") if $verbose_search;
     # First we search with ASCII as it's fastest
     foreach my $line (@haystack) {
+        # If license is defined and this is it, just use this entry
+        if (defined $license and $line =~ /$license/) {
+            push @out, $line;
+            next;
+        }
         my $match = 1;
         foreach my $name (@names) {
             if ($line !~ /\b$name\b/i) {
