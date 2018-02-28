@@ -627,7 +627,13 @@ if (defined $param_schedule) {
     my $target_file = "$WORK_DIR/sgf/$base_file";
     my $encoded = Encode::encode('UTF-8', $target_file);
     move($sgf_name, $encoded) or die "mv $sgf_name $encoded: $!\n";
-    $game->sgf(Encode::encode('UTF-8', "$SGF_URL/$base_file"));
+
+    #$game->sgf(Encode::encode('UTF-8', "$SGF_URL/$base_file"));
+    # Actually it's... already encoded? in which case remove
+    # previous line /YR 19FEB2018
+    # Yeah I guess we just keep it in internal format
+    # whatever it is..
+    $game->sgf("$SGF_URL/$base_file");
 
 ########## Cancel the result of a game
 } elsif (defined $param_unresult) {
