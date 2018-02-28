@@ -495,7 +495,7 @@ sub as_HTML {
         next unless ref $round eq 'Round';
 
         my $round_num = $round->number;
-        $html .= "<h2>Appariements pour la ronde $round_num</h2>\n".a({href=>"../index.shtml"}, "Retour aux r&egrave;gles<br>");
+        $html .= "<h2>Appariements pour la ronde $round_num</h2>\n".a({href=>$INDEX_URL}, "Retour aux r&egrave;gles<br>");
         $table = new HTML::Table (-cols=>4, -border=>1 );
         $table->addRow('Blanc', 'Noir', 'Handicap', 'R&eacute;sultat', 'SGF');
         foreach my $game ($round->games) {

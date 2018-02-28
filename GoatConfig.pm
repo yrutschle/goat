@@ -9,7 +9,7 @@ require Exporter;
 use vars qw/ @EXPORT @ISA/;
 @ISA = qw/Exporter/;
 @EXPORT=qw/ 
-$INSTALL_DIR $WORK_DIR $LOG_DIR $TMP_DIR $SGF_URL
+$INSTALL_DIR $WORK_DIR $LOG_DIR $TMP_DIR $SGF_URL $INDEX_URL
 
 $GOAT_ADDRESS $ADMIN_ADDRESS $TOURNAMENT_NAME $TOURNAMENT_CITY
 $TOURNAMENT_LICENSES
@@ -63,6 +63,7 @@ our $TIMEZONE = $cfg->{timezone};
 my $template_name = $cfg->{template_name};
 
 our $SGF_URL = $cfg->{sgf_url};
+our $INDEX_URL = $cfg->{index_url};
 
 
 # Directory to get templates for outgoing e-mails
