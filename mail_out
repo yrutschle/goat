@@ -211,7 +211,12 @@ my %options = (
         postprocess => sub {
             my ($data) = @_;
 
+            # Make string for mail subject and body,
+            # localised to tournament timezone (could be
+            # extended to a user-defined timezone)
             $data->{date} = utc2str $data->{time};
+
+            # Create ICS using UTC (marked by 'Z' at the end)
             my $dtstart = DateTime::Format::ICal->format_datetime(DateTime->from_epoch(epoch => $data->{time}));
             my $dtend = DateTime::Format::ICal->format_datetime(DateTime->from_epoch(epoch => $data->{time} + 2 * 3600));
             my $ical = Data::ICal->new();

@@ -380,11 +380,10 @@ my $mail_out_opts = "";
 if (defined $testing) {
     $mail_out_opts = '--no-send';
     $BIN_MAIL_OUT = "perl -MDevel::Cover=\"-silent,on\" $BIN_MAIL_OUT";
-    $TIMEZONE = 'GMT'; # we don't really want to test daylight savings
 }
 
 my $today = &my_time; # Now
-my $local_today = scalar localtime($today); # Now, in string form
+my $today_str = scalar gmtime($today); # Now, in string form, in UTC (only used in logs)
 
 my $Tournament; # Reference to the Tournament object, that contains all the data
 
@@ -424,7 +423,7 @@ sub challenge {
 
 
     system("$BIN_MAIL_OUT $mail_out_opts --issue-challenge '$bn,$wn,$handi,$final_date'") unless $simulate;
-    print "$local_today: $bn plays black against $wn with $handi stones\n";
+    print "$today_str: $bn plays black against $wn with $handi stones\n";
 
     $r_game->challenged(my_time);
     $r_game->reminder_date(my_time);
@@ -445,7 +444,7 @@ sub remind_challenge {
     $r_game->reminder_date(my_time);
 
     system("$BIN_MAIL_OUT $mail_out_opts --remind-challenge '$bn,$wn,$handi,$final_date'") unless $simulate;
-    print "$local_today: $bn and $wn haven't set up the challenge yet.\n";
+    print "$today_str: $bn and $wn haven't set up the challenge yet.\n";
 }
 
 =head2 remind_getresults
@@ -465,7 +464,7 @@ sub remind_getresults {
     $r_game->reminder_date(my_time);
 
     system("$BIN_MAIL_OUT $mail_out_opts --ask-result '$bn,$wn,$date'") unless $simulate;
-    print "$local_today: $bn and $wn please give your results\n";
+    print "$today_str: $bn and $wn please give your results\n";
 }
 
 =head2 remind_game_coming_up
@@ -485,7 +484,7 @@ sub remind_game_coming_up {
 
     system("$BIN_MAIL_OUT $mail_out_opts --coming-up '$bn,$wn,$handi,$date,$location'") 
         unless $simulate;
-    print "$local_today: game coming up: $bn and $wn\n";
+    print "$today_str: game coming up: $bn and $wn\n";
 }
 
 =head2 notify_not_registered
@@ -496,7 +495,7 @@ address can't be found.
 =cut
 sub notify_not_registered { 
     my ($player) = @_; 
-    print "$local_today: notify $player that their game cannot be found\n"; 
+    print "$today_str: notify $player that their game cannot be found\n"; 
 
     system("$BIN_MAIL_OUT $mail_out_opts --player-unknown '$player'");
 }
@@ -522,7 +521,7 @@ sub finish_game {
         print "game: ".$rated.".\n";
     }
 
-    print "$local_today: notify $b and $w their game is finished and $winning_colour won; result given by $submitter\n";
+    print "$today_str: notify $b and $w their game is finished and $winning_colour won; result given by $submitter\n";
     system("$BIN_MAIL_OUT $mail_out_opts --give-results='$b,$w,$winning_colour,$submitter'");
 
 }
@@ -554,13 +553,13 @@ if (defined $param_schedule) {
     my $date = parse_datestr($date_str);
 
     unless (defined $date) {
-        print "$local_today: notify $player that '$date_str' is invalid\n";
+        print "$today_str: notify $player that '$date_str' is invalid\n";
         system("$BIN_MAIL_OUT $mail_out_opts --baddate '$player,$date_str'");
         exit;
     }
 
     if ($date < $today) {
-        print "$local_today: notify $player that '$date_str' is in the past\n";
+        print "$today_str: notify $player that '$date_str' is in the past\n";
         system("$BIN_MAIL_OUT $mail_out_opts --pastdate '$player,$date_str'");
         exit;
     }
@@ -570,7 +569,7 @@ if (defined $param_schedule) {
     my $b = $black->fulladdress;
     my $w = $white->fulladdress;
 
-    print "$local_today: notify $b and $w that their game has been scheduled on "
+    print "$today_str: notify $b and $w that their game has been scheduled on "
             .scalar localtime($date)." in $location by $player\n";
 
 
@@ -594,7 +593,7 @@ if (defined $param_schedule) {
         $res = 'black' if $res eq 'noir';
         finish_game($game, $submitter, $res);
     } else {
-        print "$local_today: notify $submitter that '$winning_colour' is invalid\n";
+        print "$today_str: notify $submitter that '$winning_colour' is invalid\n";
         system("$BIN_MAIL_OUT $mail_out_opts --badcolour='$submitter,$winning_colour'");
     }
 

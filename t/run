@@ -15,7 +15,6 @@ my @tests;
 
 $ENV{GOAT_DIR} = $ENV{PWD};
 $ENV{WORK_DIR} = "$ENV{PWD}/t/tmp";
-$ENV{TZ} = "GMT"; # Keep logs to local time, but fix timezone for testing...
 
 unless (-e "$ENV{WORK_DIR}")  {
     mkdir "$ENV{WORK_DIR}" or die "mkdir $ENV{WORK_DIR}: $!\n";
@@ -171,10 +170,15 @@ push @tests,
       'test' => 'diff -u ../out.15b out.15b',
       'doc' => 'Successful game scheduling',
   },
-  # Scheduling, dd/MM/yyyy date format
+  # Scheduling, dd/MM/yyyy date format, summer time
     { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.17b letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.15d ; perl $perl_opts ../../goat --status >> out.15d 2>&1",
       'test' => 'diff -u ../out.15d out.15d',
-      'doc' => 'Successful game scheduling with dd/MM/YYYY format',
+      'doc' => 'Successful game scheduling with dd/MM/YYYY format, summer time',
+  },
+  # Scheduling, dd/MM/yyyy date format, winter time
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.17c letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.15e ; perl $perl_opts ../../goat --status >> out.15e 2>&1",
+      'test' => 'diff -u ../out.15e out.15e',
+      'doc' => 'Successful game scheduling with dd/MM/YYYY format, winter time',
   },
   # Scheduling with command in the body of the e-mail
     { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.18 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.15 ; perl $perl_opts ../../goat --status >> out.15 2>&1",
