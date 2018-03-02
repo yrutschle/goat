@@ -27,7 +27,7 @@ mail_out -- goat's e-mail sender
 =head1 SYNOPSIS
 
 mail_out [--mail-in-illegal <rcpt>,<file>]
-         [--issue-challenge <black>,<white>,<handi>]
+         [--issue-challenge <black>,<white>,<handi>,<limit date>]
          [--remind-challenge <p1>,<p2>,<handi>,<final_date>]
          [--ask-results <p1>,<p2>]
          [--player-unknown <p1>]
@@ -391,10 +391,7 @@ sub process_action {
         $data{goat_address} = $GOAT_ADDRESS;
         $data{admin_address} = $ADMIN_ADDRESS;
         $data{tournament_name} = $TOURNAMENT_NAME;
-        $data{subject_prefix} = 'goat';
-        if (defined $SUBJECT_PREFIX) {
-            $data{subject_prefix} = $SUBJECT_PREFIX;
-        }
+        $data{subject_prefix} = $SUBJECT_PREFIX // 'goat';
         my @to = sort map {$data{$_}} @{$action{mailto}};
         # copy mail to admin adress
         if (defined $ADMIN_FORWARD and $ADMIN_FORWARD eq 'yes') {
