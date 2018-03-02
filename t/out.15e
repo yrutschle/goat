@@ -1,11 +1,11 @@
-Sat Jul 30 15:30:00 2005: notify Jean-Jacques PORTAL <jean-jacques.portal@example.org> and Yves RUTSCHLE <yves@example.org> that their game has been scheduled on Sun Oct  9 20:30:00 2016 in Le Cactus by yves@example.org
+Sat Jul 30 15:30:00 2005: notify Jean-Jacques PORTAL <jean-jacques.portal@example.org> and Yves RUTSCHLE <yves@example.org> that their game has been scheduled on Tue Nov 22 20:30:00 2016 in Le Cactus by yves@example.org
  <yves@example.org>
 Content-Transfer-Encoding: binary
 Content-Type: multipart/mixed; boundary="---testing42ftwtesting"
 From: GO Assistant <goat@rutschle.net>
 MIME-Version: 1.0
 Return-Path: GO Assistant <goat@rutschle.net>
-Subject: [goat] Partie: Le Cactus, dimanche 09 octobre 2016 20:30
+Subject: [goat] Partie: Le Cactus, mardi 22 novembre 2016 20:30
 To: Jean-Jacques PORTAL <jean-jacques.portal@example.org>,Yves RUTSCHLE
 X-Loop: GO Assistant <goat@rutschle.net>
 X-Mailer: MIME-Tools with no versionThis is a multi-part message in MIME format...
@@ -22,7 +22,7 @@ Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@ru
 yves@example.org a programmé votre partie:
 
 Lieu: Le Cactus
-Date: dimanche 09 octobre 2016 20:30
+Date: mardi 22 novembre 2016 20:30
 Noir: Jean-Jacques PORTAL <jean-jacques.portal@example.org>
 Blanc: Yves RUTSCHLE <yves@example.org>
 Handicap: 1
@@ -47,8 +47,8 @@ QkVHSU46VkNBTEVOREFSDQpWRVJTSU9OOjIuMA0KUFJPRElEOkdvYXQgdGVz
 dCBzdWl0ZQ0KQkVHSU46VkVWRU5UDQpERVNDUklQVElPTjpub2lyOiBKZWFu
 LUphY3F1ZXMgUE9SVEFMIDxqZWFuLWphY3F1ZXMucG9ydGFsQGV4YW1wbGUu
 b3JnPlxuYmwNCiBhbmM6IFl2ZXMgUlVUU0NITEUgPHl2ZXNAZXhhbXBsZS5v
-cmc+XG5oYW5kaWNhcDogMVxuDQpEVEVORDoyMDE2MTAwOVQyMDMwMDBaDQpE
-VFNUQVJUOjIwMTYxMDA5VDE4MzAwMFoNCkxPQ0FUSU9OOkxlIENhY3R1cw0K
+cmc+XG5oYW5kaWNhcDogMVxuDQpEVEVORDoyMDE2MTEyMlQyMTMwMDBaDQpE
+VFNUQVJUOjIwMTYxMTIyVDE5MzAwMFoNCkxPQ0FUSU9OOkxlIENhY3R1cw0K
 U1VNTUFSWTpUb3Vybm9pIHBlcm1hbmVudCBkZSBUb3Vsb3VzZQ0KVUlEOjAw
 MDAwMDAwLTAwMDAtMDAwMC1IRUxMLTBXT1JMRDAwMDAwMA0KRU5EOlZFVkVO
 VA0KRU5EOlZDQUxFTkRBUg0K
@@ -102,7 +102,7 @@ challenged: Boreï ENG <boreieng@example.org>	Jean-yves PAPAZOGLOU <jeanyves.pap
 
 scheduled: Jean-Jacques PORTAL <jean-jacques.portal@example.org>	Yves RUTSCHLE <yves@example.org>	(1 stones) 	 
                 Challenge sent Sat Jul 30 15:30:00 2005
-                Scheduled for Sun Oct  9 18:30:00 2016 at Le Cactus
+                Scheduled for Tue Nov 22 19:30:00 2016 at Le Cactus
 
 challenged: Nicolas DARQUE <nicolas.darque@example.org>	Olivier ROUMEZI <o_roumezi@example.org>	(0 stones) 	 
                 Challenge sent Sat Jul 30 15:30:00 2005

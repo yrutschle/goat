@@ -1,6 +1,6 @@
 package GoatLib;
 
-use locale;
+use strict;
 use Pod::Usage;
 
 use Exporter;
@@ -9,8 +9,10 @@ use Date::Parse;
 use Date::Language;
 use DateTime::TimeZone;
 
-@ISA=qw(Exporter);
-@EXPORT=qw( stone_to_level level_to_stones download_echelle parse_datestr);
+use GoatConfig;
+
+our @ISA=qw(Exporter);
+our @EXPORT=qw( stone_to_level level_to_stones download_echelle parse_datestr);
 
 =head2 fixup_frenchisms
 
@@ -57,14 +59,11 @@ sub parse_datestr {
     $date_str = Encode::decode("utf8", $date_str);
 
     my $lang = Date::Language->new('French');
+
+    my $date;
     eval {  # str2time and others die on illegal dates: we really don't want that.
         $date_str = fixup_frenchisms $date_str;
-        $date = $lang->str2time($date_str);
-        # Compute date in UTC using timezone in configuration
-        my $tz = DateTime::TimeZone->new(name => $TIMEZONE);
-        my $dt = DateTime->from_epoch(epoch => $date);
-        $date -= $tz->offset_for_datetime($dt);
-        #print "$date\n";
+        $date = $lang->str2time($date_str, $TIMEZONE);
     };
     return $date;
 }
