@@ -63,7 +63,25 @@ sub parse_datestr {
     my $date;
     eval {  # str2time and others die on illegal dates: we really don't want that.
         $date_str = fixup_frenchisms $date_str;
-        $date = $lang->str2time($date_str, $TIMEZONE);
+
+        # Caveat: str2time takes a timezone in the silly 3-letter format
+        # ('GMT', 'EST', 'CET', ...); if it doesn't understand the timezone, it
+        # silently reverts to the system timezone, so the code becomes
+        # non-deterministic across systems.
+        #
+        # Hence: we convert text with str2time forced to UTC (so we're
+        # independant from system settings), then compute the offset with
+        # DateTime::TimeZone, which works with standard timezone names.
+
+        $date = $lang->str2time($date_str, 'UTC');
+
+        my $tz = DateTime::TimeZone->new( name => $TIMEZONE );
+        my $dt = DateTime->from_epoch(epoch => $date);
+        my $offset = $tz->offset_for_datetime($dt);
+        #print "datestr: str2time($date_str) => $date ; $TIMEZONE: $offset, ";
+        $date -= $offset;
+        #print "final: $date\n";
+
     };
     return $date;
 }
