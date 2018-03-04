@@ -570,7 +570,7 @@ if (defined $param_schedule) {
     my $w = $white->fulladdress;
 
     print "$today_str: notify $b and $w that their game has been scheduled on "
-            .scalar localtime($date)." in $location by $player\n";
+            .scalar gmtime($date)." (GMT) in $location by $player\n";
 
 
     system("$BIN_MAIL_OUT $mail_out_opts --notify-schedule '$b,$w,$handi,$date,$location,$player'");
