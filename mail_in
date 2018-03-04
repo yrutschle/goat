@@ -67,25 +67,28 @@ GetOptions(
     'test' => \$testing,
 );
 
-my ($goat_opts, $mail_out_opts);
+my $coverage = 0; # Add as a command line option later on?
 
+my (@goat_opts, @mail_out_opts);
+
+my (@BIN_GOAT, @BIN_MAIL_OUT);
+push @BIN_GOAT, $BIN_GOAT;
+push @BIN_MAIL_OUT, $BIN_MAIL_OUT;
 if ($testing) {
-    $goat_opts = '--test';
-    $mail_out_opts = '--no-send';
-    $BIN_GOAT = "perl -MDevel::Cover=\"-silent,on\" $BIN_GOAT";
-    $BIN_MAIL_OUT = "perl -MDevel::Cover=\"-silent,on\" $BIN_MAIL_OUT";
+    @goat_opts = ('--test');
+    @mail_out_opts = ('--no-send');
+    if ($coverage) {
+        @BIN_GOAT = ("perl", "-MDevel::Cover=\"-silent,on\"", $BIN_GOAT);
+        @BIN_MAIL_OUT = ("perl", "-MDevel::Cover=\"-silent,on\"", $BIN_MAIL_OUT);
+    }
 }
 
 # Use pairing file defined in config file, or toperm 
-my $tournament_file='toperm';
-if (defined $TOURNAMENT_FILE ) {
-    $tournament_file = $TOURNAMENT_FILE;
-}
-$goat_opts .= " --file $tournament_file";
+my $tournament_file = $TOURNAMENT_FILE // 'toperm';
+push @goat_opts, "--file",  $tournament_file;
 
 #Where to log things? Mail_in needs to log errors, as there
 #are no other way to report them.
-
 my $LOGFILE = "$LOG_DIR/mail_in.log";
 
 # record a line in a log file.
@@ -113,9 +116,9 @@ sub make_tmpfile {
 
 # Executes a command and log
 sub my_exec {
-    my ($exec) = @_;
-    record "exec `$exec`";
-    my $r = system $exec;
+    my (@exec) = @_;
+    record "@exec";
+    my $r = system @exec;
     if ($? == -1) {
         print "failed to execute: $!\n";
     } elsif ($? & 127) {
@@ -123,7 +126,7 @@ sub my_exec {
         ($? & 127),  ($? & 128) ? 'with' : 'without';
     } else {
         if ($? >> 8) {
-            printf "child exited with value %d\n", $? >> 8;
+            #printf "child exited with value %d\n", $? >> 8;
         }
     }
 
@@ -145,18 +148,22 @@ sub process_sgf {
             open my $fh, "> $filename" or record "tmpfile $filename: $!\n" and die "$filename: $!\n";
             print $fh $part->body;
             close $fh;
-            my_exec("$BIN_GOAT $goat_opts --sgf-result $from,$filename");
+            my_exec($BIN_GOAT, @goat_opts, "--sgf-result", "$from,$filename");
             exit(0);
         }
     }
 }
 
+# Read incoming mail from stdin (see .forward)
 my $mail = Email::Filter->new;
 
 # First log the entire mail (maybe remove this when we gain
-# confidence in the system?)
+# confidence in the system?). We remove ESC to prevent
+# terminal ANSI sequence injections.
 record "Got mail";
-print $logfile $mail->simple->as_string;
+my $mail_text = $mail->simple->as_string;
+$mail_text =~ s/\e//g;
+print $logfile $mail_text;
 
 $mail->exit(0);
 
@@ -217,10 +224,12 @@ Indicates who won the game.
 =cut
 
 # Tries to match a command in the line passed as parameter
-# Returns the command to execute, or undef if no match
+# Returns the command to execute (as an array of parameters
+# to pass to system()), or undef if no match
 sub parse_command {
     my ($line) = @_;
     my $exec;
+    my @exec;
 
     return if $line =~ /^>/;
 
@@ -230,7 +239,7 @@ sub parse_command {
 
         $place //= 'KGS';
 
-        $exec = "$BIN_GOAT $goat_opts --schedule \"$from, $date,$place\"";
+        @exec = ($BIN_GOAT, @goat_opts, "--schedule", "$from,$date,$place");
     } elsif ($line =~ /(r.*?sult).*(blanc|noir|white|black)?/i) { 
         my $winner = $2;
         # If we couldn't find the colour, pass the whole
@@ -238,21 +247,17 @@ sub parse_command {
         if (not defined $winner) {
             $winner = $line;
         }
-        $exec = "$BIN_GOAT $goat_opts --result \"$from,$winner\"";
-    } elsif ($line =~ /(sans\s*nouvelles?|no\s*news)/i) {
-        $exec = "$BIN_GOAT $goat_opts --nonews \"$from\"";
+        @exec = ($BIN_GOAT, @goat_opts, "--result", "$from,$winner");
+    } 
 
-    } else {
-    }
-
-    return $exec;
+    return @exec;
 }
 
 # First try to parse the mail subject line
-my $exec = parse_command scalar decode("MIME-Header", $mail->subject);
+my @exec = parse_command scalar decode("MIME-Header", $mail->subject);
 
 # If that didn't work, try to parse each line of the e-mail
-if (not defined $exec) {
+if (not @exec) {
     my @lines;
 
     # If it's multi-part, descend into each part
@@ -264,20 +269,20 @@ if (not defined $exec) {
             push @lines, split /\n/, $p->body_str;
         }
     }
-    my @out = grep { defined $_ } map { parse_command $_ } @lines;
+    my @out = grep { @$_ } map { [ parse_command $_ ] } @lines;
     if (@out) {
-        $exec = shift @out; # keep first command
+        @exec = @{shift @out}; # keep first command
     }
 }
 
-if (not defined $exec) {
+if (not @exec) {
     my $tmp_fn = make_tmpfile $mail; # Pass the mail for bouncing
 
     # Instead, bounce an error message.
     record "No command found, bouncing mail";
-    $exec = "$BIN_MAIL_OUT $mail_out_opts --mail-in-illegal \"$from,$tmp_fn\"";
+    @exec = (@BIN_MAIL_OUT, @mail_out_opts, "--mail-in-illegal" => "$from,$tmp_fn");
 }
 
 
-my_exec($exec);
+my_exec(@exec);
 
