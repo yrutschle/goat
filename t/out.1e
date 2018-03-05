@@ -1,7 +1,7 @@
 Not found "New Player2" in echelle -- adding anyway
-registering Player2 New <newplayer2@example.org>
+registering New Player2 <newplayer2@example.org>
 Registered 1 more players.
-Player New <newplayer1@example.org>	Player2 New <newplayer2@example.org>	(2)		
+New Player <newplayer1@example.org>	New Player2 <newplayer2@example.org>	(2)		
 Tournament: tpToulouse
 Round 2
 undef: Daniel DALLA_BARBA <daniel.dalla-barba@example.org>	Umberto POLVERINI <polverini@example.org>	(4 stones) 	 
@@ -56,7 +56,7 @@ challenged: Nicolas DARQUE <nicolas.darque@example.org>	Olivier ROUMEZI <o_roume
                 Challenge sent Sat Jul 30 15:30:00 2005
                 Not scheduled
 
-undef: Player New <newplayer1@example.org>	Player2 New <newplayer2@example.org>	(2 stones) 	 
+undef: New Player <newplayer1@example.org>	New Player2 <newplayer2@example.org>	(2 stones) 	 
                 Challenge not sent
                 Not scheduled
 

@@ -1,5 +1,5 @@
 Not found "New Player" in echelle -- adding anyway
-registering Player New <newplayer@example.org>
+registering New Player <newplayer@example.org>
 Registered 1 more players.
 Odd number of players -- specify a bye with:
 	pair --bye <email>

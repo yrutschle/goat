@@ -1,14 +1,14 @@
 line 4:Illegal: alias illegal Line with no address
 
 Not found "Joe Bloggs" in echelle -- adding anyway
-Bloggs Joe: player license: - is not allowed.
+Joe Bloggs: player license: - is not allowed.
 Not found "Joey Bloggs" in echelle -- adding anyway
-Bloggs Joey: player license: - is not allowed.
+Joey Bloggs: player license: - is not allowed.
 Not found "John Bloggs" in echelle -- adding anyway
-Bloggs John: player license: - is not allowed.
+John Bloggs: player license: - is not allowed.
 Unknown option: 3b
 Not found "Jane Bloggs" in echelle -- adding anyway
-Bloggs Jane: player license: - is not allowed.
+Jane Bloggs: player license: - is not allowed.
 Ambiguous name "Yves":
  ABADIE Yves                           -1500 - 0452000 31To
  BAILLY Yves                            -900 - 9516001 21Di
@@ -17,12 +17,10 @@ Ambiguous name "Yves":
  CASTEL Yves                           -9999 - 0288706 67SE
  CAUTERMAN Yves-Michel                 -9999 - 0693011 59Li
  CAVALLO Jean-Yves                     -9999 - 9212102 XXXX
- CHANG Yves_Suy_Sing                   -1000 - 0484001 68Mu
  CHARDARD Yves                          -900 - 0485001 54Na
  CHRISTMANN Pierre-Yves                    0 - 0800364 91SM
  CLABON Yves                            -200 - 0637204 35Re
  CLAIR Yves                             -185 L 9951702 64Pa
- COUET Jean_Yves                       -9999 - 9213051 38Gr
  COURSOLLE Pierre-Yves                  -877 L 1100166 58Ne
  DECROIX Yves                              0 - 0070000 32Ea
  DELAGNEAU Pierre-Yves                 -1100 - 9551005 33Bo
@@ -46,7 +44,6 @@ Ambiguous name "Yves":
  LE_CORRE Yves                         -1300 - 9191004 80Am
  LE_MEUR Jean-Yves                      -400 - 0230001 00L3
  LEDOUARON Yves                        -9999 - 1400115 42Se
- LEGEAY Pierre_Yves                    -9999 - 1200290 33Bo
  LEGOFF Yves                           -9999 - 9125053 75Pa
  LODS Jean-Yves                        -1000 - 9079001 30NJ
  MAETZ Jean-Yves                        -700 - 0700078 38Gr
@@ -55,7 +52,6 @@ Ambiguous name "Yves":
  MERIEUX Yves                          -9999 - 9877816 06Pe
  MEROT Yves                             -600 - 8828500 44Na
  MOCQUARD Yves                          -300 - 9937203 35Re
- MONNOT Jean_Yves                      -1300 - 0700371 71Cs
  MONTHOUX Pierre-Yves                  -9999 - 0800227 38Gr
  OLLIEROU Yves                         -1200 - 1000117 92Bo
  PAPAZOGLOU Jean-Yves                   -687 L 0700101 31Ba
@@ -93,14 +89,14 @@ Bore� ENG: player license: - is not allowed.
 Maxime GALLY: player license: - is not allowed.
 Hugues CAUBEL: player license: - is not allowed.
 Registered 32 players.
-Bloggs Joey <joey@example.org> 250 ------- ---- -
+Joey Bloggs <joey@example.org> 250 ------- ---- -
 Umberto POLVERINI <polverini@example.org> -150 8850900 31To -
 Eric SAVES <esaves@example.org> -450 0152006 31Pi C
 Didier BELLOC <didier.belloc@example.org> -450 0252005 31To -
 Frédéric NASSE <fred.clubgo@example.org> -550 0452018 31To -
 Daniel DALLA_BARBA <daniel.dalla-barba@example.org> -550 9652001 31To L
 Laurent LAMÔLE <lorl@example.org> -650 9721004 31Pi L
-Bloggs Joe <joe@example.org> -650 ------- ---- -
+Joe Bloggs <joe@example.org> -650 ------- ---- -
 Thomas DUFOUR <naptod@example.org> -650 0452010 31Pi L
 Frédéric CAGNAZZO <fcagnazzo@example.org> -750 0252001 31To -
 Jean-François ROUSSEL <Jean-Francois.Roussel@example.org> -750 9752026 31Ba -
@@ -121,8 +117,8 @@ Jean-Yves PAPAZOGLOU <jeanyves.papazoglou@example.org> -1250 0700101 31Ba L
 Yves RUTSCHLE <yves@example.org> -1272 0652029 31To L
 Laurent BOURDRON <laurent.bourdron@example.org> -1350 0552012 31To L
 Olivier ROUMEZI <o_roumezi@example.org> -1550 0452027 31To -
-Bloggs John <john@example.org> -1600 ------- ---- -
-Bloggs Jane <jane@example.org> -1600 ------- ---- -
+John Bloggs <john@example.org> -1600 ------- ---- -
+Jane Bloggs <jane@example.org> -1600 ------- ---- -
 Nicolas DARQUE <nicolas.darque@example.org> -1650 0552014 31To -
 Jean-Jacques PORTAL <jean-jacques.portal@example.org> -1750 0652028 31Ba L
 
