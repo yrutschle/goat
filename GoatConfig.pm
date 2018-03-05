@@ -12,7 +12,7 @@ use vars qw/ @EXPORT @ISA/;
 $INSTALL_DIR $WORK_DIR $LOG_DIR $TMP_DIR $SGF_URL $INDEX_URL
 
 $GOAT_ADDRESS $ADMIN_ADDRESS $TOURNAMENT_NAME $TOURNAMENT_CITY
-$TOURNAMENT_LICENSES
+$TOURNAMENT_LICENSES @PAIRING_CRITERIA
 $TOURNAMENT_FILE
 $ADMIN_FORWARD
 
@@ -58,6 +58,7 @@ our $TOURNAMENT_NAME = $cfg->{tournament_name};
 our $TOURNAMENT_FILE = $cfg->{tournament_file};
 our $TOURNAMENT_CITY = $cfg->{tournament_city};
 our $TOURNAMENT_LICENSES= $cfg->{tournament_licenses};
+our @PAIRING_CRITERIA = split /\s+/, $cfg->{pairing_criteria};
 our $LOCALE = $cfg->{locale};
 our $TIMEZONE = $cfg->{timezone};
 my $template_name = $cfg->{template_name};
