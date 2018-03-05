@@ -2,14 +2,19 @@
 #########################
 # Run test suite for Goat. From Goat's dir, just:
 # export PERLLIB=`pwd`
-# t/run
-# of t/run x  to run just test x
+# t/run --list          => list all available tests
+# t/run                 => run all tests
+# t/run 3 7 11          => run only specified tests
 #
 # Coverage reports is in t/tmp/cover_db/coverage.html
+# (if required with $coverage = 1 below)
 #
 
 use strict;
 use warnings;
+
+use Getopt::Long;
+use FileHandle;
 
 my @tests;
 
@@ -241,8 +246,7 @@ push @tests,
 
   ;
 
-#use Test::More tests => 42;
-  use Test::More;
+use Test::More;
 
 
 chdir "t/tmp" || die "Can't chdir to my test directory";
@@ -253,25 +257,32 @@ unlink("toperm.lock");
 system "cover -delete" if $coverage;
 die "Unable to clear coverage analysis.\n" if $?;
 
-my $index = 1;
-
-my $test = shift;
-
-# run -l to list all tests and exit
-if (defined $test and $test =~ /^-l/) {
-    foreach my $test(@tests) {
-        print $index++ . " => " . $test->{'doc'} . "\n";;
-    }
-    exit 0;
+{   # Number tests
+    my $i = 1;
+    map { $_->{'index'} = $i++ } @tests;
 }
 
-@tests = ($tests[$test-1]) if defined $test;
+format test_list =
+@>> - @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+$_->{'index'}, $_->{'doc'};
+.
 
+GetOptions(
+    'list' => sub { 
+        format_name STDOUT "test_list";
+        map { write; } @tests;
+        exit 0;
+    },
+);
+
+@tests = @tests[ map { $_ - 1 } @ARGV ] if @ARGV;
+
+my @results;
 
 foreach my $test ( @tests ) {
     my ($val,$name);
 
-    print "running ".$index++."\n";
+    print "running ".$test->{'index'}.": ".$test->{'doc'}."\n";
     my $cmd=$test->{'run'};
     $val=system($cmd);
 
@@ -285,6 +296,7 @@ foreach my $test ( @tests ) {
         $val=system($test->{'test'});	
     	$name=$test->{'doc'}.' returns what is expected';
         ok($val == 0,$name);
+        push @results, [ $test->{'index'}, $test->{'doc'}, $val ];
 	unless ($val == 0) {
 	    diag ("Failed (retval=$val) on:");
 	    diag ($test->{'test'});
@@ -294,7 +306,16 @@ foreach my $test ( @tests ) {
     }
 }
 
-done_testing($index);
+
+format test_results = 
+@>> - @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  @>>
+$_->[0], $_->[1], $_->[2] ? "NOK" : "OK"
+.
+
+format_name STDOUT "test_results";
+map { write; } @results;
+
+done_testing();
 
 if ($coverage) {
     system "cover"; 
