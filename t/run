@@ -262,14 +262,19 @@ die "Unable to clear coverage analysis.\n" if $?;
     map { $_->{'index'} = $i++ } @tests;
 }
 
+format test_list_top =
+ID  | Description
+----+-------------------------------------------------------------------------
+.
 format test_list =
-@>> - @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+@>> | @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 $_->{'index'}, $_->{'doc'};
 .
 
 GetOptions(
     'list' => sub { 
         format_name STDOUT "test_list";
+        format_top_name STDOUT "test_list_top";
         map { write; } @tests;
         exit 0;
     },
@@ -307,12 +312,18 @@ foreach my $test ( @tests ) {
 }
 
 
+format test_results_top =
+ID  | Description                                                       | Status
+----+-------------------------------------------------------------------+-------
+.
+
 format test_results = 
-@>> - @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  @>>
+@>> | @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< |   @>>
 $_->[0], $_->[1], $_->[2] ? "NOK" : "OK"
 .
 
 format_name STDOUT "test_results";
+format_top_name STDOUT "test_results_top";
 map { write; } @results;
 
 done_testing();
