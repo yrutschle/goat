@@ -59,15 +59,15 @@ push @tests,
    # Tests PAIR_4
    { 'run' => "cp ../toperm_in.1 toperm; " .
        "echo 'alias newplayer New Player <newplayer\@example.org> #6k' | perl $perl_opts ../../add_player -f toperm > out.1b 2>&1 ; ".
-       "perl $perl_opts ../../pair -f toperm >> out.1b 2>&1 ; perl $perl_opts ../../goat --status >> out.1b",
+       "perl $perl_opts ../../pair -test -f toperm >> out.1b 2>&1 ; perl $perl_opts ../../goat --status >> out.1b",
        'test' => 'diff -u ../out.1b out.1b',
        'doc' => 'New round with odd number of players',
    },
    # pair: pair with a bye player
    # Tests PAIR_4
-   { 'run' => "cp ../toperm_in.1 toperm; " .
+   { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.1 toperm; " .
        "echo 'alias newplayer New Player <newplayer\@example.org> #6k' | perl $perl_opts ../../add_player -f toperm > out.1c 2>&1 ; ".
-       "perl $perl_opts ../../pair -f toperm --bye newplayer\@example.org >> out.1c 2>&1 ; perl $perl_opts ../../goat --status >> out.1c",
+       "perl $perl_opts ../../pair --test -f toperm --bye newplayer\@example.org >> out.1c 2>&1 ; perl $perl_opts ../../goat --status >> out.1c",
        'test' => 'diff -u ../out.1c out.1c',
        'doc' => 'New round with bye player',
    },

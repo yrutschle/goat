@@ -1,7 +1,7 @@
 #! /usr/bin/perl -w
 
 # Goat: Gentil Organisateur et Administrateur de Tournois
-# Copyright (C) 2006-2015 Yves Rutschle
+# Copyright (C) 2006-2018 Yves Rutschle
 # 
 # This program is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public
@@ -273,4 +273,10 @@ while (@res) {
 }
 
 $Tournament->save($param_file);
+
+my $mail_out_opts = "";
+if ($testing) {
+    $mail_out_opts = "--no-send";
+}
+system("$BIN_MAIL_OUT $mail_out_opts --deadline $round_num,$param_final_date");
 
