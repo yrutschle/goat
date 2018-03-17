@@ -1,7 +1,7 @@
 #! /usr/bin/perl -w
 
 # Goat: Gentil Organisateur et Administrateur de Tournois
-# Copyright (C) 2006-2016  Yves Rutschle
+# Copyright (C) 2006-2018  Yves Rutschle
 # 
 # This program is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public
@@ -390,21 +390,6 @@ my $Tournament; # Reference to the Tournament object, that contains all the data
 
 =head1 FUNCTIONS
 
-=head2 my_time
-
-Equivalent to time(), except if $testing is true it will
-pick the time in $ENV{TEST_TIME}. This allows regression
-testing.
-
-=cut
-sub my_time {
-    if ($testing) {
-        die "TEST_TIME not set while in testing mode\n" if not defined $ENV{TEST_TIME};
-        return $ENV{TEST_TIME};
-    }
-    return time;
-}
-
 =head2 challenge
 
 Issue a challenge for the game passed in parameter. Changes
@@ -689,6 +674,9 @@ if (defined $param_schedule) {
         foreach my $game ($Tournament->curr_round->games) {
             print $game->text_status;
         }
+        print "Final date: ".
+            ($Tournament->curr_round->final_date // "undef").
+            " (".  utc2str($Tournament->curr_round->final_date) .")\n";
     }
 
 ########## Print out TOU tournament results

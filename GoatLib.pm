@@ -7,12 +7,16 @@ use Exporter;
 use Time::ParseDate;  # This is in Debian's libtime-modules-perl package
 use Date::Parse;
 use Date::Language;
+use DateTime;  # package libdatetime-perl
 use DateTime::TimeZone;
+use DateTime::Locale; # package libdatetime-locale-perl
 
 use GoatConfig;
 
 our @ISA=qw(Exporter);
-our @EXPORT=qw( stone_to_level level_to_stones download_echelle parse_datestr);
+our @EXPORT=qw( stone_to_level level_to_stones download_echelle parse_datestr 
+utc2str my_time
+);
 
 =head2 fixup_frenchisms
 
@@ -127,5 +131,21 @@ sub download_echelle {
     `wget http://ffg.jeudego.org/echelle/echtxt/ech_ffg_new.txt`;
     return -r $filename;
 }
+
+
+# Turn a UTC time_t into a localised timezoned string
+sub utc2str {
+    my $loc = DateTime::Locale->load($LOCALE);
+    my $o = DateTime->from_epoch(epoch => $_[0], locale => $LOCALE, time_zone=>$TIMEZONE);
+    my $date = $o->strftime("%A %d %B %Y %R");
+}
+
+
+# Equivalent to time(), except if $ENV{TEST_TIME} is defined it returns that instead.
+# This allows regression testing.
+sub my_time {
+    return $ENV{TEST_TIME} // time;
+}
+
 
 1;

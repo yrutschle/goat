@@ -1,7 +1,7 @@
 #! /usr/bin/perl -w
 
 # Goat: Gentil Organisateur et Administrateur de Tournois
-# Copyright (C) 2006-2017 Yves Rutschle
+# Copyright (C) 2006-2018 Yves Rutschle
 # 
 # This program is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public
@@ -87,7 +87,7 @@ if (defined $param_final_date) {
     $final_date = parse_datestr($param_final_date);
     die "Wrong date format $param_final_date." unless defined $final_date;
 } else {
-    $final_date = time + 30 * 24 * 3600; # one month in the future
+    $final_date = my_time + 30 * 24 * 3600; # one month in the future
 }
 
 

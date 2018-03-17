@@ -1,7 +1,7 @@
 #! /usr/bin/perl -w
 
 # Goat: Gentil Organisateur et Administrateur de Tournois
-# Copyright (C) 2006-2015 Yves Rutschle
+# Copyright (C) 2006-2018 Yves Rutschle
 # 
 # This program is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public
@@ -77,17 +77,6 @@ die pod2usage(-verbose=>2) if defined $help;
 die "No tournament file specified. Use -f <file>.\n" unless defined $param_file;
 my $Tournament = Tournament->load($param_file);
 
-
-#Equivalent to time(), except if $testing is true it will
-#pick the time in $ENV{TEST_TIME}. This allows regression
-#testing.
-sub my_time {
-    if ($testing) {
-        die "TEST_TIME not set while in testing mode\n" if not defined $ENV{TEST_TIME};
-        return $ENV{TEST_TIME};
-    }
-    return time;
-}
 
 # Applies function to all games in a tournament. Game is
 # passed as first parameter to function, e.g. remove all
@@ -245,7 +234,7 @@ if (defined $param_final_date) {
     $final_date = parse_datestr($param_final_date);
     die "Wrong date format $param_final_date." unless defined $final_date;
 } else {
-    $param_final_date = my_time() + 30 * 24 * 3600; # one month in the future
+    $final_date = my_time() + 30 * 24 * 3600; # one month in the future
 }
 $round->final_date($final_date);
 $Tournament->add_round($round_num, $round);

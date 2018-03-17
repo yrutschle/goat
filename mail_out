@@ -1,7 +1,7 @@
 #! /usr/bin/perl -w
 
 # Goat: Gentil Organisateur et Administrateur de Tournois
-# Copyright (C) 2006-2016  Yves Rutschle
+# Copyright (C) 2006-2018  Yves Rutschle
 # 
 # This program is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public
@@ -56,7 +56,6 @@ use MIME::Entity;
 use Data::ICal;
 use Data::UUID;
 use DateTime;  # package libdatetime-perl
-use DateTime::Locale; # package libdatetime-locale-perl
 use DateTime::Format::ICal; 
 use Data::ICal::Entry::Event;
 use Template;
@@ -73,6 +72,7 @@ BEGIN {
 }
 
 use GoatConfig;
+use GoatLib;
 
 
 my $LOGFILE = "$LOG_DIR/mail_out.log";
@@ -93,14 +93,6 @@ my $tt = Template->new({
 # Testing: to make some normally random things non-random
 # No_send: to prevent sending mail
 my ($help, $testing, $no_send); 
-
-# Turn a UTC time_t into a localised timezoned string
-sub utc2str {
-    my $loc = DateTime::Locale->load($LOCALE);
-    my $o = DateTime->from_epoch(epoch => $_[0], locale => $LOCALE, time_zone=>$TIMEZONE);
-    my $date = $o->strftime("%A %d %B %Y %R");
-}
-
 
 =head2 OPTIONS
 
