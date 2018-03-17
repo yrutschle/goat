@@ -60,6 +60,7 @@ use DateTime::Format::ICal;
 use Data::ICal::Entry::Event;
 use Template;
 use POSIX;
+use Data::Dumper;
 
 # Check we have the right environment variables to find
 # the modules, and add to @INC.
@@ -128,6 +129,11 @@ Sends players their pairing.
 
 Notify players that I<setter> has scheduled the game to take
 place on I<date> in I<location>
+
+=item --deadline <round,date>
+
+Notify organiser that tournament round I<round> is to finish
+on I<date> (UNIX timestamp), with an ICS attached.
 
 =item --coming-up <black,white,handicap,date,location>
 
@@ -236,6 +242,44 @@ EOF
         },
         template => "scheduled.tt",
         mailto => [qw/black white/],
+    ),
+
+    'deadline=s' => process_action(
+        param_names => [qw/ round time /],
+        postprocess => sub {
+            my ($data) = @_;
+
+            $data->{date} = utc2str $data->{time};
+            $data->{date} =~ s/ \d\d:\d\d//; # Keep date only
+
+            # Create ICS for end of round
+            my $dt = DateTime::Format::ICal->format_datetime(
+                DateTime->from_epoch(epoch => $data->{time}));
+            # format_datetime doesn't seem to produce  all-day event, so remove time spec
+            # manually
+            $dt =~ s/T.*//;
+            my $ical = Data::ICal->new();
+            my $ug = Data::UUID->new();
+            my $event = Data::ICal::Entry::Event->new();
+            my $desc = "$TOURNAMENT_NAME: end round $data->{round}";
+            $event->add_properties(
+                summary => $desc,
+                description => $desc,
+                dtstart => $dt,
+                dtend => $dt,
+                location => $data->{location},
+                uid => $ug->to_string($ug->create()),
+            );
+            if ($testing) {
+                # Give variable / random fields fixed values
+                $ical->add_properties(prodid => "Goat test suite");
+                $event->add_properties(uid => "00000000-0000-0000-HELL-0WORLD000000");
+            }
+            $ical->add_entry($event);
+            $data->{ics} = Encode::encode('UTF-8', $ical->as_string);
+        },
+        template => "deadline.tt",
+        mailto => [qw/ admin_address /],
     ),
 
     'coming-up=s'               => process_action(
@@ -377,7 +421,6 @@ sub sendmail {
 
 
 # Returns a callback that can be passed to GetOptions
-use Data::Dumper;
 sub process_action {
     my (%action) = @_;
     return sub {

@@ -1,0 +1,6 @@
+Subject: [[% subject_prefix %]] Fin de ronde [% round %]: [% date %]
+
+La ronde [% round %] du tournoi doit terminer: [% date %]
+
+(Mais bon, y'a l'ICS joint pour ça).
+
