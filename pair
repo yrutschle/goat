@@ -267,5 +267,5 @@ my $mail_out_opts = "";
 if ($testing) {
     $mail_out_opts = "--no-send";
 }
-system("$BIN_MAIL_OUT $mail_out_opts --deadline $round_num,$param_final_date");
+system("$BIN_MAIL_OUT $mail_out_opts --deadline $round_num,$final_date");
 
