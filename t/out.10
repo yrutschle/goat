@@ -1,4 +1,4 @@
-Sat Jul 30 15:30:00 2005: notify Jean-Jacques PORTAL <jean-jacques.portal@example.org> and Yves RUTSCHLE <yves@example.org> their game is finished and white won; result given by Yves@Example.Org
+Sat Jul 30 15:30:00 2005: notify Jean-Jacques PORTAL <jean-jacques.portal@example.org> and Yves RÜTSCHLÉ <yves@example.org> their game is finished and white won; result given by Yves@Example.Org
  <yves@example.org>
 Content-Transfer-Encoding: binary
 Content-Type: multipart/mixed; boundary="---testing42ftwtesting"
@@ -6,7 +6,7 @@ From: GO Assistant <goat@rutschle.net>
 MIME-Version: 1.0
 Return-Path: GO Assistant <goat@rutschle.net>
 Subject: [goat] Résultat de votre ronde
-To: Jean-Jacques PORTAL <jean-jacques.portal@example.org>,Yves RUTSCHLE
+To: Jean-Jacques PORTAL <jean-jacques.portal@example.org>,Yves RÜTSCHLÉ
 X-Loop: GO Assistant <goat@rutschle.net>
 X-Mailer: MIME-Tools with no versionThis is a multi-part message in MIME format...
 
@@ -15,12 +15,12 @@ Content-Type: text/plain; charset="UTF-8"
 Content-Disposition: inline
 Content-Transfer-Encoding: binary
 
-Vous avez reçu ce courrier car vous êtes inscrit au Tournoi permanent de Toulouse.
+Vous avez reçu ce courrier car vous êtes inscrit au Tournoi pérmanent de Tøulouse.
 Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@rutschle.net>.
 
 
 Le résultat de votre partie a été enregistré.
-Jean-Jacques PORTAL <jean-jacques.portal@example.org> contre Yves RUTSCHLE <yves@example.org>, victoire pour Yves RUTSCHLE <yves@example.org>.
+Jean-Jacques PORTAL <jean-jacques.portal@example.org> contre Yves RÜTSCHLÉ <yves@example.org>, victoire pour Yves RÜTSCHLÉ <yves@example.org>.
 
 Le résultat a été rapporté par Yves@Example.Org.
 

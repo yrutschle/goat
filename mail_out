@@ -238,7 +238,7 @@ EOF
                 $event->add_properties(uid => "00000000-0000-0000-HELL-0WORLD000000");
             }
             $ical->add_entry($event);
-            $data->{ics} = Encode::encode('UTF-8', $ical->as_string);
+            $data->{ics} = $ical->as_string; # encoding is done in sendmail
         },
         template => "scheduled.tt",
         mailto => [qw/black white/],
@@ -276,7 +276,7 @@ EOF
                 $event->add_properties(uid => "00000000-0000-0000-HELL-0WORLD000000");
             }
             $ical->add_entry($event);
-            $data->{ics} = Encode::encode('UTF-8', $ical->as_string);
+            $data->{ics} = $ical->as_string; # encoding is done in sendmail
         },
         template => "deadline.tt",
         mailto => [qw/ admin_address /],

@@ -1,4 +1,4 @@
-Sat Jul 30 15:30:00 2005: notify Jean-Jacques PORTAL <jean-jacques.portal@example.org> and Yves RUTSCHLE <yves@example.org> that their game has been scheduled on Sun Oct  9 18:30:00 2016 (GMT) in Le Cactus by yves@example.org
+Sat Jul 30 15:30:00 2005: notify Jean-Jacques PORTAL <jean-jacques.portal@example.org> and Yves RÜTSCHLÉ <yves@example.org> that their game has been scheduled on Sun Oct  9 18:30:00 2016 (GMT) in Le Cactus by yves@example.org
  <yves@example.org>
 Content-Transfer-Encoding: binary
 Content-Type: multipart/mixed; boundary="---testing42ftwtesting"
@@ -6,7 +6,7 @@ From: GO Assistant <goat@rutschle.net>
 MIME-Version: 1.0
 Return-Path: GO Assistant <goat@rutschle.net>
 Subject: [goat] Partie: Le Cactus, dimanche 09 octobre 2016 20:30
-To: Jean-Jacques PORTAL <jean-jacques.portal@example.org>,Yves RUTSCHLE
+To: Jean-Jacques PORTAL <jean-jacques.portal@example.org>,Yves RÜTSCHLÉ
 X-Loop: GO Assistant <goat@rutschle.net>
 X-Mailer: MIME-Tools with no versionThis is a multi-part message in MIME format...
 
@@ -15,7 +15,7 @@ Content-Type: text/plain; charset="UTF-8"
 Content-Disposition: inline
 Content-Transfer-Encoding: binary
 
-Vous avez reçu ce courrier car vous êtes inscrit au Tournoi permanent de Toulouse.
+Vous avez reçu ce courrier car vous êtes inscrit au Tournoi pérmanent de Tøulouse.
 Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@rutschle.net>.
 
 
@@ -24,7 +24,7 @@ yves@example.org a programmé votre partie:
 Lieu: Le Cactus
 Date: dimanche 09 octobre 2016 20:30
 Noir: Jean-Jacques PORTAL <jean-jacques.portal@example.org>
-Blanc: Yves RUTSCHLE <yves@example.org>
+Blanc: Yves RÜTSCHLÉ <yves@example.org>
 Handicap: 1
 
 Après la partie, merci de publier le résultat en répondant à
@@ -46,12 +46,12 @@ Content-Transfer-Encoding: base64
 QkVHSU46VkNBTEVOREFSDQpWRVJTSU9OOjIuMA0KUFJPRElEOkdvYXQgdGVz
 dCBzdWl0ZQ0KQkVHSU46VkVWRU5UDQpERVNDUklQVElPTjpub2lyOiBKZWFu
 LUphY3F1ZXMgUE9SVEFMIDxqZWFuLWphY3F1ZXMucG9ydGFsQGV4YW1wbGUu
-b3JnPlxuYmwNCiBhbmM6IFl2ZXMgUlVUU0NITEUgPHl2ZXNAZXhhbXBsZS5v
-cmc+XG5oYW5kaWNhcDogMVxuDQpEVEVORDoyMDE2MTAwOVQyMDMwMDBaDQpE
-VFNUQVJUOjIwMTYxMDA5VDE4MzAwMFoNCkxPQ0FUSU9OOkxlIENhY3R1cw0K
-U1VNTUFSWTpUb3Vybm9pIHBlcm1hbmVudCBkZSBUb3Vsb3VzZQ0KVUlEOjAw
-MDAwMDAwLTAwMDAtMDAwMC1IRUxMLTBXT1JMRDAwMDAwMA0KRU5EOlZFVkVO
-VA0KRU5EOlZDQUxFTkRBUg0K
+b3JnPlxuYmwNCiBhbmM6IFl2ZXMgUsOcVFNDSEzDiSA8eXZlc0BleGFtcGxl
+Lm9yZz5cbmhhbmRpY2FwOiAxXG4NCkRURU5EOjIwMTYxMDA5VDIwMzAwMFoN
+CkRUU1RBUlQ6MjAxNjEwMDlUMTgzMDAwWg0KTE9DQVRJT046TGUgQ2FjdHVz
+DQpTVU1NQVJZOlRvdXJub2kgcMOpcm1hbmVudCBkZSBUw7h1bG91c2UNClVJ
+RDowMDAwMDAwMC0wMDAwLTAwMDAtSEVMTC0wV09STEQwMDAwMDANCkVORDpW
+RVZFTlQNCkVORDpWQ0FMRU5EQVINCg==
 
 -----testing42ftwtesting--
 Tournament: tpToulouse
@@ -100,7 +100,7 @@ challenged: Boreï ENG <boreieng@example.org>	Jean-yves PAPAZOGLOU <jeanyves.pap
                 Challenge sent Sat Jul 30 15:30:00 2005
                 Not scheduled
 
-scheduled: Jean-Jacques PORTAL <jean-jacques.portal@example.org>	Yves RUTSCHLE <yves@example.org>	(1 stones) 	 
+scheduled: Jean-Jacques PORTAL <jean-jacques.portal@example.org>	Yves RÜTSCHLÉ <yves@example.org>	(1 stones) 	 
                 Challenge sent Sat Jul 30 15:30:00 2005
                 Scheduled for Sun Oct  9 18:30:00 2016 at Le Cactus
 
