@@ -3,7 +3,7 @@ Subject: [[% subject_prefix %]] N'oubliez pas d'organiser votre partie!
 [% INCLUDE header.tt %]
 
 Vous n'avez pas encore arrangé votre partie. Les parties de
-cette ronde sont à jouer pour le [% date %].
+cette ronde sont à jouer pour le [% dateonly %].
 
 Noir: [% black %]
 Blanc: [% white %]

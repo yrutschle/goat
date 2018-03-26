@@ -3,7 +3,7 @@ Subject: [[% subject_prefix %]] Votre appariement
 [% INCLUDE header.tt %]
 
 Voici votre appariement pour la prochaine ronde, à jouer
-pour le [% date %] :
+pour le [% dateonly %] :
 
 Noir: [% black %]
 Blanc: [% white %]

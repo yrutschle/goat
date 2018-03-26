@@ -160,8 +160,10 @@ Notify I<rcpt> that I<colour> is not a valid color.
 =cut
         # process_action() turns the parameters passed to the
         # option into a hash nameѕ after names in
-        # param_names, then if 'date' exists turns it to
-        # string, then calls postprocess if it exists
+        # param_names, 
+        # - if 'date' exists turns it to string (with time)
+        # - if 'dateonly' exists turn it to string (no time)
+        #  , then calls postprocess if it exists
         # passing the data hash has parameter, then
         # processes the specified template and mails the
         # result to the email addresses coming from the
@@ -181,7 +183,7 @@ my %options = (
     ),
 
     'remind-challenge=s'        => process_action(
-        param_names => [qw/black white handi date/],
+        param_names => [qw/black white handi dateonly/],
         template => "organise.tt",
         mailto => [qw/black white/],
     ),
@@ -199,7 +201,7 @@ my %options = (
     ),
 
     'issue-challenge=s'         => process_action(
-        param_names => [qw/black white handi date/],
+        param_names => [qw/black white handi dateonly/],
         template => "pairing.tt",
         mailto => [qw/black white/],
     ),
@@ -428,6 +430,7 @@ sub process_action {
         my @param_values = split /\s*,\s*/, $params;
         my %data = make_hash($action{param_names}, \@param_values);
         $data{date} = utc2str $data{date} if exists $data{date};
+        $data{dateonly} = utc2str $data{dateonly}, "%A %d %B %Y" if exists $data{dateonly};
         $data{goat_address} = $GOAT_ADDRESS;
         $data{admin_address} = $ADMIN_ADDRESS;
         $data{tournament_name} = $TOURNAMENT_NAME;

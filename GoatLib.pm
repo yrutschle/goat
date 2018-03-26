@@ -134,10 +134,13 @@ sub download_echelle {
 
 
 # Turn a UTC time_t into a localised timezoned string
+# ts: time_t
+# format: strftime format, with sane default if undef
 sub utc2str {
+    my ($ts, $format) = @_;
     my $loc = DateTime::Locale->load($LOCALE);
     my $o = DateTime->from_epoch(epoch => $_[0], locale => $LOCALE, time_zone=>$TIMEZONE);
-    my $date = $o->strftime("%A %d %B %Y %R");
+    my $date = $o->strftime($format // "%A %d %B %Y %R");
 }
 
 
