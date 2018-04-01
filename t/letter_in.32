@@ -1,0 +1,85 @@
+Received: from smtp12.smtpout.orange.fr ([80.12.242.134] helo=smtp.smtpout.orange.fr)
+	by hood.rutschle.net with esmtps (TLS1.0:DHE_RSA_AES_128_CBC_SHA1:128)
+	(Exim 4.89)
+	(envelope-from <pascal.beaumont74@example.org>)
+	id 1f0vBz-0007Ki-B1
+	for goat_ffg@example.org; Tue, 27 Mar 2018 20:27:39 +0000
+Received: from wwinf1u17 ([10.223.74.61])
+	by mwinf5d35 with ME
+	id T8Te1x00d1KLjbe038TeSU; Tue, 27 Mar 2018 22:27:38 +0200
+X-ME-Helo: wwinf1u17
+X-ME-Auth: cGFzY2FsLmJlYXVtb250NzRAb3JhbmdlLmZy
+X-ME-Date: Tue, 27 Mar 2018 22:27:38 +0200
+X-ME-IP: 10.79.5.104
+Date: Tue, 27 Mar 2018 22:27:38 +0200 (CEST)
+From: Pascal BEAUMONT <pascal.beaumont74@example.org>
+Reply-To: Pascal BEAUMONT <pascal.beaumont74@example.org>
+To: goat_ffg@example.org
+Message-ID: <1157288187.18085.1522182458764.JavaMail.www@wwinf1u17>
+Subject: Game Records from Tetsuki
+MIME-Version: 1.0
+Content-Type: multipart/mixed; 
+	boundary="----=_Part_18084_944695894.1522182458702"
+X-Country-Code: 
+Message-Context: email-message
+X-Cache-ID: 
+X-WUM-SignatureAdded: 
+X-Cache-Entry: 
+X-Wum-Nature: EMAIL-NATURE
+X-Originating-IP: 10.79.5.104
+X-Message-Size: 
+X-SAVECOPY: true
+X-National-Code: 
+X-Wum-ChannelType: 
+X-WUM-FROM: |~|
+X-WUM-TO: |~|
+X-WUM-REPLYTO: |~|
+
+------=_Part_18084_944695894.1522182458702
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+resultat noir
+------=_Part_18084_944695894.1522182458702
+Content-Type: application/x-go-sgf; name="Game 1.sgf"
+content-transfer-encoding: base64
+Content-Disposition: attachment; size=2744; size=2892; filename="Game 1.sgf"
+
+KAo7RkZbNF0KIEdNWzFdCiBDQVtVVEYtOF0KIEFQW1RldHN1a2ldCiBHTlsxMjIyNzk0OS0yOTYt
+VGNob3VtaS1zY2Fsc2Vuc2VpNzQgKDIpLnNnZl0KIERUWzIwMTgvMDMvMjddCiBTWlsxOV0KIEhB
+WzBdCiBLTVs3LjVdCiBSVVtKYXBhbmVzZV0KIFJFW0IrMjEuNV0KIEJSWzE3a10KIFBCW3NjYWxz
+ZW5zZWk3NF0KIFdSWzE3a10KIFBXW1RjaG91bWldCjtCW3BkXTtXW2NwXTtCW3BxXTtXW2RkXTtC
+W3FrXTtXW25jXTtCW3BmXTtXW2pkXTtCW2VwXTtXW2RuXQo7QltocF07V1tucF07Qltwb107V1tr
+cV07QltqcV07V1tqcF07QltpcV07V1tscF07QltkcV07V1tjcV0KO0JbY3JdO1dbYnJdO0JbZHJd
+O1dbYXFdO0JbY2tdO1dbY2xdO0JbY2ZdO1dbY2ldO0JbZmNdO1dbZWVdCjtCW2dlXTtXW2RnXTtC
+W2NnXTtXW2VjXTtCW2hjXTtXW2JkXTtCW2JpXTtXW2JrXTtCW2NqXTtXW2NoXQo7QltiaF07V1tw
+Yl07QltxY107V1txYl07QltyYl07V1tvbl07Qltwbl07V1tvbF07QltwbF07V1twaV0KO0JbcWhd
+O1dbcWldO0JbcGhdO1dbb2hdO0Jbb2ddO1dbb2pdO0JbcmldO1dbcmpdO0JbcmhdO1dbcWpdCjtC
+W3JrXTtXW3NqXTtCW3NrXTtXW2luXTtCW2duXTtXW2ZvXTtCW2dvXTtXW2ZwXTtCW2ZxXTtXW2Vv
+XQo7QltncV07V1tkcF07QltlcV07V1tlbF07QltnbF07V1tlal07Qltial07V1tibF07QltlaV07
+V1tlaF0KO0JbZmldO1dbZ2tdO0JbZmtdO1dbZmpdO0JbZ2pdO1dbaGtdO0JbZWtdO1dbZGpdO0Jb
+ZGtdO1dbZ2ldCjtCW2hqXTtXW2ZoXTtCW2RpXTtXW2htXTtCW2hsXTtXW2lrXTtCW2dtXTtXW2ls
+XTtCW2RoXTtXW2lpXQo7QltlZ107V1tkZl07QltnaF07V1tmZl07QltmZ107V1tnZl07QltlZl07
+V1tkZV07QltoZl07V1tmZV0KO0JbZ2RdO1dbaGddO0JbaWZdO1dbaWRdO0JbaGVdO1dbaWddO0Jb
+aGldO1dbamZdO0JbaWNdO1dbamNdCjtCW2piXTtXW2ZiXTtCW2diXTtXW2ViXTtCW2ZkXTtXW2ti
+XTtCW2lhXTtXW2liXTtCW2hiXTtXW2dhXQo7QltoZF07V1trYV07QltqYV07V1tsY107QltuZV07
+V1ttZ107QltuZ107V1tuaF07QlttZl07V1tvZF0KO0Jbb2VdO1dbcGNdO0JbcWRdO1dbbGddO0Jb
+aWpdO1dbampdO0JbamldO1dbaWhdO0JbZ2ddO1dba2ldCjtCW2pnXTtXW2poXTtCW2tnXTtXW2tm
+XTtCW2RsXTtXW2RtXTtCW2VtXTtXW2pyXTtCW2lyXTtXW2tyXQo7Qltqb107V1tpcF07Qltpb107
+V1trcF07Qltobl07V1trbl07Qltqbl07V1tpbV07QltqbV07V1tqbF0KO0Jba2xdO1dbamtdO0Jb
+a21dO1dba29dO0JbbWxdO1dbbW1dO0JbbG1dO1dbbG5dO0Jbbm1dO1dbbW5dCjtCW29tXTtXW25s
+XTtCW25rXTtXW29rXTtCW25qXTtXW25uXTtCW3BtXTtXW21rXTtCW2xsXTtXW2xrXQo7QltuaV07
+V1tra107Qltob107V1ttaV07Qltwal07V1ttal07QltzaV07V1tvaV07Qltwa107V1tuZF0KO0Jb
+bWRdO1dbbWNdO0JbbGRdO1dbbGVdO0JbbWVdO1dba2RdO0Jba2VdO1dbamVdO0JbbGZdO1dba2hd
+CjtCW2JlXTtXW2NlXTtCW2FkXTtXW2JmXTtCW2JnXTtXW2FlXTtCW2FnXTtXW2FjXTtCW2FmXTtX
+W2JlXQo7Qltha107V1thbF07QltjbV07V1twcl07Qltxcl07V1tvcl07QltvcV07V1txcV07Qltx
+cF07V1tycV0KO0JbcnJdO1dbbnFdO0Jbb3BdO1dbb29dO0JbcHBdO1dbcnBdO0Jbcm9dO1dbcXNd
+O0Jbc3BdO1dbYm1dCjtCW2NuXTtXW2JuXTtCW3JzXTtXW3BzXTtCW25yXTtXW21yXTtCW25zXTtX
+W21zXTtCW29zXTtXW2lzXQo7Qltocl07V1tmbV07QltmbF07V1toc107Qltnc107V1tqc107Qltl
+bl07V1tkb107Qltmbl07V1tncF0KO0JbcWFdO1dbcGFdO0JbcmFdO1dbY3NdO0JbZHNdO1dbYnNd
+O0JbYWpdO1dbZWRdO0JbaGFdO1dbZmFdCjtCW2hoXTtXW2llXTtCW2tlXTtXW2ZzXTtCW2dyXTtX
+W2xlXTtCW2NjXTtXW2tlXTtCW2JjXTtXW2JiXQo7QltjYl07V1tkYl07QltiYV07V1thYl07Qltj
+YV07V1tkYV07QlthYV07V1tzYl07QltyY107V1tdCjtCW2FkXTtXW2FiXTtCW2FjXTtXW2NkXTtC
+W107V1tdKQ==
+
+------=_Part_18084_944695894.1522182458702--

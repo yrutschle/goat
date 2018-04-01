@@ -154,6 +154,11 @@ push @tests,
       'test' => 'diff -u ../out.31 out.31',
       'doc' => 'Receive SGF with UTF8 names',
   },
+  # Receive SGF with invalid date
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.32 letter; cp ../toperm_in.31 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.32 2>&1 ; perl $perl_opts ../../goat --status >> out.32 2>&1",
+      'test' => 'diff -u ../out.32 out.32',
+      'doc' => 'Receive SGF with invalid date',
+  },
   # Check for loops
     { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.14 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.12",
       'test' => 'diff -u ../out.12 out.12',

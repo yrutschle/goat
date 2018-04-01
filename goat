@@ -508,7 +508,6 @@ sub finish_game {
 
     print "$today_str: notify $b and $w their game is finished and $winning_colour won; result given by $submitter\n";
     system("$BIN_MAIL_OUT $mail_out_opts --give-results='$b,$w,$winning_colour,$submitter'");
-
 }
 
 
@@ -596,6 +595,11 @@ if (defined $param_schedule) {
     }
 
     my $sgf_date = $sgf->DT;
+    # If SGF date is invalid (e.g. pandanet), use today's date instead
+    if ($sgf_date !~ /\d{4}-\d{2}-\d{2}/) {
+        $sgf_date = utc2str($today, "%F");
+    }
+
     $sgf->RE =~ /^([BW])/;
     my $res = $1;
     if ($res eq 'W') {
@@ -778,7 +782,6 @@ close $fh;
 
 # Everything done -- update the file
 $Tournament->save($toperm_file) unless $simulate;
-
 
 # Formats for score printing. This isn't good and should be
 # abstracted somehow.
