@@ -24,7 +24,7 @@ pair -- compute a new round in a tournament
 
 =head1 SYNOPSIS
 
-pair [--bye [<bye_player>|'random']] [--date <date>] --file <toperm>
+pair [--bye [<bye_player>|'random']] [--date <date>] [--verbose <1|2>] --file <toperm>
 
 =head1 DESCRIPTION
 
@@ -65,12 +65,14 @@ use Getopt::Long;
 
 # Interpret command line
 my ($testing, $param_file, $param_bye, $param_final_date, $help);
+my $verbose = 0;
 GetOptions(
     'test' => \$testing,
     'help' => \$help,
     'file=s' => \$param_file,
     'date=s' => \$param_final_date,
     'bye=s' => \$param_bye,
+    'verbose=i' => \$verbose,
 ) or die pod2usage();
 
 die pod2usage(-verbose=>2) if defined $help;
@@ -167,9 +169,9 @@ my %criteria = (
 sub score {
     my ($a, $b) = @_;
 
-    my $exp = 1; # Explain (not implemented)
+    my $explain = ($verbose >= 2);
     my $sum = 0;
-    map { $sum += &$_($a, $b, $exp) } @criteria{ @PAIRING_CRITERIA };
+    map { $sum += &$_($a, $b, $explain) } @criteria{ @PAIRING_CRITERIA };
     return $sum;
 }
 
@@ -179,8 +181,10 @@ $matchmaker = Algorithm::Pair::Best2->new(
     window => 6,
     progress => sub {
         my ($p1, $p2, $i1, $i2) = @_;
-        my $score = $matchmaker->get_score($i1, $i2);
-        print "Paired ".$p1->fullname." - ".$p2->fullname." ($score)\n";
+        if ($verbose >= 1) {
+            my $score = $matchmaker->get_score($i1, $i2);
+            print "Paired ".$p1->fullname." - ".$p2->fullname." ($score)\n";
+        }
     }
 );
 
