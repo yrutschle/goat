@@ -129,6 +129,8 @@ my %criteria = (
 
         my $score = $diff;
 
+        print "level_diff:\t".$p1->fullname." vs ".$p2->fullname.": $score\n" if $explain;
+
         return $score;
     },
 
@@ -145,14 +147,19 @@ my %criteria = (
         } $Tournament;
 
         my $score = 10000 * $played;
+
+        print "already_played:\t".$p1->fullname." vs ".$p2->fullname.": $score\n" if $explain;
         return $score;
     },
 
     same_club => sub {
         my ($p1, $p2, $explain) = @_;
 
-        return 500 if $p1->club eq $p2->club;
-        return 0;
+        my $score = 0;
+        $score = 500 if $p1->club eq $p2->club;
+
+        print "same_club:\t".$p1->fullname." vs ".$p2->fullname.": $score\n" if $explain;
+        return $score;
     },
 );
 
@@ -160,15 +167,21 @@ my %criteria = (
 sub score {
     my ($a, $b) = @_;
 
-    my $exp = 0; # Explain (not implemented)
+    my $exp = 1; # Explain (not implemented)
     my $sum = 0;
     map { $sum += &$_($a, $b, $exp) } @criteria{ @PAIRING_CRITERIA };
     return $sum;
 }
 
-my $matchmaker = Algorithm::Pair::Best2->new(
+my $matchmaker;
+$matchmaker = Algorithm::Pair::Best2->new(
     scoreSub => \&score,
     window => 6,
+    progress => sub {
+        my ($p1, $p2, $i1, $i2) = @_;
+        my $score = $matchmaker->get_score($i1, $i2);
+        print "Paired ".$p1->fullname." - ".$p2->fullname." ($score)\n";
+    }
 );
 
 
@@ -210,6 +223,8 @@ if (1 & @players) {
 }
 
 # Add all players to the pairing object. 
+# (Sorted so they're already sort of close to each other wrt
+# to the criteria)
 foreach my $p (reverse sort {$a->level <=> $b->level} @players) {
     $matchmaker->add($p);
 }
