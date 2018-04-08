@@ -127,9 +127,6 @@ while (<>) {
 
 # Tournament object
 my $t = new Tournament (
-    name => $TOURNAMENT_NAME,
-    city => $TOURNAMENT_CITY,
-    comments=> $TOURNAMENT_NAME,
     time=> 60,
     size=> 19,
     komi=> 7.5,

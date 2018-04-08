@@ -18,14 +18,14 @@ use Fcntl ':flock';
 Round contains all the information about a tournament:
 List of rounds, dates, and so on.
 
-This is designed to easily translate into a FFG .TOU tournament result file, even though maybe not everything makes sense (e.g. 'date' doesn't make sense for Toulouse's permanent tournament, 'city' doesn't make sense for an Internet tournament etc.).
+This is designed to easily translate into a FFG .TOU tournament result file, even though maybe not everything makes sense (e.g. 'date' doesn't make sense for Toulouse's permanent tournament).
 
 =cut
 
 use vars qw/@attributes/;
 
 BEGIN {
-    @attributes = qw/name date city comments prog time size komi round_number Round FFGPlayer filename/;
+    @attributes = qw/date prog time size komi round_number Round FFGPlayer filename/;
     my $subs;
     foreach my $data ( @attributes ) {
         $subs .= qq{
@@ -39,9 +39,9 @@ BEGIN {
 
 =over 4
 
-=item Tournament->new ( name => "tpToulouse", city => "Toulouse" )
+=item Tournament->new( time => 60, komi => 7.5 );
 
-Creates a new object, using the specified options
+Creates a new object, optionally set attributes
 
 =cut
 sub new {
@@ -60,6 +60,14 @@ sub new {
     return $obj;
 }
 
+# Accessor to constants
+sub name {
+    return $TOURNAMENT_NAME;
+}
+
+sub city {
+    return $TOURNAMENT_CITY;
+}
 
 # Locking is done by creating a .lock file.
 # There is still a race condition between the existence check and the creation
@@ -305,9 +313,8 @@ including rounds specified by $rounds.
 =cut
 sub tou_header {
     my ($obj, $rounds) = @_;
-    my ($name, $date, $city, $comments, $prog, $time, $size, $komi) =
-       ($obj->name, $obj->date, $obj->city, $obj->comments, 
-           $obj->prog, $obj->time, $obj->size, $obj->komi);
+    my ($date, $prog, $time, $size, $komi) =
+       ($obj->date, $obj->prog, $obj->time, $obj->size, $obj->komi);
 
     # If date not set, pick today as default.
     if (not defined $date) {
@@ -315,15 +322,18 @@ sub tou_header {
         $m++; $y += 1900;
         $date = sprintf "%02d/%02d/%04d", $d,$m,$y;
     }
+
+    my $name = $obj->name;
+    my $city = $obj->city;
     
     # Add round numbers to comment field
-    $comments .= ", ronde $rounds"  if defined $rounds;
+    $name.= " - Ronde #$rounds"  if defined $rounds;
 
     return <<EOF;
 ;name=$name
 ;date=$date
 ;vill=$city
-;comm=$comments
+;comm=$name
 ;prog=$prog
 ;time=$time+b
 ;size=$size
@@ -467,13 +477,15 @@ use HTML::Table;  # apt-get install libhtml-table-perl
 sub as_HTML {
     my ($obj, %opts) = @_;
 
+    my $tname = $obj->name;
+
     my $html = 
     start_html(
-        -title => $TOURNAMENT_NAME,
+        -title => $tname,
         -encoding => 'UTF-8',
-    ), h1($obj->name);
+    ), h1($tname);
 
-    $html .= "<h1>".$obj->name."</h1><h2>Inscrits</h2>";
+    $html .= "<h1>".$tname."</h1><h2>Inscrits</h2>";
 
     # Player list
     my $table = new HTML::Table(-cols=>3, -border=>1);
