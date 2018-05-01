@@ -1,0 +1,206 @@
+#! /usr/bin/perl -w
+
+# Goat: Gentil Organisateur et Administrateur de Tournois
+# Copyright (C) 2018  Yves Rutschle
+# 
+# This program is free software; you can redistribute it
+# and/or modify it under the terms of the GNU General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later
+# version.
+# 
+# This program is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied
+# warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+# PURPOSE.  See the GNU General Public License for more
+# details.
+# 
+# The full text for the General Public License is here:
+# http://www.gnu.org/licenses/gpl.html
+
+=head1 NAME
+
+imap_frontend -- goat's IMAP client
+
+=head1 SYNOPSIS
+
+imap_frontend [--once]
+
+=head1 DESCRIPTION
+
+C<imap_frontend> connects to an IMAP mailbox, and waits for
+incoming e-mails to pass them on to C<mail_in> (which in
+turns parses them and passes them to C<goat>).
+
+=head1 OPTIONS
+
+=over 4
+
+=item --once
+
+Run only once: check if there is mail, process it and leave.
+
+=back
+
+=cut
+
+
+use strict;
+
+# Check we have the right environment variables to find
+# the modules, and add to @INC.
+BEGIN {
+    die "Environment variable GOAT_DIR and WORK_DIR must be defined\n" 
+        if not defined $ENV{GOAT_DIR} or not defined $ENV{WORK_DIR};
+
+    push @INC, $ENV{GOAT_DIR};
+}
+use GoatConfig;
+
+use Mail::IMAPClient; # libmail-imapclient-perl, the only module that supports IMAP IDLE
+use IO::Socket::SSL;
+use Getopt::Long;
+use Pod::Usage;
+
+
+my ($help, $param_once);
+GetOptions(
+    'help' => \$help,
+    'once' => \$param_once,
+) or die pod2usage();
+die pod2usage(-verbose=>2) if defined $help;
+
+
+my $imap_server = $CFG->{imap_server} or die "imap_server not set\n";
+my $imap_port = $CFG->{imap_port} // "imaps";
+my $imap_root_ca = $CFG->{imap_root_ca};  # Optional
+my $imap_user = $CFG->{imap_user} or die "imap_user not set\n";
+my $imap_passwd = $CFG->{imap_passwd} or die "imap_passwd not set\n";
+
+my $imap_socket = IO::Socket::SSL->new(
+    PeerAddr => "$imap_server:$imap_port",
+    defined $imap_root_ca ? ( SSL_ca_file => $imap_root_ca ) : undef,
+);
+die "$@\n" unless defined $imap_socket;
+
+my $imap = Mail::IMAPClient->new();
+$imap->Socket($imap_socket);
+$imap->User($imap_user);
+$imap->Password($imap_passwd);
+$imap->login() or die "$@\n";
+
+
+my $folder = "INBOX";
+
+$imap->select($folder);
+
+
+# First, process all message
+&process();
+
+exit if defined $param_once;
+
+my $maxidle = 600; # in seconds
+my $DEBUG = 0;
+
+# And loop, waiting for new messages
+# (this is almost entirely from /usr/share/doc/libmail-imapclient-perl/examples/idle.pl.gz)
+my ($tag, $chkseen);
+while (1) {
+    unless ($imap->IsConnected) {
+        $imap->connect or die "connect: $@\n";
+        $imap->select($folder) or die "select: $@\n";
+        $tag = undef;
+    }
+
+    my $ret;
+    if ($chkseen) {
+        $chkseen = 0;
+
+        # end idle if necessary
+        if ($tag) {
+            $tag = undef;
+            $ret = $imap->done or last;
+        }
+
+        my $unseen = $imap->unseen_count;
+        last if $@;
+        print("$unseen unseen/new message(s) in '$folder'\n") if $unseen;
+
+        &process();
+    }
+
+    # idle for X seconds unless data was returned by done
+    unless ($ret) {
+        $tag ||= $imap->idle
+            or die("error: idle: $@\n");
+
+        $ret = $imap->idle_data( $maxidle ) or last;
+
+        # connection can go stale so we exit/re-enter of idle state
+        # - RFC 2177 mentions 29m but firewalls may be more strict
+        unless (@$ret) {
+            warn( "DEBUG: force exit of idle\n" ) if $DEBUG;
+            $tag = undef;
+
+            # restarted lost connections on next iteration
+            $ret = $imap->done or next;
+        }
+    }
+
+    local ( $1, $2, $3 );
+    foreach my $resp (@$ret) {
+        $resp =~ s/\015?\012$//;
+
+        warn("DEBUG: server response: $resp\n") if $DEBUG;
+
+        # ignore:
+        # - DONE command
+        # - <tag> OK IDLE...
+        next if ( $resp eq "DONE" );
+        next if ( $resp =~ /^\w+\s+OK\s+IDLE\b/ );
+
+        if ( $resp =~ /^\*\s+(\d+)\s+(EXISTS)\b/ ) {
+            my ( $num, $what ) = ( $1, $2 );
+            print("$what: $num message(s) in '$folder'\n");
+            $chkseen++;
+        }
+        elsif ( $resp =~ /^\*\s+(\d+)\s+(EXPUNGE)\b/ ) {
+            my ( $num, $what ) = ( $1, $2 );
+            print("$what: message $num from '$folder'\n");
+        }
+
+        # * 83 FETCH (FLAGS (\Seen))
+        elsif ( $resp =~ /^\*\s+(\d+)\s+(FETCH)\s+(.*)/ ) {
+            my ( $num, $what, $info ) = ( $1, $2, $3 );
+            $chkseen++ if ( $info =~ /[\(|\s]\\Seen[\)|\s]/ );
+            print("$what: message $num from '$folder': $info\n");
+        }
+        else {
+            print("server response: $resp\n");
+        }
+    }
+}
+
+
+
+
+
+
+# Retrieves all mail, process, throw out
+sub process {
+    my %mbox = $imap->fetch_hash("BODY[]");
+
+    foreach my $id (keys %mbox) {
+        my $email = $mbox{$id}->{"BODY[]"};
+
+        open my $out, "| $ENV{GOAT_DIR}/mail_in";
+        print $out $email;
+        close $out;
+
+        $imap->delete_message([$id]);
+    }
+    $imap->expunge;
+}
+
+

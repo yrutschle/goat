@@ -9,6 +9,8 @@ require Exporter;
 use vars qw/ @EXPORT @ISA/;
 @ISA = qw/Exporter/;
 @EXPORT=qw/ 
+$CFG
+
 $INSTALL_DIR $WORK_DIR $LOG_DIR $TMP_DIR $SGF_URL $INDEX_URL
 
 $GOAT_ADDRESS $ADMIN_ADDRESS $TOURNAMENT_NAME $TOURNAMENT_CITY
@@ -50,6 +52,7 @@ use constant GAME_COMINGUP_TIMEOUT => 1 * 24 * 3600; # 1 day
 our $INSTALL_DIR = "$ENV{GOAT_DIR}";
 
 my $cfg = LoadFile("$ENV{WORK_DIR}/goat.cfg");
+our $CFG = $cfg;
 our $GOAT_ADDRESS = $cfg->{goat_address};
 our $ADMIN_ADDRESS = $cfg->{admin_address};
 our $ADMIN_FORWARD = $cfg->{admin_forward};

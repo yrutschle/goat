@@ -53,6 +53,8 @@ easy translating or customising of outgoing messages.
 use Getopt::Long;
 use Pod::Usage;
 use MIME::Entity;
+use Email::Sender::Simple;
+use Email::Sender::Transport::SMTP;
 use Data::ICal;
 use Data::UUID;
 use DateTime;  # package libdatetime-perl
@@ -60,6 +62,7 @@ use DateTime::Format::ICal;
 use Data::ICal::Entry::Event;
 use Template;
 use POSIX;
+use Try::Tiny;
 use Data::Dumper;
 
 # Check we have the right environment variables to find
@@ -415,7 +418,27 @@ sub sendmail {
     # editing it, and that it'll appear as not covered
     # during test (because, well, it isn't).
 
-    $msg->send;
+    # If SMTP is set up, use it
+    if (exists $CFG->{smtp_server}) {
+        my %opts = (
+            host => $CFG->{smtp_server},
+            ssl => 'starttls',
+            sasl_username => $CFG->{smtp_user},
+            sasl_password => $CFG->{smtp_passwd},
+        );
+        $opts{ssl_options} = { SSL_ca_file => $CFG->{smtp_root_ca} } if exists $CFG->{smtp_root_ca};
+        my $smtp = Email::Sender::Transport::SMTP->new(%opts);
+        die "no transport\n" unless defined $smtp;
+        try {
+            Email::Sender::Simple->send($msg, { transport => $smtp });
+        } catch {
+            record "Sender error: $_\n";
+        }
+    } else {
+        # Otherwise, use sendmail or whatever the system
+        # will find appropriate
+        $msg->send;
+    }
 
     record("@$r_to: $hdr{subject}");
 }
