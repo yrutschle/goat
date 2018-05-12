@@ -1,7 +1,38 @@
 #! /usr/bin/perl -w
 
-# remove a player from next rounds (played games and score
-# remain)
+# Goat: Gentil Organisateur et Administrateur de Tournois
+# Copyright (C) 2006-2018  Yves Rutschle
+# 
+# This program is free software; you can redistribute it
+# and/or modify it under the terms of the GNU General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later
+# version.
+# 
+# This program is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied
+# warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+# PURPOSE.  See the GNU General Public License for more
+# details.
+# 
+# The full text for the General Public License is here:
+# http://www.gnu.org/licenses/gpl.html
+
+=head1 NAME
+
+ del_player -- remove one player for subsequent rounds
+
+=head1 SYNOPSIS
+
+ del_player [-f file] <player email>
+
+=head1 DESCRIPTION
+
+B<del_player> removes a player from subsequent rounds: the
+player will no longer be paired. Past games remain recorded
+and the player still appears in the full results.
+
+=cut
 
 use strict;
 use locale;
@@ -14,6 +45,7 @@ BEGIN {
 
     push @INC, $ENV{GOAT_DIR};
 }
+
 
 use Tournament;
 use Getopt::Long;
@@ -31,18 +63,13 @@ die "No tournament file specified. Use -f <file>.\n" unless defined $param_file;
 
 my $t = load Tournament "$param_file";
 
-my $p = $t->find_player_by_email(shift);
+my $email = shift;
+die pod2usage() unless defined $email;
+my $p = $t->find_player_by_email($email);
+die "player $email not found\n" unless defined $p;
+
 $t->del_player($p);
 print "deleting ".$p->fullname." <".$p->email.">\n";
 
 $t->save($param_file);
-
-=head1 NAME
-
- del_player
-
-=SYNOPSIS
-
- del_player -f <tournament file> <player email>
-
 
