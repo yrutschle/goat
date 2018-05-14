@@ -1,7 +1,7 @@
 #! /usr/bin/perl -w
 
 # Goat: Gentil Organisateur et Administrateur de Tournois
-# Copyright (C) 2006-2017  Yves Rutschle
+# Copyright (C) 2006-2018  Yves Rutschle
 # 
 # This program is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public
@@ -47,18 +47,8 @@ use MIME::Parser;
 use Data::UUID;
 
 use Encode;
-
 use Getopt::Long;
 
-# Check we have the right environment variables to find
-# the modules, and add to @INC.
-BEGIN {
-    die "Environment variable GOAT_DIR and WORK_DIR must be defined\n" 
-        if not defined $ENV{GOAT_DIR} or not defined $ENV{WORK_DIR};
-    # This is necessary when called from .forward, in order
-    # to find our .pm files.
-    push @INC, $ENV{GOAT_DIR};
-}
 use GoatConfig;
 
 my $testing = '';

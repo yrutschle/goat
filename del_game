@@ -1,7 +1,7 @@
 #! /usr/bin/perl -w
 
 # Goat: Gentil Organisateur et Administrateur de Tournois
-# Copyright (C) 2006-2008  Yves Rutschle
+# Copyright (C) 2006-2018  Yves Rutschle
 # 
 # This program is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public
@@ -42,15 +42,6 @@ backup your tournament file before operating.
 
 use strict;
 use Pod::Usage;
-
-# Check we have the right environment variables to find
-# the modules, and add to @INC.
-BEGIN {
-    die "Environment variable GOAT_DIR and WORK_DIR must be defined\n" 
-        if not defined $ENV{GOAT_DIR} or not defined $ENV{WORK_DIR};
-
-    push @INC, $ENV{GOAT_DIR};
-}
 
 use Tournament;
 use Getopt::Long;

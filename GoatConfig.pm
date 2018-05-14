@@ -11,7 +11,7 @@ use vars qw/ @EXPORT @ISA/;
 @EXPORT=qw/ 
 $CFG
 
-$INSTALL_DIR $WORK_DIR $LOG_DIR $TMP_DIR $SGF_URL $INDEX_URL
+$LOG_DIR $TMP_DIR $SGF_DIR $SGF_URL $INDEX_URL
 
 $GOAT_ADDRESS $ADMIN_ADDRESS $TOURNAMENT_NAME $TOURNAMENT_CITY
 $TOURNAMENT_LICENSES @PAIRING_CRITERIA
@@ -30,9 +30,6 @@ CHALLENGED_TIMEOUT SCHEDULED_TIMEOUT
 GAME_COMINGUP_TIMEOUT
 /;
 
-die "Environment variable GOAT_DIR not set.\n" unless defined $ENV{GOAT_DIR};
-die "Environment variable WORK_DIR not set.\n" unless defined $ENV{WORK_DIR};
-
 # Period at which to send reminders of a forgotten challenge
 use constant CHALLENGED_TIMEOUT => 7 * 24 * 3600; # 7 days
 
@@ -44,14 +41,7 @@ use constant SCHEDULED_TIMEOUT => 1 * 24 * 3600; # 1 day
 # (This may need adjusting if you're running the script in the evening)
 use constant GAME_COMINGUP_TIMEOUT => 1 * 24 * 3600; # 1 day
 
-# Directory structure. If you followed the suggestion in README,
-# you should not need to change anything here.
-
-# Where is goat installed? This will usually be a home
-# directory, e.g. /home/goat.
-our $INSTALL_DIR = "$ENV{GOAT_DIR}";
-
-my $cfg = LoadFile("$ENV{WORK_DIR}/goat.cfg");
+my $cfg = LoadFile("goat.cfg");
 our $CFG = $cfg;
 our $GOAT_ADDRESS = $cfg->{goat_address};
 our $ADMIN_ADDRESS = $cfg->{admin_address};
@@ -64,28 +54,23 @@ our $TOURNAMENT_LICENSES= $cfg->{tournament_licenses};
 our @PAIRING_CRITERIA = split /\s+/, $cfg->{pairing_criteria};
 our $LOCALE = $cfg->{locale};
 our $TIMEZONE = $cfg->{timezone};
-my $template_name = $cfg->{template_name};
 
 our $SGF_URL = $cfg->{sgf_url};
 our $INDEX_URL = $cfg->{index_url};
 
+our $TEMPLATE_DIR = $cfg->{template_dir};
 
-# Directory to get templates for outgoing e-mails
-our $TEMPLATE_DIR = "$INSTALL_DIR/$template_name";
+our $LOG_DIR=$cfg->{log_dir};
+our $TMP_DIR=$cfg->{tmp_dir};
+our $SGF_DIR=$cfg->{sgf_dir};
 
-
-# Where to put working files? Typically log/ and tmp/
-our $WORK_DIR=$ENV{WORK_DIR};
-our $LOG_DIR="$WORK_DIR/log";
-our $TMP_DIR="$WORK_DIR/tmp";
-
-# Where are the binaries?
-our $BIN_GOAT = "$INSTALL_DIR/goat";
-our $BIN_MAIL_IN = "$INSTALL_DIR/mail_in";
-our $BIN_MAIL_OUT = "$INSTALL_DIR/mail_out";
+# The binaries should be in $PATH
+our $BIN_GOAT = "goat";
+our $BIN_MAIL_IN = "mail_in";
+our $BIN_MAIL_OUT = "mail_out";
 
 # Creates directories if required
-foreach my $dir ($WORK_DIR, $LOG_DIR, $TMP_DIR) {
+foreach my $dir ($LOG_DIR, $TMP_DIR, $SGF_DIR) {
     unless ( -d $dir ) {
         mkdir $dir or die "mkdir $dir: $!\n";
     }

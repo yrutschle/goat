@@ -47,14 +47,6 @@ Run only once: check if there is mail, process it and leave.
 
 use strict;
 
-# Check we have the right environment variables to find
-# the modules, and add to @INC.
-BEGIN {
-    die "Environment variable GOAT_DIR and WORK_DIR must be defined\n" 
-        if not defined $ENV{GOAT_DIR} or not defined $ENV{WORK_DIR};
-
-    push @INC, $ENV{GOAT_DIR};
-}
 use GoatConfig;
 
 use Mail::IMAPClient; # libmail-imapclient-perl, the only module that supports IMAP IDLE
@@ -194,7 +186,7 @@ sub process {
     foreach my $id (keys %mbox) {
         my $email = $mbox{$id}->{"BODY[]"};
 
-        open my $out, "| $ENV{GOAT_DIR}/mail_in";
+        open my $out, "| mail_in" or die "transfer to mail_in: $!\n";
         print $out $email;
         close $out;
 

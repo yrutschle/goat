@@ -31,14 +31,6 @@ use open ':locale';
 
 use Fcntl qw/SEEK_SET LOCK_EX LOCK_UN/;
 
-# Check we have the right environment variables to find
-# the modules, and add to @INC.
-BEGIN {
-    die "Environment variable GOAT_DIR and WORK_DIR must be defined\n" 
-        if not defined $ENV{GOAT_DIR} or not defined $ENV{WORK_DIR};
-
-    push @INC, $ENV{GOAT_DIR};
-}
 use GoatConfig;
 use GoatLib;
 
@@ -331,11 +323,6 @@ See Tournament, Round and GoGame for explanations.
 =cut
 
 ################################################################################
-# Add local directory to path, to access mail_out easily
-
-$ENV{PATH} .= ":$INSTALL_DIR";
-
-################################################################################
 # Global variables
 
 # command line parameters
@@ -374,12 +361,12 @@ GetOptions(
 ) or die pod2usage();
 
 die pod2usage(-verbose=>2) if defined $help;
-$toperm_file="$WORK_DIR/toperm" unless defined $toperm_file;
+$toperm_file="toperm" unless defined $toperm_file;
 
 my $mail_out_opts = "";
 if (defined $testing) {
     $mail_out_opts = '--no-send';
-    $BIN_MAIL_OUT = "perl -MDevel::Cover=\"-silent,on\" $BIN_MAIL_OUT";
+    $BIN_MAIL_OUT = "perl -MDevel::Cover=\"-silent,on\" ../../$BIN_MAIL_OUT";
 }
 
 my $today = &my_time; # Now
@@ -612,7 +599,7 @@ if (defined $param_schedule) {
     }
 
     my $base_file = "$sgf_date-" . $game->white->givenname . "-". $game->black->givenname .  ".sgf";
-    my $target_file = "$WORK_DIR/sgf/$base_file";
+    my $target_file = "$SGF_DIR/$base_file";
     my $encoded = Encode::encode('UTF-8', $target_file);
     move($sgf_name, $encoded) or die "mv $sgf_name $encoded: $!\n";
 
@@ -635,7 +622,7 @@ if (defined $param_schedule) {
 
     my $sgf = $game->sgf;
     if (defined $sgf) {
-        unlink "$WORK_DIR/sgf/$sgf" or warn "$sgf: $!\n";
+        unlink "$SGF_DIR/$sgf" or warn "$sgf: $!\n";
         $game->sgf(undef);
     }
 ########## Cancel the game

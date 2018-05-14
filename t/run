@@ -1,7 +1,8 @@
 #! /usr/bin/perl
 #########################
 # Run test suite for Goat. From Goat's dir, just:
-# export PERLLIB=`pwd`
+# export PERL5LIB=`pwd`
+# export PATH=$PATH:`pwd`
 # t/run --list          => list all available tests
 # t/run                 => run all tests
 # t/run 3 7 11          => run only specified tests
@@ -17,16 +18,6 @@ use Getopt::Long;
 use FileHandle;
 
 my @tests;
-
-$ENV{GOAT_DIR} = $ENV{PWD};
-$ENV{WORK_DIR} = "$ENV{PWD}/t/tmp";
-
-unless (-e "$ENV{WORK_DIR}")  {
-    mkdir "$ENV{WORK_DIR}" or die "mkdir $ENV{WORK_DIR}: $!\n";
-}
-unless (-e "t/tmp/sgf")  {
-    mkdir "t/tmp/sgf" or die "mkdir t/tmp/sgf: $!\n";
-}
 
 my $coverage = 0; # Set to 1 to do code coverage analysis
 

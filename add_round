@@ -48,15 +48,6 @@ You would go about it as such:
 
 use strict;
 
-# Check we have the right environment variables to find
-# the modules, and add to @INC.
-BEGIN {
-    die "Environment variable GOAT_DIR and WORK_DIR must be defined\n" 
-        if not defined $ENV{GOAT_DIR} or not defined $ENV{WORK_DIR};
-
-    push @INC, $ENV{GOAT_DIR};
-}
-
 use Tournament;
 use Getopt::Long;
 use Pod::Usage;

@@ -47,7 +47,23 @@ Install the dependencies:
         cpan Games::Go::SGF
 ```
 
-Check out `GoatConfig.pm` for configuration options.
+Copy the Goat files to the install directory (e.g.
+`/opt/goat`). Add that directory to $PATH (so the system finds
+the various scripts) and to $PERL5LIB (so the scripts find
+the libraries).
+
+Then create a work directory. Copy the installation's
+`example.cfg` as `goat.cfg` and edit that file (at least the
+directories) 
+
+Add the install directory to $PATH and to $PERL5LIB so the
+system finds the binaries, and the binaries find the
+libraries, e.g.:
+
+```
+export PATH=$PATH:/opt/goat
+export PERL5LIB=/opt/goat
+```
 
 Goat is called in 2 ways: on receiving a mail that contains
 a command; and regularly, to send out reminders.
@@ -57,7 +73,8 @@ Mail reception
 
 There are two strategies to get mail to Goat: On Unix, get
 the MTA to deliver directly to a Goat local user; or in
-general, get Goat to monitor an IMAP mailbox.
+general (Unix or others), get Goat to monitor an IMAP
+mailbox.
 
 Local forward file
 ------------------
@@ -66,9 +83,7 @@ This method will only work on a Unix system that receives
 the e-mail directly, where the local MTA (Exim, Postfix,
 ...) is set up to use local `.forward` files.
 
-Create a `goat` user account. Copy all the files of this
-archive to the home directory of the 'goat' user, for
-example in a `goat` directory, then create a `.forward`
+Create a `goat` user account, then create a `.forward`
 file that contains:
 
 ```
@@ -78,22 +93,18 @@ file that contains:
 Then we create the frontend script that will set up
 environment variables for Goat upon reception of an e-mail.
 
-The 'frontend' script will set up two environment variables:
-`GOAT_DIR`, which should contain the path to the Goat code
-`WORK_DIR`, which contains the path to the work files
-(tournament file, html exports etc), then call
-`$GOAT_DIR/mail_in`. 
+The `frontend` script will set up two environment variables:
+`PATH` and `PERL5LIB`, then call `mail_in`. 
 
 E.g.: my `/home/goat/frontend`:
 
 ```
 #! /bin/sh
 
-# These environment variables are used by goat
-export GOAT_DIR=/home/goat/curr
-export WORK_DIR=/home/goat
+export PATH=$PATH:/opt/goat
+export PERL5LIB=/opt/goat
 
-$GOAT_DIR/mail_in
+mail_in
 ```
 
 (and set it as executable)
@@ -113,7 +124,7 @@ IMAP account. This incurrs a wee overhead compared to the
 previous solution, but should let you run Goat with almost
 any e-mail provider including Gmail.
 
-Set up `WORK_DIR` and `GOAT_DIR` environment variables as above,
+Set up `PATH` and `PERL5LIB` environment variables as above,
 before starting `imap_frontend` so probably in your
 `.bashrc`.
 
@@ -133,7 +144,9 @@ you can also run it regularly in a crontab and request to
 exit after one poll:
 
 ```
-0/15 * * *      /home/goat/imap_frontend --once
+PATH=$PATH:/opt/goat
+PERL5LIB=/opt/goat
+0/15 * * *      imap_frontend --once
 ```
 
 This will check e-mail every 15 minutes.
@@ -151,7 +164,9 @@ We also need to call Goat regularly to send out reminders.
 Add a crontab entry for the goat user:
 
 ```
-0 0 * * *       /home/goat/curr/goat >> /home/goat/log/cron
+PATH=$PATH:/opt/goat
+PERL5LIB=/opt/goat
+0 0 * * *       goat >> /var/log/goat/cron
 ```
 
 Now goat will run once a day to send out reminders if
