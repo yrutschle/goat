@@ -28,26 +28,15 @@
 
 =head1 DESCRIPTION
 
-Tournament registration is handled by the tournament
-operator adding players to a file directly from mutt, using
-'a' to create aliases for them. The operator must take care
-that the players' names are complete enough to let
-B<register> find them in the Echelle database.
+WARNING! B<register> destroys any existing tournament file!
+to add players to an existing file, use B<add_player>.
 
-This registering method has three advantages: there can be no
-mistake in e-mail addresses, it's simple to do from the mail
-program, and the operator is left with a mutt-usable list of
-players for further mass-mailing.
-
-B<register> takes the registered player list on its standard
-input or command line, and outputs a Tournament object in a
-file specified with -f.
-
-B<--getech> forces downloading the echelle file.
+Tournament registration is done from a simple text file that
+contains one line for each player.
 
 The format of each line is as follows:
 
- alias <alias name> <full name> <<email address>> # additional information
+ <full name> <<email address>> # additional information
 
 Additional information can be the licence number (useful in
 case there are several players with the same name) or the
@@ -55,11 +44,26 @@ level (useful if a player hasn't played yet).
 
 For example:
 
- alias joe Joe Bloggs <joe@blogs.net> # 0242149 3k
+ Joe Bloggs <joe@blogs.net> # 0242149 3k
 
 This will register Joe Bloggs, licence number 0242149, at
 250 points. In most cases, the additional information does
 not need to be specified.
+
+B<register> knows how to parse B<mutt> alias lines directly,
+so B<mutt> users just need to press 'C<a>' when reading the
+mail of a player.  This registering method has three
+advantages: there can be no mistake in e-mail addresses,
+it's simple to do from the mail program, and the operator is
+left with a mutt-usable list of players for further
+mass-mailing.
+
+B<register> takes the registered player list on its standard
+input or command line, and outputs a Tournament object in a
+file specified with -f.
+
+B<--getech> forces downloading the echelle file.
+
 
 =cut
 

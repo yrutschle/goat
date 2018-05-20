@@ -181,7 +181,8 @@ sub new_from_alias {
     my ($class, $line, $echelle_file) = @_;
     my ($name, $email, $niv, $licence);
 
-    if ($line =~ /^alias\s+\S+\s+([^<]*)<(\S*)>(\s*#.*)?/) {
+    $line =~ s/^alias\s+\S+\s+//; # If it's a mutt line, simplify
+    if ($line =~ /([^<]*)<(\S*)>(\s*#.*)?/) {
         ($name, $email) = ($1, $2);
         ($niv, $licence) = parse_additional_info($3);
     } else {

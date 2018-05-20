@@ -34,12 +34,19 @@ push @tests,
     'doc' => 'Update data from echelle',
 },
 
-   # register: register some players
+   # register: register some players with mutt alias
    # Tests REGISTER_1, REGISTER_2, REGISTER_3, REGISTER_4,
    # REGISTER_5
    { 'run' => "cp ../mutt1 mutt; cp ../ech_ffg_new.txt .; perl $perl_opts ../../register -f toperm mutt 2> out.0 ; perl $perl_opts ../../goat --list-players >> out.0",
        'test' => 'diff -u ../out.0 out.0',
-       'doc' => 'Register players',
+       'doc' => 'Register players from mutt',
+   },
+   # register: register some players
+   # Tests REGISTER_1, REGISTER_2, REGISTER_3, REGISTER_4,
+   # REGISTER_5
+   { 'run' => "cp ../players .; cp ../ech_ffg_new.txt .; perl $perl_opts ../../register -f toperm players 2> out.0b ; perl $perl_opts ../../goat --list-players >> out.0b",
+       'test' => 'diff -u ../out.0 out.0b',
+       'doc' => 'Register players with text file',
    },
    # pair: create a new round
    # Tests PAIR_1, PAIR_2, PAIR_3, PAIR_5
