@@ -1,8 +1,6 @@
 #! /usr/bin/perl
 #########################
 # Run test suite for Goat. From Goat's dir, just:
-# export PERL5LIB=`pwd`
-# export PATH=$PATH:`pwd`
 # t/run --list          => list all available tests
 # t/run                 => run all tests
 # t/run 3 7 11          => run only specified tests
@@ -16,6 +14,9 @@ use warnings;
 
 use Getopt::Long;
 use FileHandle;
+
+$ENV{PATH} = "$ENV{PATH}:../..";
+$ENV{PERL5LIB} = "$ENV{PERL5LIB}:../..";
 
 my @tests;
 
