@@ -54,7 +54,16 @@ the libraries).
 
 Then create a work directory. Copy the installation's
 `example.cfg` as `goat.cfg` and edit that file (at least the
-directories) 
+directories).  If you plan to run several tournaments in the
+same directory, you can do that by creating several config
+files; just make sure to specify one `tournament_file` per
+tournament in the configuration; then you can specify which
+tournament to work on with the `--file` option which is
+available on all command line programs. If you don't specify
+any, the programs will pick `goat.cfg` as default: if you're
+running several tournaments, it's a good idea to have no
+file called that so you always have to specify which
+tournament to work on.
 
 Add the install directory to $PATH and to $PERL5LIB so the
 system finds the binaries, and the binaries find the

@@ -29,10 +29,10 @@ convenience (e-mail can be delivered to goat easily) and
 security (security breach in goat's code won't result in too
 much damage).
 
-Mail_in is called from goat's .forward. It parses the input
-e-mail and calls goat accordingly. Mail_in only handles
-delivery-related errors: it doesn't check that arguments are
-valid.
+B<mail_in> is called from goat's C<.forward> or from
+B<imap_frontend>. It parses the input e-mail and calls goat
+accordingly. B<mail_in> only handles delivery-related errors:
+it doesn't check that arguments are valid.
 
 =cut
 
@@ -72,10 +72,6 @@ if ($testing) {
         @BIN_MAIL_OUT = ("perl", "-MDevel::Cover=\"-silent,on\"", $BIN_MAIL_OUT);
     }
 }
-
-# Use pairing file defined in config file, or toperm 
-my $tournament_file = $TOURNAMENT_FILE // 'toperm';
-push @goat_opts, "--file",  $tournament_file;
 
 #Where to log things? Mail_in needs to log errors, as there
 #are no other way to report them.

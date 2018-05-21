@@ -3,6 +3,7 @@ package GoatConfig;
 use strict;
 
 use YAML qw/LoadFile/;
+use Getopt::Long;
 
 require Exporter;
 
@@ -41,7 +42,23 @@ use constant SCHEDULED_TIMEOUT => 1 * 24 * 3600; # 1 day
 # (This may need adjusting if you're running the script in the evening)
 use constant GAME_COMINGUP_TIMEOUT => 1 * 24 * 3600; # 1 day
 
-my $cfg = LoadFile("goat.cfg");
+my ($cfg_file, $cl_cfg_file);
+Getopt::Long::Configure qw/pass_through/;
+GetOptions(
+    'file=s' => \$cl_cfg_file,
+);
+
+$cfg_file = $ENV{GOAT_CFG} if defined $ENV{GOAT_CFG};
+$cfg_file = $cl_cfg_file if defined $cl_cfg_file;
+$cfg_file //= "goat.cfg";
+$ENV{GOAT_CFG} = $cfg_file;
+
+my $cfg;
+
+eval {
+    $cfg = LoadFile($cfg_file);
+};
+if ($@) { warn "$cfg_file: $@\n"; return 1 }; # If no configuration, warn and keep going in case user did --help
 our $CFG = $cfg;
 our $GOAT_ADDRESS = $cfg->{goat_address};
 our $ADMIN_ADDRESS = $cfg->{admin_address};

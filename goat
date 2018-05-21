@@ -47,7 +47,7 @@ goat -- gentil organisateur et adminstrateur de tournois
 =head1 SYNOPSIS
 
 goat [--test] [--simulate]
-     [--file <pairing file>]
+     [--file <config file>]
      [--round <num>]
      [--submitting-results]
      [--tou [full][,submitted]]
@@ -102,16 +102,16 @@ make an alias for each player into a file).
 
 =item Register all the players:
 
- register -f toperm < mutt.aliases
+ register -f toperm.cfg < mutt.aliases
 
 =item Pair the players:
 
- pair -f toperm
+ pair -f toperm.cfg
 
 or if there is an odd number of players, select one bye
 player:
 
- pair -f toperm ­-bye poor@player.com
+ pair -f toperm.cfg ­-bye poor@player.com
 
 =item That's it. Goat will send mails, reminders, collect
 results. Once all the results are in (or the time has come
@@ -120,21 +120,21 @@ to start the next round:
 =item Create the results file (and send it to your favourite
 federation):
 
- goat --submitting-results --tou > results
+ goat -f toperm.cfg --submitting-results --tou > results
 
 =item Add and remove players, if necessary:
 
- add_players -f toperm < mutt.newaliases
- del_player -f toperm sore@loser.com
+ add_players -f toperm.cfg < mutt.newaliases
+ del_player -f toperm.cfg sore@loser.com
 
 =item Update the player's levels (fetching from the
 Internet):
 
- update_levels -f toperm
+ update_levels -f toperm.cfg
 
 =item Create the new round:
 
- pair -f toperm
+ pair -f toperm.cfg
 
 =back
 
@@ -155,9 +155,9 @@ actions is executed.
 
 =item --file
 
-Specify which tournament file to use. The default is 'toperm',
-which is used by the other scripts included in the
-distribution.
+Specify which configuration file to use. The default is
+'goat.cfg'. This option and default is the same for all
+scripts in the distribution.
 
 =item --round
 
@@ -326,7 +326,7 @@ See Tournament, Round and GoGame for explanations.
 # Global variables
 
 # command line parameters
-my ($testing, $toperm_file, $param_round, $param_schedule,
+my ($testing, $param_round, $param_schedule,
     $param_result, $param_unresult, $param_rated, $param_status, $param_sgf,
     $param_cancel, $param_chhand, $param_score,
     $param_reminders, $param_submitting, $param_tou, $help, $simulate,
@@ -339,7 +339,6 @@ my ($testing, $toperm_file, $param_round, $param_schedule,
 GetOptions(
     'test' => \$testing,
     'simulate' => \$simulate,
-    'file=s' => \$toperm_file,
     'round=s' => \$param_round,
     'schedule=s' => \$param_schedule,
     'reminders' => \$param_reminders,
@@ -361,7 +360,7 @@ GetOptions(
 ) or die pod2usage();
 
 die pod2usage(-verbose=>2) if defined $help;
-$toperm_file="toperm" unless defined $toperm_file;
+my $toperm_file = $TOURNAMENT_FILE;
 
 my $mail_out_opts = "";
 if (defined $testing) {
@@ -501,7 +500,6 @@ sub finish_game {
 ########## ########## ########## ########## ########## ########## ##########
 # Main
 
-# Hmmm, there is no locking anymore, I'm not fond of that.
 $Tournament = load Tournament "$toperm_file";
 
 # Select round if needed

@@ -24,7 +24,7 @@ imap_frontend -- goat's IMAP client
 
 =head1 SYNOPSIS
 
-imap_frontend [--once]
+imap_frontend [--once] [--file <config>]
 
 =head1 DESCRIPTION
 

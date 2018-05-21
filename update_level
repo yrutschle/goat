@@ -54,23 +54,19 @@ use Tournament;
 
 my $ECHELLE_FILE = "ech_ffg_new.txt";
 
-my ($param_file, $param_no_getech, $no_act, $help);
+my ($param_no_getech, $no_act, $help);
 GetOptions(
     'help' => \$help,
-    'file=s' => \$param_file,
     'no-getech' => \$param_no_getech,
     'n' => \$no_act,
     'no-act' => \$no_act,
 ) or die pod2usage();
 
 die pod2usage(-verbose=>2) if defined $help;
-die "No tournament file specified. Use -f <file>.\n" unless defined $param_file;
-
 
 download_echelle($ECHELLE_FILE) unless $param_no_getech;
 
-my $tournament = load Tournament "$param_file";
-die "$param_file: $!\n" if not defined $tournament;
+my $tournament = load Tournament $TOURNAMENT_FILE;
 
 # Build a hash of all the players in the echelle file
 my %all_players;
@@ -130,4 +126,4 @@ foreach my $player ($tournament->players) {
 #   map { [(niv_num $_->registering_level), $_] }
 #   @registered;
 
-$tournament->save($param_file) unless $no_act;
+$tournament->save($TOURNAMENT_FILE) unless $no_act;

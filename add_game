@@ -24,7 +24,7 @@ add_game -- pair a single player pair
 
 =head1 SYNOPSIS
 
-add_game --file <toperm> 
+add_game --file <config file> 
          --black <player> 
          --white <player>
          [--handicap <0-9>]
@@ -50,19 +50,19 @@ use Pod::Usage;
 
 use Tournament;
 use Getopt::Long;
+use GoatConfig;
 
 # Interpret command line
-my ($param_file, $param_black, $param_white, $param_handi, $help);
+my ($param_black, $param_white, $param_handi, $help);
 GetOptions(
     'help' => \$help,
-    'file=s' => \$param_file,
     'black=s' => \$param_black,
     'white=s' => \$param_white,
     'handicap=i' => \$param_handi,
 ) or die pod2usage();
 
 die pod2usage(-verbose=>2) if defined $help;
-die "No tournament file specified. Use -f <file>.\n" unless defined $param_file;
+my $param_file = $TOURNAMENT_FILE;
 my $Tournament = Tournament->load($param_file);
 
 my $black = $Tournament->find_player_by_email($param_black);

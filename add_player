@@ -1,7 +1,7 @@
 #! /usr/bin/perl -w
 
 # Goat: Gentil Organisateur et Administrateur de Tournois
-# Copyright (C) 2006-2007  Yves Rutschle
+# Copyright (C) 2006-2018  Yves Rutschle
 # 
 # This program is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public
@@ -44,18 +44,17 @@ use Getopt::Long;
 use Pod::Usage;
 
 use Tournament;
+use GoatConfig;
 use GoatLib;
 
 my $ECHELLE_FILE = "ech_ffg_new.txt";
 
-my ($param_file, $help);
+my ($help);
 GetOptions(
     'help' => \$help,
-    'file=s' => \$param_file,
 ) or die pod2usage();
 
 die pod2usage(-verbose=>2) if defined $help;
-die "No tournament file specified. Use -f <file>.\n" unless defined $param_file;
 
 my @registered;
 
@@ -76,11 +75,11 @@ while (<>) {
 #   @registered;
 
 # Tournament object
-my $t = load Tournament "$param_file";
+my $t = load Tournament $TOURNAMENT_FILE;
 foreach my $p (@registered) {
     $t->add_player($p);
     warn "registering ".$p->fulladdress."\n";
 }
-$t->save($param_file);
+$t->save($TOURNAMENT_FILE);
 
 warn "Registered ".(scalar @registered)." more players.\n";

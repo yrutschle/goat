@@ -55,20 +55,18 @@ use Tournament;
 use Getopt::Long;
 
 # Interpret command line
-my ($testing, $param_file, $param_bye, $param_final_date, $help);
+my ($testing, $param_bye, $param_final_date, $help);
 my $verbose = 0;
 GetOptions(
     'test' => \$testing,
     'help' => \$help,
-    'file=s' => \$param_file,
     'date=s' => \$param_final_date,
     'bye=s' => \$param_bye,
     'verbose=i' => \$verbose,
 ) or die pod2usage();
 
 die pod2usage(-verbose=>2) if defined $help;
-die "No tournament file specified. Use -f <file>.\n" unless defined $param_file;
-my $Tournament = Tournament->load($param_file);
+my $Tournament = Tournament->load($TOURNAMENT_FILE);
 
 
 # Applies function to all games in a tournament. Game is
@@ -271,7 +269,7 @@ while (@res) {
     $Tournament->curr_round->add_game($g);
 }
 
-$Tournament->save($param_file);
+$Tournament->save($TOURNAMENT_FILE);
 
 my $mail_out_opts = "";
 if ($testing) {

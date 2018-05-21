@@ -1,6 +1,0 @@
-#! /usr/bin/perl -w
-
-use Tournament;
-
-my $t = Tournament->load(shift);
-$t->save(shift);

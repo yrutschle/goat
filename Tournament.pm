@@ -108,6 +108,8 @@ object, and returns a Tournament.
 sub load {
     my ($class, $tournament_fn) = @_;
 
+    die "Tournament database `$tournament_fn` not found or unwritable\n" unless -w $tournament_fn;
+
     $class->lock($tournament_fn);
 
     my $f;

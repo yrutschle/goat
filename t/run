@@ -29,7 +29,7 @@ push @tests,
 
 # update_level: check it all works
 {
-    'run' => "cp ../ech_ffg_new.txt .; cp ../toperm.in.8 toperm; perl $perl_opts ../../update_level --no-getech -f toperm 2> out.20",
+    'run' => "cp ../ech_ffg_new.txt .; cp ../toperm.in.8 toperm; perl $perl_opts ../../update_level --no-getech 2> out.20",
     'test' => 'diff -u ../out.20 out.20',
     'doc' => 'Update data from echelle',
 },
@@ -37,55 +37,55 @@ push @tests,
    # register: register some players with mutt alias
    # Tests REGISTER_1, REGISTER_2, REGISTER_3, REGISTER_4,
    # REGISTER_5
-   { 'run' => "cp ../mutt1 mutt; cp ../ech_ffg_new.txt .; perl $perl_opts ../../register -f toperm mutt 2> out.0 ; perl $perl_opts ../../goat --list-players >> out.0",
+   { 'run' => "cp ../mutt1 mutt; cp ../ech_ffg_new.txt .; perl $perl_opts ../../register mutt 2> out.0 ; perl $perl_opts ../../goat --list-players >> out.0",
        'test' => 'diff -u ../out.0 out.0',
        'doc' => 'Register players from mutt',
    },
    # register: register some players
    # Tests REGISTER_1, REGISTER_2, REGISTER_3, REGISTER_4,
    # REGISTER_5
-   { 'run' => "cp ../players .; cp ../ech_ffg_new.txt .; perl $perl_opts ../../register -f toperm players 2> out.0b ; perl $perl_opts ../../goat --list-players >> out.0b",
+   { 'run' => "cp ../players .; cp ../ech_ffg_new.txt .; perl $perl_opts ../../register players 2> out.0b ; perl $perl_opts ../../goat --list-players >> out.0b",
        'test' => 'diff -u ../out.0 out.0b',
        'doc' => 'Register players with text file',
    },
    # pair: create a new round
    # Tests PAIR_1, PAIR_2, PAIR_3, PAIR_5
-   { 'run' => " export TEST_TIME=1122737400; cp ../toperm_in.1 toperm; perl $perl_opts ../../pair --test -f toperm > out.1 2>&1 ; perl $perl_opts ../../goat --status >> out.1",
+   { 'run' => " export TEST_TIME=1122737400; cp ../toperm_in.1 toperm; perl $perl_opts ../../pair --test > out.1 2>&1 ; perl $perl_opts ../../goat --status >> out.1",
        'test' => 'diff -u ../out.1 out.1',
        'doc' => 'New round',
    },
    # pair: fail because of odd number of players 
    # Tests PAIR_4
    { 'run' => "cp ../toperm_in.1 toperm; " .
-       "echo 'alias newplayer New Player <newplayer\@example.org> #6k' | perl $perl_opts ../../add_player -f toperm > out.1b 2>&1 ; ".
-       "perl $perl_opts ../../pair -test -f toperm >> out.1b 2>&1 ; perl $perl_opts ../../goat --status >> out.1b",
+       "echo 'alias newplayer New Player <newplayer\@example.org> #6k' | perl $perl_opts ../../add_player > out.1b 2>&1 ; ".
+       "perl $perl_opts ../../pair -test >> out.1b 2>&1 ; perl $perl_opts ../../goat --status >> out.1b",
        'test' => 'diff -u ../out.1b out.1b',
        'doc' => 'New round with odd number of players',
    },
    # pair: pair with a bye player
    # Tests PAIR_4
    { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.1 toperm; " .
-       "echo 'alias newplayer New Player <newplayer\@example.org> #6k' | perl $perl_opts ../../add_player -f toperm > out.1c 2>&1 ; ".
-       "perl $perl_opts ../../pair --test -f toperm --bye newplayer\@example.org >> out.1c 2>&1 ; perl $perl_opts ../../goat --status >> out.1c",
+       "echo 'alias newplayer New Player <newplayer\@example.org> #6k' | perl $perl_opts ../../add_player > out.1c 2>&1 ; ".
+       "perl $perl_opts ../../pair --test --bye newplayer\@example.org >> out.1c 2>&1 ; perl $perl_opts ../../goat --status >> out.1c",
        'test' => 'diff -u ../out.1c out.1c',
        'doc' => 'New round with bye player',
    },
    # del_game: remove a game
-    { 'run' => "cp ../toperm_in.2 toperm; perl $perl_opts ../../del_game -f toperm yves\@example.org > out.1d 2>&1 ; " .
+    { 'run' => "cp ../toperm_in.2 toperm; perl $perl_opts ../../del_game yves\@example.org > out.1d 2>&1 ; " .
         "perl $perl_opts ../../goat --status >> out.1d 2>&1",
       'test' => 'diff -u ../out.1d out.1d',
       'doc' => 'Remove a game',
   },
   # add_game: adds a game (with 2 new players)
    { 'run' => "cp ../toperm_in.2 toperm; " .
-       "echo 'alias newplayer1 New Player <newplayer1\@example.org> #6k' | perl $perl_opts ../../add_player -f toperm > out.1e 2>&1 ; ".
-       "echo 'alias newplayer2 New Player2 <newplayer2\@example.org> #6k' | perl $perl_opts ../../add_player -f toperm > out.1e 2>&1 ; ".
-       "perl $perl_opts ../../add_game -f toperm --black newplayer1\@example.org --white newplayer2\@example.org --handicap 2 >> out.1e 2>&1 ; perl $perl_opts ../../goat --status >> out.1e",
+       "echo 'alias newplayer1 New Player <newplayer1\@example.org> #6k' | perl $perl_opts ../../add_player > out.1e 2>&1 ; ".
+       "echo 'alias newplayer2 New Player2 <newplayer2\@example.org> #6k' | perl $perl_opts ../../add_player > out.1e 2>&1 ; ".
+       "perl $perl_opts ../../add_game --black newplayer1\@example.org --white newplayer2\@example.org --handicap 2 >> out.1e 2>&1 ; perl $perl_opts ../../goat --status >> out.1e",
        'test' => 'diff -u ../out.1e out.1e',
        'doc' => 'Add a game to an existing round',
    },
    # del_player: removes a player
-    { 'run' => "cp ../toperm_in.1 toperm; perl $perl_opts ../../del_player -f toperm yves\@example.org > out.1f 2>&1 ; " .
+    { 'run' => "cp ../toperm_in.1 toperm; perl $perl_opts ../../del_player yves\@example.org > out.1f 2>&1 ; " .
         "perl $perl_opts ../../goat --list-all >> out.1f 2>&1",
       'test' => 'diff -u ../out.1f out.1f',
       'doc' => 'Remove a player',
@@ -214,13 +214,13 @@ push @tests,
   },
 
   # 11: TOU output
-  { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.6 toperm; perl $perl_opts ../../goat -f toperm --tou full --test > out.200 2>&1",
+  { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.6 toperm; perl $perl_opts ../../goat --tou full --test > out.200 2>&1",
       'test' => 'diff -u ../out.200 out.200',
       'doc' => 'Generate TOU',
   },
   # 11: TOU output for one single round (remove players who
   # didn't play, and still use players who got deleted)
-  { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.7 toperm; perl $perl_opts ../../goat -f toperm --tou --round 1 --test > out.201 2>&1",
+  { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.7 toperm; perl $perl_opts ../../goat --tou --round 1 --test > out.201 2>&1",
       'test' => 'diff -u ../out.201 out.201',
       'doc' => 'Generate TOU for a single round',
   },
@@ -239,9 +239,9 @@ push @tests,
   },
   # Manual pairing management
   { 'run' => " export TEST_TIME=1122737400; cp ../toperm_in.1 toperm; ".
-      "perl $perl_opts ../../add_round -f toperm > out.21 2>&1 ; ".
-      "perl $perl_opts ../../add_game -f toperm --black polverini\@example.org --white joey\@example.org >> out.21 2>&1 ; ".
-      "perl $perl_opts ../../add_game -f toperm --black yves\@example.org --white lorl\@example.org >> out.21 2>&1 ; ".
+      "perl $perl_opts ../../add_round > out.21 2>&1 ; ".
+      "perl $perl_opts ../../add_game --black polverini\@example.org --white joey\@example.org >> out.21 2>&1 ; ".
+      "perl $perl_opts ../../add_game --black yves\@example.org --white lorl\@example.org >> out.21 2>&1 ; ".
       "perl $perl_opts ../../goat --status >> out.21",
       'test' => 'diff -u ../out.21 out.21',
       'doc' => 'Manual new round',

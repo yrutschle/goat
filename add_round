@@ -34,7 +34,7 @@ pairings made with another program.
 
 If the B<date> is specified, it will be displayed in
 all reminders. If not specified, one month from now is
-picked. ( just like <pair>  programm ).
+picked, just like the B<pair>  program.
 
 You would go about it as such:
 
@@ -52,21 +52,19 @@ use Tournament;
 use Getopt::Long;
 use Pod::Usage;
 use GoatLib;
+use GoatConfig;
 
 
 # Interpret command line
-my ($testing, $param_file, $param_final_date, $help);
+my ($testing, $param_final_date, $help);
 GetOptions(
     'help' => \$help,
-    'file=s' => \$param_file,
     'date=s' => \$param_final_date,
 ) or die pod2usage();
 
 die pod2usage(-verbose=>2) if defined $help;
-die "No tournament file specified. Use -f <file>.\n" unless defined $param_file;
 
-
-my $Tournament = Tournament->load($param_file);
+my $Tournament = Tournament->load($TOURNAMENT_FILE);
 
 my $round_num = ($Tournament->round_number || 0) + 1;
 print "Creating round $round_num\n";
@@ -84,5 +82,5 @@ if (defined $param_final_date) {
 
 $round->final_date($final_date);
 $Tournament->add_round($round_num, $round);
-$Tournament->save($param_file);
+$Tournament->save($TOURNAMENT_FILE);
 
