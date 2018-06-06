@@ -64,9 +64,9 @@ GetOptions(
 
 die pod2usage(-verbose=>2) if defined $help;
 
-download_echelle($ECHELLE_FILE) unless $param_no_getech;
-
 my $tournament = load Tournament $TOURNAMENT_FILE;
+
+download_echelle($ECHELLE_FILE) unless $param_no_getech;
 
 # Build a hash of all the players in the echelle file
 my %all_players;
