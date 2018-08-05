@@ -61,6 +61,7 @@ goat [--test] [--simulate]
      [--status]
      [--score]
      [--reminders]
+     [--list-players]
      [--list-unplayed]
      [--list-unlicensed]
      [--list-all]
@@ -130,7 +131,7 @@ federation):
 =item Update the player's levels (fetching from the
 Internet):
 
- update_levels -f toperm.cfg
+ update_level -f toperm.cfg
 
 =item Create the new round:
 
