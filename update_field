@@ -43,6 +43,7 @@ use Pod::Usage;
 use Data::Dumper;
 
 use Tournament;
+use GoatConfig;
 
 my ($no_act, $help, $out_email, $in_email,
     $in_level,
@@ -61,7 +62,6 @@ die pod2usage(-verbose=>2) if defined $help;
 die "No player email specified. Use -select <email>.\n" unless defined $in_email;
 
 my $tournament = load Tournament $TOURNAMENT_FILE;
-die "$param_file: $!\n" if not defined $tournament;
 
 
 
