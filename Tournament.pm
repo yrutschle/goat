@@ -203,6 +203,34 @@ sub players {
     @{$_[0]->FFGPlayer};
 }
 
+=item $tournament->unplayed
+
+Returns a list of players who haven't played their game in the current round
+
+=cut
+sub unplayed {
+    my ($obj) = @_;
+
+    my @out;
+    foreach my $game ($obj->curr_round->games) {
+        unless ($game->is_finished or $game->is_canceled) {
+            push @out, $game->white, $game->black;
+        }
+    }
+    return @out;
+}
+
+=item $tournament->unlicensed
+
+Returns a list of players who don't have a valid license
+
+=cut
+sub unlicensed {
+    my ($obj) = @_;
+
+    return grep { ! $_->is_licensed($TOURNAMENT_LICENSES) } $obj->players;
+}
+
 =head2 $tournament->find_game_by_email
 
 Searches for a game in the tournament in which the specified

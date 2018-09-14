@@ -185,6 +185,7 @@ Send out reminders if needed (Typically: to people who
 haven't set up their game yet; to people who have played but
 haven't given their result; the day before the game)
 
+
 =item --list-players
 
 Lists all players registered at this point.
@@ -680,14 +681,13 @@ if (defined $param_schedule) {
 
 ########## Print out who hasn't played their game yet
 } elsif (defined $param_list_unplayed) {
-    foreach my $game ($Tournament->curr_round->games) {
-        unless ($game->is_finished or $game->is_canceled) {
-            print $game->white->email . " " .  $game->black->email . " ";
-        }
+
+    foreach ($Tournament->unplayed) {
+        print $game->white->email . " " .  $game->black->email . " ";
     }
     print "\n";
 
-########## Print out who hasn't played their game yet
+########## Print out everyone
 } elsif (defined $param_list_all) {
     foreach my $player ($Tournament->players) {
         print $player->email." ";
@@ -696,8 +696,8 @@ if (defined $param_schedule) {
 
 ########## Print out players with no license
 } elsif (defined $param_list_unlicensed) {
-    foreach my $player ($Tournament->players) {
-        print $player->email." " unless $player->is_licensed($TOURNAMENT_LICENSES);
+    foreach my $player ($Tournament->unlicensed) {
+        print $player->email." ";
     }
     print "\n";
 
