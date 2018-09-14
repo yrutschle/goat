@@ -682,23 +682,19 @@ if (defined $param_schedule) {
 ########## Print out who hasn't played their game yet
 } elsif (defined $param_list_unplayed) {
 
-    foreach ($Tournament->unplayed) {
-        print $game->white->email . " " .  $game->black->email . " ";
-    }
+    print join " ", sort map { $_->email } $Tournament->unplayed;
     print "\n";
 
 ########## Print out everyone
 } elsif (defined $param_list_all) {
-    foreach my $player ($Tournament->players) {
-        print $player->email." ";
-    }
+
+    print join " ", sort map { $_->email }  $Tournament->players;
     print "\n";
 
 ########## Print out players with no license
 } elsif (defined $param_list_unlicensed) {
-    foreach my $player ($Tournament->unlicensed) {
-        print $player->email." ";
-    }
+
+    print join " ", sort map { $_->email }  $Tournament->unlicensed;
     print "\n";
 
 ########## Print out all players
