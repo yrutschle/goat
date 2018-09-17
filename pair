@@ -52,6 +52,7 @@ use open ':locale';
 use GoatLib;
 use GoatConfig;
 use Tournament;
+use MailOut;
 use Getopt::Long;
 
 # Interpret command line
@@ -271,9 +272,12 @@ while (@res) {
 
 $Tournament->save($TOURNAMENT_FILE);
 
-my $mail_out_opts = "";
-if ($testing) {
-    $mail_out_opts = "--no-send";
-}
-system("$BIN_MAIL_OUT $mail_out_opts --deadline $round_num,$final_date");
+my $mail_out = new MailOut(
+    no_send => (defined $testing),
+    testing => (defined $testing),
+);
+$mail_out->deadline(
+    round => $round_num,
+    time => $final_date,
+);
 

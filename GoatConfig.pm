@@ -25,7 +25,7 @@ $TEMPLATE_DIR
 
 $LOCALE $TIMEZONE
 
-$BIN_MAIL_OUT $BIN_MAIL_IN $BIN_GOAT
+$BIN_MAIL_IN $BIN_GOAT
 
 CHALLENGED_TIMEOUT SCHEDULED_TIMEOUT
 GAME_COMINGUP_TIMEOUT
@@ -84,7 +84,6 @@ our $SGF_DIR=$cfg->{sgf_dir};
 # The binaries should be in $PATH
 our $BIN_GOAT = "goat";
 our $BIN_MAIL_IN = "mail_in";
-our $BIN_MAIL_OUT = "mail_out";
 
 # Creates directories if required
 foreach my $dir ($LOG_DIR, $TMP_DIR, $SGF_DIR) {

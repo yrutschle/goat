@@ -50,6 +50,7 @@ use Encode;
 use Getopt::Long;
 
 use GoatConfig;
+use MailOut;
 
 my $testing = '';
 
@@ -59,19 +60,21 @@ GetOptions(
 
 my $coverage = 0; # Add as a command line option later on?
 
-my (@goat_opts, @mail_out_opts);
+my (@goat_opts);
 
-my (@BIN_GOAT, @BIN_MAIL_OUT);
+my (@BIN_GOAT);
 push @BIN_GOAT, $BIN_GOAT;
-push @BIN_MAIL_OUT, $BIN_MAIL_OUT;
 if ($testing) {
     @goat_opts = ('--test');
-    @mail_out_opts = ('--no-send');
     if ($coverage) {
         @BIN_GOAT = ("perl", "-MDevel::Cover=\"-silent,on\"", $BIN_GOAT);
-        @BIN_MAIL_OUT = ("perl", "-MDevel::Cover=\"-silent,on\"", $BIN_MAIL_OUT);
     }
 }
+
+my $mail_out = new MailOut( 
+    testing => (defined $testing),
+    no_send => (defined $testing),
+);
 
 #Where to log things? Mail_in needs to log errors, as there
 #are no other way to report them.
@@ -266,7 +269,11 @@ if (not @exec) {
 
     # Instead, bounce an error message.
     record "No command found, bouncing mail";
-    @exec = (@BIN_MAIL_OUT, @mail_out_opts, "--mail-in-illegal" => "$from,$tmp_fn");
+    $mail_out->mail_in_illegal(
+        rcpt => $from,
+        file => $tmp_fn,
+    );
+    exit;
 }
 
 

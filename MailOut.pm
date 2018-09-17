@@ -26,7 +26,9 @@ mail_out -- goat's e-mail sender
 
 =head1 SYNOPSIS
 
-mail_out [--mail-in-illegal <rcpt>,<file>]
+The old command line interface:
+
+ mail_out [--mail-in-illegal <rcpt>,<file>]
          [--issue-challenge <black>,<white>,<handi>,<limit date>]
          [--remind-challenge <p1>,<p2>,<handi>,<final_date>]
          [--ask-results <p1>,<p2>]
@@ -41,14 +43,26 @@ mail_out [--mail-in-illegal <rcpt>,<file>]
 
          [--no-send]
 
+New interface:
+
+ my $mail_out = new MailOut;
+ my $mail_test = new MailOut 
+                        testing => 1,
+                        no_send => 1;
+ $mail_out->mail-in-illegal(<rcpt>, <file>);
+ [...]
+
 =head1 DESCRIPTION
 
-Mail_out groups all of Goat's outgoing e-mail messages. This
-concentrates all the e-mail management here, and allows for
-easy translating or customising of outgoing messages.
-(Translation support needs to be added though).
+Mail_out groups all of Goat's outgoing e-mail messages. It
+provides abstract messages, instanciates them with templates
+(which can be easily translated), and manages the actual
+e-mail sending, either through the local MTA or through the
+SMTP configured through I<GoatConfig.pm>.
 
 =cut
+
+package MailOut;
 
 use Getopt::Long;
 use Pod::Usage;
@@ -87,6 +101,21 @@ my $tt = Template->new({
 # Testing: to make some normally random things non-random
 # No_send: to prevent sending mail
 my ($help, $testing, $no_send); 
+
+
+# This class is a singleton, which is "pattern-speak" for
+# "it's evolved from something that was a standalone program
+# and there is currently no point in making all the global
+# variables into instance variables. Sorry."
+sub new {
+    my ($class, %opts) = @_;
+
+    $testing = 1 if ($opts{testing});
+    $no_send = 1 if ($opts{no_send});
+
+    my %o;  # Later, this should contain object settings (logfile, testing, and so on)
+    return bless \%o, $class;
+}
 
 =head2 OPTIONS
 
@@ -151,21 +180,31 @@ of the game.
 Notify I<rcpt> that I<colour> is not a valid color.
 
 =cut
-        # process_action() turns the parameters passed to the
-        # option into a hash nameѕ after names in
-        # param_names, 
-        # - if 'date' exists turns it to string (with time)
-        # - if 'dateonly' exists turn it to string (no time)
-        #  , then calls postprocess if it exists
-        # passing the data hash has parameter, then
-        # processes the specified template and mails the
-        # result to the email addresses coming from the
-        # named parameters.
-        # The parameter names are passed to the template
-        # processor so they can be used directly in
-        # templates.
-my %options = (
-    'mail-in-illegal=s'         => process_action(
+
+# A lot of actions simply result in expanding a specific
+# e-mail template with appropriate parameters, then sending
+# it to some recipients. So we define the properties for
+# each action (template, params and so on), then one
+# function (process_action) does the same job for each
+# template, then we instanciate one method for each
+# template.
+#
+# Methods expect template data to be passed as hash, e.g.:
+# $o->mail_in_illegal( rcpt => $to, file => $path );
+# (this calls process_action("mail_in_illegal", rcpt => $to [...])
+#
+# 'param_names' are no longer used, we keep them for
+# documentation (maybe we could validate the method was
+# called with appropriate parameters)
+# - if 'date' exists turns it to string (with time)
+# - if 'dateonly' exists turn it to string (no time)
+# - if 'postprocess' exists it gets called just before
+# sending expanding the template, which allows to customise
+# parameters for specific actions.
+# - 'mailto' contains the target email addresses coming
+# from the named parameters.
+my %template_methods = (
+    'mail_in_illegal'         => {
         param_names => [qw/rcpt file/],
         template => "badcmd.tt",
         postprocess => sub {
@@ -173,33 +212,33 @@ my %options = (
             $data->{contents} = `cat $data->{file}`;
         },
         mailto => [qw/rcpt/],
-    ),
+    },
 
-    'remind-challenge=s'        => process_action(
+    'remind_challenge'        => {
         param_names => [qw/black white handi dateonly/],
         template => "organise.tt",
         mailto => [qw/black white/],
-    ),
+    },
 
-    'ask-result=s'              => process_action(
+    'ask_result'              => {
         param_names => [qw/p1 p2 date/],
         template => "ask_result.tt",
         mailto => [qw/p1 p2/],
-    ),
+    },
 
-    'player-unknown=s'          => process_action(
+    'player_unknown'          => {
         param_names => [qw/p1/],
-        template => "unknown_address.tt",
+       template => "unknown_address.tt",
         mailto => [qw/p1/],
-    ),
+    },
 
-    'issue-challenge=s'         => process_action(
+    'issue_challenge'         => {
         param_names => [qw/black white handi dateonly/],
         template => "pairing.tt",
         mailto => [qw/black white/],
-    ),
+    },
 
-    'notify-schedule=s'         => process_action(
+    'notify_schedule'         => {
         param_names => [qw/ black white handi time location setter/],
         postprocess => sub {
             my ($data) = @_;
@@ -237,9 +276,9 @@ EOF
         },
         template => "scheduled.tt",
         mailto => [qw/black white/],
-    ),
+    },
 
-    'deadline=s' => process_action(
+    'deadline' => {
         param_names => [qw/ round time /],
         postprocess => sub {
             my ($data) = @_;
@@ -275,27 +314,27 @@ EOF
         },
         template => "deadline.tt",
         mailto => [qw/ admin_address /],
-    ),
+    },
 
-    'coming-up=s'               => process_action(
+    'coming_up'               => {
         param_names => [qw/black white handi date location/],
         template => "game_reminder.tt",
         mailto => [qw/black white/],
-    ),
+    },
 
-    'baddate=s'                 => process_action(
+    'baddate'                 => {
         param_names => [qw/p1 date_str/],
         template => "baddate.tt",
         mailto => [qw/p1/],
-    ),
+    },
 
-    'pastdate=s'                => process_action(
+    'pastdate'                => {
         param_names => [qw/p1 date_str/],
         template => "pastdate.tt",
         mailto => [qw/p1/],
-    ),
+    },
 
-    'give-results=s'            => process_action(
+    'give_results'            => {
         param_names => [qw/black white result player/],
         template => "results.tt",
         postprocess => sub {
@@ -303,34 +342,51 @@ EOF
             $data->{winner} = $data->{result} eq 'black' ?  $data->{black} : $data->{white};
         },
         mailto => [qw/black white/],
-    ),
+    },
 
-    'badcolour=s'               => process_action(
+    'badcolour'               => {
         param_names => [qw/p1 colour/],
         template => "badcolour.tt",
         mailto => [qw/p1/],
-    ),
-
-    'no-send'                   => sub { $testing = 1; $no_send = 1; },
-    'help'                      => \$help,
+    },
 );
 
-GetOptions(%options) or die pod2usage();
+# Given an action name, fill in common fields and send
+# expanded template by mail
+# Parameters are a hash of names that get expanded in the
+# templates.
+sub process_action {
+    my ($action_name, %data) = @_;
+    $data{date} = utc2str $data{date} if exists $data{date};
+    $data{dateonly} = utc2str $data{dateonly}, "%A %d %B %Y" if exists $data{dateonly};
+    $data{goat_address} = $GOAT_ADDRESS;
+    $data{admin_address} = $ADMIN_ADDRESS;
+    $data{tournament_name} = $TOURNAMENT_NAME;
+    $data{subject_prefix} = $SUBJECT_PREFIX // 'goat';
 
-die pod2usage(-verbose=>2) if defined $help;
+    my %action = %{$template_methods{$action_name}};
+    my @to = sort map {$data{$_}} @{$action{mailto}};
+    # copy mail to admin adress
+    if (defined $ADMIN_FORWARD and $ADMIN_FORWARD eq 'yes') {
+        @to = (@to, $ADMIN_ADDRESS);
+    }
+    $action{postprocess}->(\%data) if exists $action{postprocess};
+    sendmail(\@to, $action{template}, \%data);
+}
 
 
-# Makes a hash from a list
-# $names: ref to list of names
-# $vals: ref to list of vals
-# Returns: hash of names => vals
-# Hash key names are lower-cased
-sub make_hash {
-    my ($names, $vals) = @_;
-    my %h;
-
-    map {$h{lc shift @$names} = $_ } @$vals;
-    return %h;
+# Now instanciate one method for each action
+# Each method simply calls process_action() with the action
+# name as first parameter
+foreach my $method (keys %template_methods) {
+    my $subs;
+    $subs .= qq(
+       sub $method {
+           my (\$o, \@p) = \@_;
+           return process_action(\"$method\", \@p);
+       }
+    );
+    eval $subs;
 }
 
 
@@ -434,28 +490,5 @@ sub sendmail {
 }
 
 
+1;
 
-# Returns a callback that can be passed to GetOptions
-sub process_action {
-    my (%action) = @_;
-    return sub {
-        my ($action_name, $params) = @_;
-        my @param_values = split /\s*,\s*/, $params;
-        my %data = make_hash($action{param_names}, \@param_values);
-        $data{date} = utc2str $data{date} if exists $data{date};
-        $data{dateonly} = utc2str $data{dateonly}, "%A %d %B %Y" if exists $data{dateonly};
-        $data{goat_address} = $GOAT_ADDRESS;
-        $data{admin_address} = $ADMIN_ADDRESS;
-        $data{tournament_name} = $TOURNAMENT_NAME;
-        $data{subject_prefix} = $SUBJECT_PREFIX // 'goat';
-        my @to = sort map {$data{$_}} @{$action{mailto}};
-        # copy mail to admin adress
-        if (defined $ADMIN_FORWARD and $ADMIN_FORWARD eq 'yes') {
-            @to = (@to, $ADMIN_ADDRESS);
-        }
-        $action{postprocess}->(\%data) if exists $action{postprocess};
-        sendmail(\@to, $action{template}, \%data);
-    }
-}
-
-record "No action: ARGV=@ARGV";

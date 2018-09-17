@@ -38,6 +38,7 @@ use Tournament;
 use Round;
 use GoGame;
 use FFGPlayer;
+use MailOut;
 
 =head1 NAME
 
@@ -364,11 +365,10 @@ GetOptions(
 die pod2usage(-verbose=>2) if defined $help;
 my $toperm_file = $TOURNAMENT_FILE;
 
-my $mail_out_opts = "";
-if (defined $testing) {
-    $mail_out_opts = '--no-send';
-    $BIN_MAIL_OUT = "perl -MDevel::Cover=\"-silent,on\" ../../$BIN_MAIL_OUT";
-}
+my $mail_out = new MailOut( 
+    testing => (defined $testing),
+    no_send => (defined $testing or defined $simulate),
+);
 
 my $today = &my_time; # Now
 my $today_str = scalar gmtime($today); # Now, in string form, in UTC (only used in logs)
@@ -394,8 +394,12 @@ sub challenge {
     my $bn = $black->fulladdress;
     my $wn = $white->fulladdress;
 
-
-    system("$BIN_MAIL_OUT $mail_out_opts --issue-challenge '$bn,$wn,$handi,$final_date'") unless $simulate;
+    $mail_out->issue_challenge(
+        black => $bn,
+        white => $wn, 
+        handi => $handi, 
+        dateonly => $final_date
+    );
     print "$today_str: $bn plays black against $wn with $handi stones\n";
 
     $r_game->challenged(my_time);
@@ -416,7 +420,12 @@ sub remind_challenge {
 
     $r_game->reminder_date(my_time);
 
-    system("$BIN_MAIL_OUT $mail_out_opts --remind-challenge '$bn,$wn,$handi,$final_date'") unless $simulate;
+    $mail_out->remind_challenge(
+        black => $bn,
+        white => $wn,
+        handi => $handi,
+        dateonly => $final_date,
+    );
     print "$today_str: $bn and $wn haven't set up the challenge yet.\n";
 }
 
@@ -436,7 +445,12 @@ sub remind_getresults {
 
     $r_game->reminder_date(my_time);
 
-    system("$BIN_MAIL_OUT $mail_out_opts --ask-result '$bn,$wn,$date'") unless $simulate;
+    $mail_out->ask_result(
+        p1 => $bn,
+        p2 => $wn,
+        date => $date,
+    );
+
     print "$today_str: $bn and $wn please give your results\n";
 }
 
@@ -449,14 +463,19 @@ sub remind_game_coming_up {
     my ($r_game) = @_;
 
     my ($black, $white, $date, $handi, $location) = 
-        ($r_game->black, $r_game->white, $r_game->scheduled_date, 
-            $r_game->handicap, $r_game->location);
+    ($r_game->black, $r_game->white, $r_game->scheduled_date, 
+        $r_game->handicap, $r_game->location);
 
     my $bn = $black->fulladdress;
     my $wn = $white->fulladdress;
 
-    system("$BIN_MAIL_OUT $mail_out_opts --coming-up '$bn,$wn,$handi,$date,$location'") 
-        unless $simulate;
+    $mail_out->coming_up(
+        black => $bn,
+        white => $wn,
+        handi => $handi,
+        date => $date,
+        location => $location,
+    );
     print "$today_str: game coming up: $bn and $wn\n";
 }
 
@@ -470,7 +489,7 @@ sub notify_not_registered {
     my ($player) = @_; 
     print "$today_str: notify $player that their game cannot be found\n"; 
 
-    system("$BIN_MAIL_OUT $mail_out_opts --player-unknown '$player'");
+    $mail_out->player_unknown( p1 => $player );
 }
 
 
@@ -494,8 +513,14 @@ sub finish_game {
         print "game: ".$rated.".\n";
     }
 
+    $mail_out->give_results(
+        black => $b,
+        white => $w,
+        result => $winning_colour,
+        player => $submitter,
+    );
+
     print "$today_str: notify $b and $w their game is finished and $winning_colour won; result given by $submitter\n";
-    system("$BIN_MAIL_OUT $mail_out_opts --give-results='$b,$w,$winning_colour,$submitter'");
 }
 
 
@@ -525,13 +550,19 @@ if (defined $param_schedule) {
 
     unless (defined $date) {
         print "$today_str: notify $player that '$date_str' is invalid\n";
-        system("$BIN_MAIL_OUT $mail_out_opts --baddate '$player,$date_str'");
+        $mail_out->baddate(
+            p1 => $player,
+            date_str => $date_str,
+        );
         exit;
     }
 
     if ($date < $today) {
         print "$today_str: notify $player that '$date_str' is in the past\n";
-        system("$BIN_MAIL_OUT $mail_out_opts --pastdate '$player,$date_str'");
+        $mail_out->pastdate(
+            p1 => $player,
+            date_str => $date_str,
+        );
         exit;
     }
 
@@ -541,10 +572,17 @@ if (defined $param_schedule) {
     my $w = $white->fulladdress;
 
     print "$today_str: notify $b and $w that their game has been scheduled on "
-            .scalar gmtime($date)." (GMT) in $location by $player\n";
+    .scalar gmtime($date)." (GMT) in $location by $player\n";
 
 
-    system("$BIN_MAIL_OUT $mail_out_opts --notify-schedule '$b,$w,$handi,$date,$location,$player'");
+    $mail_out->notify_schedule(
+        black => $b,
+        white => $w,
+        handi => $handi,
+        time => $date,
+        location => $location,
+        setter => $player,
+    );
 
     $game->scheduled($date, $location);
 
@@ -565,7 +603,10 @@ if (defined $param_schedule) {
         finish_game($game, $submitter, $res);
     } else {
         print "$today_str: notify $submitter that '$winning_colour' is invalid\n";
-        system("$BIN_MAIL_OUT $mail_out_opts --badcolour='$submitter,$winning_colour'");
+        $mail_out->badcolour(
+            p1 => $submitter,
+            colour => $winning_colour,
+        );
     }
 
 ########## Recording the result with a SGF
