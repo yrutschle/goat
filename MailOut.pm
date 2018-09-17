@@ -448,6 +448,10 @@ sub sendmail {
     }
 
     if ($no_send) {
+        # The mail is already encoded; we don't want PerlIO to convert it to
+        # 'locale' as that would become unportable
+        binmode STDOUT, ':raw';
+
         # MIME::Entity does not output headers in a
         # deterministic order. We care when we test, so
         # output the headers separately and sorted
@@ -455,6 +459,9 @@ sub sendmail {
         print join "\n", sort split /\n/, $msg->header_as_string;
 
         print $msg->body_as_string;
+
+        # Set back to locale for further console output
+        binmode STDOUT, ":encoding(locale)";
         return;
     } 
 

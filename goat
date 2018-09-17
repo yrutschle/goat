@@ -27,7 +27,6 @@ use Pod::Usage;
 
 use Mail::Address;
 use Games::Go::SGF;
-use open ':locale';
 
 use Fcntl qw/SEEK_SET LOCK_EX LOCK_UN/;
 
@@ -39,6 +38,8 @@ use Round;
 use GoGame;
 use FFGPlayer;
 use MailOut;
+
+use open ':locale';
 
 =head1 NAME
 
@@ -426,6 +427,7 @@ sub remind_challenge {
         handi => $handi,
         dateonly => $final_date,
     );
+
     print "$today_str: $bn and $wn haven't set up the challenge yet.\n";
 }
 
@@ -513,14 +515,13 @@ sub finish_game {
         print "game: ".$rated.".\n";
     }
 
+    print "$today_str: notify $b and $w their game is finished and $winning_colour won; result given by $submitter\n";
     $mail_out->give_results(
         black => $b,
         white => $w,
         result => $winning_colour,
         player => $submitter,
     );
-
-    print "$today_str: notify $b and $w their game is finished and $winning_colour won; result given by $submitter\n";
 }
 
 
@@ -531,6 +532,7 @@ $Tournament = load Tournament "$toperm_file";
 
 # Select round if needed
 $Tournament->round_number($param_round) if defined $param_round;
+
 
 
 # Check if there is an action to perform
