@@ -461,7 +461,7 @@ sub sendmail {
         print $msg->body_as_string;
 
         # Set back to locale for further console output
-        binmode STDOUT, ":encoding(locale)";
+        binmode STDOUT, ":utf8";
         return;
     } 
 
