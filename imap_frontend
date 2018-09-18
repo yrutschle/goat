@@ -55,6 +55,7 @@ use Getopt::Long;
 use Pod::Usage;
 
 
+my $verbose = 1;
 my ($help, $param_once);
 GetOptions(
     'help' => \$help,
@@ -69,19 +70,27 @@ my $imap_root_ca = $CFG->{imap_root_ca};  # Optional
 my $imap_user = $CFG->{imap_user} or die "imap_user not set\n";
 my $imap_passwd = $CFG->{imap_passwd} or die "imap_passwd not set\n";
 
+
+warn "connecting to $imap_server:$imap_port\n" if $verbose;
+
+
 my $imap_socket = IO::Socket::SSL->new(
     PeerAddr => $imap_server,
     PeerService => $imap_port,
     SSL_ca_file => $imap_root_ca // "",
 );
-die "$@\n" unless defined $imap_socket;
+#die "$@\n" unless defined $imap_socket;
 
 my $imap = Mail::IMAPClient->new();
 $imap->Socket($imap_socket);
+warn "login as user $imap_user\n" if $verbose;
 $imap->User($imap_user);
+warn "sending password\n" if $verbose;
 $imap->Password($imap_passwd);
+warn "logging in\n" if $verbose;
 $imap->login() or die "$@\n";
 
+warn "logged in\n" if $verbose;
 
 my $folder = "INBOX";
 
@@ -100,6 +109,8 @@ my $DEBUG = 0;
 # (this is almost entirely from /usr/share/doc/libmail-imapclient-perl/examples/idle.pl.gz)
 my ($tag, $chkseen);
 while (1) {
+    warn "waiting for mail...\n" if $verbose;
+
     unless ($imap->IsConnected) {
         $imap->connect or die "connect: $@\n";
         $imap->select($folder) or die "select: $@\n";
@@ -182,16 +193,21 @@ while (1) {
 
 # Retrieves all mail, process, throw out
 sub process {
+    warn "processing...\n" if $verbose;
     my %mbox = $imap->fetch_hash("BODY[]");
 
     foreach my $id (keys %mbox) {
         my $email = $mbox{$id}->{"BODY[]"};
+
+        warn "one message...\n" if $verbose;
 
         open my $out, "| mail_in" or die "transfer to mail_in: $!\n";
         print $out $email;
         close $out;
 
         $imap->delete_message([$id]);
+
+        warn "done.\n" if $verbose;
     }
     $imap->expunge;
 }
