@@ -403,7 +403,8 @@ foreach my $method (keys %template_methods) {
 }
 
 
-# Send mail to one or several recipients:
+# Process template, create message with attachements and send mail to one or
+# several recipients:
 # sendmail ['bob@foo.com', 'joe@bar.com'], $template, # \%data;
 sub sendmail {
     my ($r_to, $template, $r_data) = @_;
@@ -461,6 +462,24 @@ sub sendmail {
         );
     }
 
+    # If more than 3 recipients, send mails one by one (avoids being labelled
+    # spammer by Free.fr). Otherwise, just one mail, so e-mails for challenges
+    # contain all the relevant addresses for players.
+    if (@$r_to > 3) {
+        foreach my $rcpt (@$r_to) {
+            $msg->head->set("To", $rcpt);
+            sendmsg($msg);
+        }
+    } else {
+        sendmsg($msg);
+    }
+}
+
+
+# Passes a MIME::Entity to the SMTP server (or the console, when testing)
+sub sendmsg {
+    my ($msg) = @_;
+
     if ($no_send) {
         # The mail is already encoded; we don't want PerlIO to convert it to
         # 'locale' as that would become unportable
@@ -507,7 +526,9 @@ sub sendmail {
         $msg->send;
     }
 
-    record("@$r_to: $hdr{subject}");
+    my $to = $msg->head->get("To");
+    my $subject = $msg->head->get("Subject");
+    record("$to: $subject");
 }
 
 

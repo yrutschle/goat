@@ -2,7 +2,7 @@ Subject: [[% subject_prefix %]] Ronde [% round %]: Les appariements!
 
 [% INCLUDE header.tt %]
 
-Voici les appariements de la ronde [% round %] du 
+Voici les appariements de la ronde [% round %] du
 [% tournament_name %].
 
 [% pairings %]
