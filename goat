@@ -60,6 +60,7 @@ goat [--test] [--simulate]
      [--rated=<yes|no>]
      [--cancel <player>]
      [--chhand <player>,<handicap>]
+     [--send-pairings]
      [--status]
      [--score]
      [--reminders]
@@ -210,6 +211,14 @@ convenient to create a list for hand mass-mailing.
 Lists e-mail addresses of players who no longer have a valid
 license.
 
+=item --send-pairings
+
+Send pairings to all players.
+
+This command was introduced because some SMTP servers would
+reject mass e-mails to participants, so this creates one
+e-mail, and one connection, for each recipient.
+
 =item --result player,winning color
 
 Record the winner of a game.
@@ -334,7 +343,8 @@ my ($testing, $param_round, $param_schedule,
     $param_result, $param_unresult, $param_rated, $param_status, $param_sgf,
     $param_cancel, $param_chhand, $param_score,
     $param_reminders, $param_submitting, $param_tou, $help, $simulate,
-    $param_list_unplayed, $param_list_all, $param_list_unlicensed, $param_list_players
+    $param_list_unplayed, $param_list_all, $param_list_unlicensed, $param_list_players,
+    $param_send_pairings,
     );
 
 ################################################################################
@@ -350,6 +360,7 @@ GetOptions(
     'list-all' => \$param_list_all,
     'list-players' => \$param_list_players,
     'list-unlicensed' => \$param_list_unlicensed,
+    'send-pairings' => \$param_send_pairings,
     'results=s' => \$param_result,
     'unresult=s' => \$param_unresult,
     'sgf-result=s' => \$param_sgf,
@@ -750,6 +761,21 @@ if (defined $param_schedule) {
             "\n"; #);
     }
     print "\n";
+
+############# Email parings
+} elsif (defined $param_send_pairings) {
+
+    my $pairings = $Tournament->curr_round->pairings_as_text;
+    my @rcpt = $Tournament->players;
+
+    $mail_out->send_pairings(
+        mailto => \@rcpt,
+        pairings => $pairings,
+        round => $Tournament->round_number,
+        dateonly => $Tournament->curr_round->final_date,
+    );
+
+
 
 ########## Print out the score
 } elsif (defined $param_score) {

@@ -73,6 +73,12 @@ push @tests,
        'test' => 'diff -u ../out.1c out.1c',
        'doc' => 'New round with bye player',
    },
+   # send pairings
+   { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.2 toperm; " .
+       "echo 'alias newplayer New Player <newplayer\@example.org> #6k' | perl $perl_opts ../../goat --test --send-pairings > out.1g 2>&1 ; ",
+       'test' => 'diff -u ../out.1g out.1g',
+       'doc' => 'Send pairing e-mails',
+   },
    # del_game: remove a game
     { 'run' => "cp ../toperm_in.2 toperm; perl $perl_opts ../../del_game yves\@example.org > out.1d 2>&1 ; " .
         "perl $perl_opts ../../goat --status >> out.1d 2>&1",

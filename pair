@@ -223,20 +223,8 @@ foreach my $p (reverse sort {$a->level <=> $b->level} @players) {
     $matchmaker->add($p);
 }
 
-# Find the longest name+address
-my $max_name_length = (sort { $a <=> $b } map { length $_->fulladdress } @players)[-1];
-$max_name_length += 7; # For the club label
 
 my $round_num = ($Tournament->round_number || 0) + 1;
-print "Round $round_num\n";
-
-my $bl = length "Noir";
-my $wl = length "Blanc";
-print "Noir". " " x ($max_name_length - $bl) . 
-      " Blanc"." " x($max_name_length - $wl) . 
-      " handicap\n";
-
-
 my $round = Round->new($round_num);
 my $final_date;
 if (defined $param_final_date) {
@@ -259,16 +247,10 @@ while (@res) {
     $handi -= 1 if $handi > 0;
     my $g = new GoGame $black, $white, $handi;
 
-    # Print out a formated line
-    my $bt = $black->fulladdress . " (".$black->club.")";
-    my $wt = $white->fulladdress . " (".$white->club.")";
-    my $bl = length $bt;
-    my $wl = length $wt;
-    print $bt . " " x ($max_name_length - $bl) . " " . 
-          $wt . " " x($max_name_length - $wl) . " $handi\n";
-
     $Tournament->curr_round->add_game($g);
 }
+
+print $Tournament->curr_round->pairings_as_text;
 
 $Tournament->save($TOURNAMENT_FILE);
 

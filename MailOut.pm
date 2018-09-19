@@ -100,7 +100,7 @@ my $tt = Template->new({
 
 # Testing: to make some normally random things non-random
 # No_send: to prevent sending mail
-my ($help, $testing, $no_send); 
+my ($testing, $no_send); 
 
 
 # This class is a singleton, which is "pattern-speak" for
@@ -349,12 +349,20 @@ EOF
         template => "badcolour.tt",
         mailto => [qw/p1/],
     },
+
+    'send_pairings'           => {
+        param_names => [qw/pairings round/],
+        template => "pairings.tt",
+    },
 );
 
 # Given an action name, fill in common fields and send
 # expanded template by mail
 # Parameters are a hash of names that get expanded in the
 # templates.
+# Recipients are FFGPlayers listed in 'mailto' as parameters (e.g. 'black',
+# corresponding to the hash keys) or if 'mailto' exists in parameters use that
+# instead (as an arrayref)
 sub process_action {
     my ($action_name, %data) = @_;
     $data{date} = utc2str $data{date} if exists $data{date};
@@ -365,10 +373,15 @@ sub process_action {
     $data{subject_prefix} = $SUBJECT_PREFIX // 'goat';
 
     my %action = %{$template_methods{$action_name}};
-    my @to = sort map {$data{$_}} @{$action{mailto}};
+    my @to;
+    if (exists $data{mailto}) {
+        @to = sort map {$_->email} @{$data{mailto}};
+    } else {
+       @to = sort map {$data{$_}} @{$action{mailto}};
+   }
     # copy mail to admin adress
     if (defined $ADMIN_FORWARD and $ADMIN_FORWARD eq 'yes') {
-        @to = (@to, $ADMIN_ADDRESS);
+        push @to, $ADMIN_ADDRESS;
     }
     $action{postprocess}->(\%data) if exists $action{postprocess};
     sendmail(\@to, $action{template}, \%data);
@@ -394,6 +407,7 @@ foreach my $method (keys %template_methods) {
 # sendmail ['bob@foo.com', 'joe@bar.com'], $template, # \%data;
 sub sendmail {
     my ($r_to, $template, $r_data) = @_;
+
 
     my $body;
 

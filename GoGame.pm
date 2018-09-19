@@ -3,6 +3,7 @@ package GoGame;
 use strict;
 use locale;
 
+use GoatLib;
 use FFGPlayer;
 
 =head1 DESCRIPTION
