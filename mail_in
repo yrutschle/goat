@@ -52,7 +52,7 @@ use Getopt::Long;
 use GoatConfig;
 use MailOut;
 
-my $testing = '';
+my $testing;
 
 GetOptions(
     'test' => \$testing,
@@ -64,7 +64,7 @@ my (@goat_opts);
 
 my (@BIN_GOAT);
 push @BIN_GOAT, $BIN_GOAT;
-if ($testing) {
+if (defined $testing) {
     @goat_opts = ('--test');
     if ($coverage) {
         @BIN_GOAT = ("perl", "-MDevel::Cover=\"-silent,on\"", $BIN_GOAT);
