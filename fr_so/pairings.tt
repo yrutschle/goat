@@ -1,0 +1,12 @@
+Subject: [[% subject_prefix %]] Ronde [% round %]: Les appariements!
+
+[% INCLUDE header.tt %]
+
+Voici les appariements de la ronde [% round %] du
+[% tournament_name %].
+
+[% pairings %]
+
+Les parties sont à jouer avant le [% dateonly %].
+
+À bientôt!
