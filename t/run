@@ -234,6 +234,11 @@ push @tests,
       'doc' => 'Generate TOU for a single round',
   },
 
+  # send results by mail
+  { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.7 toperm; perl $perl_opts ../../goat --send-results --round 1 --test > out.202 2>&1",
+      'test' => 'diff -u ../out.202 out.202',
+      'doc' => 'Send TOU by e-mail',
+  },
 
   # Tests for mail_out
   # 16: mail_in_illegal

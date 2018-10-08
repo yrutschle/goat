@@ -202,7 +202,9 @@ Notify I<rcpt> that I<colour> is not a valid color.
 # sending expanding the template, which allows to customise
 # parameters for specific actions.
 # - 'mailto' contains the target email addresses coming
-# from the named parameters.
+# from the named parameters or configuration.
+# - 'attach' is a MIME::Entity initialisation hashref used to attach to the
+# mail, if it exists.
 my %template_methods = (
     'mail_in_illegal'         => {
         param_names => [qw/rcpt file/],
@@ -354,6 +356,12 @@ EOF
         param_names => [qw/pairings round/],
         template => "pairings.tt",
     },
+
+    'send_results'           => {
+        param_names => [qw/round tou/],
+        mailto => [qw/admin_address rating_manager/],
+        template => "send_results.tt",
+    },
 );
 
 # Given an action name, fill in common fields and send
@@ -367,10 +375,9 @@ sub process_action {
     my ($action_name, %data) = @_;
     $data{date} = utc2str $data{date} if exists $data{date};
     $data{dateonly} = utc2str $data{dateonly}, "%A %d %B %Y" if exists $data{dateonly};
-    $data{goat_address} = $GOAT_ADDRESS;
-    $data{admin_address} = $ADMIN_ADDRESS;
-    $data{tournament_name} = $TOURNAMENT_NAME;
-    $data{subject_prefix} = $SUBJECT_PREFIX // 'goat';
+
+    # Import all configuration into template substitutions
+    map { $data{$_} = $CFG->{$_} } keys %$CFG;
 
     my %action = %{$template_methods{$action_name}};
     my @to;
@@ -409,12 +416,13 @@ foreach my $method (keys %template_methods) {
 sub sendmail {
     my ($r_to, $template, $r_data) = @_;
 
-
     my $body;
 
-    # Mails are encoded in UTF-8 (see charset below)
+    # Mails are encoded in UTF-8 (see charset below) so encode all strings to
+    # UTF. We also get references here for attachment objects, so don't encode
+    # those.
     foreach my $k (keys %$r_data) {
-        $r_data->{$k} = Encode::encode('UTF-8', $r_data->{$k});
+        $r_data->{$k} = Encode::encode('UTF-8', $r_data->{$k}) unless ref $r_data->{$k};
     }
 
     $tt->process($template, $r_data, \$body) or die $tt->error;
@@ -460,6 +468,13 @@ sub sendmail {
             Charset => 'UTF-8',
             Data => $r_data->{ics},
         );
+    }
+
+    if (exists $r_data->{attach}) {
+        $r_data->{attach}->{Data} = Encode::encode('UTF-8', $r_data->{attach}->{Data});
+        $r_data->{attach}->{Charset} = 'UTF-8';
+
+        $msg->attach(%{$r_data->{attach}});
     }
 
     # If more than 3 recipients, send mails one by one (avoids being labelled
