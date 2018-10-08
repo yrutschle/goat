@@ -209,10 +209,6 @@ my %template_methods = (
     'mail_in_illegal'         => {
         param_names => [qw/rcpt file/],
         template => "badcmd.tt",
-        postprocess => sub {
-            my ($data) = @_;
-            $data->{contents} = `cat $data->{file}`;
-        },
         mailto => [qw/rcpt/],
     },
 

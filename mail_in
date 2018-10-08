@@ -89,20 +89,6 @@ sub record {
     }
 }
 
-# Records the mail in a temp file; returns the name of the
-# file
-sub make_tmpfile {
-    my ($mail) = @_;
-    my $tmp_fn = "$TMP_DIR/mail_in.$$";
-    open my $fh, "> $tmp_fn" or do { 
-        print "makeTmpfile $tmp_fn: $!\n";
-        record "make_tmpfile $tmp_fn: $!";
-        return;
-    };
-    print $fh $mail->simple->as_string;
-    return $tmp_fn;
-}
-
 # Executes a command and log
 sub my_exec {
     my (@exec) = @_;
@@ -265,13 +251,11 @@ if (not @exec) {
 }
 
 if (not @exec) {
-    my $tmp_fn = make_tmpfile $mail; # Pass the mail for bouncing
-
     # Instead, bounce an error message.
     record "No command found, bouncing mail";
     $mail_out->mail_in_illegal(
         rcpt => $from,
-        file => $tmp_fn,
+        contents => $mail->simple->as_string,
     );
     exit;
 }
