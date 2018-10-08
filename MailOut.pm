@@ -274,7 +274,11 @@ EOF
                 $event->add_properties(uid => "00000000-0000-0000-HELL-0WORLD000000");
             }
             $ical->add_entry($event);
-            $data->{ics} = $ical->as_string; # encoding is done in sendmail
+            $data->{attach} = {
+                Type => 'text/calendar',
+                Encoding => 'base64',
+                Data => $ical->as_string, # encoding is done in sendmail
+            };
         },
         template => "scheduled.tt",
         mailto => [qw/black white/],
@@ -312,7 +316,11 @@ EOF
                 $event->add_properties(uid => "00000000-0000-0000-HELL-0WORLD000000");
             }
             $ical->add_entry($event);
-            $data->{ics} = $ical->as_string; # encoding is done in sendmail
+            $data->{attach} = {
+                Type => 'text/calendar',
+                Encoding => 'base64',
+                Data => $ical->as_string, # encoding is done in sendmail
+            };
         },
         template => "deadline.tt",
         mailto => [qw/ admin_address /],
@@ -460,15 +468,6 @@ sub sendmail {
         'Charset' => 'UTF-8',
         'Data' => $body,
     );
-
-    if (exists $r_data->{ics}) {
-        $msg->attach(
-            Type => 'text/calendar',
-            Encoding => 'base64',
-            Charset => 'UTF-8',
-            Data => $r_data->{ics},
-        );
-    }
 
     if (exists $r_data->{attach}) {
         $r_data->{attach}->{Data} = Encode::encode('UTF-8', $r_data->{attach}->{Data});
