@@ -24,10 +24,12 @@ add_game -- pair a single player pair
 
 =head1 SYNOPSIS
 
-add_game --file <config file> 
+add_game [--file <config file>]
          --black <player> 
          --white <player>
          [--handicap <0-9>]
+
+add_game <player> <player>
 
 =head1 DESCRIPTION
 
@@ -41,7 +43,8 @@ I<add_player>.
 
 The options are self-explanatory. The players are specfied
 using their e-mail addresses. If handicap is not specified,
-"level difference - 1" is the default.
+"level difference - 1" is the default.  If colors are not
+specified, attribute white to the strongest player.
 
 =cut
 
@@ -65,10 +68,29 @@ die pod2usage(-verbose=>2) if defined $help;
 my $param_file = $TOURNAMENT_FILE;
 my $Tournament = Tournament->load($param_file);
 
-my $black = $Tournament->find_player_by_email($param_black);
-die "$param_black not found in $param_file.\n" unless defined $black;
-my $white = $Tournament->find_player_by_email($param_white);
-die "$param_white not found in $param_file.\n" unless defined $white;
+my ($black, $white);
+if (not defined $param_black or not defined $param_white) {
+    my ($p1_name, $p2_name) = @ARGV;
+    my $p1 = $Tournament->find_player_by_email($p1_name);
+    die "$p1_name not found in $param_file.\n" unless defined $p1;
+    my $p2 = $Tournament->find_player_by_email($p2_name);
+    die "$p2_name not found in $param_file.\n" unless defined $p2;
+
+    if ($p1->level > $p2->level) {
+        $black = $p2;
+        $white = $p1;
+    } else {
+        $black = $p1;
+        $white = $p2;
+    }
+} else {
+    $black = $Tournament->find_player_by_email($param_black);
+    die "$param_black not found in $param_file.\n" unless defined $black;
+    $white = $Tournament->find_player_by_email($param_white);
+    die "$param_white not found in $param_file.\n" unless defined $white;
+}
+
+
 
 unless (defined $param_handi) {
     $param_handi = int(($white->level - $black->level)/100);
