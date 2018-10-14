@@ -75,7 +75,7 @@ push @tests,
    },
    # send pairings
    { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.2 toperm; " .
-       "echo 'alias newplayer New Player <newplayer\@example.org> #6k' | perl $perl_opts ../../goat --test --send-pairings > out.1g 2>&1 ; ",
+       "perl $perl_opts ../../goat --test --send-pairings > out.1g 2>&1 ; ",
        'test' => 'diff -u ../out.1g out.1g',
        'doc' => 'Send pairing e-mails',
    },
