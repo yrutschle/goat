@@ -1,10 +1,10 @@
 Subject: [[% subject_prefix %]] Ronde [% round %]: Les appariements!
 
 [% INCLUDE header.tt %]
-
-Voici les appariements de la ronde [% round %] du
-[% tournament_name %].
-
+Voici les appariements de la ronde [% round %] du [% tournament_name %].
+[% IF bye %]
+Nous sommes en nombre impair, et [% bye %] a été tiré au sort pour passer cette ronde.
+[% END %]
 [% pairings %]
 
 Les parties sont à jouer avant le [% dateonly %].

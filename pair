@@ -193,6 +193,7 @@ $matchmaker = Algorithm::Pair::Best2->new(
 
 # Test for odd number of players -- request to remove one
 my @players = $Tournament->players;
+my $bye;
 if (1 & @players) {
     if (defined $param_bye and $param_bye eq 'random') {
         # Find players that haven't played their last game
@@ -204,7 +205,7 @@ if (1 & @players) {
         # If all have played or tournament not started, select from all players
         @bye_candidates = @players unless @bye_candidates;
 
-        my $bye = @bye_candidates[ rand @bye_candidates ];
+        $bye = @bye_candidates[ rand @bye_candidates ];
         warn "Randomly picking ".$bye->fullname." as bye player\n";;
         @players = grep { $_->id ne $bye->id } @players;
     } else {
@@ -213,6 +214,7 @@ if (1 & @players) {
 
         @players = grep { $_->email ne $param_bye } @players;
         die "$param_bye not found\n" if (1 & @players);
+        $bye = $param_bye;
     }
 }
 
@@ -234,6 +236,7 @@ if (defined $param_final_date) {
     $final_date = my_time() + 30 * 24 * 3600; # one month in the future
 }
 $round->final_date($final_date);
+$round->bye($Tournament->find_player_by_email($bye)) if defined $bye;
 $Tournament->add_round($round_num, $round);
 
 my @res = $matchmaker->pick();

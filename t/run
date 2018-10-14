@@ -77,7 +77,13 @@ push @tests,
    { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.2 toperm; " .
        "perl $perl_opts ../../goat --test --send-pairings > out.1g 2>&1 ; ",
        'test' => 'diff -u ../out.1g out.1g',
-       'doc' => 'Send pairing e-mails',
+       'doc' => 'Send pairing e-mails with even players',
+   },
+   # send pairings
+   { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.2b toperm; " .
+       "perl $perl_opts ../../goat --test --send-pairings > out.1h 2>&1 ; ",
+       'test' => 'diff -u ../out.1h out.1h',
+       'doc' => 'Send pairing e-mails with odd players',
    },
    # del_game: remove a game
     { 'run' => "cp ../toperm_in.2 toperm; perl $perl_opts ../../del_game yves\@example.org > out.1d 2>&1 ; " .

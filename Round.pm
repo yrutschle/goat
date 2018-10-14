@@ -15,7 +15,7 @@ list of games, dates, and so on.
 
 BEGIN {
     my $subs;
-    foreach my $data ( qw/GoGame number final_date/ ) {
+    foreach my $data ( qw/GoGame number final_date bye/ ) {
         $subs .= qq{
             sub $data {
                 \$_[1] ? \$_[0]->{$data} = \$_[1] : \$_[0]->{$data};

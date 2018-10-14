@@ -778,12 +778,17 @@ if (defined $param_schedule) {
 ############# Email parings
 } elsif (defined $param_send_pairings) {
 
-    my $pairings = $Tournament->curr_round->pairings_as_text;
+    my $r= $Tournament->curr_round;
+    my $pairings = $r->pairings_as_text;
     my @rcpt = $Tournament->players;
+
+    my $bye;
+    $bye = $r->bye->fullname if defined $r->bye;
 
     $mail_out->send_pairings(
         mailto => \@rcpt,
         pairings => $pairings,
+        bye => $bye,
         round => $Tournament->round_number,
         dateonly => $Tournament->curr_round->final_date,
     );
