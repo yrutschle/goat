@@ -366,6 +366,12 @@ EOF
         mailto => [qw/admin_address rating_manager/],
         template => "send_results.tt",
     },
+
+    'send_unplayed'          => {
+        param_names => [qw/old_round new_round/],
+        template => "unplayed.tt",
+    },
+
 );
 
 # Given an action name, fill in common fields and send
