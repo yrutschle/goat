@@ -60,6 +60,7 @@ goat [--test] [--simulate]
      [--rated=<yes|no>]
      [--cancel <player>]
      [--chhand <player>,<handicap>]
+     [--swap <player>]
      [--send-pairings]
      [--send-results]
      [--send-unplayed]
@@ -257,6 +258,20 @@ result files.
 Changes the handicap of the game containing the specified
 player.
 
+Along with I<--swap>, this allows changing all
+parameters of a game without having to delete it and
+recreate it.
+
+
+=item --swap I<player>
+
+Swap the color of the players involved in the game played by
+I<player>. 
+
+Along with I<--chhand>, this allows changing all
+parameters of a game without having to delete it and
+recreate it.
+
 =item --status
 
 Prints out the status of all games in the round. The round
@@ -354,7 +369,7 @@ See Tournament, Round and GoGame for explanations.
 # command line parameters
 my ($testing, $param_round, $param_schedule,
     $param_result, $param_unresult, $param_rated, $param_status, $param_sgf,
-    $param_cancel, $param_chhand, $param_score,
+    $param_cancel, $param_chhand, $param_swap, $param_score,
     $param_reminders, $param_submitting, $param_tou, $help, $simulate,
     $param_list_unplayed, $param_list_all, $param_list_unlicensed, $param_list_players,
     $param_send_pairings, $param_send_results, $param_send_unplayed,
@@ -382,6 +397,7 @@ GetOptions(
     'rated=s'  => \$param_rated,
     'cancel=s' => \$param_cancel,
     'chhand=s' => \$param_chhand,
+    'swap=s'   => \$param_swap,
     'score'    => \$param_score,
     'status'   => \$param_status,
     'submitting-results' => \$param_submitting,
@@ -723,6 +739,20 @@ if (defined $param_schedule) {
         exit;
     }
     $game->handicap($hand);
+
+########## Swap players
+}elsif (defined $param_swap) {
+    my ($player) = $param_swap;
+
+    my $game = $Tournament->find_game_by_email($player);
+    unless (defined $game) {
+        print "$player not found\n";
+        exit;
+    }
+
+    my $tmp = $game->white;
+    $game->white($game->black);
+    $game->black($tmp)
     
 ########## Print out status of the round
 } elsif (defined $param_status) {
