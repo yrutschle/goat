@@ -79,7 +79,7 @@ push @tests,
        'test' => 'diff -u ../out.1g out.1g',
        'doc' => 'Send pairing e-mails with even players',
    },
-   # send pairings
+   # send pairings (with bye)
    { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.2b toperm; " .
        "perl $perl_opts ../../goat --test --send-pairings > out.1h 2>&1 ; ",
        'test' => 'diff -u ../out.1h out.1h',
