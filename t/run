@@ -85,6 +85,14 @@ push @tests,
        'test' => 'diff -u ../out.1h out.1h',
        'doc' => 'Send pairing e-mails with odd players',
    },
+   # change a game (handicap + swap)
+   { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.2b toperm; " .
+       "perl $perl_opts ../../goat --swap joey\@example.org > out.1j 2>&1 ; ".
+       "perl $perl_opts ../../goat --chhand joey\@example.org,5 > out.1j 2>&1 ; ".
+       "perl $perl_opts ../../goat --status > out.1j 2>&1 ; " ,
+       'test' => 'diff -u ../out.1j out.1j',
+       'doc' => 'Change game: swap player and handicap',
+   },
    # send unplayed game warning 
    { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.2c toperm; " .
        "perl $perl_opts ../../goat --test --send-unplayed > out.1i 2>&1 ; ",
