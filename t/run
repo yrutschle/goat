@@ -85,6 +85,12 @@ push @tests,
        'test' => 'diff -u ../out.1h out.1h',
        'doc' => 'Send pairing e-mails with odd players',
    },
+   # send unplayed game warning 
+   { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.2c toperm; " .
+       "perl $perl_opts ../../goat --test --send-unplayed > out.1i 2>&1 ; ",
+       'test' => 'diff -u ../out.1i out.1i',
+       'doc' => 'Send warning to unplayed games',
+   },
    # del_game: remove a game
     { 'run' => "cp ../toperm_in.2 toperm; perl $perl_opts ../../del_game yves\@example.org > out.1d 2>&1 ; " .
         "perl $perl_opts ../../goat --status >> out.1d 2>&1",

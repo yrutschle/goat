@@ -1,0 +1,2213 @@
+--- !!perl/hash:Tournament
+FFGPlayer:
+  - &1 !!perl/hash:FFGPlayer
+    club: 84Av
+    email: sam.teissier@gmail.com
+    familyname: TEISSIER
+    givenname: Samuel
+    id: Samuel TEISSIER
+    level: 105
+    license: 1500264
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &2 !!perl/hash:FFGPlayer
+    club: 75Al
+    email: fmadigou@gmail.com
+    familyname: MADIGOU
+    givenname: Franck
+    id: Franck MADIGOU
+    level: 33
+    license: 0625039
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &3 !!perl/hash:FFGPlayer
+    club: 57Me
+    email: haimrick@hotmail.fr
+    familyname: LACAN
+    givenname: Emerick
+    id: Emerick LACAN
+    level: -10
+    license: 0900256
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &4 !!perl/hash:FFGPlayer
+    club: 76Ro
+    email: fabien.valet@netcourrier.com
+    familyname: VALET
+    givenname: Fabien
+    id: Fabien VALET
+    level: -42
+    license: 0800100
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &5 !!perl/hash:FFGPlayer
+    club: 57Me
+    email: jean.brauch@education.lu
+    familyname: BRAUCH
+    givenname: Jean
+    id: Jean BRAUCH
+    level: -196
+    license: 1700176
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &6 !!perl/hash:FFGPlayer
+    club: 84Va
+    email: jipioh@gmail.com
+    familyname: HUEBER
+    givenname: Jean-Philippe
+    id: Jean-Philippe HUEBER
+    level: -164
+    license: 0574710
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &7 !!perl/hash:FFGPlayer
+    club: 91Or
+    email: rawu@libertysurf.fr
+    familyname: WURZINGER
+    givenname: Ralf
+    id: Ralf WURZINGER
+    level: -209
+    license: 9826801
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &8 !!perl/hash:FFGPlayer
+    club: 57Ma
+    email: benjamin.freche@gmail.com
+    familyname: FRECHE
+    givenname: Benjamin
+    id: Benjamin FRECHE
+    level: -124
+    license: 1200004
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &9 !!perl/hash:FFGPlayer
+    club: 13Ma
+    email: dani.damaz@laposte.net
+    familyname: DAMAZ
+    givenname: Dani
+    id: Dani DAMAZ
+    level: -208
+    license: 1000413
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &10 !!perl/hash:FFGPlayer
+    club: 57Me
+    email: renaud.sailaway@gmail.com
+    familyname: RENAUD
+    givenname: Mathieu
+    id: Mathieu RENAUD
+    level: -378
+    license: 9127502
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &11 !!perl/hash:FFGPlayer
+    club: 34Mo
+    email: tudual34@free.fr
+    familyname: DURAND
+    givenname: Tudual
+    id: Tudual DURAND
+    level: -367
+    license: 1100374
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &12 !!perl/hash:FFGPlayer
+    club: 13Ma
+    email: claude@renegat.net
+    familyname: BRISSON
+    givenname: Claude
+    id: Claude BRISSON
+    level: -498
+    license: 0322103
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &13 !!perl/hash:FFGPlayer
+    club: 13Ma
+    email: sanzadresse@hotmail.fr
+    familyname: ESTHER
+    givenname: Elin
+    id: Elin ESTHER
+    level: -513
+    license: 1700148
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &14 !!perl/hash:FFGPlayer
+    club: 31Ba
+    email: laurent.bourdron@free.fr
+    familyname: BOURDRON
+    givenname: Laurent
+    id: Laurent BOURDRON
+    level: -602
+    license: 0552012
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &15 !!perl/hash:FFGPlayer
+    club: 54Na
+    email: x.litzenburger@gmail.com
+    familyname: LITZENBURGER
+    givenname: Xavier
+    id: Xavier LITZENBURGER
+    level: -290
+    license: 0900430
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &16 !!perl/hash:FFGPlayer
+    club: 31Ba
+    email: jeanyves.papazoglou@gmail.com
+    familyname: PAPAZOGLOU
+    givenname: Jean-Yves
+    id: Jean-Yves PAPAZOGLOU
+    level: -870
+    license: 0700101
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &17 !!perl/hash:FFGPlayer
+    club: 64Pa
+    email: jl.boutaud@orange.fr
+    familyname: BOUTAUD_DE_LA_COMBE
+    givenname: Jean-Luc
+    id: Jean-Luc BOUTAUD_DE_LA_COMBE
+    level: -940
+    license: 9251703
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &18 !!perl/hash:FFGPlayer
+    club: 90Be
+    email: gillian.basso@gmail.com
+    familyname: BASSO
+    givenname: Gillian
+    id: Gillian BASSO
+    level: -911
+    license: 1400149
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &19 !!perl/hash:FFGPlayer
+    club: 57Me
+    email: roland.clanche@sfr.fr
+    familyname: CLANCHÉ
+    givenname: Roland
+    id: Roland CLANCHÉ
+    level: -1124
+    license: 1300315
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &20 !!perl/hash:FFGPlayer
+    club: 34Mo
+    email: desoeuvres.aurelien@gmail.com
+    familyname: DESOEUVRES
+    givenname: Aurelien
+    id: Aurelien DESOEUVRES
+    level: -1137
+    license: 1600079
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &21 !!perl/hash:FFGPlayer
+    club: 31To
+    email: yves@rutschle.net
+    familyname: RUTSCHLE
+    givenname: Yves
+    id: Yves RUTSCHLE
+    level: -1317
+    license: 0652029
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &22 !!perl/hash:FFGPlayer
+    club: 34Mo
+    email: briac.fabienne@free.fr
+    familyname: DURAND
+    givenname: Laouen
+    id: Laouen DURAND
+    level: -1060
+    license: 1400076
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &23 !!perl/hash:FFGPlayer
+    club: 94Ca
+    email: fabc.frappart@free.fr
+    familyname: FRAPPART
+    givenname: Bastien
+    id: Bastien FRAPPART
+    level: -916
+    license: 1800050
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &24 !!perl/hash:FFGPlayer
+    club: 18Bo
+    email: eric.imbault@neuf.fr
+    familyname: IMBAULT
+    givenname: Eric
+    id: Eric IMBAULT
+    level: -1411
+    license: 1400017
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &25 !!perl/hash:FFGPlayer
+    club: 57Me
+    email: go.tolesinski@laposte.net
+    familyname: OLESINSKI
+    givenname: Thibaut
+    id: Thibaut OLESINSKI
+    level: -1567
+    license: 1800140
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &26 !!perl/hash:FFGPlayer
+    club: 74An
+    email: pascal.beaumont74@orange.fr
+    familyname: BEAUMONT
+    givenname: Pascal
+    id: Pascal BEAUMONT
+    level: -1969
+    license: 1400082
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &27 !!perl/hash:FFGPlayer
+    club: 64Pa
+    email: francis.tugaye@wanadoo.fr
+    familyname: TUGAYÉ
+    givenname: Francis
+    id: Francis TUGAYÉ
+    level: -955
+    license: 0451700
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &28 !!perl/hash:FFGPlayer
+    club: 64Pa
+    email: sylvain.assos@free.fr
+    familyname: THIBEAU
+    givenname: Sylvain
+    id: Sylvain THIBEAU
+    level: -741
+    license: 9326801
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &29 !!perl/hash:FFGPlayer
+    club: 34Mo
+    email: alikae@hotmail.fr
+    familyname: SPANO
+    givenname: Christelle
+    id: Christelle SPANO
+    level: -1796
+    license: 1700107
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &30 !!perl/hash:FFGPlayer
+    club: 31Pi
+    email: lorl@free.fr
+    familyname: LAMÔLE
+    givenname: Laurent
+    id: Laurent LAMÔLE
+    level: -246
+    license: 9721004
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &31 !!perl/hash:FFGPlayer
+    club: 75Al
+    email: christian.boyart@wanadoo.fr
+    familyname: BOYART
+    givenname: Christian
+    id: Christian BOYART
+    level: -577
+    license: 8696800
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &32 !!perl/hash:FFGPlayer
+    club: 95Va
+    email: c.loudoux@gmail.com
+    familyname: LOUDOUX
+    givenname: Christopher
+    id: Christopher LOUDOUX
+    level: -837
+    license: 1800156
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &33 !!perl/hash:FFGPlayer
+    club: 31Ba
+    email: fblecocq@gmail.com
+    familyname: LECOCQ
+    givenname: Fabrice
+    id: Fabrice LECOCQ
+    level: -1950
+    license: 1800060
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: C
+  - &34 !!perl/hash:FFGPlayer
+    club: 15Au
+    email: tisserand.romain@gmail.com
+    familyname: TISSERAND
+    givenname: Romain
+    id: Romain TISSERAND
+    level: -878
+    license: 1600222
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+Round:
+  - {}
+  - !!perl/hash:Round
+    GoGame:
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: &35 !!perl/hash:FFGPlayer
+            club: 69Ly
+            email: robin.chauvin.69@gmail.com
+            familyname: CHAUVIN
+            givenname: Robin
+            id: Robin CHAUVIN
+            level: 201
+            license: 0800145
+            registering_level:
+              - ~
+              - ~
+              - ~
+              - ~
+              - ~
+            status: L
+        challenge_date: 1518078251
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1518548400
+        result: black
+        scheduled_date: 1518548400
+        sgf: /tournois/ffg/2017/2018-02-13-ThÃ©o-Robin.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: &36 !!perl/hash:FFGPlayer
+            club: 29Br
+            email: theo.come1@gmail.com
+            familyname: CÔME
+            givenname: Théo
+            id: Théo CÔME
+            level: 202
+            license: 1200102
+            registering_level:
+              - ~
+              - ~
+              - ~
+              - ~
+              - ~
+            status: L
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *2
+        challenge_date: 1518078256
+        handicap: 0
+        rated: 1
+        reminder_date: 1520151845
+        result: black
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *1
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: &37 !!perl/hash:FFGPlayer
+            club: 91Or
+            email: benjamin.hellouin@gmail.com
+            familyname: HELLOUIN
+            givenname: Benjamin
+            id: Benjamin HELLOUIN
+            level: -14
+            license: 0900024
+            registering_level:
+              - ~
+              - ~
+              - ~
+              - ~
+            status: L
+        challenge_date: 1518078261
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1519837200
+        result: black
+        scheduled_date: 1519837200
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *3
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *5
+        challenge_date: 1518078266
+        handicap: 0
+        rated: 1
+        reminder_date: 1518078266
+        result: black
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *4
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *6
+        challenge_date: 1518078271
+        handicap: 0
+        rated: 1
+        reminder_date: 1518769450
+        result: white
+        sgf: /tournois/ffg/sgf/2018-02-22-Jean-Philippe-Ralf.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *7
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *9
+        challenge_date: 1518078276
+        handicap: 0
+        location: "KGS \r"
+        rated: 1
+        reminder_date: 1519329600
+        result: white
+        scheduled_date: 1519329600
+        sgf: /tournois/ffg/sgf/2018-02-22-Benjamin-Dani.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *8
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *10
+        challenge_date: 1518078281
+        handicap: 0
+        rated: 1
+        reminder_date: 1519460651
+        result: white
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *11
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *12
+        challenge_date: 1518078286
+        handicap: 0
+        rated: 1
+        reminder_date: 1519460656
+        result: white
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: &38 !!perl/hash:FFGPlayer
+            club: 91SM
+            email: dartiguesjulien@gmail.com
+            familyname: DARTIGUES
+            givenname: Julien
+            id: Julien DARTIGUES
+            level: -442
+            license: 1500095
+            registering_level:
+              - ~
+              - ~
+              - ~
+            status: L
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *14
+        challenge_date: 1518078291
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1518876000
+        result: white
+        scheduled_date: 1518876000
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *13
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *16
+        challenge_date: 1518078296
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1519246800
+        result: white
+        scheduled_date: 1519246800
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *15
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *18
+        challenge_date: 1518078301
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1518967800
+        result: white
+        scheduled_date: 1518967800
+        sgf: /tournois/ffg/2017/2018-02-18-Jean-Luc-Gillian.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *17
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *19
+        challenge_date: 1518078307
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1519158600
+        result: black
+        scheduled_date: 1519158600
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: &39 !!perl/hash:FFGPlayer
+            club: 67SE
+            email: emmanuel.poidevin@laposte.net
+            familyname: POIDEVIN
+            givenname: Emmanuel
+            id: Emmanuel POIDEVIN
+            level: -1074
+            license: 1600305
+            registering_level:
+              - ~
+              - ~
+              - ~
+              - ~
+              - ~
+            status: L
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: !!perl/hash:FFGPlayer
+            club: 42Se
+            email: T.Bisaccia.T@hotmail.fr
+            familyname: BISACCIA
+            givenname: Thomas
+            id: Thomas BISACCIA
+            level: -1260
+            license: 1500013
+            registering_level:
+              - ~
+              - ~
+              - ~
+            status: L
+        challenge_date: 1518078312
+        handicap: 0
+        location: "KGS\r"
+        rated: 1
+        reminder_date: 1519547045
+        result: white
+        scheduled_date: 1519245600
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *20
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *22
+        challenge_date: 1518078318
+        handicap: 0
+        rated: 1
+        reminder_date: 1518769481
+        result: white
+        sgf: /tournois/ffg/2017/2018-02-19-Yves-Laouen.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *21
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *24
+        challenge_date: 1518078323
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1519072200
+        result: white
+        scheduled_date: 1519072200
+        sgf: /tournois/ffg/sgf/2018-02-19-Bastien-Eric.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *23
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: &40 !!perl/hash:FFGPlayer
+            club: 11Na
+            email: david@tarczewski.fr
+            familyname: TARCZEWSKI
+            givenname: David
+            id: David TARCZEWSKI
+            level: -1757
+            license: 1500273
+            registering_level:
+              - ~
+              - ~
+              - ~
+              - ~
+            status: L
+        challenge_date: 1518078328
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1519484400
+        result: white
+        scheduled_date: 1519484400
+        sgf: /tournois/ffg/sgf/2018-02-24-Thibaut-David.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *25
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *26
+        challenge_date: 1518078333
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1519115051
+        result: white
+        scheduled_date: 1518962400
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: &41 !!perl/hash:FFGPlayer
+            club: 67SE
+            email: poidevin.emmanuel@gmail.com
+            familyname: POIDEVIN
+            givenname: Robin
+            id: Robin POIDEVIN
+            level: -1850
+            license: 1600306
+            registering_level:
+              - ~
+              - ~
+              - ~
+              - ~
+              - ~
+            status: L
+    number: 1
+  - !!perl/hash:Round
+    GoGame:
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *1
+        challenge_date: 1521275051
+        handicap: 0
+        rated: 1
+        reminder_date: 1521275051
+        result: white
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *36
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *3
+        challenge_date: 1521275056
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1522947600
+        result: white
+        scheduled_date: 1522947600
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *35
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *37
+        challenge_date: 1521275061
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1523259000
+        result: white
+        scheduled_date: 1523259000
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *2
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *6
+        challenge_date: 1521275066
+        handicap: 0
+        rated: 1
+        reminder_date: 1521275066
+        result: black
+        sgf: /tournois/ffg/sgf/2018-03-21-Fabien-Jean-Philippe.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *4
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *7
+        challenge_date: 1521275071
+        handicap: 0
+        rated: 1
+        reminder_date: 1521966258
+        result: black
+        sgf: /tournois/ffg/sgf/2018-03-25-Jean-Ralf.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *5
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *30
+        challenge_date: 1521275076
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1522350000
+        result: black
+        scheduled_date: 1522350000
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *8
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *10
+        challenge_date: 1521275082
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1522346400
+        result: white
+        scheduled_date: 1522346400
+        sgf: /tournois/ffg/sgf/2018-03-29-Dani-Mathieu.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *9
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *13
+        challenge_date: 1521275087
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1521896400
+        result: white
+        scheduled_date: 1521896400
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *38
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: &42 !!perl/hash:FFGPlayer
+            club: 74An
+            email: anthonylecorps.go@gmail.com
+            familyname: LECORPS
+            givenname: Anthony
+            id: Anthony LECORPS
+            level: -545
+            license: 1200200
+            registering_level:
+              - ~
+              - ~
+              - ~
+              - ~
+              - ~
+              - ~
+            status: L
+        challenge_date: 1521275092
+        handicap: 0
+        location: "kgs\r"
+        rated: 1
+        reminder_date: 1523363400
+        result: black
+        scheduled_date: 1523363400
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *12
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *15
+        challenge_date: 1521275097
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1522261800
+        result: black
+        scheduled_date: 1522261800
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *14
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *16
+        challenge_date: 1521275103
+        handicap: 0
+        location: "KGS salle FFG\r"
+        rated: 1
+        reminder_date: 1523041200
+        result: white
+        scheduled_date: 1523041200
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *28
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *39
+        challenge_date: 1521275108
+        handicap: 1
+        rated: 1
+        reminder_date: 1522657462
+        result: white
+        sgf: /tournois/ffg/sgf/2018-04-08-Jean-Luc-Emmanuel.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *17
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *27
+        challenge_date: 1521275114
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1523289600
+        result: white
+        scheduled_date: 1523289600
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *18
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *20
+        challenge_date: 1521275119
+        handicap: 0
+        location: "KGS\r"
+        rated: 1
+        reminder_date: 1522857600
+        result: white
+        scheduled_date: 1522857600
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *19
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *23
+        challenge_date: 1521275129
+        handicap: 0
+        rated: 1
+        reminder_date: 1521275129
+        result: black
+        sgf: /tournois/ffg/sgf/2018-03-18-Laouen-Bastien.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *22
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *25
+        challenge_date: 1521275135
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1525003200
+        result: black
+        scheduled_date: 1525003200
+        sgf: /tournois/ffg/sgf/2018-04-29-Eric-Thibaut.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *24
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *41
+        challenge_date: 1521275140
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1524471846
+        scheduled_date: 1521736200
+        status: scheduled
+        white:
+          FFGPlayer: *40
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *26
+        challenge_date: 1521275145
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1522484647
+        result: black
+        scheduled_date: 1522179000
+        sgf: /tournois/ffg/sgf/2018-04-01-Christelle-Pascal.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *29
+    final_date: 1523831424
+    number: 2
+  - !!perl/hash:Round
+    GoGame:
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *2
+        challenge_date: 1524644652
+        handicap: 0
+        rated: 1
+        reminder_date: 1526027046
+        result: black
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *36
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *1
+        challenge_date: 1524644657
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1528029000
+        result: black
+        scheduled_date: 1528029000
+        sgf: /tournois/ffg/sgf/2018-06-03-Robin-Samuel.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *35
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *7
+        challenge_date: 1524644663
+        handicap: 1
+        rated: 1
+        reminder_date: 1528100647
+        status: challenged
+        white:
+          FFGPlayer: *3
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *4
+        challenge_date: 1524644668
+        handicap: 0
+        rated: 1
+        reminder_date: 1525335865
+        result: black
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *37
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *6
+        challenge_date: 1524644673
+        handicap: 0
+        rated: 1
+        reminder_date: 1528100654
+        status: challenged
+        white:
+          FFGPlayer: *5
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *9
+        challenge_date: 1524644678
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1526583600
+        result: white
+        scheduled_date: 1526583600
+        sgf: /tournois/ffg/sgf/2018-05-17-Laurent-Dani.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *30
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *10
+        challenge_date: 1524644683
+        handicap: 0
+        rated: 1
+        reminder_date: 1527409464
+        result: white
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *8
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *12
+        challenge_date: 1524644688
+        handicap: 0
+        rated: 1
+        reminder_date: 1526718272
+        result: white
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *11
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *15
+        challenge_date: 1524644694
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1525262400
+        result: black
+        scheduled_date: 1525262400
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *13
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *14
+        challenge_date: 1524644699
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1525285800
+        result: white
+        scheduled_date: 1525285800
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *42
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *17
+        challenge_date: 1524644705
+        handicap: 0
+        location: "KGS\r"
+        rated: 1
+        reminder_date: 1525766400
+        result: white
+        scheduled_date: 1525766400
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *16
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *18
+        challenge_date: 1524644710
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1526317200
+        result: white
+        scheduled_date: 1526317200
+        sgf: /tournois/ffg/sgf/2018-05-14-Sylvain-Gillian.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *28
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *19
+        challenge_date: 1524644715
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1525363200
+        result: white
+        scheduled_date: 1525363200
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *27
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *20
+        challenge_date: 1524644721
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1527793200
+        result: black
+        scheduled_date: 1527793200
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *39
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *21
+        challenge_date: 1524644726
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1526497200
+        result: white
+        scheduled_date: 1526497200
+        sgf: /tournois/ffg/sgf/2018-05-16-Bastien-Yves.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *23
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *24
+        challenge_date: 1524644731
+        handicap: 0
+        rated: 1
+        reminder_date: 1524644731
+        result: white
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *22
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *29
+        challenge_date: 1524644736
+        handicap: 2
+        rated: 1
+        reminder_date: 1526718283
+        result: black
+        sgf: /tournois/ffg/sgf/2018-05-19-Thibaut-Christelle.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *25
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *26
+        challenge_date: 1524644741
+        handicap: 1
+        location: KGS
+        rated: 0
+        reminder_date: 1526804647
+        result: black
+        scheduled_date: 1525964400
+        status: finished
+        white:
+          FFGPlayer: *40
+    final_date: 1527192290
+    number: 3
+  - !!perl/hash:Round
+    GoGame:
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *3
+        challenge_date: 1528359855
+        handicap: 1
+        rated: 1
+        reminder_date: 1533198247
+        status: challenged
+        white:
+          FFGPlayer: *36
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *2
+        challenge_date: 1528359861
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1530784800
+        result: black
+        scheduled_date: 1530784800
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *35
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *4
+        challenge_date: 1528359867
+        handicap: 0
+        rated: 1
+        reminder_date: 1530433459
+        result: white
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *1
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *5
+        challenge_date: 1528359873
+        handicap: 0
+        rated: 1
+        reminder_date: 1531124654
+        result: white
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *8
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *7
+        challenge_date: 1528359879
+        handicap: 0
+        rated: 1
+        reminder_date: 1528359879
+        result: white
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *30
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *9
+        challenge_date: 1528359885
+        handicap: 0
+        rated: 1
+        reminder_date: 1529742271
+        result: black
+        sgf: /tournois/ffg/sgf/2018-06-26-Jean-Philippe-Dani.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *6
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *11
+        challenge_date: 1528359891
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1529517600
+        result: black
+        scheduled_date: 1529517600
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *15
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *12
+        challenge_date: 1528359896
+        handicap: 0
+        rated: 1
+        reminder_date: 1530433471
+        result: black
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *10
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *42
+        challenge_date: 1528359903
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1529391600
+        result: white
+        scheduled_date: 1529391600
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *13
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *14
+        challenge_date: 1528359909
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1530556200
+        result: white
+        scheduled_date: 1530556200
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *31
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *18
+        challenge_date: 1528359915
+        handicap: 1
+        location: KGS
+        rated: 1
+        reminder_date: 1529132400
+        result: black
+        scheduled_date: 1529132400
+        sgf: /tournois/ffg/sgf/2018-06-16-Jean-Yves-Gillian.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *16
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *28
+        challenge_date: 1528359921
+        handicap: 0
+        rated: 1
+        reminder_date: 1529051107
+        result: black
+        sgf: /tournois/ffg/sgf/2018-06-18-Richard-Sylvain.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: &43 !!perl/hash:FFGPlayer
+            club: 31Ba
+            email: hitier.richard@gmail.com
+            familyname: HITIER
+            givenname: Richard
+            id: Richard HITIER
+            level: -782
+            license: 9652010
+            registering_level:
+              - ~
+              - ~
+              - ~
+              - ~
+              - ~
+              - ~
+              - ~
+            status: L
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: &44 !!perl/hash:FFGPlayer
+            club: 33Bo
+            email: julien.gavard@gmail.com
+            familyname: GAVARD
+            givenname: Julien
+            id: Julien GAVARD
+            level: -858
+            license: 1000151
+            registering_level:
+              - ~
+              - ~
+              - ~
+              - ~
+              - ~
+              - ~
+            status: C
+        challenge_date: 1528359927
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1529951400
+        result: black
+        scheduled_date: 1529951400
+        sgf: /tournois/ffg/sgf/2018-06-25-Jean-Luc-Julien.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *17
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *39
+        challenge_date: 1528359933
+        handicap: 0
+        rated: 1
+        reminder_date: 1533198253
+        status: challenged
+        submitted: 1
+        white:
+          FFGPlayer: *27
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *19
+        challenge_date: 1528359939
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1529523000
+        result: white
+        scheduled_date: 1529523000
+        sgf: /tournois/ffg/sgf/2018-06-20-Bastien-Roland.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *23
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *21
+        challenge_date: 1528359945
+        handicap: 0
+        location: OGS
+        rated: 1
+        reminder_date: 1530093600
+        result: white
+        scheduled_date: 1530093600
+        sgf: /tournois/ffg/sgf/2018-06-27-Aurelien-Yves.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *20
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *25
+        challenge_date: 1528359951
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1530363600
+        result: white
+        scheduled_date: 1530363600
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *22
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *26
+        challenge_date: 1528359957
+        handicap: 2
+        location: KGS
+        rated: 1
+        reminder_date: 1529610300
+        result: white
+        scheduled_date: 1529610300
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *24
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *41
+        challenge_date: 1528359963
+        handicap: 0
+        rated: 1
+        reminder_date: 1533198258
+        status: challenged
+        submitted: 1
+        white:
+          FFGPlayer: *29
+    final_date: 1530882739
+    number: 4
+  - !!perl/hash:Round
+    GoGame:
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *5
+        challenge_date: 1533543853
+        handicap: 1
+        rated: 1
+        reminder_date: 1537950250
+        result: white
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *1
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *4
+        challenge_date: 1533543859
+        handicap: 0
+        rated: 1
+        reminder_date: 1538641450
+        status: challenged
+        submitted: 1
+        white:
+          FFGPlayer: *2
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *7
+        challenge_date: 1533543865
+        handicap: 0
+        rated: 1
+        reminder_date: 1535617459
+        result: black
+        sgf: /tournois/ffg/sgf/2018-09-01-Benjamin-Ralf.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *8
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *6
+        challenge_date: 1533543871
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1534446000
+        result: black
+        scheduled_date: 1534446000
+        sgf: /tournois/ffg/sgf/2018-08-16-Laurent-Jean-Philippe.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *30
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *9
+        challenge_date: 1533543877
+        handicap: 0
+        rated: 1
+        reminder_date: 1534926266
+        result: white
+        sgf: /tournois/ffg/sgf/2018-08-29-Xavier-Dani.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *15
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *13
+        challenge_date: 1533543882
+        handicap: 0
+        rated: 1
+        reminder_date: 1536308659
+        result: black
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *10
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *42
+        challenge_date: 1533543888
+        handicap: 0
+        rated: 0
+        reminder_date: 1534926278
+        result: white
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *11
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *14
+        challenge_date: 1533543894
+        handicap: 0
+        location: kgs
+        rated: 1
+        reminder_date: 1535999400
+        result: white
+        scheduled_date: 1535999400
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *12
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *16
+        challenge_date: 1533543900
+        handicap: 0
+        location: 21:00
+        rated: 1
+        reminder_date: 1535925600
+        result: white
+        scheduled_date: 1535925600
+        sgf: /tournois/ffg/sgf/2018-09-03-Christian-Jean-Yves.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *31
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *44
+        challenge_date: 1533543906
+        handicap: 0
+        rated: 1
+        reminder_date: 1538641451
+        status: canceled
+        submitted: 1
+        white:
+          FFGPlayer: *43
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *32
+        challenge_date: 1533543912
+        handicap: 0
+        rated: 1
+        reminder_date: 1535617477
+        result: white
+        sgf: /tournois/ffg/sgf/2018-09-04-Sylvain-Christopher.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *28
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *23
+        challenge_date: 1533543918
+        handicap: 0
+        rated: 1
+        reminder_date: 1534926307
+        result: white
+        sgf: /tournois/ffg/sgf/2018-08-29-Gillian-Bastien.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *18
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *20
+        challenge_date: 1533543923
+        handicap: 0
+        location: "KGS\r"
+        rated: 1
+        reminder_date: 1535635800
+        result: white
+        scheduled_date: 1535635800
+        sgf: /tournois/ffg/sgf/2018-08-30-Jean-Luc-Aurelien.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *17
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *22
+        challenge_date: 1533543929
+        handicap: 2
+        location: KGS
+        rated: 1
+        reminder_date: 1535385600
+        result: black
+        scheduled_date: 1535385600
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *27
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *21
+        challenge_date: 1533543935
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1536087600
+        result: white
+        scheduled_date: 1536087600
+        sgf: /tournois/ffg/sgf/2018-09-04-Roland-Yves.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *19
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *26
+        challenge_date: 1533543941
+        handicap: 3
+        location: "OGS\r"
+        rated: 1
+        reminder_date: 1535824800
+        result: black
+        scheduled_date: 1535824800
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *25
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *29
+        challenge_date: 1533543947
+        handicap: 1
+        location: KGS
+        rated: 1
+        reminder_date: 1537293600
+        result: black
+        scheduled_date: 1537293600
+        sgf: /tournois/ffg/sgf/2018-09-18-Eric-Christelle.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *24
+    final_date: 1538683659
+    number: 5
+  - !!perl/hash:Round
+    GoGame:
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *3
+        challenge_date: 1538814252
+        handicap: 0
+        rated: 1
+        reminder_date: 1541579050
+        status: challenged
+        white:
+          FFGPlayer: *1
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *8
+        challenge_date: 1538814252
+        handicap: 0
+        rated: 1
+        reminder_date: 1541579051
+        status: challenged
+        white:
+          FFGPlayer: *4
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *15
+        challenge_date: 1538814253
+        handicap: 0
+        rated: 1
+        reminder_date: 1539505452
+        result: black
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *6
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *9
+        challenge_date: 1538814254
+        handicap: 0
+        rated: 1
+        reminder_date: 1540887852
+        result: black
+        sgf: /tournois/ffg/sgf/2018-11-04-Jean-Dani.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *5
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *11
+        challenge_date: 1538814254
+        handicap: 0
+        rated: 1
+        reminder_date: 1539505454
+        result: black
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *7
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *10
+        challenge_date: 1538814255
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1539716400
+        result: white
+        scheduled_date: 1539716400
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *30
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *31
+        challenge_date: 1538814256
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1539682200
+        result: white
+        scheduled_date: 1539682200
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *12
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *28
+        challenge_date: 1538814257
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1539628200
+        result: white
+        scheduled_date: 1539628200
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *14
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *16
+        challenge_date: 1538814258
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1539764649
+        result: white
+        scheduled_date: 1539630000
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *32
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *18
+        challenge_date: 1538814258
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1539882000
+        result: white
+        scheduled_date: 1539882000
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *34
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *27
+        challenge_date: 1538814259
+        handicap: 0
+        location: KGS
+        rated: 1
+        reminder_date: 1539889200
+        result: white
+        scheduled_date: 1539889200
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *23
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *22
+        challenge_date: 1538814260
+        handicap: 0
+        rated: 1
+        reminder_date: 1539505458
+        result: black
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *17
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *24
+        challenge_date: 1538814260
+        handicap: 1
+        location: KGS
+        rated: 1
+        reminder_date: 1541532600
+        result: white
+        scheduled_date: 1541532600
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *19
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *25
+        challenge_date: 1538814261
+        handicap: 3
+        location: KGS
+        rated: 1
+        reminder_date: 1541941200
+        scheduled_date: 1541941200
+        status: scheduled
+        white:
+          FFGPlayer: *20
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *29
+        challenge_date: 1539073451
+        handicap: 3
+        location: kgs
+        rated: 1
+        reminder_date: 1539804600
+        result: white
+        scheduled_date: 1539804600
+        sgf: /tournois/ffg/sgf/2018-10-17-Yves-Christelle.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *21
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *26
+        challenge_date: 1538814262
+        handicap: 0
+        location: "ogs\r"
+        rated: 1
+        reminder_date: 1538940600
+        result: black
+        scheduled_date: 1538940600
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *33
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *13
+        challenge_date: 1540110253
+        handicap: 4
+        rated: 1
+        reminder_date: 1540801449
+        result: white
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *2
+    final_date: 1541331877
+    number: 6
+city: Real-time Internet Servers
+comments: Tournoi Lent Internet FFG
+filename: toperm
+komi: 7.5
+name: Tournoi Lent Internet FFG
+prog: goatlib
+round_number: 6
+size: 19
+time: 60
