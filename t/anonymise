@@ -1,0 +1,28 @@
+#! /usr/bin/perl -w
+
+# Anonymise e-mail addresses of a tournament file by
+# replacing the domain with example.tld. This is to avoid
+# using real addresses in test files that are published. The
+# other data (name, license and whatnot) are public anyway.
+
+use strict;
+use Tournament; # this complains about not finding the conf, but whatever
+
+my $tournament_fn = shift @ARGV;
+
+my $t = Tournament->load($tournament_fn);
+
+map {
+    my $email = $_->email;
+    my $addr = (Mail::Address->parse($email))[0];
+    if ($addr->host !~ /example/) {
+        my $tld = ("net", "org", "com")[rand 3];
+        my $u = $addr->user;
+        my $new = "$u\@example.$tld";
+        $_->email($new);
+    }
+} $t->players;
+
+
+$t->save($tournament_fn);
+
