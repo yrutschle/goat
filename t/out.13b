@@ -1,12 +1,12 @@
-Sat Jul 30 15:30:00 2005: notify Yves CLAIR <clairyves@wanadoo.fr> and Philippe BATAILLER <philippe.batailler@free.fr> their game is finished and black won; result given by clairyves@wanadoo.fr
- <clairyves@wanadoo.fr>
+Sat Jul 30 15:30:00 2005: notify Yves CLAIR <clairyves@example.net> and Philippe BATAILLER <philippe.batailler@example.net> their game is finished and black won; result given by clairyves@example.net
+ <clairyves@example.net>
 Content-Transfer-Encoding: binary
 Content-Type: multipart/mixed; boundary="---testing42ftwtesting"
 From: GO Assistant <goat@rutschle.net>
 MIME-Version: 1.0
 Return-Path: GO Assistant <goat@rutschle.net>
 Subject: [goat] Résultat de votre ronde
-To: Philippe BATAILLER <philippe.batailler@free.fr>,Yves CLAIR
+To: Philippe BATAILLER <philippe.batailler@example.net>,Yves CLAIR
 X-Loop: GO Assistant <goat@rutschle.net>
 X-Mailer: MIME-Tools with no versionThis is a multi-part message in MIME format...
 
@@ -20,8 +20,8 @@ Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@ru
 
 
 Le résultat de votre partie a été enregistré.
-Yves CLAIR <clairyves@wanadoo.fr> contre Philippe BATAILLER <philippe.batailler@free.fr>, victoire pour Yves CLAIR <clairyves@wanadoo.fr>.
+Yves CLAIR <clairyves@example.net> contre Philippe BATAILLER <philippe.batailler@example.net>, victoire pour Yves CLAIR <clairyves@example.net>.
 
-Le résultat a été rapporté par clairyves@wanadoo.fr.
+Le résultat a été rapporté par clairyves@example.net.
 
 -----testing42ftwtesting--

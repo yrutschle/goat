@@ -2,7 +2,7 @@
 FFGPlayer:
   - &1 !!perl/hash:FFGPlayer
     club: 17Ro
-    email: haohan9223@gmail.com
+    email: haohan9223@example.com
     familyname: LI
     givenname: Haohan
     id: Haohan LI
@@ -17,7 +17,7 @@ FFGPlayer:
     status: L
   - &2 !!perl/hash:FFGPlayer
     club: 75Al
-    email: bourhis.francois@gmail.com
+    email: bourhis.francois@example.com
     familyname: BOURHIS
     givenname: François
     id: François BOURHIS
@@ -32,7 +32,7 @@ FFGPlayer:
     status: L
   - &3 !!perl/hash:FFGPlayer
     club: 64Pa
-    email: simeon.girousse@gmail.com
+    email: simeon.girousse@example.org
     familyname: GIROUSSE
     givenname: Siméon
     id: Siméon GIROUSSE
@@ -47,7 +47,7 @@ FFGPlayer:
     status: L
   - &4 !!perl/hash:FFGPlayer
     club: 75Ju
-    email: aldo.moscatelli@hotmail.ch
+    email: aldo.moscatelli@example.org
     familyname: MOSCATELLI
     givenname: Aldo
     id: Aldo MOSCATELLI
@@ -62,7 +62,7 @@ FFGPlayer:
     status: L
   - &5 !!perl/hash:FFGPlayer
     club: 44Na
-    email: bguevel@protonmail.com
+    email: bguevel@example.com
     familyname: GUEVEL
     givenname: Brendan
     id: Brendan GUEVEL
@@ -77,7 +77,7 @@ FFGPlayer:
     status: L
   - &6 !!perl/hash:FFGPlayer
     club: 13Ma
-    email: benjamin.hellouin@gmail.com
+    email: benjamin.hellouin@example.org
     familyname: HELLOUIN
     givenname: Benjamin
     id: Benjamin HELLOUIN
@@ -92,7 +92,7 @@ FFGPlayer:
     status: L
   - &7 !!perl/hash:FFGPlayer
     club: 69Ly
-    email: denis.kuperberg@gmail.com
+    email: denis.kuperberg@example.net
     familyname: KUPERBERG
     givenname: Denis
     id: Denis KUPERBERG
@@ -107,7 +107,7 @@ FFGPlayer:
     status: L
   - &8 !!perl/hash:FFGPlayer
     club: 91Or
-    email: neveucedric@hotmail.com
+    email: neveucedric@example.net
     familyname: NEVEU
     givenname: Cédric
     id: Cédric NEVEU
@@ -122,7 +122,7 @@ FFGPlayer:
     status: L
   - &9 !!perl/hash:FFGPlayer
     club: 69Ly
-    email: mezouarabdallah@gmail.com
+    email: mezouarabdallah@example.net
     familyname: MEZOUAR
     givenname: Abdallah
     id: Abdallah MEZOUAR
@@ -137,7 +137,7 @@ FFGPlayer:
     status: L
   - &10 !!perl/hash:FFGPlayer
     club: 38Gr
-    email: maltook21@gmail.com
+    email: maltook21@example.com
     familyname: LAKSSIL
     givenname: Maleek
     id: Maleek LAKSSIL
@@ -152,7 +152,7 @@ FFGPlayer:
     status: L
   - &11 !!perl/hash:FFGPlayer
     club: 76Ro
-    email: fabien.valet@netcourrier.com
+    email: fabien.valet@example.org
     familyname: VALET
     givenname: Fabien
     id: Fabien VALET
@@ -167,7 +167,7 @@ FFGPlayer:
     status: L
   - &12 !!perl/hash:FFGPlayer
     club: 91Or
-    email: rawu@libertysurf.fr
+    email: rawu@example.net
     familyname: WURZINGER
     givenname: Ralf
     id: Ralf WURZINGER
@@ -182,7 +182,7 @@ FFGPlayer:
     status: L
   - &13 !!perl/hash:FFGPlayer
     club: 76Ro
-    email: bertignaccorentin@gmail.com
+    email: bertignaccorentin@example.org
     familyname: BERTIGNAC
     givenname: Corentin
     id: Corentin BERTIGNAC
@@ -197,7 +197,7 @@ FFGPlayer:
     status: L
   - &14 !!perl/hash:FFGPlayer
     club: 34Mo
-    email: lepolititien@gmail.com
+    email: lepolititien@example.org
     familyname: CARRERE
     givenname: Colin
     id: Colin CARRERE
@@ -212,7 +212,7 @@ FFGPlayer:
     status: L
   - &15 !!perl/hash:FFGPlayer
     club: 75Al
-    email: vincendon.fa@gmail.com
+    email: vincendon.fa@example.net
     familyname: VINCENDON
     givenname: Sandrine
     id: Sandrine VINCENDON
@@ -227,7 +227,7 @@ FFGPlayer:
     status: L
   - &16 !!perl/hash:FFGPlayer
     club: 31Pi
-    email: lorl@free.fr
+    email: lorl@example.net
     familyname: LAMÔLE
     givenname: Laurent
     id: Laurent LAMÔLE
@@ -242,7 +242,7 @@ FFGPlayer:
     status: L
   - &17 !!perl/hash:FFGPlayer
     club: 06Pe
-    email: thao.stephane@gmail.com
+    email: thao.stephane@example.org
     familyname: THAO
     givenname: Stéphane
     id: Stéphane THAO
@@ -257,7 +257,7 @@ FFGPlayer:
     status: L
   - &18 !!perl/hash:FFGPlayer
     club: 29Br
-    email: theo_come@yahoo.fr
+    email: theo_come@example.net
     familyname: CÔME
     givenname: Théo
     id: Théo CÔME
@@ -272,7 +272,7 @@ FFGPlayer:
     status: L
   - &19 !!perl/hash:FFGPlayer
     club: 76Ro
-    email: lalo-rfg@wanadoo.fr
+    email: lalo-rfg@example.com
     familyname: LALO
     givenname: Jean-Pierre
     id: Jean-Pierre LALO
@@ -287,7 +287,7 @@ FFGPlayer:
     status: L
   - &20 !!perl/hash:FFGPlayer
     club: 10Tr
-    email: troyes.atari@gmail.com
+    email: troyes.atari@example.org
     familyname: VINCENT
     givenname: Thomas(10Tr)
     id: Thomas(10Tr) VINCENT
@@ -302,7 +302,7 @@ FFGPlayer:
     status: L
   - &21 !!perl/hash:FFGPlayer
     club: 13Ma
-    email: sanzadresse@hotmail.fr
+    email: sanzadresse@example.net
     familyname: ESTHER
     givenname: Elin
     id: Elin ESTHER
@@ -317,7 +317,7 @@ FFGPlayer:
     status: L
   - &22 !!perl/hash:FFGPlayer
     club: 64Pa
-    email: claudetanguy@hotmail.com
+    email: claudetanguy@example.org
     familyname: TANGUY
     givenname: Claude
     id: Claude TANGUY
@@ -332,7 +332,7 @@ FFGPlayer:
     status: L
   - &23 !!perl/hash:FFGPlayer
     club: 78Ve
-    email: arnaudzaltzman@gmail.com
+    email: arnaudzaltzman@example.org
     familyname: ZALTZMAN
     givenname: Arnaud
     id: Arnaud ZALTZMAN
@@ -347,7 +347,7 @@ FFGPlayer:
     status: L
   - &24 !!perl/hash:FFGPlayer
     club: 91SM
-    email: dartiguesjulien@gmail.com
+    email: dartiguesjulien@example.com
     familyname: DARTIGUES
     givenname: Julien
     id: Julien DARTIGUES
@@ -362,7 +362,7 @@ FFGPlayer:
     status: L
   - &25 !!perl/hash:FFGPlayer
     club: 92An
-    email: eric.paul@free.fr
+    email: eric.paul@example.org
     familyname: PAUL
     givenname: Eric
     id: Eric PAUL
@@ -377,7 +377,7 @@ FFGPlayer:
     status: L
   - &26 !!perl/hash:FFGPlayer
     club: 69Ly
-    email: langeron.psygo@gmail.com
+    email: langeron.psygo@example.com
     familyname: LANGERON
     givenname: Rémi
     id: Rémi LANGERON
@@ -392,7 +392,7 @@ FFGPlayer:
     status: L
   - &27 !!perl/hash:FFGPlayer
     club: 31Ba
-    email: julien.corcessin.ffg@gmail.com
+    email: julien.corcessin.ffg@example.org
     familyname: CORCESSIN
     givenname: Julien
     id: Julien CORCESSIN
@@ -407,7 +407,7 @@ FFGPlayer:
     status: L
   - &28 !!perl/hash:FFGPlayer
     club: 69GC
-    email: langermisteur@gmail.com
+    email: langermisteur@example.com
     familyname: LANGER
     givenname: Mateo
     id: Mateo LANGER
@@ -422,7 +422,7 @@ FFGPlayer:
     status: L
   - &29 !!perl/hash:FFGPlayer
     club: 31Ba
-    email: hitier.richard@gmail.com
+    email: hitier.richard@example.net
     familyname: HITIER
     givenname: Richard
     id: Richard HITIER
@@ -437,7 +437,7 @@ FFGPlayer:
     status: L
   - &30 !!perl/hash:FFGPlayer
     club: 64Pa
-    email: sylvain.assos@free.fr
+    email: sylvain.assos@example.com
     familyname: THIBEAU
     givenname: Sylvain
     id: Sylvain THIBEAU
@@ -452,7 +452,7 @@ FFGPlayer:
     status: L
   - &31 !!perl/hash:FFGPlayer
     club: 69Ly
-    email: martin.donati@free.fr
+    email: martin.donati@example.net
     familyname: DONATI
     givenname: Martin
     id: Martin DONATI
@@ -467,7 +467,7 @@ FFGPlayer:
     status: L
   - &32 !!perl/hash:FFGPlayer
     club: 31Ba
-    email: jeanyves.papazoglou@gmail.com
+    email: jeanyves.papazoglou@example.net
     familyname: PAPAZOGLOU
     givenname: Jean-Yves
     id: Jean-Yves PAPAZOGLOU
@@ -482,7 +482,7 @@ FFGPlayer:
     status: L
   - &33 !!perl/hash:FFGPlayer
     club: 37To
-    email: clement.beni@gmail.com
+    email: clement.beni@example.com
     familyname: BÉNI
     givenname: Clément
     id: Clément BÉNI
@@ -497,7 +497,7 @@ FFGPlayer:
     status: L
   - &34 !!perl/hash:FFGPlayer
     club: 69Ly
-    email: ugo.guignardperret@gmail.com
+    email: ugo.guignardperret@example.net
     familyname: GUIGNARD-PERRET
     givenname: Ugo
     id: Ugo GUIGNARD-PERRET
@@ -512,7 +512,7 @@ FFGPlayer:
     status: L
   - &35 !!perl/hash:FFGPlayer
     club: 64Pa
-    email: francis.tugaye@wanadoo.fr
+    email: francis.tugaye@example.org
     familyname: TUGAYÉ
     givenname: Francis
     id: Francis TUGAYÉ
@@ -527,7 +527,7 @@ FFGPlayer:
     status: L
   - &36 !!perl/hash:FFGPlayer
     club: 64Pa
-    email: nightaelia@gmail.com
+    email: nightaelia@example.net
     familyname: GRANGÉ
     givenname: Jean-Romain
     id: Jean-Romain GRANGÉ
@@ -542,7 +542,7 @@ FFGPlayer:
     status: L
   - &37 !!perl/hash:FFGPlayer
     club: 64Pa
-    email: ayumichanyo@gmail.com
+    email: ayumichanyo@example.org
     familyname: SCHOTT_DEDIEU
     givenname: Kim
     id: Kim SCHOTT_DEDIEU
@@ -557,7 +557,7 @@ FFGPlayer:
     status: L
   - &38 !!perl/hash:FFGPlayer
     club: 75Op
-    email: Elodie_SAMSON@hotmail.fr
+    email: Elodie_SAMSON@example.org
     familyname: SAMSON
     givenname: Elodie
     id: Elodie SAMSON
@@ -572,7 +572,7 @@ FFGPlayer:
     status: L
   - &39 !!perl/hash:FFGPlayer
     club: 69Ly
-    email: piau2000@hotmail.com
+    email: piau2000@example.com
     familyname: LARGOUNEZ
     givenname: Guillaume
     id: Guillaume LARGOUNEZ
@@ -587,7 +587,7 @@ FFGPlayer:
     status: L
   - &40 !!perl/hash:FFGPlayer
     club: 92An
-    email: benjamin.monate@gmail.com
+    email: benjamin.monate@example.com
     familyname: MONATE
     givenname: Benjamin
     id: Benjamin MONATE
@@ -602,7 +602,7 @@ FFGPlayer:
     status: L
   - &41 !!perl/hash:FFGPlayer
     club: 92An
-    email: dianemorel@gmail.com
+    email: dianemorel@example.net
     familyname: MONATE
     givenname: Philéas
     id: Philéas MONATE
@@ -617,7 +617,7 @@ FFGPlayer:
     status: L
   - &42 !!perl/hash:FFGPlayer
     club: 31To
-    email: yves@rutschle.net
+    email: yves@example.org
     familyname: RUTSCHLE
     givenname: Yves
     id: Yves RUTSCHLE
@@ -632,7 +632,7 @@ FFGPlayer:
     status: L
   - &43 !!perl/hash:FFGPlayer
     club: 18Bo
-    email: eric.imbault@neuf.fr
+    email: eric.imbault@example.com
     familyname: IMBAULT
     givenname: Eric
     id: Eric IMBAULT
@@ -647,7 +647,7 @@ FFGPlayer:
     status: L
   - &44 !!perl/hash:FFGPlayer
     club: 31Ba
-    email: jpladet@gmail.com
+    email: jpladet@example.org
     familyname: LADET
     givenname: Jean-Pierre
     id: Jean-Pierre LADET
@@ -662,7 +662,7 @@ FFGPlayer:
     status: L
   - &45 !!perl/hash:FFGPlayer
     club: 19Br
-    email: coursiere.aurelian@gmail.com
+    email: coursiere.aurelian@example.net
     familyname: COURSIERE
     givenname: Aurélian
     id: Aurélian COURSIERE
@@ -677,7 +677,7 @@ FFGPlayer:
     status: L
   - &46 !!perl/hash:FFGPlayer
     club: 13Ma
-    email: roman.auvray@gmail.com
+    email: roman.auvray@example.com
     familyname: AUVRAY
     givenname: Roman
     id: Roman AUVRAY
@@ -692,7 +692,7 @@ FFGPlayer:
     status: L
   - &47 !!perl/hash:FFGPlayer
     club: 69Ly
-    email: benjamin.millaud@gmail.com
+    email: benjamin.millaud@example.com
     familyname: MILLAUD
     givenname: Benjamin
     id: Benjamin MILLAUD
@@ -707,7 +707,7 @@ FFGPlayer:
     status: L
   - &48 !!perl/hash:FFGPlayer
     club: 31Ba
-    email: nicolas.symphorien@gmail.com
+    email: nicolas.symphorien@example.org
     familyname: SYMPHORIEN
     givenname: Nicolas
     id: Nicolas SYMPHORIEN
@@ -722,7 +722,7 @@ FFGPlayer:
     status: L
   - &49 !!perl/hash:FFGPlayer
     club: 69Ly
-    email: romvise@stocastico.it
+    email: romvise@example.org
     familyname: SERRA
     givenname: Roberto
     id: Roberto SERRA
@@ -737,7 +737,7 @@ FFGPlayer:
     status: L
   - &50 !!perl/hash:FFGPlayer
     club: 34Mo
-    email: alikae@hotmail.fr
+    email: alikae@example.org
     familyname: SPANO
     givenname: Christelle
     id: Christelle SPANO
@@ -752,7 +752,7 @@ FFGPlayer:
     status: L
   - &51 !!perl/hash:FFGPlayer
     club: 19Br
-    email: pauline.decastrooliveira@laposte.net
+    email: pauline.decastrooliveira@example.org
     familyname: DE_CASTRO_OLIVEIRA
     givenname: Pauline
     id: Pauline DE_CASTRO_OLIVEIRA
@@ -767,7 +767,7 @@ FFGPlayer:
     status: L
   - &52 !!perl/hash:FFGPlayer
     club: 49An
-    email: vanwynsberghe.florian@live.fr
+    email: vanwynsberghe.florian@example.net
     familyname: VANWYNSBERGHE
     givenname: Florian
     id: Florian VANWYNSBERGHE
@@ -782,7 +782,7 @@ FFGPlayer:
     status: L
   - &53 !!perl/hash:FFGPlayer
     club: 33Bo
-    email: astridgaultier@gmail.com
+    email: astridgaultier@example.org
     familyname: ZEMOR
     givenname: Solal
     id: Solal ZEMOR
@@ -797,7 +797,7 @@ FFGPlayer:
     status: L
   - &54 !!perl/hash:FFGPlayer
     club: 31Ba
-    email: cmd.lbourdron@free.fr
+    email: cmd.lbourdron@example.net
     familyname: BOURDRON
     givenname: Laurent
     id: Laurent BOURDRON
@@ -812,7 +812,7 @@ FFGPlayer:
     status: L
   - &55 !!perl/hash:FFGPlayer
     club: 59Li
-    email: tarzer@gmx.fr
+    email: tarzer@example.org
     familyname: ZERIOUHI
     givenname: Tarik
     id: Tarik ZERIOUHI
@@ -827,7 +827,7 @@ FFGPlayer:
     status: L
   - &56 !!perl/hash:FFGPlayer
     club: 31Ba
-    email: neotis31@wanadoo.fr
+    email: neotis31@example.net
     familyname: TAGLIAVINI
     givenname: Loïc
     id: Loïc TAGLIAVINI
@@ -842,7 +842,7 @@ FFGPlayer:
     status: L
   - &57 !!perl/hash:FFGPlayer
     club: 64Pa
-    email: jl.boutaud@orange.fr
+    email: jl.boutaud@example.org
     familyname: BOUTAUD_DE_LA_COMBE
     givenname: Jean-Luc
     id: Jean-Luc BOUTAUD_DE_LA_COMBE
@@ -857,7 +857,7 @@ FFGPlayer:
     status: L
   - &58 !!perl/hash:FFGPlayer
     club: 59Li
-    email: martial.rossignol@gmail.com
+    email: martial.rossignol@example.net
     familyname: ROSSIGNOL
     givenname: Martial
     id: Martial ROSSIGNOL
@@ -2518,7 +2518,7 @@ Round:
     number: 4
 city: Real-time Internet Servers
 comments: Tournoi Lent Internet FFG
-filename: /home/goat_ffg/toperm
+filename: toperm_in.13c
 komi: 7.5
 name: Tournoi Lent Internet FFG
 prog: goatlib

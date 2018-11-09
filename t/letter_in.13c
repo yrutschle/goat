@@ -1,7 +1,7 @@
 Received: from mail-pf0-f170.google.com ([209.85.192.170])
 	by hood.rutschle.net with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
 	(Exim 4.84_2)
-	(envelope-from <haohan9223@gmail.com>)
+	(envelope-from <haohan9223@example.com>)
 	id 1cuhj9-0007ba-99
 	for goat_ffg@rutschle.net; Sun, 02 Apr 2017 15:47:39 +0000
 Received: by mail-pf0-f170.google.com with SMTP id 197so11957307pfv.1
@@ -39,7 +39,7 @@ Received: from [192.168.3.61] ([222.42.97.195])
 Message-ID: <58e11d11.c549620a.b2a4d.f68f@mx.google.com>
 Date: Sun, 02 Apr 2017 23:47:26 +0800
 Subject: Re: [goat] Votre appariement
-From: haohan9223 <haohan9223@gmail.com>
+From: haohan9223 <haohan9223@example.com>
 To: GO Assistant <goat_ffg@rutschle.net>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8

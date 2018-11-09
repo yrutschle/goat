@@ -1,17 +1,17 @@
-Received: from yves by hood.rutschle.net with local (Exim 4.84_2)
-	(envelope-from <yves@rutschle.net>)
+Received: from yves by hood.example.net with local (Exim 4.84_2)
+	(envelope-from <yves@example.net>)
 	id 1avtf1-0008V1-4J
-	for goat_so@rutschle.net; Thu, 28 Apr 2016 21:39:47 +0000
+	for goat_so@example.net; Thu, 28 Apr 2016 21:39:47 +0000
 Date: Thu, 28 Apr 2016 21:39:47 +0000
-From: Yves Rutschle <yves@rutschle.net>
-To: GO Assistant <goat_so@rutschle.net>
+From: Yves Rutschle <yves@example.net>
+To: GO Assistant <goat_so@example.net>
 Subject: Re: [goat] =?UTF-8?Q?R=E9sulta?= =?UTF-8?Q?t?= de votre ronde
-Message-ID: <20160428213947.GT2896@rutschle.net>
-References: <E1avtBu-00085a-GZ@hood.rutschle.net>
+Message-ID: <20160428213947.GT2896@example.net>
+References: <E1avtBu-00085a-GZ@hood.example.net>
 MIME-Version: 1.0
 Content-Type: multipart/mixed; boundary="ijf6z65S790CMqo8"
 Content-Disposition: inline
-In-Reply-To: <E1avtBu-00085a-GZ@hood.rutschle.net>
+In-Reply-To: <E1avtBu-00085a-GZ@hood.example.net>
 User-Agent: Mutt/1.5.23 (2014-03-12)
 
 
