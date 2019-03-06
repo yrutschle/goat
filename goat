@@ -138,11 +138,6 @@ a result file).
  add_players -f toperm.cfg < mutt.newaliases
  del_player -f toperm.cfg sore@loser.com
 
-=item Update the player's levels (fetching from the
-Internet):
-
- update_level -f toperm.cfg
-
 =item Create the new round:
 
  pair -f toperm.cfg
