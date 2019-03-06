@@ -1,6 +1,96 @@
 Not found "New Player" in echelle -- adding anyway
 registering New Player <newplayer@example.org>
 Registered 1 more players.
+Bloggs Joey not found in echelle file -- skipping
+Umberto POLVERINI: changing from -150 to -100
+Umberto POLVERINI: license status changed to:-
+Umberto POLVERINI: player is not licensed.
+Umberto POLVERINI: player license: - is not allowed.
+Eric SAVES: changing from -450 to -400
+Eric SAVES: updating club from 31To to 31Pi
+Eric SAVES: license status changed to:C
+Didier BELLOC: changing from -450 to -600
+Didier BELLOC: license status changed to:-
+Didier BELLOC: player is not licensed.
+Didier BELLOC: player license: - is not allowed.
+Frédéric NASSE: changing from -550 to -600
+Frédéric NASSE: license status changed to:-
+Frédéric NASSE: player is not licensed.
+Frédéric NASSE: player license: - is not allowed.
+Daniel DALLA_BARBA: changing from -550 to -484
+Laurent LAMÔLE: changing from -650 to -386
+Laurent LAMÔLE: updating club from 31To to 31Pi
+Bloggs Joe not found in echelle file -- skipping
+Thomas DUFOUR: changing from -650 to -213
+Thomas DUFOUR: updating club from 31To to 31Pi
+Frédéric CAGNAZZO: changing from -750 to -800
+Frédéric CAGNAZZO: license status changed to:-
+Frédéric CAGNAZZO: player is not licensed.
+Frédéric CAGNAZZO: player license: - is not allowed.
+Jean-François ROUSSEL: changing from -750 to -400
+Jean-François ROUSSEL: updating club from 31To to 31Ba
+Jean-François ROUSSEL: license status changed to:-
+Jean-François ROUSSEL: player is not licensed.
+Jean-François ROUSSEL: player license: - is not allowed.
+Marc MAUREL: changing from -850 to -685
+Florian NIVET: changing from -850 to 75
+Frédéric MIRCOVICH: changing from -850 to -900
+Frédéric MIRCOVICH: license status changed to:-
+Frédéric MIRCOVICH: player is not licensed.
+Frédéric MIRCOVICH: player license: - is not allowed.
+Michaël PALLANDRE: changing from -850 to -1000
+Michaël PALLANDRE: license status changed to:-
+Michaël PALLANDRE: player is not licensed.
+Michaël PALLANDRE: player license: - is not allowed.
+Jacques CARANICOLAS: changing from -950 to -832
+Jacques CARANICOLAS: updating club from 31To to 31Ba
+Lionel BIDEO: changing from -950 to -1000
+Lionel BIDEO: license status changed to:-
+Lionel BIDEO: player is not licensed.
+Lionel BIDEO: player license: - is not allowed.
+Mathias ORTNER: changing from -950 to -800
+Mathias ORTNER: license status changed to:-
+Mathias ORTNER: player is not licensed.
+Mathias ORTNER: player license: - is not allowed.
+Laurent MEUNIER: changing from -1050 to -800
+Laurent MEUNIER: license status changed to:-
+Laurent MEUNIER: player is not licensed.
+Laurent MEUNIER: player license: - is not allowed.
+Hugues CAUBEL: changing from -1050 to -1000
+Hugues CAUBEL: license status changed to:-
+Hugues CAUBEL: player is not licensed.
+Hugues CAUBEL: player license: - is not allowed.
+François LEROY: changing from -1111 to -1136
+François LEROY: updating club from 31To to 31Pi
+Florence BORNET: changing from -1250 to -1200
+Florence BORNET: license status changed to:-
+Florence BORNET: player is not licensed.
+Florence BORNET: player license: - is not allowed.
+Boreï ENG: changing from -1250 to -900
+Boreï ENG: updating club from 31To to 57Me
+Boreï ENG: license status changed to:-
+Boreï ENG: player is not licensed.
+Boreï ENG: player license: - is not allowed.
+Maxime GALLY: changing from -1250 to -1300
+Maxime GALLY: license status changed to:-
+Maxime GALLY: player is not licensed.
+Maxime GALLY: player license: - is not allowed.
+Jean-yves PAPAZOGLOU not found in echelle file -- skipping
+Laurent BOURDRON: changing from -1350 to -661
+Olivier ROUMEZI: changing from -1550 to -1300
+Olivier ROUMEZI: license status changed to:-
+Olivier ROUMEZI: player is not licensed.
+Olivier ROUMEZI: player license: - is not allowed.
+Yves RUTSCHLE: changing from -1589 to -1272
+Bloggs John not found in echelle file -- skipping
+Bloggs Jane not found in echelle file -- skipping
+Nicolas DARQUE: changing from -1650 to -1500
+Nicolas DARQUE: license status changed to:-
+Nicolas DARQUE: player is not licensed.
+Nicolas DARQUE: player license: - is not allowed.
+Jean-Jacques PORTAL: changing from -1750 to -463
+Jean-Jacques PORTAL: updating club from 31To to 31Ba
+New Player not found in echelle file -- skipping
 Odd number of players -- specify a bye with:
 	pair --bye <email>
 Tournament: Tournoi pérmanent de Tøulouse

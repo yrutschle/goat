@@ -82,8 +82,9 @@ use GoatConfig;
 
 my $ECHELLE_FILE = "ech_ffg_new.txt";
 
-my ($param_force_getech, $help);
+my ($testing, $param_force_getech, $help);
 GetOptions(
+    'test' => \$testing,
     'help' => \$help,
     'getech' => \$param_force_getech,
 ) or die pod2usage();
@@ -92,8 +93,8 @@ die pod2usage(-verbose=>2) if defined $help;
 
 my @registered;
 
-download_echelle($ECHELLE_FILE) if $param_force_getech;
-
+# Download/update echelle
+update_ech() unless $testing;
 
 while (<>) {
     next if /^#/ or /^$/;

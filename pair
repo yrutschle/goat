@@ -68,6 +68,8 @@ GetOptions(
 die pod2usage(-verbose=>2) if defined $help;
 my $Tournament = Tournament->load($TOURNAMENT_FILE);
 
+update_ech($Tournament);
+
 
 # Applies function to all games in a tournament. Game is
 # passed as first parameter to function, e.g. remove all
