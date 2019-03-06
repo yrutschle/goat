@@ -42,10 +42,11 @@ use constant SCHEDULED_TIMEOUT => 1 * 24 * 3600; # 1 day
 # (This may need adjusting if you're running the script in the evening)
 use constant GAME_COMINGUP_TIMEOUT => 1 * 24 * 3600; # 1 day
 
-my ($cfg_file, $cl_cfg_file);
+my ($cfg_file, $cl_cfg_file, $testing);
 Getopt::Long::Configure qw/pass_through/;
 GetOptions(
     'file=s' => \$cl_cfg_file,
+    'test' => \$testing,
 );
 
 $cfg_file = $ENV{GOAT_CFG} if defined $ENV{GOAT_CFG};
@@ -80,6 +81,8 @@ our $TEMPLATE_DIR = $cfg->{template_dir};
 our $LOG_DIR=$cfg->{log_dir};
 our $TMP_DIR=$cfg->{tmp_dir};
 our $SGF_DIR=$cfg->{sgf_dir};
+
+$cfg->{testing} = $testing;
 
 # The binaries should be in $PATH
 our $BIN_GOAT = "goat";
