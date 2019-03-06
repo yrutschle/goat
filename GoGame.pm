@@ -90,6 +90,14 @@ Location for a scheduled game.
 
 Who won the game (black or white).
 
+=item winner
+
+FFGPlayer object that won the game
+
+=item loser
+
+FFGPlayer object that lost the game
+
 =item rated
 
 True if the game is to be submitted to a rating system. (Typically, we don't
@@ -154,6 +162,29 @@ sub white {
     my ($obj, $r) = @_;
     $obj->{white}->{FFGPlayer} = $r if $r;
     $obj->{white}->{FFGPlayer};
+}
+
+# Returns object for winner player
+sub winner {
+    my ($obj) = @_;
+    return undef unless $obj->finished;
+
+    return ($obj->result eq 'white') ? $obj->white : $obj->black;
+}
+
+# Returns object for loser player
+sub loser {
+    my ($obj) = @_;
+    return undef unless $obj->finished;
+
+    return ($obj->result eq 'white') ? $obj->black : $obj->white;
+}
+
+# True if game has both specified players
+sub has_players {
+    my ($g, $p1, $p2) = @_;
+    return ((($p1 == $g->white) and ($p2 == $g->black)) 
+        or (($p1 == $g->black) and ($p2 == $g->white)));
 }
 
 #################################################################################
