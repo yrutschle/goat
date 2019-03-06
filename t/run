@@ -30,13 +30,6 @@ $perl_opts .= '-MDevel::Cover="-silent,on"' if $coverage;
 
 push @tests, 
 
-# update_level: check it all works
-{
-    'run' => "cp ../ech_ffg_new.txt .; cp ../toperm.in.8 toperm; perl $perl_opts ../../update_level --no-getech 2> out.20",
-    'test' => 'diff -u ../out.20 out.20',
-    'doc' => 'Update data from echelle',
-},
-
    # register: register some players with mutt alias
    # Tests REGISTER_1, REGISTER_2, REGISTER_3, REGISTER_4,
    # REGISTER_5

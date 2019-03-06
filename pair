@@ -56,10 +56,9 @@ use MailOut;
 use Getopt::Long;
 
 # Interpret command line
-my ($testing, $param_bye, $param_final_date, $help);
+my ($param_bye, $param_final_date, $help);
 my $verbose = 0;
 GetOptions(
-    'test' => \$testing,
     'help' => \$help,
     'date=s' => \$param_final_date,
     'bye=s' => \$param_bye,
@@ -258,8 +257,8 @@ print $Tournament->curr_round->pairings_as_text;
 $Tournament->save($TOURNAMENT_FILE);
 
 my $mail_out = new MailOut(
-    no_send => (defined $testing),
-    testing => (defined $testing),
+    no_send => (defined $CFG->{testing}),
+    testing => (defined $CFG->{testing}),
 );
 $mail_out->deadline(
     round => $round_num,

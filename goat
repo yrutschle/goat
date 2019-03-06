@@ -367,7 +367,7 @@ See Tournament, Round and GoGame for explanations.
 # Global variables
 
 # command line parameters
-my ($testing, $param_round, $param_schedule,
+my ($param_round, $param_schedule,
     $param_result, $param_unresult, $param_rated, $param_status, $param_sgf,
     $param_cancel, $param_chhand, $param_swap, $param_score,
     $param_reminders, $param_submitting, $param_tou, $help, $simulate,
@@ -379,7 +379,6 @@ my ($testing, $param_round, $param_schedule,
 # Command line parsing
 
 GetOptions(
-    'test' => \$testing,
     'simulate' => \$simulate,
     'round=s' => \$param_round,
     'schedule=s' => \$param_schedule,
@@ -409,8 +408,8 @@ die pod2usage(-verbose=>2) if defined $help;
 my $toperm_file = $TOURNAMENT_FILE;
 
 my $mail_out = new MailOut( 
-    testing => (defined $testing),
-    no_send => (defined $testing or defined $simulate),
+    testing => (defined $CFG->{testing}),
+    no_send => (defined $CFG->{testing} or defined $simulate),
 );
 
 my $today = &my_time; # Now

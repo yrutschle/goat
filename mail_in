@@ -52,19 +52,13 @@ use Getopt::Long;
 use GoatConfig;
 use MailOut;
 
-my $testing;
-
-GetOptions(
-    'test' => \$testing,
-);
-
 my $coverage = 0; # Add as a command line option later on?
 
 my (@goat_opts);
 
 my (@BIN_GOAT);
 push @BIN_GOAT, $BIN_GOAT;
-if (defined $testing) {
+if (defined $CFG->{testing}) {
     @goat_opts = ('--test');
     if ($coverage) {
         @BIN_GOAT = ("perl", "-MDevel::Cover=\"-silent,on\"", $BIN_GOAT);
@@ -72,8 +66,8 @@ if (defined $testing) {
 }
 
 my $mail_out = new MailOut( 
-    testing => (defined $testing),
-    no_send => (defined $testing),
+    testing => (defined $CFG->{testing}),
+    no_send => (defined $CFG->{testing}),
 );
 
 #Where to log things? Mail_in needs to log errors, as there
