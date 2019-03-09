@@ -83,14 +83,12 @@ use GoatConfig;
 use GoatLib;
 
 
-my $LOGFILE = "$LOG_DIR/mail_out.log";
-
 # record a line in a log file.
-my ($logfile);
-open $logfile, ">> $LOGFILE" or die "$LOGFILE: $!\n";
+open my $logfile, ">> $CFG->{logfile}" or die "$CFG->{logfile}: $!\n";
 sub record {
     foreach (@_) {
         print $logfile (gmtime).": $_\n";
+        print "$_\n";
     }
 }
 

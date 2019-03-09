@@ -415,6 +415,21 @@ my $Tournament; # Reference to the Tournament object, that contains all the data
 
 =head1 FUNCTIONS
 
+=head2 record
+
+Prints a message to stdout and logs it. Interactive commands
+should use C<print> instead.
+
+=cut
+my ($logfile);
+open $logfile, ">> $CFG->{logfile}" or die "$CFG->{logfile}: $!\n";
+sub record {
+    foreach (@_) {
+        print $logfile "$_";
+        print "$_";
+    }
+}
+
 =head2 challenge
 
 Issue a challenge for the game passed in parameter. Changes
@@ -437,7 +452,7 @@ sub challenge {
         handi => $handi, 
         dateonly => $final_date
     );
-    print "$today_str: $bn plays black against $wn with $handi stones\n";
+    record "$today_str: $bn plays black against $wn with $handi stones\n";
 
     $r_game->challenged(my_time);
     $r_game->reminder_date(my_time);
@@ -464,7 +479,7 @@ sub remind_challenge {
         dateonly => $final_date,
     );
 
-    print "$today_str: $bn and $wn haven't set up the challenge yet.\n";
+    record "$today_str: $bn and $wn haven't set up the challenge yet.\n";
 }
 
 =head2 remind_getresults
@@ -489,7 +504,7 @@ sub remind_getresults {
         date => $date,
     );
 
-    print "$today_str: $bn and $wn please give your results\n";
+    record "$today_str: $bn and $wn please give your results\n";
 }
 
 =head2 remind_game_coming_up
@@ -514,7 +529,7 @@ sub remind_game_coming_up {
         date => $date,
         location => $location,
     );
-    print "$today_str: game coming up: $bn and $wn\n";
+    record "$today_str: game coming up: $bn and $wn\n";
 }
 
 =head2 notify_not_registered
@@ -525,7 +540,7 @@ address can't be found.
 =cut
 sub notify_not_registered { 
     my ($player) = @_; 
-    print "$today_str: notify $player that their game cannot be found\n"; 
+    record "$today_str: notify $player that their game cannot be found\n"; 
 
     $mail_out->player_unknown( p1 => $player );
 }
@@ -548,10 +563,9 @@ sub finish_game {
         my $rated = 0;
         $rated = 1 if $param_rated =~ /yes|1/i;
         $game->rated($rated);
-        print "game: ".$rated.".\n";
     }
 
-    print "$today_str: notify $b and $w their game is finished and $winning_colour won; result given by $submitter\n";
+    record "$today_str: notify $b and $w their game is finished and $winning_colour won; result given by $submitter\n";
     $mail_out->give_results(
         black => $b,
         white => $w,
@@ -587,7 +601,7 @@ if (defined $param_schedule) {
     my $date = parse_datestr($date_str);
 
     unless (defined $date) {
-        print "$today_str: notify $player that '$date_str' is invalid\n";
+        record "$today_str: notify $player that '$date_str' is invalid\n";
         $mail_out->baddate(
             p1 => $player,
             date_str => $date_str,
@@ -596,7 +610,7 @@ if (defined $param_schedule) {
     }
 
     if ($date < $today) {
-        print "$today_str: notify $player that '$date_str' is in the past\n";
+        record "$today_str: notify $player that '$date_str' is in the past\n";
         $mail_out->pastdate(
             p1 => $player,
             date_str => $date_str,
@@ -609,7 +623,7 @@ if (defined $param_schedule) {
     my $b = $black->fulladdress;
     my $w = $white->fulladdress;
 
-    print "$today_str: notify $b and $w that their game has been scheduled on "
+    record "$today_str: notify $b and $w that their game has been scheduled on "
     .scalar gmtime($date)." (GMT) in $location by $player\n";
 
 
@@ -640,7 +654,7 @@ if (defined $param_schedule) {
         $res = 'black' if $res eq 'noir';
         finish_game($game, $submitter, $res);
     } else {
-        print "$today_str: notify $submitter that '$winning_colour' is invalid\n";
+        record "$today_str: notify $submitter that '$winning_colour' is invalid\n";
         $mail_out->badcolour(
             p1 => $submitter,
             colour => $winning_colour,
@@ -674,7 +688,7 @@ if (defined $param_schedule) {
     elsif ($res eq 'B') {
         finish_game($game, $submitter, 'black');
     } else {
-        print "Invalid SGF (or no result)?!\n";
+        record "Invalid SGF (or no result)?!\n";
     }
 
     my $base_file = "$sgf_date-" . $game->white->givenname . "-". $game->black->givenname .  ".sgf";

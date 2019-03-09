@@ -12,7 +12,7 @@ use vars qw/ @EXPORT @ISA/;
 @EXPORT=qw/ 
 $CFG
 
-$LOG_DIR $TMP_DIR $SGF_DIR $SGF_URL $INDEX_URL
+$TMP_DIR $SGF_DIR $SGF_URL $INDEX_URL
 
 $GOAT_ADDRESS $ADMIN_ADDRESS $TOURNAMENT_NAME $TOURNAMENT_CITY
 $TOURNAMENT_LICENSES @PAIRING_CRITERIA
@@ -78,7 +78,6 @@ our $INDEX_URL = $cfg->{index_url};
 
 our $TEMPLATE_DIR = $cfg->{template_dir};
 
-our $LOG_DIR=$cfg->{log_dir};
 our $TMP_DIR=$cfg->{tmp_dir};
 our $SGF_DIR=$cfg->{sgf_dir};
 
@@ -88,8 +87,10 @@ $cfg->{testing} = $testing;
 our $BIN_GOAT = "goat";
 our $BIN_MAIL_IN = "mail_in";
 
+my ($logvol, $logdir, $logfile) = File::Spec->splitpath($cfg->{logfile});
+
 # Creates directories if required
-foreach my $dir ($LOG_DIR, $TMP_DIR, $SGF_DIR) {
+foreach my $dir ($logdir, $TMP_DIR, $SGF_DIR) {
     unless ( -d $dir ) {
         mkdir $dir or die "mkdir $dir: $!\n";
     }

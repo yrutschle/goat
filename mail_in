@@ -70,13 +70,8 @@ my $mail_out = new MailOut(
     no_send => (defined $CFG->{testing}),
 );
 
-#Where to log things? Mail_in needs to log errors, as there
-#are no other way to report them.
-my $LOGFILE = "$LOG_DIR/mail_in.log";
-
 # record a line in a log file.
-my ($logfile);
-open $logfile, ">> $LOGFILE" or die "$LOGFILE: $!\n";
+open my $logfile, ">> $CFG->{logfile}" or die "$CFG->{logfile}: $!\n";
 sub record {
     foreach (@_) {
         print $logfile (gmtime).": $_\n";
