@@ -4,6 +4,7 @@ use strict;
 
 use YAML qw/LoadFile/;
 use Getopt::Long;
+use File::Spec;
 
 require Exporter;
 
