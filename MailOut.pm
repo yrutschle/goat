@@ -470,8 +470,10 @@ sub sendmail {
     );
 
     if (exists $r_data->{attach}) {
-        $r_data->{attach}->{Data} = Encode::encode('UTF-8', $r_data->{attach}->{Data});
-        $r_data->{attach}->{Charset} = 'UTF-8';
+        $r_data->{attach}->{Charset} //= 'UTF-8';
+        $r_data->{attach}->{Data} = Encode::encode(
+            $r_data->{attach}->{Charset}, 
+            $r_data->{attach}->{Data});
 
         $msg->attach(%{$r_data->{attach}});
     }

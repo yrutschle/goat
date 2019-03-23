@@ -842,6 +842,7 @@ if (defined $param_schedule) {
     $mail_out->send_results(
         round => $opts{round},
         attach => {
+            Charset => 'ISO-8859-1',
             Type => 'text/plain',
             Filename => "round$opts{round}.tou",
             Data => $tou,
