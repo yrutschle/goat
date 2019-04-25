@@ -46,25 +46,35 @@ push @tests,
    },
    # pair: create a new round
    # Tests PAIR_1, PAIR_2, PAIR_3, PAIR_5
-   { 'run' => " export TEST_TIME=1122737400; cp ../toperm_in.1 toperm; perl $perl_opts ../../pair --test > out.1 2>&1 ; perl $perl_opts ../../goat --status >> out.1",
+   { 'run' => " export TEST_TIME=1122737400; cp ../ech_ffg_new.txt . ; cp ../toperm_in.1 toperm; perl $perl_opts ../../pair --test > out.1 2>&1 ; perl $perl_opts ../../goat --status >> out.1",
        'test' => 'diff -u ../out.1 out.1',
        'doc' => 'New round',
    },
    # pair: fail because of odd number of players 
    # Tests PAIR_4
-   { 'run' => "cp ../toperm_in.1 toperm; " .
+   { 'run' => "cp ../toperm_in.1 toperm; cp ../ech_ffg_new.txt . ; " .
        "echo 'alias newplayer New Player <newplayer\@example.org> #6k' | perl $perl_opts ../../add_player > out.1b 2>&1 ; ".
-       "perl $perl_opts ../../pair -test >> out.1b 2>&1 ; perl $perl_opts ../../goat --status >> out.1b",
+       "perl $perl_opts ../../pair --test >> out.1b 2>&1 ; perl $perl_opts ../../goat --status >> out.1b",
        'test' => 'diff -u ../out.1b out.1b',
        'doc' => 'New round with odd number of players',
    },
    # pair: pair with a bye player
    # Tests PAIR_4
-   { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.1 toperm; " .
+   { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.1 toperm; cp ../ech_ffg_new.txt . ; " .
        "echo 'alias newplayer New Player <newplayer\@example.org> #6k' | perl $perl_opts ../../add_player > out.1c 2>&1 ; ".
        "perl $perl_opts ../../pair --test --bye newplayer\@example.org >> out.1c 2>&1 ; perl $perl_opts ../../goat --status >> out.1c",
        'test' => 'diff -u ../out.1c out.1c',
        'doc' => 'New round with bye player',
+   },
+   # pair: pair with random bye player, send pairings
+   # (sending is required to check $round->bye is set properly)
+   { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.9 toperm; " .
+       "cp ../ech_ffg_new2.txt ech_ffg_new.txt ; ".
+       "perl $perl_opts ../../pair --test --bye random > out.1k 2>&1 ;".
+       "perl $perl_opts ../../goat --status >> out.1k ; ".
+       "perl $perl_opts ../../goat --test --send-pairings >> out.1k",
+       'test' => 'diff -u ../out.1k out.1k',
+       'doc' => 'New round with random bye player and send pairings',
    },
    # send pairings
    { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.2 toperm; " .
