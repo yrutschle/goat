@@ -26,31 +26,23 @@ mail_out -- goat's e-mail sender
 
 =head1 SYNOPSIS
 
-The old command line interface:
-
- mail_out [--mail-in-illegal <rcpt>,<file>]
-         [--issue-challenge <black>,<white>,<handi>,<limit date>]
-         [--remind-challenge <p1>,<p2>,<handi>,<final_date>]
-         [--ask-results <p1>,<p2>]
-         [--player-unknown <p1>]
-         [--notify-schedule <b>,<w>,<handi>,<date>,<location>,<setter>]
-         [--coming-up <b>,<w>,<handi>,<date>,<location>,<setter>]
-         [--baddate <rcpt>,<date_str>]
-         [--pastdate <rcpt>,<date_str>]
-         [--give-results <p1>,<p2>,<reporter>,<winner>]
-         [--badcolour <rcpt>,<colour_str>]
-         [--attach <attachement>]
-
-         [--no-send]
-
-New interface:
-
  my $mail_out = new MailOut;
  my $mail_test = new MailOut 
                         testing => 1,
                         no_send => 1;
- $mail_out->mail-in-illegal(<rcpt>, <file>);
- [...]
+
+ $mail_out->mail_in_illegal(<rcpt>, <file>);
+ $mail_out_>issue_challenge(<black>,<white>,<handi>,<limit date>);
+ $mail_out_>remind_challenge(<p1>,<p2>,<handi>,<final_date>);
+ $mail_out_>ask_results(<p1>,<p2>);
+ $mail_out_>player_unknown(<p1>);
+ $mail_out_>notify_schedule(<b>,<w>,<handi>,<date>,<location>,<setter>);
+ $mail_out_>coming_up(<b>,<w>,<handi>,<date>,<location>,<setter>);
+ $mail_out_>baddate(<rcpt>,<date_str>);
+ $mail_out_>pastdate(<rcpt>,<date_str>);
+ $mail_out_>give_results(<p1>,<p2>,<reporter>,<winner>);
+ $mail_out_>badcolour(<rcpt>,<colour_str>);
+ $mail_out_>attach(<attachement>);
 
 =head1 DESCRIPTION
 
@@ -115,65 +107,65 @@ sub new {
     return bless \%o, $class;
 }
 
-=head2 OPTIONS
+=head2 METHODS
 
 =over 4
 
-=item --mail-in-illegal <rcpt>,<file>
+=item $mail_out->mail_in_illegal <rcpt>,<file>
 
 Called from mail_in on an illegal or unknwon command. 
 
-=item --remind-challenge <black,white,handicap,final_date>
+=item $mail_out->remind_challenge <black,white,handicap,final_date>
 
 Remind players who haven't scheduled their game yet to do
 so.
 
 B<final_date> is UTC UNIX date.
 
-=item --ask-results <black,white,date>
+=item $mail_out->ask_results <black,white,date>
 
 Ask players who had scheduled their game at I<date> that
 they need to publish their results.
 
-=item --player-unknown <address>
+=item $mail_out->player_unknown <address>
 
 Notifies I<address> that that address is unknown. (Game
 schedules and results must be sent from the e-mail address
 that Goat knows about).
 
-=item --issue-challenge <black,white,handicap,limit date>
+=item $mail_out->issue_challenge <black,white,handicap,limit date>
 
 Sends players their pairing.
 
-=item --notify-schedule <black,white,handicap,date,location,setter>
+=item $mail_out->notify_schedule <black,white,handicap,date,location,setter>
 
 Notify players that I<setter> has scheduled the game to take
 place on I<date> in I<location>
 
-=item --deadline <round,date>
+=item deadline $mail_out-><round,date>
 
 Notify organiser that tournament round I<round> is to finish
 on I<date> (UNIX timestamp), with an ICS attached.
 
-=item --coming-up <black,white,handicap,date,location>
+=item $mail_out->coming_up <black,white,handicap,date,location>
 
 Notify players that their game is scheduled to take
 place on I<date> (soon) in I<location>
 
-=item --baddate <rcpt,date>
+=item $mail_out->baddate <rcpt,date>
 
 Notify I<rcpt> that I<date> is invalid.
 
-=item --pastdate <rcpt,date>
+=item $mail_out->pastdate <rcpt,date>
 
 Notify I<rcpt> that I<date> is already past.
 
-=item --give-results <black,white,result,reporter>
+=item $mail_out->give_results <black,white,result,reporter>
 
 Notify the players that I<reporter> has reported the result
 of the game.
 
-=item --badcolour <rcpt,colour>
+=item $mail_out->badcolour <rcpt,colour>
 
 Notify I<rcpt> that I<colour> is not a valid color.
 
