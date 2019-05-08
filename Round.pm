@@ -75,14 +75,18 @@ sub pairings_as_text {
     my $max_name_length = (sort { $a <=> $b } map { length $_->fulladdress } @players)[-1];
     $max_name_length += 7; # For the club label
 
-    $out = "Round $round_num\n";
+    $out = "[Round $round_num]\n";
 
-    my $bl = length "Noir";
-    my $wl = length "Blanc";
-    $out .= "Noir". " " x ($max_name_length - $bl) . 
-    " Blanc"." " x($max_name_length - $wl) . 
-    " handicap\n";
-
+    my $b_label = "Noir black schwartz";
+    my $w_label = "Blanc";
+    my $h_label = "Handicap";
+    my $bheader = "| $b_label". " " x ($max_name_length + 1 - length $b_label);
+    my $wheader = "| $w_label". " " x ($max_name_length - length $w_label);
+    my $header = $bheader . $wheader .  "| $h_label\n";
+    $out .= $header;
+    $out .= ("|" . "." x (-1 + length $bheader)) . 
+            ("|" . "." x (-1 + length $wheader)) . 
+            ("|" . "." x (2 + length $h_label)) . "\n";
 
     foreach my $game ($obj->games) {
         my $black = $game->black;
@@ -93,8 +97,8 @@ sub pairings_as_text {
         my $wt = $white->fulladdress . " (".$white->club.")";
         my $bl = length $bt;
         my $wl = length $wt;
-        $out .= $bt . " " x ($max_name_length - $bl) . " " . 
-        $wt . " " x($max_name_length - $wl) . " $handi\n";
+        $out .= "| $bt" . " " x ($max_name_length - $bl) . " | " . 
+        $wt . " " x($max_name_length - $wl) . "| $handi\n";
 
     }
 
