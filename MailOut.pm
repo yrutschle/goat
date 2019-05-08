@@ -69,6 +69,7 @@ use Data::ICal::Entry::Event;
 use Template;
 use POSIX;
 use Try::Tiny;
+use Text::MultiMarkdown 'markdown';
 use Data::Dumper;
 
 use GoatConfig;
@@ -416,8 +417,6 @@ foreach my $method (keys %template_methods) {
 sub sendmail {
     my ($r_to, $template, $r_data) = @_;
 
-    my $body;
-
     # Mails are encoded in UTF-8 (see charset below) so encode all strings to
     # UTF. We also get references here for attachment objects, so don't encode
     # those.
@@ -425,6 +424,7 @@ sub sendmail {
         $r_data->{$k} = Encode::encode('UTF-8', $r_data->{$k}) unless ref $r_data->{$k};
     }
 
+    my ($body);
     $tt->process($template, $r_data, \$body) or die $tt->error;
 
     # Remove header lines
@@ -455,10 +455,21 @@ sub sendmail {
         $mime_parms{'X-Mailer'} = "MIME-Tools with no version";
     }
 
+    my $html_body = markdown($body);
+
     my $msg = MIME::Entity->build(%mime_parms);
-    $msg->attach(
+    my $alternative = $msg->attach(
+                            Type => 'multipart/alternative', 
+                            Boundary => '---alternative-contents');
+    $alternative->attach(
         'Charset' => 'UTF-8',
+        Type => 'text/plain',
         'Data' => $body,
+    );
+    $alternative->attach(
+        'Charset' => 'UTF-8',
+        Type => 'text/html',
+        Data => $html_body,
     );
 
     if (exists $r_data->{attach}) {
