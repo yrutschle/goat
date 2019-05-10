@@ -1,8 +1,0 @@
-Subject: [goat] Résultat de votre ronde
-
-[% INCLUDE header.tt %]
-
-Le résultat de votre partie a été enregistré.
-[% black %] contre [% white %], victoire pour [% winner %].
-
-Le résultat a été rapporté par [% player %].
