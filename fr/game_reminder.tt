@@ -4,17 +4,17 @@ Subject:  [[% subject_prefix %]] Partie: [% location %], [% date %]
 
 N'oubliez pas de jouer votre partie:
 
-Lieu: [% location %]
-Date: [% date %]
-Noir: [% black %]
-Blanc: [% white %]
-Handicap: [% handi %]
+* Lieu: [% location %]
+* Date: [% date %]
+* Noir: [% black %]
+* Blanc: [% white %]
+* Handicap: [% handi %]
 
 Après la partie, merci de publier le résultat en répondant à
 ce mail en remplissant le sujet de votre réponse de la façon
 suivante :
 
-resultat <couleur gagnante>
+resultat noir|blanc
 
 Par exemple :
 

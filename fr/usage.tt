@@ -3,12 +3,13 @@ envoyé à Goat. Le corps du message est ignoré.
 
 Goat gère les commandes suivantes:
 
-rendezvous <date>, <lieu>
-resultat <couleur gagnante>
+rendezvous date, lieu
 
-rendezvous: Utilisez cette commande afin d'informer Goat de
+resultat blanc|noir
+
+* *rendezvous*: Utilisez cette commande afin d'informer Goat de
 la date et du lieu choisi pour votre partie.
 
-resultat: Après la partie, indiquez la couleur du joueur qui
+* *resultat*: Après la partie, indiquez la couleur du joueur qui
 a gagné la partie.
 

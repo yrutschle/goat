@@ -5,15 +5,15 @@ Subject: [[% subject_prefix %]] Votre appariement
 Voici votre appariement pour la prochaine ronde, à jouer
 pour le [% dateonly %] :
 
-Noir: [% black %]
-Blanc: [% white %]
-Handicap: [% handi %]
+* Noir: [% black %]
+* Blanc: [% white %]
+* Handicap: [% handi %]
 
 Merci de répondre à ce courrier dès que vous aurez arrangé la
 rencontre, en remplissant le sujet de votre réponse de la
 façon suivante :
 
-rendezvous <date>, <lieu>
+rendezvous date, lieu
 
 Par exemple:
 
@@ -22,7 +22,7 @@ rendezvous 23 février 2018 16:08, Auberge du Poney Fringant
 Vous pouvez également rapporter directement le résultat si
 vous avez omis de prévenir Goat de votre partie:
 
-resultat <couleur gagnante>
+resultat blanc|noir
 
 Par exemple :
 
