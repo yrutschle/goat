@@ -77,7 +77,7 @@ sub pairings_as_text {
 
     $out = "[Round $round_num]\n";
 
-    my $b_label = "Noir black schwartz";
+    my $b_label = "Noir";
     my $w_label = "Blanc";
     my $h_label = "Handicap";
     my $bheader = "| $b_label". " " x ($max_name_length + 1 - length $b_label);

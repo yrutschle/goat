@@ -1,0 +1,23 @@
+#! /usr/bin/perl -w
+
+# Test script that sends an example of all possible e-mails
+# to one address. This allows to see what formatting looks
+# like in real e-mail clients.
+
+# Usage (from t/)
+# ./send_all rcpt@example.net
+
+
+# Really this just sets up the environment for send_all.pl
+
+use strict;
+
+$ENV{PATH} = "$ENV{PATH}:../..";
+$ENV{PERL5LIB} = "$ENV{PERL5LIB}:../../";
+
+chdir "t/tmp" || die "Can't chdir to my test directory";
+
+system("cp ../../example.cfg ./goat.cfg");
+unlink("toperm.lock");
+
+system "../send_all.pl";

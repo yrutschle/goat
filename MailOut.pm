@@ -91,7 +91,9 @@ my $tt = Template->new({
 
 # Testing: to make some normally random things non-random
 # No_send: to prevent sending mail
-my ($testing, $no_send); 
+# Send to dir: write one file per e-mail, Maildir-like, in the specified
+# directory
+my ($testing, $no_send, $send_to_dir); 
 
 
 # This class is a singleton, which is "pattern-speak" for
@@ -103,6 +105,7 @@ sub new {
 
     $testing = 1 if ($opts{testing});
     $no_send = 1 if ($opts{no_send});
+    $send_to_dir = $opts{send_to_dir} // 0;
 
     my %o;  # Later, this should contain object settings (logfile, testing, and so on)
     return bless \%o, $class;
@@ -516,6 +519,21 @@ sub sendmsg {
         binmode STDOUT, ":utf8";
         return;
     } 
+
+    if ($send_to_dir) {
+        # Create a new file name
+        my $cnt = 0;
+        my $basename = "$send_to_dir/msg$cnt";
+        while (-e $basename) {
+            $cnt++;
+            $basename = "$send_to_dir/msg$cnt";
+        }
+
+        open my $fh, "> $basename" or die "$basename: $!\n";
+
+        print $fh $msg->as_string;
+        return;
+    }
 
     # Happy debugger warning: this code is never tested by
     # the test suite, because we don't want it to *actually*
