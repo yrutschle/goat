@@ -98,6 +98,16 @@ replace the players with Go programs, thus having
 tournaments with no humans at all.  Oh wait, I just went too
 far.
 
+=head1 NEW ROUND IN A NUTSHELL
+
+Don't read this if you haven't understood the following
+sections. This is just a memo so as not to forget anything.
+
+ goat --send-unplayed
+ goat --send-results
+ pair
+ goat --send-pairings
+
 =head1 A TYPICAL TOURNAMENT
 
 A typical tournament would run like this:
@@ -113,12 +123,12 @@ make an alias for each player into a file).
 
 =item Pair the players:
 
- pair -f toperm.cfg
+ pair
 
 or if there is an odd number of players, select one bye
 player:
 
- pair -f toperm.cfg ­-bye poor@player.com
+ pair --bye poor@player.com
 
 =item That's it. Goat will send mails, reminders, collect
 results. Once all the results are in (or the time has come
@@ -140,7 +150,7 @@ a result file).
 
 =item Create the new round:
 
- pair -f toperm.cfg
+ pair
 
 =back
 
