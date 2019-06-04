@@ -79,7 +79,7 @@ my $imap_socket = IO::Socket::SSL->new(
     PeerService => $imap_port,
     SSL_ca_file => $imap_root_ca // "",
 );
-#die "$@\n" unless defined $imap_socket;
+die "$@\n" unless defined $imap_socket;
 
 my $imap = Mail::IMAPClient->new();
 $imap->Socket($imap_socket);
