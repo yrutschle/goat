@@ -218,8 +218,15 @@ if (1 & @players) {
         # If all have played or tournament not started, select from all players
         @bye_candidates = @players unless @bye_candidates;
 
+        # Remove players that have already been bye
+        my @old_bye = grep { defined $_ } map { $_->bye } $Tournament->rounds;
+        foreach my $old (@old_bye) {
+            @bye_candidates = grep { $_->id ne $old->id } @bye_candidates;
+        }
+
         $bye = random_pick @bye_candidates;
         warn "Randomly picking ".$bye->fullname." as bye player\n";;
+        die "Undef bye player?\n" if not defined $bye;  # May happen e.g. if 2 players haven't played but were also bye before
         @players = grep { $_->id ne $bye->id } @players;
     } else {
         die "Odd number of players -- specify a bye with:\n".
