@@ -565,6 +565,7 @@ sub as_HTML {
             $table->setRowBGColor($table->getTableRows, "Gray") if $game->is_canceled;
         }
         $html .= $table;
+        $html .= "<p>Joueur en passe: ".$round->bye->fullname if defined $round->bye;
     }
 
     # Score table
