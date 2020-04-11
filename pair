@@ -56,12 +56,13 @@ use MailOut;
 use Getopt::Long;
 
 # Interpret command line
-my ($param_bye, $param_final_date, $help);
+my ($param_bye, $param_final_date, $param_round, $help);
 my $verbose = 0;
 GetOptions(
     'help' => \$help,
     'date=s' => \$param_final_date,
     'bye=s' => \$param_bye,
+    'round=i' => \$param_round,
     'verbose=i' => \$verbose,
 ) or die pod2usage();
 
@@ -238,7 +239,7 @@ foreach my $p (reverse sort {$a->level <=> $b->level} @players) {
 }
 
 
-my $round_num = ($Tournament->round_number || 0) + 1;
+my $round_num = $param_round // (($Tournament->round_number || 0) + 1);
 my $round = Round->new($round_num);
 my $final_date;
 if (defined $param_final_date) {
