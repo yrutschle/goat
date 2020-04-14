@@ -204,7 +204,7 @@ sub parse_command {
         $place //= 'KGS';
 
         @exec = ($BIN_GOAT, @goat_opts, "--schedule", "$from,$date,$place");
-    } elsif ($line =~ /(r.*?sult).*(blanc|noir|white|black)?/i) { 
+    } elsif ($line =~ /(r.*?sult).*(blanc|noir|white|black)/i) { 
         my $winner = $2;
         # If we couldn't find the colour, pass the whole
         # command for the error message
