@@ -782,7 +782,8 @@ if (defined $param_schedule) {
         foreach my $game ($Tournament->curr_round->games) {
             print $game->text_status;
         }
-        print "Bye player: ".$Tournament->curr_round->bye->fullname."\n";
+        print "Bye player: ".$Tournament->curr_round->bye->fullname."\n"
+            if defined $Tournament->curr_round->bye;
         print "Final date: ".
             ($Tournament->curr_round->final_date // "undef").
             " (".  utc2str($Tournament->curr_round->final_date) .")\n";

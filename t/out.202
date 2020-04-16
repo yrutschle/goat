@@ -20,6 +20,12 @@ X-Loop: GO Assistant <goat@rutschle.net>
 X-Mailer: MIME-Tools with no versionThis is a multi-part message in MIME format...
 
 -----testing42ftwtesting
+Content-Type: multipart/alternative; boundary="---alternative-contents"
+Content-Transfer-Encoding: binary
+
+This is a multi-part message in MIME format...
+
+-----alternative-contents
 Content-Type: text/plain; charset="UTF-8"
 Content-Disposition: inline
 Content-Transfer-Encoding: binary
@@ -28,6 +34,17 @@ Hello,
 
 Voici les résultats de la ronde 1 du Tournoi pérmanent de Tøulouse.
 
+
+-----alternative-contents
+Content-Type: text/html; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: binary
+
+<p>Hello,</p>
+
+<p>Voici les résultats de la ronde 1 du Tournoi pérmanent de Tøulouse.</p>
+
+-----alternative-contents--
 
 -----testing42ftwtesting
 Content-Type: text/plain; charset="ISO-8859-1"; name="round1.tou"

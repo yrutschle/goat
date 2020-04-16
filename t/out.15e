@@ -11,6 +11,12 @@ X-Loop: GO Assistant <goat@rutschle.net>
 X-Mailer: MIME-Tools with no versionThis is a multi-part message in MIME format...
 
 -----testing42ftwtesting
+Content-Type: multipart/alternative; boundary="---alternative-contents"
+Content-Transfer-Encoding: binary
+
+This is a multi-part message in MIME format...
+
+-----alternative-contents
 Content-Type: text/plain; charset="UTF-8"
 Content-Disposition: inline
 Content-Transfer-Encoding: binary
@@ -21,22 +27,59 @@ Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@ru
 
 yves@example.org a programmé votre partie:
 
-Lieu: Le Cactus
-Date: mardi 22 novembre 2016 20:30
-Noir: Jean-Jacques PORTAL <jean-jacques.portal@example.org>
-Blanc: Yves RÜTSCHLÉ <yves@example.org>
-Handicap: 1
+* Lieu: Le Cactus
+* Date: mardi 22 novembre 2016 20:30
+* Noir: Jean-Jacques PORTAL <jean-jacques.portal@example.org>
+* Blanc: Yves RÜTSCHLÉ <yves@example.org>
+* Handicap: 1
 
 Après la partie, merci de publier le résultat en répondant à
 ce mail en remplissant le sujet de votre réponse de la façon
 suivante :
 
-resultat <couleur gagnante>
+resultat blanc|noir
 
 Par exemple :
 
 resultat blanc
 
+Vous pouvez aussi simplement attcher le fichier SGF de la
+partie: il sera sauvegardé, et le résultat sera celui
+indiqué dans le SGF.
+
+-----alternative-contents
+Content-Type: text/html; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: binary
+
+<p>Vous avez reçu ce courrier car vous êtes inscrit au Tournoi pérmanent de Tøulouse.
+Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@rutschle.net>.</p>
+
+<p>yves@example.org a programmé votre partie:</p>
+
+<ul>
+<li>Lieu: Le Cactus</li>
+<li>Date: mardi 22 novembre 2016 20:30</li>
+<li>Noir: Jean-Jacques PORTAL <jean-jacques.portal@example.org></li>
+<li>Blanc: Yves RÜTSCHLÉ <yves@example.org></li>
+<li>Handicap: 1</li>
+</ul>
+
+<p>Après la partie, merci de publier le résultat en répondant à
+ce mail en remplissant le sujet de votre réponse de la façon
+suivante :</p>
+
+<p>resultat blanc|noir</p>
+
+<p>Par exemple :</p>
+
+<p>resultat blanc</p>
+
+<p>Vous pouvez aussi simplement attcher le fichier SGF de la
+partie: il sera sauvegardé, et le résultat sera celui
+indiqué dans le SGF.</p>
+
+-----alternative-contents--
 
 -----testing42ftwtesting
 Content-Type: text/calendar; charset="UTF-8"

@@ -11,6 +11,12 @@ X-Loop: GO Assistant <goat@rutschle.net>
 X-Mailer: MIME-Tools with no versionThis is a multi-part message in MIME format...
 
 -----testing42ftwtesting
+Content-Type: multipart/alternative; boundary="---alternative-contents"
+Content-Transfer-Encoding: binary
+
+This is a multi-part message in MIME format...
+
+-----alternative-contents
 Content-Type: text/plain; charset="UTF-8"
 Content-Disposition: inline
 Content-Transfer-Encoding: binary
@@ -23,6 +29,21 @@ Le résultat de votre partie a été enregistré.
 Pascal BEAUMONT <pascal.beaumont74@example.org> contre Christelle SPANO <alikae@example.org>, victoire pour Pascal BEAUMONT <pascal.beaumont74@example.org>.
 
 Le résultat a été rapporté par pascal.beaumont74@example.org.
+
+-----alternative-contents
+Content-Type: text/html; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: binary
+
+<p>Vous avez reçu ce courrier car vous êtes inscrit au Tournoi pérmanent de Tøulouse.
+Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@rutschle.net>.</p>
+
+<p>Le résultat de votre partie a été enregistré.
+Pascal BEAUMONT <pascal.beaumont74@example.org> contre Christelle SPANO <alikae@example.org>, victoire pour Pascal BEAUMONT <pascal.beaumont74@example.org>.</p>
+
+<p>Le résultat a été rapporté par pascal.beaumont74@example.org.</p>
+
+-----alternative-contents--
 
 -----testing42ftwtesting--
 Tournament: Tournoi pérmanent de Tøulouse

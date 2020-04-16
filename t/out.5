@@ -1,15 +1,20 @@
-Sat Jul 30 15:30:00 2005: notify yves@example.org that 'resultat blan' is invalid
 Content-Transfer-Encoding: binary
 Content-Type: multipart/mixed; boundary="---testing42ftwtesting"
 From: GO Assistant <goat@rutschle.net>
 MIME-Version: 1.0
 Return-Path: GO Assistant <goat@rutschle.net>
-Subject: [goat] Erreur de couleur
+Subject: [goat] Commande illégale
 To: yves@example.org
 X-Loop: GO Assistant <goat@rutschle.net>
 X-Mailer: MIME-Tools with no versionThis is a multi-part message in MIME format...
 
 -----testing42ftwtesting
+Content-Type: multipart/alternative; boundary="---alternative-contents"
+Content-Transfer-Encoding: binary
+
+This is a multi-part message in MIME format...
+
+-----alternative-contents
 Content-Type: text/plain; charset="UTF-8"
 Content-Disposition: inline
 Content-Transfer-Encoding: binary
@@ -18,11 +23,87 @@ Vous avez reçu ce courrier car vous êtes inscrit au Tournoi pérmanent de Tøu
 Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@rutschle.net>.
 
 
-La commande "resultat blan" que vous avez indiquée n'est pas
-légale. Merci d'essayer à nouveau, en utilisant:
+Votre commande n'a pas pu être interpretée correctement.
 
-resultat blanc
-resultat noir
+Les commandes doivent être écrites dans l'objet du courrier
+envoyé à Goat. Le corps du message est ignoré.
 
+Goat gère les commandes suivantes:
+
+rendezvous date, lieu
+
+resultat blanc|noir
+
+* *rendezvous*: Utilisez cette commande afin d'informer Goat de
+la date et du lieu choisi pour votre partie.
+
+* *resultat*: Après la partie, indiquez la couleur du joueur qui
+a gagné la partie. Vous pouvez aussi simplement attacher le
+fichier SGF de la partie: il sera sauvegardé, et le résultat
+sera celui indiqué dans le SGF.
+
+
+
+---- Votre message :
+Received: from yves by localhost with local (Exim 4.50)
+	id 1G17uk-0003eY-55
+	for goat@example.org; Thu, 13 Jul 2006 22:36:02 +0200
+Date: Thu, 13 Jul 2006 22:36:01 +0200
+To: goat@example.org
+Subject: resultat blan
+Message-ID: <20060713203601.GD841@naryves.com>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+User-Agent: Mutt/1.5.9i
+From: Yves <yves@example.org>
+
+
+
+
+
+-----alternative-contents
+Content-Type: text/html; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: binary
+
+<p>Vous avez reçu ce courrier car vous êtes inscrit au Tournoi pérmanent de Tøulouse.
+Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@rutschle.net>.</p>
+
+<p>Votre commande n'a pas pu être interpretée correctement.</p>
+
+<p>Les commandes doivent être écrites dans l'objet du courrier
+envoyé à Goat. Le corps du message est ignoré.</p>
+
+<p>Goat gère les commandes suivantes:</p>
+
+<p>rendezvous date, lieu</p>
+
+<p>resultat blanc|noir</p>
+
+<ul>
+<li><p><em>rendezvous</em>: Utilisez cette commande afin d'informer Goat de
+la date et du lieu choisi pour votre partie.</p></li>
+<li><p><em>resultat</em>: Après la partie, indiquez la couleur du joueur qui
+a gagné la partie. Vous pouvez aussi simplement attacher le
+fichier SGF de la partie: il sera sauvegardé, et le résultat
+sera celui indiqué dans le SGF.</p></li>
+</ul>
+
+<p>---- Votre message :
+Received: from yves by localhost with local (Exim 4.50)
+    id 1G17uk-0003eY-55
+    for goat@example.org; Thu, 13 Jul 2006 22:36:02 +0200
+Date: Thu, 13 Jul 2006 22:36:01 +0200
+To: goat@example.org
+Subject: resultat blan
+Message-ID: &lt;20060713203601.GD841@naryves.com>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+User-Agent: Mutt/1.5.9i
+From: Yves <yves@example.org></p>
+
+-----alternative-contents--
 
 -----testing42ftwtesting--

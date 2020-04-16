@@ -107,6 +107,17 @@ sub new {
     $no_send = 1 if ($opts{no_send});
     $send_to_dir = $opts{send_to_dir} // 0;
 
+    if ($testing) {
+        # Don't mangle mail links randomly for the sanity of the test suite!
+        eval q{
+            no warnings qw(redefine);
+            package Text::Markdown;
+            sub _EncodeEmailAddress {
+                return "<$_[1]>";
+            }
+        }
+    }
+
     my %o;  # Later, this should contain object settings (logfile, testing, and so on)
     return bless \%o, $class;
 }

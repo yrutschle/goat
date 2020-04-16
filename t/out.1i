@@ -9,6 +9,12 @@ X-Loop: GO Assistant <goat@rutschle.net>
 X-Mailer: MIME-Tools with no versionThis is a multi-part message in MIME format...
 
 -----testing42ftwtesting
+Content-Type: multipart/alternative; boundary="---alternative-contents"
+Content-Transfer-Encoding: binary
+
+This is a multi-part message in MIME format...
+
+-----alternative-contents
 Content-Type: text/plain; charset="UTF-8"
 Content-Disposition: inline
 Content-Transfer-Encoding: binary
@@ -20,9 +26,27 @@ Vous n'avez pas encore joué vos parties de la ronde 6 du Tournoi pérmanent de 
 
 C'est maintenant le début de la ronde 7. Vous
 pouvez toujours jouer vos parties, mais il faudra m'envoyer
-directemet les résultats.
+directement les résultats.
 
 Merci!
+
+-----alternative-contents
+Content-Type: text/html; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: binary
+
+<p>Vous avez reçu ce courrier car vous êtes inscrit au Tournoi pérmanent de Tøulouse.
+Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@rutschle.net>.</p>
+
+<p>Vous n'avez pas encore joué vos parties de la ronde 6 du Tournoi pérmanent de Tøulouse.</p>
+
+<p>C'est maintenant le début de la ronde 7. Vous
+pouvez toujours jouer vos parties, mais il faudra m'envoyer
+directement les résultats.</p>
+
+<p>Merci!</p>
+
+-----alternative-contents--
 
 -----testing42ftwtesting--
 Content-Transfer-Encoding: binary
@@ -36,6 +60,12 @@ X-Loop: GO Assistant <goat@rutschle.net>
 X-Mailer: MIME-Tools with no versionThis is a multi-part message in MIME format...
 
 -----testing42ftwtesting
+Content-Type: multipart/alternative; boundary="---alternative-contents"
+Content-Transfer-Encoding: binary
+
+This is a multi-part message in MIME format...
+
+-----alternative-contents
 Content-Type: text/plain; charset="UTF-8"
 Content-Disposition: inline
 Content-Transfer-Encoding: binary
@@ -47,9 +77,27 @@ Vous n'avez pas encore joué vos parties de la ronde 6 du Tournoi pérmanent de 
 
 C'est maintenant le début de la ronde 7. Vous
 pouvez toujours jouer vos parties, mais il faudra m'envoyer
-directemet les résultats.
+directement les résultats.
 
 Merci!
+
+-----alternative-contents
+Content-Type: text/html; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: binary
+
+<p>Vous avez reçu ce courrier car vous êtes inscrit au Tournoi pérmanent de Tøulouse.
+Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@rutschle.net>.</p>
+
+<p>Vous n'avez pas encore joué vos parties de la ronde 6 du Tournoi pérmanent de Tøulouse.</p>
+
+<p>C'est maintenant le début de la ronde 7. Vous
+pouvez toujours jouer vos parties, mais il faudra m'envoyer
+directement les résultats.</p>
+
+<p>Merci!</p>
+
+-----alternative-contents--
 
 -----testing42ftwtesting--
 Content-Transfer-Encoding: binary
@@ -63,6 +111,12 @@ X-Loop: GO Assistant <goat@rutschle.net>
 X-Mailer: MIME-Tools with no versionThis is a multi-part message in MIME format...
 
 -----testing42ftwtesting
+Content-Type: multipart/alternative; boundary="---alternative-contents"
+Content-Transfer-Encoding: binary
+
+This is a multi-part message in MIME format...
+
+-----alternative-contents
 Content-Type: text/plain; charset="UTF-8"
 Content-Disposition: inline
 Content-Transfer-Encoding: binary
@@ -74,9 +128,27 @@ Vous n'avez pas encore joué vos parties de la ronde 6 du Tournoi pérmanent de 
 
 C'est maintenant le début de la ronde 7. Vous
 pouvez toujours jouer vos parties, mais il faudra m'envoyer
-directemet les résultats.
+directement les résultats.
 
 Merci!
+
+-----alternative-contents
+Content-Type: text/html; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: binary
+
+<p>Vous avez reçu ce courrier car vous êtes inscrit au Tournoi pérmanent de Tøulouse.
+Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@rutschle.net>.</p>
+
+<p>Vous n'avez pas encore joué vos parties de la ronde 6 du Tournoi pérmanent de Tøulouse.</p>
+
+<p>C'est maintenant le début de la ronde 7. Vous
+pouvez toujours jouer vos parties, mais il faudra m'envoyer
+directement les résultats.</p>
+
+<p>Merci!</p>
+
+-----alternative-contents--
 
 -----testing42ftwtesting--
 Content-Transfer-Encoding: binary
@@ -90,6 +162,12 @@ X-Loop: GO Assistant <goat@rutschle.net>
 X-Mailer: MIME-Tools with no versionThis is a multi-part message in MIME format...
 
 -----testing42ftwtesting
+Content-Type: multipart/alternative; boundary="---alternative-contents"
+Content-Transfer-Encoding: binary
+
+This is a multi-part message in MIME format...
+
+-----alternative-contents
 Content-Type: text/plain; charset="UTF-8"
 Content-Disposition: inline
 Content-Transfer-Encoding: binary
@@ -101,9 +179,27 @@ Vous n'avez pas encore joué vos parties de la ronde 6 du Tournoi pérmanent de 
 
 C'est maintenant le début de la ronde 7. Vous
 pouvez toujours jouer vos parties, mais il faudra m'envoyer
-directemet les résultats.
+directement les résultats.
 
 Merci!
+
+-----alternative-contents
+Content-Type: text/html; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: binary
+
+<p>Vous avez reçu ce courrier car vous êtes inscrit au Tournoi pérmanent de Tøulouse.
+Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@rutschle.net>.</p>
+
+<p>Vous n'avez pas encore joué vos parties de la ronde 6 du Tournoi pérmanent de Tøulouse.</p>
+
+<p>C'est maintenant le début de la ronde 7. Vous
+pouvez toujours jouer vos parties, mais il faudra m'envoyer
+directement les résultats.</p>
+
+<p>Merci!</p>
+
+-----alternative-contents--
 
 -----testing42ftwtesting--
 Content-Transfer-Encoding: binary
@@ -117,6 +213,12 @@ X-Loop: GO Assistant <goat@rutschle.net>
 X-Mailer: MIME-Tools with no versionThis is a multi-part message in MIME format...
 
 -----testing42ftwtesting
+Content-Type: multipart/alternative; boundary="---alternative-contents"
+Content-Transfer-Encoding: binary
+
+This is a multi-part message in MIME format...
+
+-----alternative-contents
 Content-Type: text/plain; charset="UTF-8"
 Content-Disposition: inline
 Content-Transfer-Encoding: binary
@@ -128,9 +230,27 @@ Vous n'avez pas encore joué vos parties de la ronde 6 du Tournoi pérmanent de 
 
 C'est maintenant le début de la ronde 7. Vous
 pouvez toujours jouer vos parties, mais il faudra m'envoyer
-directemet les résultats.
+directement les résultats.
 
 Merci!
+
+-----alternative-contents
+Content-Type: text/html; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: binary
+
+<p>Vous avez reçu ce courrier car vous êtes inscrit au Tournoi pérmanent de Tøulouse.
+Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@rutschle.net>.</p>
+
+<p>Vous n'avez pas encore joué vos parties de la ronde 6 du Tournoi pérmanent de Tøulouse.</p>
+
+<p>C'est maintenant le début de la ronde 7. Vous
+pouvez toujours jouer vos parties, mais il faudra m'envoyer
+directement les résultats.</p>
+
+<p>Merci!</p>
+
+-----alternative-contents--
 
 -----testing42ftwtesting--
 Content-Transfer-Encoding: binary
@@ -144,6 +264,12 @@ X-Loop: GO Assistant <goat@rutschle.net>
 X-Mailer: MIME-Tools with no versionThis is a multi-part message in MIME format...
 
 -----testing42ftwtesting
+Content-Type: multipart/alternative; boundary="---alternative-contents"
+Content-Transfer-Encoding: binary
+
+This is a multi-part message in MIME format...
+
+-----alternative-contents
 Content-Type: text/plain; charset="UTF-8"
 Content-Disposition: inline
 Content-Transfer-Encoding: binary
@@ -155,8 +281,26 @@ Vous n'avez pas encore joué vos parties de la ronde 6 du Tournoi pérmanent de 
 
 C'est maintenant le début de la ronde 7. Vous
 pouvez toujours jouer vos parties, mais il faudra m'envoyer
-directemet les résultats.
+directement les résultats.
 
 Merci!
+
+-----alternative-contents
+Content-Type: text/html; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: binary
+
+<p>Vous avez reçu ce courrier car vous êtes inscrit au Tournoi pérmanent de Tøulouse.
+Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@rutschle.net>.</p>
+
+<p>Vous n'avez pas encore joué vos parties de la ronde 6 du Tournoi pérmanent de Tøulouse.</p>
+
+<p>C'est maintenant le début de la ronde 7. Vous
+pouvez toujours jouer vos parties, mais il faudra m'envoyer
+directement les résultats.</p>
+
+<p>Merci!</p>
+
+-----alternative-contents--
 
 -----testing42ftwtesting--
