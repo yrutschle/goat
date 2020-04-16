@@ -146,7 +146,7 @@ push @tests,
   },
     { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.10b letter; cp ../toperm_in.10b toperm; cat letter | perl $perl_opts ../../mail_in -t > out.10b",
       'test' => 'diff -u ../out.10b out.10b',
-      'doc' => 'wrong colour in multipart',
+      'doc' => 'colour in multipart body',
   },
 
   # 6: schedule error on date (reuse *.2 test files except out.6, as pairs shouldn't change)
