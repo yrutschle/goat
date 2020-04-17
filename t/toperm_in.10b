@@ -1,0 +1,1009 @@
+--- !!perl/hash:Tournament
+FFGPlayer:
+  - &1 !!perl/hash:FFGPlayer
+    club: 31To
+    email: xavier.bonnefond@example.org
+    familyname: BONNEFOND
+    givenname: Xavier
+    id: Xavier BONNEFOND
+    level: 32
+    license: 1200036
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &2 !!perl/hash:FFGPlayer
+    club: 31To
+    email: briefsfly@example.net
+    familyname: NIVET
+    givenname: Florian
+    id: Florian NIVET
+    level: 48
+    license: 0552022
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &3 !!perl/hash:FFGPlayer
+    club: 31Co
+    email: thomas.dufour@example.com
+    familyname: DUFOUR
+    givenname: Thomas
+    id: Thomas DUFOUR
+    level: -161
+    license: 0452010
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &4 !!perl/hash:FFGPlayer
+    club: 31Ba
+    email: andeol.evain@example.com
+    familyname: EVAIN
+    givenname: Andéol
+    id: Andéol EVAIN
+    level: -111
+    license: 1100278
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &5 !!perl/hash:FFGPlayer
+    club: 31Co
+    email: david.parcoit@example.org
+    familyname: PARCOIT
+    givenname: David
+    id: David PARCOIT
+    level: -305
+    license: 1200033
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &6 !!perl/hash:FFGPlayer
+    club: 31To
+    email: dom.eav@example.com
+    familyname: EAV
+    givenname: Dominique
+    id: Dominique EAV
+    level: -306
+    license: 0321001
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &7 !!perl/hash:FFGPlayer
+    club: 31To
+    email: glourd@example.org
+    familyname: BROUARD
+    givenname: David
+    id: David BROUARD
+    level: -413
+    license: 0052010
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &8 !!perl/hash:FFGPlayer
+    club: 31Ba
+    email: laurent.bourdron@example.org
+    familyname: BOURDRON
+    givenname: Laurent
+    id: Laurent BOURDRON
+    level: -584
+    license: 0552012
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &9 !!perl/hash:FFGPlayer
+    club: 31Ba
+    email: neotis31@example.com
+    familyname: TAGLIAVINI
+    givenname: Loïc
+    id: Loïc TAGLIAVINI
+    level: -531
+    license: 1700212
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &10 !!perl/hash:FFGPlayer
+    club: 31Ba
+    email: puaud.denis@example.net
+    familyname: PUAUD
+    givenname: Denis
+    id: Denis PUAUD
+    level: -686
+    license: 8210000
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &11 !!perl/hash:FFGPlayer
+    club: 31Ba
+    email: eflochmoen@example.net
+    familyname: LE_FLOCHMOEN
+    givenname: Eric
+    id: Eric LE_FLOCHMOEN
+    level: -816
+    license: 1000131
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &12 !!perl/hash:FFGPlayer
+    club: 31To
+    email: 1803.carajacq.1955@example.com
+    familyname: CARANICOLAS
+    givenname: Jacques
+    id: Jacques CARANICOLAS
+    level: -904
+    license: 8552001
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &13 !!perl/hash:FFGPlayer
+    club: 31Ba
+    email: jeanyves.papazoglou@example.net
+    familyname: PAPAZOGLOU
+    givenname: Jean-Yves
+    id: Jean-Yves PAPAZOGLOU
+    level: -949
+    license: 0700101
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &14 !!perl/hash:FFGPlayer
+    club: 31Ba
+    email: fblecocq@example.net
+    familyname: LECOCQ
+    givenname: Fabrice
+    id: Fabrice LECOCQ
+    level: -1018
+    license: 1800060
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: C
+  - &15 !!perl/hash:FFGPlayer
+    club: 31To
+    email: auguste.harle@example.org
+    familyname: HARLE
+    givenname: Auguste
+    id: Auguste HARLE
+    level: -1042
+    license: 9852005
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &16 !!perl/hash:FFGPlayer
+    club: 31Ba
+    email: infamousfab@example.com
+    familyname: CALLENS
+    givenname: Fabien
+    id: Fabien CALLENS
+    level: -953
+    license: 1200293
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+  - &17 !!perl/hash:FFGPlayer
+    club: 31Co
+    email: fr.leroy@example.net
+    familyname: LEROY
+    givenname: François
+    id: François LEROY
+    level: -1183
+    license: 9252006
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: C
+  - &18 !!perl/hash:FFGPlayer
+    club: ----
+    email: a.albertaguilar@example.org
+    familyname: Albert-Aguilar
+    givenname: AurÃ©lien
+    id: AurÃ©lien Albert-Aguilar
+    level: -950
+    license: -------
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: '-'
+  - &19 !!perl/hash:FFGPlayer
+    club: 31To
+    email: caro.ledun@example.net
+    familyname: LEDUN
+    givenname: Caroline
+    id: Caroline LEDUN
+    level: -1477
+    license: 2000228
+    registering_level:
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+      - ~
+    status: L
+Round:
+  - {}
+  - !!perl/hash:Round
+    GoGame:
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *2
+        challenge_date: 1569911711
+        handicap: 0
+        location: Balma
+        rated: 1
+        reminder_date: 1570730400
+        result: white
+        scheduled_date: 1570730400
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *1
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *3
+        challenge_date: 1569911712
+        handicap: 0
+        rated: 1
+        reminder_date: 1571985309
+        status: canceled
+        white:
+          FFGPlayer: !!perl/hash:FFGPlayer
+            club: 75Ju
+            email: romain.fabre15@orange.fr
+            familyname: FABRE
+            givenname: Romain
+            id: Romain FABRE
+            level: -79
+            license: 0560503
+            registering_level:
+              - ~
+              - ~
+            status: L
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *5
+        challenge_date: 1569911713
+        handicap: 0
+        location: Colomiers
+        rated: 1
+        reminder_date: 1571677200
+        result: white
+        scheduled_date: 1571677200
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *4
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *7
+        challenge_date: 1569911713
+        handicap: 0
+        rated: 1
+        reminder_date: 1570602912
+        result: white
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *6
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *9
+        challenge_date: 1569911714
+        handicap: 0
+        location: Balma
+        rated: 1
+        reminder_date: 1570862111
+        result: black
+        scheduled_date: 1570734000
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *8
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *11
+        challenge_date: 1569911715
+        handicap: 0
+        location: le compas Balma
+        rated: 1
+        reminder_date: 1571338800
+        result: white
+        scheduled_date: 1571338800
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *10
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *14
+        challenge_date: 1569911716
+        handicap: 1
+        location: Balma
+        rated: 1
+        reminder_date: 1570129200
+        result: white
+        scheduled_date: 1570129200
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *12
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *16
+        challenge_date: 1569911717
+        handicap: 0
+        rated: 1
+        reminder_date: 1570602913
+        result: black
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *15
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: !!perl/hash:FFGPlayer
+            club: 31Ba
+            email: guillaumesibra@gmail.com
+            familyname: SIBRA
+            givenname: Guillaume
+            id: Guillaume SIBRA
+            level: -1750
+            license: 1900249
+            registering_level:
+              - ~
+              - ~
+            status: L
+        challenge_date: 1569911718
+        handicap: 5
+        location: 'Club go Blagnac 5 place des Alouettes Blagnac 31700</font></div></div></div></blockquote><blockquote type="cite" class=""><div class=""><div style="word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-line-break: after-white-space;" class=""><div class=""><br class=""><blockquote type="cite" class=""><div style="word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-line-break: after-white-space;" class=""><br class=""><div class=""><br class=""></div><div class=""><br class=""><div class=""><blockquote type="cite" class=""><div class="">Le 9 oct. 2019 Ã  08:35'
+        rated: 1
+        reminder_date: 1573540509
+        scheduled_date: 1571158800
+        status: canceled
+        white:
+          FFGPlayer: *17
+    bye: *13
+    final_date: 1572461456
+    number: 1
+  - !!perl/hash:Round
+    GoGame:
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *4
+        challenge_date: 1573626911
+        handicap: 1
+        rated: 1
+        reminder_date: 1574922912
+        result: black
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *2
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *3
+        challenge_date: 1573626912
+        handicap: 0
+        location: Colomiers
+        rated: 1
+        reminder_date: 1574704800
+        result: black
+        scheduled_date: 1574704800
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *1
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *6
+        challenge_date: 1573626913
+        handicap: 0
+        location: Chez Dominique
+        rated: 1
+        reminder_date: 1574883000
+        result: white
+        scheduled_date: 1574883000
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *5
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *10
+        challenge_date: 1573626914
+        handicap: 0
+        location: Balma
+        rated: 1
+        reminder_date: 1576180800
+        result: white
+        scheduled_date: 1576180800
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *8
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *11
+        challenge_date: 1573626915
+        handicap: 0
+        location: chez Eric
+        rated: 1
+        reminder_date: 1575614110
+        result: white
+        scheduled_date: 1575500400
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *9
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *13
+        challenge_date: 1573626915
+        handicap: 0
+        location: "Compas\r"
+        rated: 1
+        reminder_date: 1575118800
+        result: black
+        scheduled_date: 1575118800
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *12
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *15
+        challenge_date: 1573626916
+        handicap: 0
+        location: Cactus
+        rated: 1
+        reminder_date: 1575478800
+        result: white
+        scheduled_date: 1575478800
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *14
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *17
+        challenge_date: 1573626917
+        handicap: 0
+        rated: 1
+        reminder_date: 1575700509
+        result: white
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *16
+    bye: *7
+    final_date: 1576187481
+    number: 2
+  - !!perl/hash:Round
+    GoGame:
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *4
+        handicap: 0
+        rated: 1
+        reminder_date: 0
+        status: undef
+        white:
+          FFGPlayer: *1
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *6
+        handicap: 0
+        rated: 1
+        reminder_date: 0
+        status: undef
+        white:
+          FFGPlayer: *3
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *9
+        handicap: 1
+        rated: 1
+        reminder_date: 0
+        status: undef
+        white:
+          FFGPlayer: *5
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *8
+        handicap: 0
+        rated: 1
+        reminder_date: 0
+        status: undef
+        white:
+          FFGPlayer: *7
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *12
+        handicap: 1
+        rated: 1
+        reminder_date: 0
+        status: undef
+        white:
+          FFGPlayer: *10
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *13
+        handicap: 0
+        rated: 1
+        reminder_date: 0
+        status: undef
+        white:
+          FFGPlayer: *11
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *16
+        handicap: 0
+        rated: 1
+        reminder_date: 0
+        status: undef
+        white:
+          FFGPlayer: *18
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *19
+        handicap: 3
+        rated: 1
+        reminder_date: 0
+        status: undef
+        white:
+          FFGPlayer: *14
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *17
+        handicap: 0
+        rated: 1
+        reminder_date: 0
+        status: undef
+        white:
+          FFGPlayer: *15
+    bye: *2
+    final_date: 1589178041
+    number: 3
+  - !!perl/hash:Round
+    GoGame:
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *5
+        challenge_date: 1579588512
+        handicap: 2
+        location: Balma
+        rated: 1
+        reminder_date: 1581019200
+        result: white
+        scheduled_date: 1581019200
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *2
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *6
+        challenge_date: 1579588513
+        handicap: 2
+        location: Club de Balma
+        rated: 1
+        reminder_date: 1581143710
+        result: white
+        scheduled_date: 1581019200
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *1
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *4
+        challenge_date: 1579588514
+        handicap: 0
+        location: "Cactus\r"
+        rated: 1
+        reminder_date: 1581575709
+        result: black
+        scheduled_date: 1581462000
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *3
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *10
+        challenge_date: 1579588515
+        handicap: 0
+        location: le compas Ã  Balma
+        rated: 1
+        reminder_date: 1580414400
+        result: white
+        scheduled_date: 1580414400
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *9
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *11
+        challenge_date: 1579588515
+        handicap: 0
+        location: balma
+        rated: 1
+        reminder_date: 1581624000
+        result: white
+        scheduled_date: 1581624000
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *8
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *16
+        challenge_date: 1579588516
+        handicap: 0
+        location: Balma
+        rated: 1
+        reminder_date: 1580414400
+        result: black
+        scheduled_date: 1580414400
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *12
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *15
+        challenge_date: 1579588517
+        handicap: 1
+        location: "Compas balma\r"
+        rated: 1
+        reminder_date: 1581748509
+        result: black
+        scheduled_date: 1581255000
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *13
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *17
+        challenge_date: 1579588518
+        handicap: 0
+        rated: 1
+        reminder_date: 1583044510
+        status: challenged
+        white:
+          FFGPlayer: *14
+    bye: *7
+    final_date: 1582144435
+    number: 4
+  - !!perl/hash:Round
+    GoGame:
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *6
+        challenge_date: 1583390112
+        handicap: 2
+        rated: 1
+        reminder_date: 1584772509
+        result: white
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *2
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *5
+        challenge_date: 1583390113
+        handicap: 2
+        location: OGS
+        rated: 1
+        reminder_date: 1585252800
+        result: white
+        scheduled_date: 1585252800
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *1
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *9
+        challenge_date: 1583390114
+        handicap: 3
+        location: KGS
+        rated: 1
+        reminder_date: 1585728000
+        result: black
+        scheduled_date: 1585728000
+        sgf: /tournois/tls/sgf/2020-03-31-Andéol-Loïc.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *4
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *8
+        challenge_date: 1583390115
+        handicap: 3
+        rated: 1
+        reminder_date: 1586154910
+        status: challenged
+        white:
+          FFGPlayer: *3
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *10
+        challenge_date: 1583390116
+        handicap: 1
+        location: au Cactus
+        rated: 1
+        reminder_date: 1586154911
+        scheduled_date: 1584561600
+        status: scheduled
+        white:
+          FFGPlayer: *7
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *16
+        challenge_date: 1583390116
+        handicap: 0
+        location: club de Balma
+        rated: 1
+        reminder_date: 1584043200
+        result: white
+        scheduled_date: 1584043200
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *11
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *14
+        challenge_date: 1583390117
+        handicap: 0
+        location: "Compas\r"
+        rated: 1
+        reminder_date: 1584858910
+        result: black
+        scheduled_date: 1584215100
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *13
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *15
+        challenge_date: 1583390118
+        handicap: 1
+        rated: 1
+        reminder_date: 1584772511
+        result: black
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *12
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *19
+        challenge_date: 1583390119
+        handicap: 1
+        location: MJC les demoiselles
+        rated: 1
+        reminder_date: 1585636510
+        result: white
+        scheduled_date: 1585328400
+        sgf: /tournois/tls/sgf/2020-03-29-François-Caroline.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *17
+    bye: *17
+    final_date: 1585945519
+    number: 5
+  - !!perl/hash:Round
+    GoGame:
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *9
+        challenge_date: 1586327710
+        handicap: 4
+        rated: 1
+        reminder_date: 1586327710
+        status: challenged
+        white:
+          FFGPlayer: *2
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *8
+        challenge_date: 1586327710
+        handicap: 5
+        rated: 1
+        reminder_date: 1586327710
+        status: challenged
+        white:
+          FFGPlayer: *1
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *6
+        challenge_date: 1586327710
+        handicap: 0
+        rated: 1
+        reminder_date: 1586327710
+        status: challenged
+        white:
+          FFGPlayer: *4
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *5
+        challenge_date: 1586327711
+        handicap: 0
+        rated: 1
+        reminder_date: 1586327711
+        status: challenged
+        white:
+          FFGPlayer: *3
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *16
+        challenge_date: 1586327711
+        handicap: 1
+        rated: 1
+        reminder_date: 1586327711
+        result: black
+        status: finished
+        white:
+          FFGPlayer: *10
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *14
+        challenge_date: 1586327711
+        handicap: 0
+        rated: 1
+        reminder_date: 1586327711
+        status: challenged
+        white:
+          FFGPlayer: *18
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *19
+        challenge_date: 1586327712
+        handicap: 3
+        rated: 1
+        reminder_date: 1586327712
+        status: challenged
+        white:
+          FFGPlayer: *15
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *12
+        challenge_date: 1586327712
+        handicap: 0
+        rated: 1
+        reminder_date: 1586327712
+        status: challenged
+        white:
+          FFGPlayer: *11
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *17
+        challenge_date: 1586327712
+        handicap: 1
+        location: 15:00
+        rated: 1
+        reminder_date: 1586759711
+        scheduled_date: 1586556000
+        sgf: /tournois/tls/sgf/2020-04-13-Jean-Yves-François.sgf
+        status: scheduled
+        white:
+          FFGPlayer: *13
+    bye: *7
+    final_date: 1588865052
+    number: 6
+filename: toperm_in.10b
+komi: 7.5
+prog: goatlib
+round_number: 6
+size: 19
+time: 60
