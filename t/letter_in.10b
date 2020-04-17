@@ -1,0 +1,66 @@
+Return-path: <jeanyves.papazoglou@example.net>
+Envelope-to: goat@rutschle.net
+Delivery-date: Tue, 14 Apr 2020 13:41:24 +0000
+Received: from mail-il1-f177.google.com ([209.85.166.177])
+	by hood.rutschle.net with esmtps (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+	(Exim 4.92)
+	(envelope-from <jeanyves.papazoglou@example.net>)
+	id 1jOLoa-0003OC-5D
+	for goat@rutschle.net; Tue, 14 Apr 2020 13:41:24 +0000
+Received: by mail-il1-f177.google.com with SMTP id i75so11952128ild.13
+        for <goat@rutschle.net>; Tue, 14 Apr 2020 06:41:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=JhHpR3SHWi0wFqI6NfieVGJqWVIm7P4YDM2lxGnl5sU=;
+        b=Zl1G6nNhJ4IfqDyTwWILXAAdQzfceXa4/ylnlg7IujuB4j7QlcdhleyrzsPK9laBmi
+         LbS1yGczFRuSjOjlz9NqjWAATDDMttq8/yZkgs35ffTP2widr9lZqM47olFdF883Jplr
+         AVXmv/OcSYG6AU+nDDqzr2aLI4LCZ4Tpl7xT6oTRPlqadh4bPMOYT69Tbin2vu+u0ruL
+         Hv2AF9D5e9/O0QFUh/vCBMBO7PMS3mhHMloya0jmZaCdVYOV/8AI9FS3CZTjqB8bqZYP
+         3ksMn7CJ8FUuee7XMudXYtKt35sVV5A6d9ti1+aOATqx+syVBOPUfBp3ldnRPtU6KZtb
+         dopw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=JhHpR3SHWi0wFqI6NfieVGJqWVIm7P4YDM2lxGnl5sU=;
+        b=lwBLv+84YprYkWdAi7xHpO+MeCD+9nYJ/2A7YCcz0JZMJuFCno3Z7mUWyqWPuR5uop
+         xhSWfgVhGuir70u78eVFRXskAFIPcAkU3fwS2NMe8vYiaDWNO61fOF0vlk9eNTpC9LJI
+         kQH2EDhn7SrEE5PgdRmJP/OxHi4gH9Dbzuh5k3CjiexgVK9xOPljLjGl7IRM9xdKVr/r
+         mFyD6IFsAUe+V7Ri/Wjf1OwYutYuqaxlNiH0NYhOEc6dmlnoW+7Y0PaPW7R/WiHhyN38
+         YZ8vTZFoG5QviXR8b39lckvN3AW3EvE65oSo8QH9yrlkaWzMy4CWneeJTsEV8ETAN2T9
+         kcdg==
+X-Gm-Message-State: AGi0PubOqaEGhTA6Djprb8+I4npHRIlgOxANObsrYkneuDs4du6mfwQZ
+	WyoqlcWS8Cfr1jnFfRo3ajF92eSeJf+QQubt9EEjlCPl
+X-Google-Smtp-Source: APiQypInqMuwR+WXyRAh7HuiPNiKacCcdLYLlrFGN2+xvD7h/CCJ5xqMvunw6Kmof8IYgZ7J6P9OxNyyY21YMsxXv0M=
+X-Received: by 2002:a92:99c2:: with SMTP id t63mr239543ilk.261.1586871679313;
+ Tue, 14 Apr 2020 06:41:19 -0700 (PDT)
+MIME-Version: 1.0
+References: <E1jNsgZ-0007h8-Tz@hood.rutschle.net>
+In-Reply-To: <E1jNsgZ-0007h8-Tz@hood.rutschle.net>
+From: Jean-Yves PAPAZOGLOU <jeanyves.papazoglou@example.net>
+Date: Tue, 14 Apr 2020 15:41:08 +0200
+Message-ID: <CAPSr0Dn37jkRzKEFaqNdKm33Pjf7A9+iTFrMtqiv8gMC=Y==iA@mail.gmail.com>
+Subject: =?UTF-8?Q?Re=3A_=5Btoperm=5D_R=C3=A9sultat_de_votre_partie?=
+To: GO Assistant <goat@rutschle.net>
+Content-Type: multipart/alternative; boundary="000000000000bfebac05a3405a4b"
+
+--000000000000bfebac05a3405a4b
+Content-Type: text/plain; charset="UTF-8"
+
+resultat blanc
+
+
+>
+
+--000000000000bfebac05a3405a4b
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">resultat=C2=A0blanc<div><br></div></div><=
+div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"margin=
+:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"=
+><br>
+</blockquote></div></div>
+
+--000000000000bfebac05a3405a4b--
