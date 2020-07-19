@@ -47,14 +47,17 @@ Content-Transfer-Encoding: binary
 -----alternative-contents--
 
 -----testing42ftwtesting
-Content-Type: text/plain; charset="ISO-8859-1"; name="round1.tou"
-Content-Disposition: inline; filename="round1.tou"
+Content-Type: text/plain;
+ charset="ISO-8859-1";
+ name="Tournoi_pérmanent_de_Tøulouse_round1.tou"
+Content-Disposition: inline;
+ filename="Tournoi_pérmanent_de_Tøulouse_round1.tou"
 Content-Transfer-Encoding: binary
 
-;name=Tournoi pérmanent de Tøulouse - Ronde #1
+;name=Tournoi pérmanent de Tøulouse - Ronde 1
 ;date=30/07/2005
 ;vill=Toulouse
-;comm=Tournoi pérmanent de Tøulouse - Ronde #1
+;comm=Tournoi pérmanent de Tøulouse - Ronde 1
 ;prog=goatlib
 ;time=60+b
 ;size=19

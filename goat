@@ -851,12 +851,14 @@ if (defined $param_schedule) {
     $opts{submitting} = 1;
     $opts{round} = $Tournament->curr_round->number;
     my $tou = $Tournament->tou(%opts);
+    my $filename = $Tournament->name . " round$opts{round}.tou";
+    $filename =~ s/ /_/g;
     $mail_out->send_results(
         round => $opts{round},
         attach => {
             Charset => 'ISO-8859-1',
             Type => 'text/plain',
-            Filename => "round$opts{round}.tou",
+            Filename => $filename,
             Data => $tou,
         },
     );

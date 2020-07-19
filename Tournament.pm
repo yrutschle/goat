@@ -357,7 +357,7 @@ sub tou_header {
     my $city = $obj->city;
     
     # Add round numbers to comment field
-    $name.= " - Ronde #$rounds"  if defined $rounds;
+    $name.= " - Ronde $rounds"  if defined $rounds;
 
     return <<EOF;
 ;name=$name
