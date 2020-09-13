@@ -566,6 +566,7 @@ sub as_HTML {
         }
         $html .= $table;
         $html .= "<p>Joueur en passe: ".$round->bye->fullname if defined $round->bye;
+        $html .= "<p>Fin de ronde: ".  utc2str($round->final_date) . "</p>\n";
     }
 
     # Score table
