@@ -577,6 +577,7 @@ sub sendmsg {
     my $to = $msg->head->get("To");
     my $subject = $msg->head->get("Subject");
     record("$to: $subject");
+    # record($msg->as_string);  # For the occasional Exim debugging...
 }
 
 
