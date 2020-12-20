@@ -66,6 +66,8 @@ use Data::UUID;
 use DateTime;  # package libdatetime-perl
 use DateTime::Format::ICal; 
 use Data::ICal::Entry::Event;
+use Data::ICal::Entry::Alarm::Display;
+use Data::ICal::Entry::Alarm::Email;
 use Template;
 use POSIX;
 use Try::Tiny;
@@ -294,11 +296,14 @@ EOF
             $data->{date} =~ s/ \d\d:\d\d//; # Keep date only
 
             # Create ICS for end of round
+            # Full-day events seem poorly supported by Data::ICal, so it's
+            # going to be messy.
             my $dt = DateTime::Format::ICal->format_datetime(
                 DateTime->from_epoch(epoch => $data->{time}));
             # format_datetime doesn't seem to produce  all-day event, so remove time spec
-            # manually
+            # manually, and add the value type parameter
             $dt =~ s/T.*//;
+            $dt = "VALUE=DATE:$dt";
             my $ical = Data::ICal->new();
             my $ug = Data::UUID->new();
             my $event = Data::ICal::Entry::Event->new();
@@ -311,16 +316,41 @@ EOF
                 location => $data->{location},
                 uid => $ug->to_string($ug->create()),
             );
+
+            # Add an alarm -- display
+            my $alarm = Data::ICal::Entry::Alarm::Display->new();
+            $alarm->add_properties(
+                description => $desc,
+                trigger => "RELATED=START:PT9H",  # Alarm at 9am that day
+            );
+            $event->add_entry($alarm);
+
+            # Add an alarm -- e-mail
+            my $alarm2 = Data::ICal::Entry::Alarm::Email->new();
+            $alarm2->add_properties(
+                description => $desc,
+                summary => $desc,
+                attendee => $CFG->{admin_address},
+                trigger => "RELATED=START:PT9H",  # E-mail at 9am that day
+            );
+            $event->add_entry($alarm2);
+
             if ($testing) {
                 # Give variable / random fields fixed values
                 $ical->add_properties(prodid => "Goat test suite");
                 $event->add_properties(uid => "00000000-0000-0000-HELL-0WORLD000000");
             }
             $ical->add_entry($event);
+
+            # Fix entries that have parameters
+            my $ical_str = $ical->as_string;
+            $ical_str =~ s/DTSTART:/DTSTART;/g;
+            $ical_str =~ s/DTEND:/DTEND;/g;
+            $ical_str =~ s/TRIGGER:/TRIGGER;/g;
             $data->{attach} = {
                 Type => 'text/calendar',
                 Encoding => 'base64',
-                Data => $ical->as_string, # encoding is done in sendmail
+                Data => $ical_str, # encoding is done in sendmail
             };
         },
         template => "deadline.tt",
