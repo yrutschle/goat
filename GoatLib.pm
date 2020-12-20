@@ -3,6 +3,7 @@ package GoatLib;
 use strict;
 use Pod::Usage;
 
+use Carp;
 use Encode;
 use Exporter;
 use Time::ParseDate;  # This is in Debian's libtime-modules-perl package
@@ -208,6 +209,7 @@ sub update_ech {
 # format: strftime format, with sane default if undef
 sub utc2str {
     my ($ts, $format) = @_;
+    croak("***utc2str called with empty time stamp") unless $ts;
     my $loc = DateTime::Locale->load($LOCALE);
     my $o = DateTime->from_epoch(epoch => $_[0], locale => $LOCALE, time_zone=>$TIMEZONE);
     my $date = $o->strftime($format // "%A %d %B %Y %R");
