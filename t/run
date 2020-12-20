@@ -287,7 +287,7 @@ push @tests,
 
   ;
 
-use Test::More;
+use Test::More tests => 84;
 
 
 chdir "t/tmp" || die "Can't chdir to my test directory";
