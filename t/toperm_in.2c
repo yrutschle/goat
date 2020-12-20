@@ -955,6 +955,7 @@ Round:
               - ~
               - ~
             status: L
+    final_date: 1523821424
     number: 1
   - !!perl/hash:Round
     GoGame:

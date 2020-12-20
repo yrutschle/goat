@@ -742,6 +742,7 @@ Round:
         submitted: 1
         white:
           FFGPlayer: *32
+    final_date: 1523821424
     number: 1
   - !!perl/hash:Round
     GoGame:
