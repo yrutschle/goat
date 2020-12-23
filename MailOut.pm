@@ -124,6 +124,18 @@ sub new {
     return bless \%o, $class;
 }
 
+
+# Fixes ICS entries that have parameters
+sub fix_ics_entries {
+    my ($in) = @_;
+
+    $in =~ s/DTSTART:/DTSTART;/g;
+    $in =~ s/DTEND:/DTEND;/g;
+    $in =~ s/TRIGGER:/TRIGGER;/g;
+
+    return $in;
+}
+
 =head2 METHODS
 
 =over 4
@@ -271,16 +283,25 @@ EOF
                 location => $data->{location},
                 uid => $ug->to_string($ug->create()),
             );
+
+            my $alarm = Data::ICal::Entry::Alarm::Display->new();
+            $alarm->add_properties(
+                description => $TOURNAMENT_NAME,
+                trigger => "RELATED=START:-PT1H",  # Alarm 1 hour before
+            );
+            $event->add_entry($alarm);
+
             if ($testing) {
                 # Give variable / random fields fixed values
                 $ical->add_properties(prodid => "Goat test suite");
                 $event->add_properties(uid => "00000000-0000-0000-HELL-0WORLD000000");
             }
             $ical->add_entry($event);
+            my $ics_str = fix_ics_entries $ical->as_string;
             $data->{attach} = {
                 Type => 'text/calendar',
                 Encoding => 'base64',
-                Data => $ical->as_string, # encoding is done in sendmail
+                Data => $ics_str, # encoding is done in sendmail
             };
         },
         template => "scheduled.tt",
@@ -343,10 +364,7 @@ EOF
             $ical->add_entry($event);
 
             # Fix entries that have parameters
-            my $ical_str = $ical->as_string;
-            $ical_str =~ s/DTSTART:/DTSTART;/g;
-            $ical_str =~ s/DTEND:/DTEND;/g;
-            $ical_str =~ s/TRIGGER:/TRIGGER;/g;
+            my $ical_str = fix_ics_entries $ical->as_string;
             $data->{attach} = {
                 Type => 'text/calendar',
                 Encoding => 'base64',
