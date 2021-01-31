@@ -24,7 +24,7 @@
 
 =head1 SYNOPSIS
 
- register [--getech] [-f file] inscrits
+ register [--no-getech] [-f file] inscrits
 
 =head1 DESCRIPTION
 
@@ -62,7 +62,7 @@ B<register> takes the registered player list on its standard
 input or command line, and outputs a Tournament object in a
 file specified with -f.
 
-B<--getech> forces downloading the echelle file.
+B<--no-getech> prevents downloading the echelle file.
 
 
 =cut
@@ -82,11 +82,11 @@ use GoatConfig;
 
 my $ECHELLE_FILE = "ech_ffg_new.txt";
 
-my ($testing, $param_force_getech, $help);
+my ($testing, $param_no_getech, $help);
 GetOptions(
     'test' => \$testing,
     'help' => \$help,
-    'getech' => \$param_force_getech,
+    'no-getech' => \$param_no_getech,
 ) or die pod2usage();
 
 die pod2usage(-verbose=>2) if defined $help;
@@ -94,7 +94,7 @@ die pod2usage(-verbose=>2) if defined $help;
 my @registered;
 
 # Download/update echelle
-update_ech() unless $testing;
+update_ech() unless $testing or $param_no_getech;
 
 while (<>) {
     next if /^#/ or /^$/;
