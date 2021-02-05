@@ -366,6 +366,7 @@ sub tou_header {
 ;comm=$name
 ;prog=$prog
 ;time=$time+b
+;ta=80
 ;size=$size
 ;komi=$komi
 ;
