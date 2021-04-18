@@ -10,19 +10,10 @@ use Tournament; # this complains about not finding the conf, but whatever
 
 my $tournament_fn = shift @ARGV;
 
-my $t = Tournament->load($tournament_fn);
+open my $f, $tournament_fn;
+while (<$f>) {
+    s/\@.*/\@example.com/;
+    print;
+}
 
-map {
-    my $email = $_->email;
-    my $addr = (Mail::Address->parse($email))[0];
-    if ($addr->host !~ /example/) {
-        my $tld = ("net", "org", "com")[rand 3];
-        my $u = $addr->user;
-        my $new = "$u\@example.$tld";
-        $_->email($new);
-    }
-} $t->players;
-
-
-$t->save($tournament_fn);
 
