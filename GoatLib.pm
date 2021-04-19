@@ -112,6 +112,7 @@ sub stone_to_level {
 sub level_to_stones {
     my ($l) = @_;
 
+    $l = -2950 if $l < -2950; # Cap for undefined level of -9999
     my $level = $l / 100;
     if ($level < 0) {
         $level = - POSIX::floor($level);
