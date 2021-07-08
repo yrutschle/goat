@@ -1,18 +1,17 @@
 #! /usr/bin/perl -w
 
-# Anonymise e-mail addresses of a tournament file by
-# replacing the domain with example.tld. This is to avoid
-# using real addresses in test files that are published. The
-# other data (name, license and whatnot) are public anyway.
+# Anonymise e-mail addresses of a file by replacing the
+# domain with example.tld. This is to avoid using real
+# addresses in test files that are published.
 
 use strict;
-use Tournament; # this complains about not finding the conf, but whatever
 
 my $tournament_fn = shift @ARGV;
 
-open my $f, $tournament_fn;
+my $f;
+open $f, $tournament_fn;
 while (<$f>) {
-    s/\@.*/\@example.com/;
+    s/\@.*\b/\@example.com/;
     print;
 }
 

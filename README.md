@@ -44,7 +44,6 @@ Install the dependencies:
 ```
         apt-get install libtime-modules-perl libemail-filter-perl libemail-valid-perl libdatetime-perl libdatetime-locale-perl libhtml-table-perl libdatetime-timezone-perl libdevel-cover-perl libtemplate-perl libmime-tools-perl libemail-reply-perl libemail-sender-perl libyaml-perl libdata-ical-perl libdatetime-format-ical-perl libdata-uuid-perl libparse-recdescent-perl libcgi-pm-perl libmail-imapclient-perl libtext-multimarkdown-perl
         cpan Algorithm::Pair::Best2
-        cpan Games::Go::SGF
 ```
 
 Copy the Goat files to the install directory (e.g.

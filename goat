@@ -26,7 +26,6 @@ use Getopt::Long;
 use Pod::Usage;
 
 use Mail::Address;
-use Games::Go::SGF;
 
 use Fcntl qw/SEEK_SET LOCK_EX LOCK_UN/;
 
@@ -674,9 +673,14 @@ if (defined $param_schedule) {
 ########## Recording the result with a SGF
 } elsif (defined $param_sgf) {
     my ($submitter, $sgf_name) = split /,/, $param_sgf;
-    # Check we can read the file, as Games::Go:SGF just dies with no explanation
+
+    my ($sgf_date, $res);
     open my $sgf, "$sgf_name" or die "$sgf_name: $!\n";
-    $sgf  = new Games::Go::SGF $sgf_name;
+    while (<$sgf>) {
+        $sgf_date = $1 if (/DT\[(.*?)\]/);
+        $res = $1 if /RE\[(.).*?\]/;
+        last if defined $sgf_date and defined $res;
+    }
 
     my $game = $Tournament->find_game_by_email($submitter);
     unless (defined $game) {
@@ -684,14 +688,11 @@ if (defined $param_schedule) {
         exit;
     }
 
-    my $sgf_date = $sgf->DT;
     # If SGF date is invalid (e.g. pandanet), use today's date instead
     if ($sgf_date !~ /\d{4}-\d{2}-\d{2}/) {
         $sgf_date = utc2str($today, "%F");
     }
 
-    $sgf->RE =~ /^([BW])/;
-    my $res = $1;
     if ($res eq 'W') {
         finish_game($game, $submitter, 'white');
     }
