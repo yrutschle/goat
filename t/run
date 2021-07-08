@@ -195,6 +195,16 @@ push @tests,
       'test' => 'diff -u ../out.32 out.32',
       'doc' => 'Receive SGF with invalid date',
   },
+  # Receive large SGF (e.g. with Leelo review)
+    { 'run' => "rm sgf/*; export TEST_TIME=1122737400; cp ../letter_in.33 letter; cp ../toperm_in.33 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.33 2>&1 ; perl $perl_opts ../../goat --status >> out.33 2>&1 ; file sgf/2021-06-29*.sgf >> out.33",
+      'test' => 'diff -u ../out.33 out.33',
+      'doc' => 'Receive jumbo SGF',
+  },
+  # Receive large SGF (e.g. with Leelo review)
+    { 'run' => "rm sgf/*; export TEST_TIME=1122737400; cp ../letter_in.33b letter; cp ../toperm_in.33 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.33b 2>&1 ; perl $perl_opts ../../goat --status >> out.33b 2>&1 ; file sgf/2021-06-29*.sgf >> out.33b",
+      'test' => 'diff -u ../out.33b out.33b',
+      'doc' => 'Receive one-line jumbo SGF',
+  },
   # Check for loops
     { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.14 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.12",
       'test' => 'diff -u ../out.12 out.12',
@@ -287,7 +297,7 @@ push @tests,
 
   ;
 
-use Test::More tests => 84;
+use Test::More tests => 88;
 
 
 chdir "t/tmp" || die "Can't chdir to my test directory";

@@ -1,0 +1,84 @@
+Sat Jul 30 15:30:00 2005: notify Johann GUILLEMOT <johann.guillemot@example.com> and Christian BOYART <christian.boyart@example.com> their game is finished and white won; result given by christian.boyart@example.com
+ <johann.guillemot@example.com>
+Content-Transfer-Encoding: binary
+Content-Type: multipart/mixed; boundary="---testing42ftwtesting"
+From: GO Assistant <goat@rutschle.net>
+MIME-Version: 1.0
+Return-Path: GO Assistant <goat@rutschle.net>
+Subject: [goat] Résultat de votre ronde
+To: Christian BOYART <christian.boyart@example.com>,Johann GUILLEMOT
+X-Loop: GO Assistant <goat@rutschle.net>
+X-Mailer: MIME-Tools with no versionThis is a multi-part message in MIME format...
+
+-----testing42ftwtesting
+Content-Type: multipart/alternative; boundary="---alternative-contents"
+Content-Transfer-Encoding: binary
+
+This is a multi-part message in MIME format...
+
+-----alternative-contents
+Content-Type: text/plain; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: binary
+
+Vous avez reçu ce courrier car vous êtes inscrit au Tournoi pérmanent de Tøulouse.
+Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@rutschle.net>.
+
+
+Le résultat de votre partie a été enregistré.
+Johann GUILLEMOT <johann.guillemot@example.com> contre Christian BOYART <christian.boyart@example.com>, victoire pour Christian BOYART <christian.boyart@example.com>.
+
+Le résultat a été rapporté par christian.boyart@example.com.
+
+-----alternative-contents
+Content-Type: text/html; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: binary
+
+<p>Vous avez reçu ce courrier car vous êtes inscrit au Tournoi pérmanent de Tøulouse.
+Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@rutschle.net>.</p>
+
+<p>Le résultat de votre partie a été enregistré.
+Johann GUILLEMOT <johann.guillemot@example.com> contre Christian BOYART <christian.boyart@example.com>, victoire pour Christian BOYART <christian.boyart@example.com>.</p>
+
+<p>Le résultat a été rapporté par christian.boyart@example.com.</p>
+
+-----alternative-contents--
+
+-----testing42ftwtesting--
+Tournament: Tournoi pérmanent de Tøulouse
+Round 5
+finished: Laurent LAMÔLE <lorl@example.com>	Quentin RENDU <quentin.rendu@example.com>	(0 stones) winner: black 
+                Challenge sent Mon Jun 21 11:53:58 2021
+                Scheduled for Thu Jun 24 19:00:00 2021 at KGS
+
+challenged: Joachim DUCOS <black-lodge@example.com>	Colin CARRERE <colin.carrere@example.com>	(0 stones) 	 
+                Challenge sent Mon Jun 21 11:53:58 2021
+                Not scheduled
+
+finished: Jean-François THOVERT <jf.thovert@example.com>	Sylvain RAVERA <sylvain.ravera@example.com>	(0 stones) winner: white 
+                Challenge sent Mon Jun 21 11:53:58 2021
+                Scheduled for Sat Jul  3 14:00:00 2021 at OGS
+
+finished: Johann GUILLEMOT <johann.guillemot@example.com>	Christian BOYART <christian.boyart@example.com>	(7 stones) winner: white 
+                Challenge sent Mon Jun 21 11:53:58 2021
+                Not scheduled
+
+finished: Eric IMBAULT <kimenogo@example.com>	Aurélian COURSIERE <coursiere.aurelian@example.com>	(0 stones) winner: black 
+                Challenge sent Mon Jun 21 11:53:58 2021
+                Scheduled for Tue Jun 29 18:00:00 2021 at KGS
+
+finished: Jean-François COQUERY <jeanfrancoiscoquery@example.com>	Fabien CALLENS <infamousfab@example.com>	(5 stones) winner: white 
+                Challenge sent Mon Jun 21 11:53:58 2021
+                Not scheduled
+
+challenged: Bertrand CLAVELIER <ientum@example.com>	Caroline LEDUN <caro.ledun@example.com>	(4 stones) 	 
+                Challenge sent Mon Jun 21 11:53:59 2021
+                Not scheduled
+
+challenged: Aurélien ALBERT-AGUILAR <a.albertaguilar@example.com>	Loïc TAGLIAVINI <neotis31@example.com>	(1 stones) 	 
+                Challenge sent Mon Jun 21 11:53:59 2021
+                Not scheduled
+
+Final date: 1626641599 (dimanche 18 juillet 2021 22:53)
+sgf/2021-06-29-Christian-Johann.sgf: UTF-8 Unicode text, with CRLF line terminators
