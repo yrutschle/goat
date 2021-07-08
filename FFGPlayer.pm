@@ -148,7 +148,8 @@ sub grep_echelle {
     # If ASCII failed, try Unicode collation (pretty slow)
     # (Actually I think this is not necessary if running UTF8 as pattern
     # matching works right. Disabling for now).
-    if (0) {
+    if (1) {
+        print "No ASCII match -- searching with Unicode Collate\n" if $verbose_search;
         my $Collator = Unicode::Collate->new(normalization => undef, level => 1);
         foreach my $line (@haystack) {
             my $match = 1;
