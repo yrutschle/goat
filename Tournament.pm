@@ -346,7 +346,19 @@ sub tou_header {
     my ($date, $prog, $time, $size, $komi) =
        ($obj->date, $obj->prog, $obj->time, $obj->size, $obj->komi);
 
-    # If date not set, pick today as default.
+    # If date not set, pick first round's start date
+    if (not defined $date and defined $rounds) {
+        my $first_round = (split /,/, $rounds)[0];
+        my $r = $obj->Round->[$first_round];
+        if (defined $r) {
+            my $start_date = $r->start_date;
+            my ($d,$m,$y) = (localtime($start_date))[3,4,5];
+            $m++; $y += 1900;
+            $date = sprintf "%02d/%02d/%04d", $d,$m,$y;
+        }
+    }
+
+    # If date still not set, pick today as default.
     if (not defined $date) {
         my ($d,$m,$y) = (localtime(&main::my_time))[3,4,5];
         $m++; $y += 1900;

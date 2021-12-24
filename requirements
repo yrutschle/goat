@@ -63,3 +63,7 @@ OUT_1
         file format. Players that have played no games in
         the exported rounds shall not be included in the
         exported file.
+
+OUT_2
+        TOU date shall be the starting date of the round
+        (Required by Sylvain Ravera, FFG, 19DEC2021)

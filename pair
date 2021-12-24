@@ -255,6 +255,7 @@ if (defined $param_final_date) {
 } else {
     $final_date = my_time() + 30 * 24 * 3600; # one month in the future
 }
+$round->start_date(&main::my_time);
 $round->final_date($final_date);
 $round->bye($bye) if defined $bye;
 $Tournament->add_round($round_num, $round);
