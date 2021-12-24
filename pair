@@ -24,11 +24,11 @@ pair -- compute a new round in a tournament
 
 =head1 SYNOPSIS
 
-pair [--bye [<bye_player>|'random']] [--date <date>] [--verbose <1|2>] --file <toperm>
+pair [--bye [<bye_player>|'random']] [--no-getech] [--date <date>] [--verbose <1|2>] [--file <toperm>]
 
 =head1 DESCRIPTION
 
-I<pair> computes a new round based on the specified
+I<pair> computes a new round based on t(he specified
 tournament file. If the number of players in the file is
 odd, it'll complain and you need to specify the e-mail
 address of a 'bye' player, who won't take part in this
@@ -40,6 +40,11 @@ all players, if all have played their game).
 If the B<date> is specified, it will be displayed in
 all reminders. If not specified, one month from now is
 picked.
+
+
+B<--no-getech> prevents downloading the echelle file and
+updating player information. This is useful to force-change
+player's registration levels, for example.
 
 =cut
 
@@ -56,7 +61,8 @@ use MailOut;
 use Getopt::Long;
 
 # Interpret command line
-my ($param_bye, $param_final_date, $param_round, $help);
+my ($param_bye, $param_final_date, $param_round,
+    $param_no_getech, $help);
 my $verbose = 0;
 GetOptions(
     'help' => \$help,
@@ -64,12 +70,13 @@ GetOptions(
     'bye=s' => \$param_bye,
     'round=i' => \$param_round,
     'verbose=i' => \$verbose,
+    'no-getech' => \$param_no_getech,
 ) or die pod2usage();
 
 die pod2usage(-verbose=>2) if defined $help;
 my $Tournament = Tournament->load($TOURNAMENT_FILE);
 
-update_ech($Tournament);
+update_ech($Tournament) unless $param_no_getech;
 
 
 # Applies function to all games in a tournament. Game is
