@@ -221,7 +221,7 @@ sub unfinish {
     my ($obj) = @_;
 
     $obj->status(UNDEF);
-    $obj->result(0);
+    $obj->{result} = undef;  # Accessor doesn't let us undef...
 }
 
 sub cancel {
