@@ -118,6 +118,7 @@ sub load {
     my $data = <$f>;
     close $f;
     my $VAR1;
+    local $YAML::LoadBlessed = 1;
     my $t = YAML::Load($data);
 
     # pick the highest round number if there are any
