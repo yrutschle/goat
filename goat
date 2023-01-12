@@ -851,17 +851,34 @@ if (defined $param_schedule) {
     my %opts;
     $opts{submitting} = 1;
     $opts{round} = $Tournament->curr_round->number;
+    my $city = $Tournament->city;
     my $tou = $Tournament->tou(%opts);
-    my $filename = $Tournament->name . " round$opts{round}.tou";
+
+    # For the main FFG echelle
+    my $filename = $Tournament->name . " round$opts{round} $city.tou";
     $filename =~ s/ /_/g;
+
+    # For the hybrid Internet echelle
+    my $filename2 = $Tournament->name . " round$opts{round} Internet.tou";
+    $filename2 =~ s/ /_/g;
+    my $tou2 = $tou;
+    $tou2 =~ s/;vill=$city/;vill=Internet/;
+
     $mail_out->send_results(
         round => $opts{round},
-        attach => {
+        attach => [{
             Charset => 'ISO-8859-1',
             Type => 'text/plain',
             Filename => $filename,
             Data => $tou,
         },
+        {
+            Charset => 'ISO-8859-1',
+            Type => 'text/plain',
+            Filename => $filename2,
+            Data => $tou2,
+        }],
+
     );
 
 ############## Email to unplayed games
