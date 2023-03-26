@@ -46,6 +46,10 @@ Install the dependencies:
         cpan Algorithm::Pair::Best2
 ```
 
+The test suite will probably require the `en_US.UTF-8`
+locale to be installed, which is done with `dpkg-reconfigure locales`.
+
+
 Copy the Goat files to the install directory (e.g.
 `/opt/goat`). Add that directory to $PATH (so the system finds
 the various scripts) and to $PERL5LIB (so the scripts find
