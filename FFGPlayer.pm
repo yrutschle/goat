@@ -14,24 +14,6 @@ use Encode;
 # Il y a quelques champs supplémentaires que l'utilisateur peut remplir à la
 # main.
 
-my $player_dtd = 
-[ 'FFGPlayer' =>
-        [],
-        'id',
-        'familyname',
-        'givenname',
-        'level',
-        'status',
-        'license',
-        'club',
-        'email',
-        ['registering_level'],
-];
-
-# Returns the DTD for this object
-sub dtd {
-    $player_dtd;
-}
 
 BEGIN {
     my $subs;
