@@ -91,6 +91,13 @@ GetOptions(
 
 die pod2usage(-verbose=>2) if defined $help;
 
+# Tournament object
+my $t = new Tournament (
+    time=> 60,
+    size=> 19,
+    komi=> 7.5,
+);
+
 my @registered;
 
 # Download/update echelle
@@ -119,13 +126,7 @@ while (<>) {
 #   map { [(stone_to_level $_->registering_level), $_] }
 #   @registered;
 
-# Tournament object
-my $t = new Tournament (
-    time=> 60,
-    size=> 19,
-    komi=> 7.5,
-    FFGPlayer=> \@registered,
-);
+$t->FFGPlayer(\@registered);
 $t->save($TOURNAMENT_FILE);
 
 warn "Registered ".(scalar @registered)." players.\n";
