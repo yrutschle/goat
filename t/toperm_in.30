@@ -1,5 +1,5 @@
 --- !!perl/hash:Tournament
-FFGPlayer:
+ffgplayers:
   - &1 !!perl/hash:FFGPlayer
     club: 31To
     email: briefsfly@example.net

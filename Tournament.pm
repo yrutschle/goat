@@ -25,7 +25,7 @@ This is designed to easily translate into a FFG .TOU tournament result file, eve
 use vars qw/@attributes/;
 
 BEGIN {
-    @attributes = qw/date prog time size komi round_number Round FFGPlayer filename/;
+    @attributes = qw/date prog time size komi round_number Round ffgplayers filename/;
     my $subs;
     foreach my $data ( @attributes ) {
         $subs .= qq{
@@ -50,7 +50,7 @@ sub new {
     $obj = \%h;
     bless $obj, $class;
 
-    $obj->FFGPlayer([]);
+    $obj->ffgplayers([]);
     $obj->Round([]);
     foreach (@attributes) {
         $obj->{$_} = $opts{$_} if exists $opts{$_};
@@ -201,7 +201,7 @@ Returns a list of registered players (which may or may not play in any given rou
 
 =cut
 sub players {
-    @{$_[0]->FFGPlayer};
+    @{$_[0]->ffgplayers};
 }
 
 =item $tournament->unplayed
@@ -294,7 +294,7 @@ Adds a FFGPlayer
 
 =cut
 sub add_player {
-    push @{$_[0]->FFGPlayer}, $_[1];
+    push @{$_[0]->ffgplayers}, $_[1];
 }
 
 =item $tournament->del_player($p)
@@ -306,7 +306,7 @@ sub del_player {
     my ($tournament, $player) = @_;
 
     my @players2 = grep { $_ ne $player } $tournament->players;
-    $tournament->FFGPlayer(\@players2);
+    $tournament->ffgplayers(\@players2);
 }
 
 =item $tournament->rounds

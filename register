@@ -126,7 +126,7 @@ while (<>) {
 #   map { [(stone_to_level $_->registering_level), $_] }
 #   @registered;
 
-$t->FFGPlayer(\@registered);
+$t->ffgplayers(\@registered);
 $t->save($TOURNAMENT_FILE);
 
 warn "Registered ".(scalar @registered)." players.\n";
