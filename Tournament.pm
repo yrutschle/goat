@@ -10,6 +10,7 @@ use Mail::Address;
 use GoatLib;
 use GoatConfig;
 use File::Copy;
+use File::Basename;
 use URI::Escape;
 use Fcntl ':flock';
 
@@ -67,6 +68,15 @@ sub name {
 
 sub city {
     return $TOURNAMENT_CITY;
+}
+
+sub ech_url {
+    return $TOURNAMENT_ECHELLE;
+}
+
+sub ech_file {
+    my ($o) = @_;
+    return basename $o->ech_url;
 }
 
 # Locking is done by creating a .lock file.
@@ -649,13 +659,17 @@ sub score {
 # Download echelle file from ffg site -- if filename already
 # exists, delete it
 sub download_echelle {
-    my ($filename) = @_;
+    my ($t) = @_;
 
     return 1 if defined $CFG->{testing};
 
-    unlink $filename;
-    `wget http://ffg.jeudego.org/echelle/echtxt/ech_ffg_new.txt`;
-    return -r $filename;
+    my $url = ech_url();
+    die "tournament_echelle not defined\n" unless defined $url;
+    my $file = $t->ech_file();
+
+    unlink $file;
+    `wget $TOURNAMENT_ECHELLE`;
+    return -r $file;
 }
 
 
@@ -709,8 +723,8 @@ sub update_ech {
     my %all_players;
     my $ech;
 
-    my $ECHELLE_FILE = "ech_ffg_new.txt";
-    my $r = download_echelle($ECHELLE_FILE);
+    my $ECHELLE_FILE = $tournament->ech_file();
+    my $r = $tournament->download_echelle();
     return $r if not defined $tournament;
 
     open $ech, $ECHELLE_FILE or die "$ECHELLE_FILE: $!\n";

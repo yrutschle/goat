@@ -80,8 +80,6 @@ use Tournament;
 use GoatLib;
 use GoatConfig;
 
-my $ECHELLE_FILE = "ech_ffg_new.txt";
-
 my ($testing, $param_no_getech, $help);
 GetOptions(
     'test' => \$testing,
@@ -107,7 +105,7 @@ while (<>) {
     next if /^#/ or /^$/;
     $_ = Encode::decode('UTF-8', $_);
 
-    my $player = FFGPlayer->new_from_alias($_, $ECHELLE_FILE);
+    my $player = FFGPlayer->new_from_alias($_, $t->ech_file());
 
     next unless defined $player;
 
