@@ -76,7 +76,7 @@ GetOptions(
 die pod2usage(-verbose=>2) if defined $help;
 my $Tournament = Tournament->load($TOURNAMENT_FILE);
 
-update_ech($Tournament) unless $param_no_getech;
+$Tournament->update_ech($Tournament) unless $param_no_getech;
 
 
 # Applies function to all games in a tournament. Game is

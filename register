@@ -101,7 +101,7 @@ my $t = new Tournament (
 my @registered;
 
 # Download/update echelle
-update_ech() unless $testing or $param_no_getech;
+$t->update_ech() unless $testing or $param_no_getech;
 
 while (<>) {
     next if /^#/ or /^$/;
