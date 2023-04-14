@@ -1,0 +1,105 @@
+David LABBE: changing from -375 to -800
+David LABBE: updating club from 17Ro to 86Po
+David LABBE: license status changed to:-
+David LABBE: player is not licensed.
+David LABBE: player license: - is not allowed.
+Christian BOYART: changing from -470 to -800
+Christian BOYART: updating club from 75Al to 92An
+Christian BOYART: license status changed to:X
+Christian BOYART: player is not licensed.
+Christian BOYART: player license: X is not allowed.
+Olivier DULAC: changing from -428 to -480
+Jean-François THOVERT: changing from -548 to -464
+Alexis GOUZIN not found in echelle file -- skipping
+Eric IMBAULT: changing from -1259 to -1607
+Eric IMBAULT: updating club from 18Vi to 18Bo
+Sylvain LERAY not found in echelle file -- skipping
+David AUDAIRE not found in echelle file -- skipping
+Sophie THOMAS not found in echelle file -- skipping
+Randomly picking David LABBE as bye player
+[Round 3]
+| Noir                                                   | Blanc                                                 | Handicap
+|........................................................|.......................................................|..........
+| Alexis GOUZIN <napozzin@example.com> (86Po)            | Jean-François THOVERT <jf.thovert@example.com> (86Po) | 3
+| Sophie THOMAS <sophiethomas@example.com> (17Ro)        | Sylvain LERAY <sylv4in@example.com> (17Ro)            | 2
+| Christian BOYART <christian.boyart@example.com> (92An) | Olivier DULAC <olivierdulac@example.com> (38Gr)       | 2
+| David AUDAIRE <daudaire@example.com> (91Or)            | Eric IMBAULT <imbault18@example.com> (18Bo)           | 0
+Content-Transfer-Encoding: binary
+Content-Type: multipart/mixed; boundary="---testing42ftwtesting"
+From: GO Assistant <goat@rutschle.net>
+MIME-Version: 1.0
+Return-Path: GO Assistant <goat@rutschle.net>
+Subject: [goat] Fin de ronde 3: lundi 29 août 2005
+To: Yves Rutschle <yves@rutschle.net>
+X-Loop: GO Assistant <goat@rutschle.net>
+X-Mailer: MIME-Tools with no versionThis is a multi-part message in MIME format...
+
+-----testing42ftwtesting
+Content-Type: multipart/alternative; boundary="---alternative-contents"
+Content-Transfer-Encoding: binary
+
+This is a multi-part message in MIME format...
+
+-----alternative-contents
+Content-Type: text/plain; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: binary
+
+La ronde 3 du tournoi doit terminer: lundi 29 août 2005
+
+(Mais bon, y'a l'ICS joint pour ça).
+
+
+-----alternative-contents
+Content-Type: text/html; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: binary
+
+La ronde 3 du tournoi doit terminer: lundi 29 août 2005<br />
+
+<p>(Mais bon, y'a l'ICS joint pour ça).</p>
+
+-----alternative-contents--
+
+-----testing42ftwtesting
+Content-Type: text/calendar; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: base64
+
+QkVHSU46VkNBTEVOREFSDQpWRVJTSU9OOjIuMA0KUFJPRElEOkdvYXQgdGVz
+dCBzdWl0ZQ0KQkVHSU46VkVWRU5UDQpERVNDUklQVElPTjpUb3Vybm9pIHDD
+qXJtYW5lbnQgZGUgVMO4dWxvdXNlOiBlbmQgcm91bmQgMw0KRFRFTkQ7VkFM
+VUU9REFURToyMDA1MDgyOQ0KRFRTVEFSVDtWQUxVRT1EQVRFOjIwMDUwODI5
+DQpMT0NBVElPTjoNClNVTU1BUlk6VG91cm5vaSBww6lybWFuZW50IGRlIFTD
+uHVsb3VzZTogZW5kIHJvdW5kIDMNClVJRDowMDAwMDAwMC0wMDAwLTAwMDAt
+SEVMTC0wV09STEQwMDAwMDANCkJFR0lOOlZBTEFSTQ0KQUNUSU9OOkRJU1BM
+QVkNCkRFU0NSSVBUSU9OOlRvdXJub2kgcMOpcm1hbmVudCBkZSBUw7h1bG91
+c2U6IGVuZCByb3VuZCAzDQpUUklHR0VSO1JFTEFURUQ9U1RBUlQ6UFQ5SA0K
+RU5EOlZBTEFSTQ0KQkVHSU46VkFMQVJNDQpBQ1RJT046RU1BSUwNCkFUVEVO
+REVFOll2ZXMgUnV0c2NobGUgPHl2ZXNAcnV0c2NobGUubmV0Pg0KREVTQ1JJ
+UFRJT046VG91cm5vaSBww6lybWFuZW50IGRlIFTDuHVsb3VzZTogZW5kIHJv
+dW5kIDMNClNVTU1BUlk6VG91cm5vaSBww6lybWFuZW50IGRlIFTDuHVsb3Vz
+ZTogZW5kIHJvdW5kIDMNClRSSUdHRVI7UkVMQVRFRD1TVEFSVDpQVDlIDQpF
+TkQ6VkFMQVJNDQpFTkQ6VkVWRU5UDQpFTkQ6VkNBTEVOREFSDQo=
+
+-----testing42ftwtesting--
+Tournament: Tournoi pérmanent de Tøulouse
+Round 3
+undef: Alexis GOUZIN <napozzin@example.com>	Jean-François THOVERT <jf.thovert@example.com>	(3 stones) 	 
+                Challenge not sent
+                Not scheduled
+
+undef: Sophie THOMAS <sophiethomas@example.com>	Sylvain LERAY <sylv4in@example.com>	(2 stones) 	 
+                Challenge not sent
+                Not scheduled
+
+undef: Christian BOYART <christian.boyart@example.com>	Olivier DULAC <olivierdulac@example.com>	(2 stones) 	 
+                Challenge not sent
+                Not scheduled
+
+undef: David AUDAIRE <daudaire@example.com>	Eric IMBAULT <imbault18@example.com>	(0 stones) 	 
+                Challenge not sent
+                Not scheduled
+
+Bye player: David LABBE
+Final date: 1125329400 (lundi 29 août 2005 17:30)

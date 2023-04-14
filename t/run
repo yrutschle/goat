@@ -66,6 +66,17 @@ push @tests,
        'test' => 'diff -u ../out.1c out.1c',
        'doc' => 'New round with bye player',
    },
+   # pair: pair with a bye player, and unplayed games have
+   # left the tournament (Normaly we pick bye players in
+   # unplayed games in previous round; here, unplayed
+   # players had unsubscribed)
+   # Clement Beni and Mickael Zizard have both not played
+   # and unregistered, so can't be picked for bye
+   { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.1b toperm; cp ../ech_ffg_V3.txt . ; " .
+       "perl $perl_opts ../../pair --test --bye random > out.1l 2>&1 ; perl $perl_opts ../../goat --status >> out.1l",
+       'test' => 'diff -u ../out.1l out.1l',
+       'doc' => 'New round with bye player and left unplayed',
+   },
    # pair: pair with random bye player, send pairings
    # (sending is required to check $round->bye is set properly)
    { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.9 toperm; " .

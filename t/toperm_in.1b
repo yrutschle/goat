@@ -1,0 +1,333 @@
+--- !!perl/hash:Tournament
+Round:
+  - {}
+  - !!perl/hash:Round
+    GoGame:
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: &1 !!perl/hash:FFGPlayer
+            club: 75Al
+            email: christian.boyart@example.com
+            familyname: BOYART
+            givenname: Christian
+            id: Christian BOYART
+            level: -470
+            license: 8696800
+            registering_level:
+              - ~
+              - ~
+              - ~
+            status: L
+        challenge_date: 1675838703
+        handicap: 0
+        rated: 1
+        reminder_date: 1677221102
+        result: black
+        sgf: /tournois/ffg/sgf/2023-03-03-David-Christian.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: &2 !!perl/hash:FFGPlayer
+            club: 17Ro
+            email: labbe.david@example.com
+            familyname: LABBE
+            givenname: David
+            id: David LABBE
+            level: -375
+            license: 9730003
+            registering_level:
+              - ~
+              - ~
+              - ~
+            status: L
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: &3 !!perl/hash:FFGPlayer
+            club: 86Po
+            email: jf.thovert@example.com
+            familyname: THOVERT
+            givenname: Jean-François
+            id: Jean-François THOVERT
+            level: -548
+            license: 9025075
+            registering_level:
+              - ~
+              - ~
+              - ~
+            status: L
+        challenge_date: 1675838703
+        handicap: 1
+        rated: 1
+        reminder_date: 1675838703
+        result: black
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: &4 !!perl/hash:FFGPlayer
+            club: 38Gr
+            email: olivierdulac@example.com
+            familyname: DULAC
+            givenname: Olivier
+            id: Olivier DULAC
+            level: -428
+            license: 0513000
+            registering_level:
+              - ~
+              - ~
+              - ~
+            status: L
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: &5 !!perl/hash:FFGPlayer
+            club: 86Po
+            email: napozzin@example.com
+            familyname: GOUZIN
+            givenname: Alexis
+            id: Alexis GOUZIN
+            level: -889
+            license: 2000063
+            registering_level:
+              - ~
+              - ~
+              - ~
+            status: L
+        challenge_date: 1675838703
+        handicap: 1
+        rated: 1
+        reminder_date: 1677221102
+        result: black
+        sgf: /tournois/ffg/sgf/2023-02-26-Clément-Alexis.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: &6 !!perl/hash:FFGPlayer
+            club: 94Ca
+            email: clement.beni@example.com
+            familyname: BÉNI
+            givenname: Clément
+            id: Clément BÉNI
+            level: -682
+            license: 0800472
+            registering_level:
+              - ~
+              - ~
+              - ~
+            status: L
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: &7 !!perl/hash:FFGPlayer
+            club: 18Vi
+            email: imbault18@example.com
+            familyname: IMBAULT
+            givenname: Eric
+            id: Eric IMBAULT
+            level: -1259
+            license: 1400017
+            registering_level:
+              - ~
+              - ~
+              - ~
+            status: L
+        challenge_date: 1675838704
+        handicap: 2
+        location: OGS
+        rated: 1
+        reminder_date: 1678217400
+        result: black
+        scheduled_date: 1678217400
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: &8 !!perl/hash:FFGPlayer
+            club: 90Be
+            email: migosh59@example.com
+            familyname: ZIZARD
+            givenname: Mickaël
+            id: Mickaël ZIZARD
+            level: -1100
+            license: 2200199
+            registering_level:
+              - ~
+              - ~
+              - ~
+            status: L
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: &9 !!perl/hash:FFGPlayer
+            club: 91Or
+            email: daudaire@example.com
+            familyname: AUDAIRE
+            givenname: David
+            id: David AUDAIRE
+            level: -1702
+            license: 2100077
+            registering_level:
+              - ~
+              - ~
+              - ~
+            status: L
+        challenge_date: 1675838704
+        handicap: 2
+        rated: 1
+        reminder_date: 1677221103
+        result: black
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: &10 !!perl/hash:FFGPlayer
+            club: 17Ro
+            email: sylv4in@example.com
+            familyname: LERAY
+            givenname: Sylvain
+            id: Sylvain LERAY
+            level: -1429
+            license: 2000242
+            registering_level:
+              - ~
+              - ~
+              - ~
+            status: L
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: &11 !!perl/hash:FFGPlayer
+            club: 00St
+            email: pierre.moreau86@example.com
+            familyname: MOREAU
+            givenname: Pierre
+            id: Pierre MOREAU
+            level: -9999
+            license: 2300104
+            registering_level:
+              - ~
+              - ~
+              - ~
+            status: L
+        challenge_date: 1675838704
+        handicap: 1
+        location: 20h30
+        rated: 1
+        reminder_date: 1677106800
+        result: white
+        scheduled_date: 1677106800
+        sgf: /tournois/ffg/sgf/2023-02-23-Sophie-Pierre.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: &12 !!perl/hash:FFGPlayer
+            club: 17Ro
+            email: sophiethomas@example.com
+            familyname: THOMAS
+            givenname: Sophie
+            id: Sophie THOMAS
+            level: -1788
+            license: 2000241
+            registering_level:
+              - ~
+              - ~
+              - ~
+            status: L
+    final_date: 1678381410
+    number: 1
+    start_date: 1675789410
+  - !!perl/hash:Round
+    GoGame:
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *4
+        challenge_date: 1678689902
+        handicap: 0
+        location: kgs
+        rated: 1
+        reminder_date: 1680158702
+        result: black
+        scheduled_date: 1680008400
+        sgf: /tournois/ffg/sgf/2023-03-26-David-Olivier.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *2
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *3
+        challenge_date: 1678689902
+        handicap: 0
+        rated: 1
+        reminder_date: 1679985903
+        result: white
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *1
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *8
+        challenge_date: 1678689902
+        handicap: 4
+        rated: 1
+        reminder_date: 1681368303
+        status: challenged
+        white:
+          FFGPlayer: *6
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *7
+        challenge_date: 1678689902
+        handicap: 3
+        location: OGS
+        rated: 1
+        reminder_date: 1680245102
+        result: black
+        scheduled_date: 1680112800
+        sgf: /tournois/ffg/sgf/2023-03-29-Alexis-Eric.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *5
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *11
+        challenge_date: 1678689902
+        handicap: 2
+        location: OGS
+        rated: 1
+        reminder_date: 1681195503
+        result: black
+        scheduled_date: 1680426000
+        sgf: /tournois/ffg/sgf/2023-04-02-Sylvain-Pierre.sgf
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *10
+      - !!perl/hash:GoGame
+        black:
+          FFGPlayer: *12
+        challenge_date: 1678689903
+        handicap: 0
+        location: OGS
+        rated: 1
+        reminder_date: 1681195503
+        result: black
+        scheduled_date: 1680426000
+        status: finished
+        submitted: 1
+        white:
+          FFGPlayer: *9
+    final_date: 1681230321
+    number: 2
+    start_date: 1678638321
+ffgplayers:
+  - *2
+  - *1
+  - *4
+  - *3
+  - *5
+  - *7
+  - *10
+  - *9
+  - *12
+filename: toperm
+komi: 7.5
+prog: goatlib
+round_number: 2
+size: 19
+time: 60

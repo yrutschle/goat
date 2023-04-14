@@ -211,6 +211,19 @@ sub random_pick {
     }
 }
 
+# Returns the list of players that are still registered
+sub keep_registered {
+    my ($tournament, @in) = @_;
+    my @out;
+
+    foreach my $p (@in) {
+        my $found = grep { $_->id eq $p->id } @{$tournament->ffgplayers};
+        push @out, $p if $found;
+    }
+    return @out;
+}
+
+
 # Test for odd number of players -- request to remove one
 my @players = $Tournament->players;
 my $bye;
@@ -220,6 +233,9 @@ if (1 & @players) {
         my @bye_candidates;
         if (defined $Tournament->curr_round) {
             @bye_candidates = $Tournament->unplayed;
+            # Keep those that are registered (people from
+            # last round may have both not played and left)
+            @bye_candidates = keep_registered $Tournament, @bye_candidates;
         }
         # If all have played or tournament not started, select from all players
         @bye_candidates = @players unless @bye_candidates;
