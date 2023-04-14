@@ -219,8 +219,7 @@ if (1 & @players) {
         # Find players that haven't played their last game
         my @bye_candidates;
         if (defined $Tournament->curr_round) {
-            my @games_not_played = grep { not ($_->is_finished or $_->is_canceled) } $Tournament->curr_round->games;
-            @bye_candidates = map { $_->white, $_->black } @games_not_played;
+            @bye_candidates = $Tournament->unplayed;
         }
         # If all have played or tournament not started, select from all players
         @bye_candidates = @players unless @bye_candidates;
