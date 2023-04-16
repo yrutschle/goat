@@ -271,6 +271,7 @@ my %template_methods = (
             my $ical = Data::ICal->new();
             my $ug = Data::UUID->new();
             my $event = Data::ICal::Entry::Event->new();
+            my $stamp = DateTime::Format::ICal->format_datetime(DateTime->from_epoch(epoch => my_time));
             $event->add_properties(
                 summary => $TOURNAMENT_NAME,
                 description => <<EOF,
@@ -280,6 +281,7 @@ handicap: $data->{handi}
 EOF
                 dtstart => $dtstart,
                 dtend => $dtend,
+                dtstamp => $stamp,
                 location => $data->{location},
                 uid => $ug->to_string($ug->create()),
             );
@@ -329,11 +331,13 @@ EOF
             my $ug = Data::UUID->new();
             my $event = Data::ICal::Entry::Event->new();
             my $desc = "$TOURNAMENT_NAME: end round $data->{round}";
+            my $stamp = DateTime::Format::ICal->format_datetime(DateTime->from_epoch(epoch => my_time));
             $event->add_properties(
                 summary => $desc,
                 description => $desc,
                 dtstart => $dt,
                 dtend => $dt,
+                dtstamp => $stamp,
                 location => $data->{location},
                 uid => $ug->to_string($ug->create()),
             );
