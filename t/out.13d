@@ -1,0 +1,48 @@
+Sat Jul 30 15:30:00 2005: notify Denis PUAUD <puaud.denis@example.com> and Samuel GEFFROY <samuelgeffroy@example.com> their game is finished and black won; result given by samuelgeffroy@example.com
+ <samuelgeffroy@example.com>
+Content-Transfer-Encoding: binary
+Content-Type: multipart/mixed; boundary="---testing42ftwtesting"
+From: GO Assistant <goat@rutschle.net>
+MIME-Version: 1.0
+Return-Path: GO Assistant <goat@rutschle.net>
+Subject: [goat] Résultat de votre ronde
+To: Denis PUAUD <puaud.denis@example.com>,Samuel GEFFROY
+X-Loop: GO Assistant <goat@rutschle.net>
+X-Mailer: MIME-Tools with no versionThis is a multi-part message in MIME format...
+
+-----testing42ftwtesting
+Content-Type: multipart/alternative; boundary="---alternative-contents"
+Content-Transfer-Encoding: binary
+
+This is a multi-part message in MIME format...
+
+-----alternative-contents
+Content-Type: text/plain; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: binary
+
+Vous avez reçu ce courrier car vous êtes inscrit au Tournoi pérmanent de Tøulouse.
+Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@rutschle.net>.
+
+
+Le résultat de votre partie a été enregistré.
+Denis PUAUD <puaud.denis@example.com> contre Samuel GEFFROY <samuelgeffroy@example.com>, victoire pour Denis PUAUD <puaud.denis@example.com>.
+
+Le résultat a été rapporté par samuelgeffroy@example.com.
+
+-----alternative-contents
+Content-Type: text/html; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: binary
+
+<p>Vous avez reçu ce courrier car vous êtes inscrit au Tournoi pérmanent de Tøulouse.
+Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@rutschle.net>.</p>
+
+<p>Le résultat de votre partie a été enregistré.
+Denis PUAUD <puaud.denis@example.com> contre Samuel GEFFROY <samuelgeffroy@example.com>, victoire pour Denis PUAUD <puaud.denis@example.com>.</p>
+
+<p>Le résultat a été rapporté par samuelgeffroy@example.com.</p>
+
+-----alternative-contents--
+
+-----testing42ftwtesting--
