@@ -17,7 +17,7 @@ $TMP_DIR $SGF_DIR $SGF_URL $INDEX_URL
 
 $GOAT_ADDRESS $ADMIN_ADDRESS $TOURNAMENT_NAME $TOURNAMENT_CITY
 $TOURNAMENT_LICENSES @PAIRING_CRITERIA
-$TOURNAMENT_FILE
+$TOURNAMENT_FILE $TOURNAMENT_ECHELLE
 $ADMIN_FORWARD
 
 $SUBJECT_PREFIX
@@ -69,6 +69,7 @@ our $SUBJECT_PREFIX = $cfg->{subject_prefix};
 our $TOURNAMENT_NAME = $cfg->{tournament_name};
 our $TOURNAMENT_FILE = $cfg->{tournament_file};
 our $TOURNAMENT_CITY = $cfg->{tournament_city};
+our $TOURNAMENT_ECHELLE = $cfg->{tournament_echelle};
 our $TOURNAMENT_LICENSES= $cfg->{tournament_licenses};
 our @PAIRING_CRITERIA = split /\s+/, $cfg->{pairing_criteria};
 our $LOCALE = $cfg->{locale};

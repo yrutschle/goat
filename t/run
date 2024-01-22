@@ -33,26 +33,26 @@ push @tests,
    # register: register some players with mutt alias
    # Tests REGISTER_1, REGISTER_2, REGISTER_3, REGISTER_4,
    # REGISTER_5
-   { 'run' => "cp ../mutt1 mutt; cp ../ech_ffg_new.txt .; perl $perl_opts ../../register --test mutt 2> out.0 ; perl $perl_opts ../../goat --list-players >> out.0",
+   { 'run' => "cp ../mutt1 mutt; cp ../ech_ffg_V3.txt .; perl $perl_opts ../../register --test mutt 2> out.0 ; perl $perl_opts ../../goat --list-players >> out.0",
        'test' => 'diff -u ../out.0 out.0',
        'doc' => 'Register players from mutt',
    },
    # register: register some players
    # Tests REGISTER_1, REGISTER_2, REGISTER_3, REGISTER_4,
    # REGISTER_5
-   { 'run' => "cp ../players .; cp ../ech_ffg_new.txt .; perl $perl_opts ../../register --test players 2> out.0b ; perl $perl_opts ../../goat --list-players >> out.0b",
+   { 'run' => "cp ../players .; cp ../ech_ffg_V3.txt .; perl $perl_opts ../../register --test players 2> out.0b ; perl $perl_opts ../../goat --list-players >> out.0b",
        'test' => 'diff -u ../out.0 out.0b',
        'doc' => 'Register players with text file',
    },
    # pair: create a new round
    # Tests PAIR_1, PAIR_2, PAIR_3, PAIR_5
-   { 'run' => " export TEST_TIME=1122737400; cp ../ech_ffg_new.txt . ; cp ../toperm_in.1 toperm; perl $perl_opts ../../pair --test > out.1 2>&1 ; perl $perl_opts ../../goat --status >> out.1",
+   { 'run' => " export TEST_TIME=1122737400; cp ../ech_ffg_V3.txt . ; cp ../toperm_in.1 toperm; perl $perl_opts ../../pair --test > out.1 2>&1 ; perl $perl_opts ../../goat --status >> out.1",
        'test' => 'diff -u ../out.1 out.1',
        'doc' => 'New round',
    },
    # pair: fail because of odd number of players 
    # Tests PAIR_4
-   { 'run' => "cp ../toperm_in.1 toperm; cp ../ech_ffg_new.txt . ; " .
+   { 'run' => "cp ../toperm_in.1 toperm; cp ../ech_ffg_V3.txt . ; " .
        "echo 'alias newplayer New Player <newplayer\@example.org> #6k' | perl $perl_opts ../../add_player > out.1b 2>&1 ; ".
        "perl $perl_opts ../../pair --test >> out.1b 2>&1 ; perl $perl_opts ../../goat --status >> out.1b",
        'test' => 'diff -u ../out.1b out.1b',
@@ -60,16 +60,27 @@ push @tests,
    },
    # pair: pair with a bye player
    # Tests PAIR_4
-   { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.1 toperm; cp ../ech_ffg_new.txt . ; " .
+   { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.1 toperm; cp ../ech_ffg_V3.txt . ; " .
        "echo 'alias newplayer New Player <newplayer\@example.org> #6k' | perl $perl_opts ../../add_player > out.1c 2>&1 ; ".
        "perl $perl_opts ../../pair --test --bye newplayer\@example.org >> out.1c 2>&1 ; perl $perl_opts ../../goat --status >> out.1c",
        'test' => 'diff -u ../out.1c out.1c',
        'doc' => 'New round with bye player',
    },
+   # pair: pair with a bye player, and unplayed games have
+   # left the tournament (Normaly we pick bye players in
+   # unplayed games in previous round; here, unplayed
+   # players had unsubscribed)
+   # Clement Beni and Mickael Zizard have both not played
+   # and unregistered, so can't be picked for bye
+   { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.1b toperm; cp ../ech_ffg_V3.txt . ; " .
+       "perl $perl_opts ../../pair --test --bye random > out.1l 2>&1 ; perl $perl_opts ../../goat --status >> out.1l",
+       'test' => 'diff -u ../out.1l out.1l',
+       'doc' => 'New round with bye player and left unplayed',
+   },
    # pair: pair with random bye player, send pairings
    # (sending is required to check $round->bye is set properly)
    { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.9 toperm; " .
-       "cp ../ech_ffg_new2.txt ech_ffg_new.txt ; ".
+       "cp ../ech_ffg_V3b.txt ech_ffg_V3.txt ; ".
        "perl $perl_opts ../../pair --test --bye random > out.1k 2>&1 ;".
        "perl $perl_opts ../../goat --status >> out.1k ; ".
        "perl $perl_opts ../../goat --test --send-pairings >> out.1k",
@@ -313,6 +324,7 @@ push @tests,
 use Test::More tests => 88;
 
 
+mkdir "t/tmp";
 chdir "t/tmp" || die "Can't chdir to my test directory";
 
 system("cp ../../example.cfg ./goat.cfg");

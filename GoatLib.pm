@@ -16,8 +16,8 @@ use DateTime::Locale; # package libdatetime-locale-perl
 use GoatConfig;
 
 our @ISA=qw(Exporter);
-our @EXPORT=qw( stone_to_level level_to_stones download_echelle parse_datestr 
-utc2str my_time update_ech
+our @EXPORT=qw( stone_to_level level_to_stones parse_datestr
+utc2str my_time
 );
 
 =head2 fixup_frenchisms
@@ -123,84 +123,6 @@ sub level_to_stones {
     }
 
     return $level;
-}
-
-# Download echelle file from ffg site -- if filename already
-# exists, delete it
-sub download_echelle {
-    my ($filename) = @_;
-
-    return 1 if defined $CFG->{testing};
-
-    unlink $filename;
-    `wget http://ffg.jeudego.org/echelle/echtxt/ech_ffg_new.txt`;
-    return -r $filename;
-}
-
-
-# Update players' level, name, clubs, license, ...
-sub update_fields {
-    my ($tournament, %all_players) = @_;
-    foreach my $player ($tournament->players) {
-        if (not exists $all_players{$player->id}) {
-            warn $player->fullname . " not found in echelle file -- skipping\n";
-            next;
-        }
-
-        my $ech_p = $all_players{$player->id};
-
-        if ($ech_p->fullname ne $player->fullname) {
-            warn "Updating name from ".$player->fullname." to ".$ech_p->fullname."\n";
-            $player->givenname($ech_p->givenname);
-            $player->familyname($ech_p->familyname);
-        }
-        if ($ech_p->level != $player->level) {
-            warn $player->fullname.": changing from ".$player->level." to ".$ech_p->level."\n";
-            $player->level($ech_p->level);
-
-        }
-        if ($ech_p->club ne $player->club) {
-            warn $player->fullname.": updating club from ".$player->club." to ".$ech_p->club."\n";
-            $player->club($ech_p->club);
-        }
-        if ($ech_p->license ne $player->license) {
-            warn $player->fullname.": updating license from ".$player->license." to ".$ech_p->license."\n";
-            $player->license($ech_p->license);
-        }
-        if ($ech_p->status ne $player->status) {
-            warn $player->fullname.": license status changed to:". $ech_p->status."\n";
-            $player->status($ech_p->status);
-        }
-        if (not $player->is_licensed($TOURNAMENT_LICENSES)) {
-            warn $player->fullname.": player is not licensed.\n";
-            warn $player->fullname.": player license: ".$player->status." is not allowed.\n"; 
-        }
-    }
-}
-
-# Download a new echelle and update all player fields if there is a tournament
-sub update_ech {
-    my ($tournament) = @_;
-
-    # Build a hash of all the players in the echelle file
-    my %all_players;
-    my $ech;
-
-    my $ECHELLE_FILE = "ech_ffg_new.txt";
-    my $r = download_echelle($ECHELLE_FILE);
-    return $r if not defined $tournament;
-
-    open $ech, $ECHELLE_FILE or die "$ECHELLE_FILE: $!\n";
-
-
-    while (<$ech>) {
-        next if /^#/;
-        my $p = new_from_ech FFGPlayer decode 'ISO-8859-1', $_;
-        next if not defined $p;
-        $all_players{$p->id} = $p;
-    }
-
-    update_fields($tournament, %all_players);
 }
 
 

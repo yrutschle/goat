@@ -68,7 +68,7 @@ ffgplayers:
     email: joe@example.org
     familyname: Joe
     givenname: Bloggs
-    level: -650
+    level: -3500
     license: -------
     registering_level: []
     status: -

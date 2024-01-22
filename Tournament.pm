@@ -4,12 +4,13 @@ use strict;
 use locale;
 use English;
 
-use FFGPlayer;
+use Encode;
 use Round;
 use Mail::Address;
 use GoatLib;
 use GoatConfig;
 use File::Copy;
+use File::Basename;
 use URI::Escape;
 use Fcntl ':flock';
 
@@ -25,7 +26,7 @@ This is designed to easily translate into a FFG .TOU tournament result file, eve
 use vars qw/@attributes/;
 
 BEGIN {
-    @attributes = qw/date prog time size komi round_number Round FFGPlayer filename/;
+    @attributes = qw/date prog time size komi round_number Round ffgplayers filename/;
     my $subs;
     foreach my $data ( @attributes ) {
         $subs .= qq{
@@ -50,7 +51,7 @@ sub new {
     $obj = \%h;
     bless $obj, $class;
 
-    $obj->FFGPlayer([]);
+    $obj->ffgplayers([]);
     $obj->Round([]);
     foreach (@attributes) {
         $obj->{$_} = $opts{$_} if exists $opts{$_};
@@ -67,6 +68,15 @@ sub name {
 
 sub city {
     return $TOURNAMENT_CITY;
+}
+
+sub ech_url {
+    return $TOURNAMENT_ECHELLE;
+}
+
+sub ech_file {
+    my ($o) = @_;
+    return basename $o->ech_url;
 }
 
 # Locking is done by creating a .lock file.
@@ -201,7 +211,7 @@ Returns a list of registered players (which may or may not play in any given rou
 
 =cut
 sub players {
-    @{$_[0]->FFGPlayer};
+    @{$_[0]->ffgplayers};
 }
 
 =item $tournament->unplayed
@@ -294,7 +304,7 @@ Adds a FFGPlayer
 
 =cut
 sub add_player {
-    push @{$_[0]->FFGPlayer}, $_[1];
+    push @{$_[0]->ffgplayers}, $_[1];
 }
 
 =item $tournament->del_player($p)
@@ -306,7 +316,7 @@ sub del_player {
     my ($tournament, $player) = @_;
 
     my @players2 = grep { $_ ne $player } $tournament->players;
-    $tournament->FFGPlayer(\@players2);
+    $tournament->ffgplayers(\@players2);
 }
 
 =item $tournament->rounds
@@ -644,5 +654,91 @@ sub score {
 
     return sort { ($b->[1] <=> $a->[1]) or ($b->[2] <=> $a->[2]) } map { [$_, $score{$_}, $sos{$_} ] } sort keys %score;
 }
+
+
+# Download echelle file from ffg site -- if filename already
+# exists, delete it
+sub download_echelle {
+    my ($t) = @_;
+
+    return 1 if defined $CFG->{testing};
+
+    my $url = ech_url();
+    die "tournament_echelle not defined\n" unless defined $url;
+    my $file = $t->ech_file();
+
+    unlink $file;
+    `wget $TOURNAMENT_ECHELLE`;
+    return -r $file;
+}
+
+
+# Update players' level, name, clubs, license, ...
+sub update_fields {
+    my ($tournament, %all_players) = @_;
+    foreach my $player ($tournament->players) {
+        if (not exists $all_players{$player->id}) {
+            warn $player->fullname . " not found in echelle file -- skipping\n";
+            next;
+        }
+
+        my $ech_p = $all_players{$player->id};
+
+        if ($ech_p->fullname ne $player->fullname) {
+            warn "Updating name from ".$player->fullname." to ".$ech_p->fullname."\n";
+            $player->givenname($ech_p->givenname);
+            $player->familyname($ech_p->familyname);
+        }
+        if ($ech_p->level != $player->level) {
+            warn $player->fullname.": changing from ".$player->level." to ".$ech_p->level."\n";
+            $player->level($ech_p->level);
+
+        }
+        if ($ech_p->club ne $player->club) {
+            warn $player->fullname.": updating club from ".$player->club." to ".$ech_p->club."\n";
+            $player->club($ech_p->club);
+        }
+        if ($ech_p->license ne $player->license) {
+            warn $player->fullname.": updating license from ".$player->license." to ".$ech_p->license."\n";
+            $player->license($ech_p->license);
+        }
+        if ($ech_p->status ne $player->status) {
+            warn $player->fullname.": license status changed to:". $ech_p->status."\n";
+            $player->status($ech_p->status);
+        }
+        if (not $player->is_licensed($TOURNAMENT_LICENSES)) {
+            warn $player->fullname.": player is not licensed.\n";
+            warn $player->fullname.": player license: ".$player->status." is not allowed.\n"; 
+        }
+    }
+}
+
+# Download a new echelle and update all player fields if there is a tournament
+use FFGPlayer;
+
+sub update_ech {
+    my ($tournament) = @_;
+
+    # Build a hash of all the players in the echelle file
+    my %all_players;
+    my $ech;
+
+    my $ECHELLE_FILE = $tournament->ech_file();
+    my $r = $tournament->download_echelle();
+    return $r if not defined $tournament;
+
+    open $ech, $ECHELLE_FILE or die "$ECHELLE_FILE: $!\n";
+
+
+    while (<$ech>) {
+        next if /^#/;
+        my $p = FFGPlayer->new_from_ech(decode 'ISO-8859-1', $_);
+        next if not defined $p;
+        $all_players{$p->id} = $p;
+    }
+
+    update_fields($tournament, %all_players);
+}
+
 
 1;

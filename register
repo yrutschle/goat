@@ -80,8 +80,6 @@ use Tournament;
 use GoatLib;
 use GoatConfig;
 
-my $ECHELLE_FILE = "ech_ffg_new.txt";
-
 my ($testing, $param_no_getech, $help);
 GetOptions(
     'test' => \$testing,
@@ -91,16 +89,23 @@ GetOptions(
 
 die pod2usage(-verbose=>2) if defined $help;
 
+# Tournament object
+my $t = new Tournament (
+    time=> 60,
+    size=> 19,
+    komi=> 7.5,
+);
+
 my @registered;
 
 # Download/update echelle
-update_ech() unless $testing or $param_no_getech;
+$t->update_ech() unless $testing or $param_no_getech;
 
 while (<>) {
     next if /^#/ or /^$/;
     $_ = Encode::decode('UTF-8', $_);
 
-    my $player = FFGPlayer->new_from_alias($_, $ECHELLE_FILE);
+    my $player = FFGPlayer->new_from_alias($_, $t->ech_file());
 
     next unless defined $player;
 
@@ -119,13 +124,7 @@ while (<>) {
 #   map { [(stone_to_level $_->registering_level), $_] }
 #   @registered;
 
-# Tournament object
-my $t = new Tournament (
-    time=> 60,
-    size=> 19,
-    komi=> 7.5,
-    FFGPlayer=> \@registered,
-);
+$t->ffgplayers(\@registered);
 $t->save($TOURNAMENT_FILE);
 
 warn "Registered ".(scalar @registered)." players.\n";

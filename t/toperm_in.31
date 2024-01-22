@@ -1,5 +1,5 @@
 --- !!perl/hash:Tournament
-FFGPlayer:
+ffgplayers:
   - &1 !!perl/hash:FFGPlayer
     club: 29Br
     email: theo.come1@example.org
