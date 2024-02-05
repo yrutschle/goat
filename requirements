@@ -40,6 +40,9 @@ PAIR_4
         pair shall exit if the number of player in the
         tournament is odd and no bye player is selected.
 
+PAIR_5
+        pair shall limit handicap to 9.
+
 
 GOAT_1
         goat shall send a notification of games that have

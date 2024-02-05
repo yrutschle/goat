@@ -45,7 +45,7 @@ push @tests,
        'doc' => 'Register players with text file',
    },
    # pair: create a new round
-   # Tests PAIR_1, PAIR_2, PAIR_3, PAIR_5
+   # Tests PAIR_1, PAIR_2, PAIR_3
    { 'run' => " export TEST_TIME=1122737400; cp ../ech_ffg_V3.txt . ; cp ../toperm_in.1 toperm; perl $perl_opts ../../pair --test > out.1 2>&1 ; perl $perl_opts ../../goat --status >> out.1",
        'test' => 'diff -u ../out.1 out.1',
        'doc' => 'New round',
@@ -65,6 +65,12 @@ push @tests,
        "perl $perl_opts ../../pair --test --bye newplayer\@example.org >> out.1c 2>&1 ; perl $perl_opts ../../goat --status >> out.1c",
        'test' => 'diff -u ../out.1c out.1c',
        'doc' => 'New round with bye player',
+   },
+   # pair: pair with handicap capping
+   # Tests PAIR_5
+   { 'run' => " export TEST_TIME=1122737400; cp ../ech_ffg_V3.txt . ; cp ../toperm_in.1c toperm; perl $perl_opts ../../pair --test > out.1m 2>&1 ; perl $perl_opts ../../goat --status > out.1m",
+       'test' => 'diff -u ../out.1m out.1m',
+       'doc' => 'Pair with handicap capping',
    },
    # pair: pair with a bye player, and unplayed games have
    # left the tournament (Normaly we pick bye players in

@@ -275,7 +275,7 @@ ffgplayers:
     email: nicolas.darque@example.org
     familyname: DARQUE
     givenname: Nicolas
-    level: -1650
+    level: -650
     license: 0552014
     registering_level: []
     status: L
