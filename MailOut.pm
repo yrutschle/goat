@@ -222,7 +222,7 @@ Notify I<rcpt> that I<colour> is not a valid color.
 # parameters for specific actions.
 # - 'mailto' contains the target email addresses coming
 # from the named parameters or configuration.
-# - 'attach' is a MIME::Entity initialisation hashref used to attach to the
+# - 'attach' is an array of MIME::Entity used to attach to the
 # mail, if it exists.
 my %template_methods = (
     'mail_in_illegal'         => {
@@ -300,11 +300,11 @@ EOF
             }
             $ical->add_entry($event);
             my $ics_str = fix_ics_entries $ical->as_string;
-            $data->{attach} = {
+            $data->{attach} = [{
                 Type => 'text/calendar',
                 Encoding => 'base64',
                 Data => $ics_str, # encoding is done in sendmail
-            };
+            }];
         },
         template => "scheduled.tt",
         mailto => [qw/black white/],
@@ -369,11 +369,11 @@ EOF
 
             # Fix entries that have parameters
             my $ical_str = fix_ics_entries $ical->as_string;
-            $data->{attach} = {
+            $data->{attach} = [{
                 Type => 'text/calendar',
                 Encoding => 'base64',
                 Data => $ical_str, # encoding is done in sendmail
-            };
+            }];
         },
         template => "deadline.tt",
         mailto => [qw/ admin_address /],
@@ -539,12 +539,14 @@ sub sendmail {
     );
 
     if (exists $r_data->{attach}) {
-        $r_data->{attach}->{Charset} //= 'UTF-8';
-        $r_data->{attach}->{Data} = Encode::encode(
-            $r_data->{attach}->{Charset}, 
-            $r_data->{attach}->{Data});
+        foreach my $a (@{$r_data->{attach}}) {
+            $a->{Charset} //= 'UTF-8';
+            $a->{Data} = Encode::encode(
+                $a->{Charset}, 
+                $a->{Data});
 
-        $msg->attach(%{$r_data->{attach}});
+            $msg->attach(%{$a});
+        }
     }
 
     # If more than 3 recipients, send mails one by one (avoids being labelled

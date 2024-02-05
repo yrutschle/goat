@@ -217,6 +217,23 @@ sub parse_command {
     return @exec;
 }
 
+# Returns a hierarchy of nested MIME parts as one list of
+# unstructured strings
+sub flatten_mime {
+    my ($msg) = @_;
+
+    my @parts = $msg->subparts;
+    if (@parts) {
+        return map { flatten_mime($_) } @parts;
+    }
+
+    # body_str is decoded according to charset
+    # in eval{} as not everything stringifies (e.g. ICS,
+    # multipart/mixed, ...)
+    my $body = eval { $msg->body_str };
+    return split /\n/, ($body // "");
+}
+
 # First try to parse the mail subject line
 my @exec = parse_command scalar decode("MIME-Header", $mail->subject);
 
@@ -226,13 +243,7 @@ if (not @exec) {
 
     # If it's multi-part, descend into each part
     my $mime = Email::MIME->new($mail->simple->as_string);
-    my @parts = $mime->parts;
-    if ($mime->parts) {
-        foreach my $p ($mime->parts) {
-            # body_str is decoded according to charset
-            push @lines, split /\n/, $p->body_str;
-        }
-    }
+    @lines = flatten_mime $mime;
     my @out = grep { @$_ } map { [ parse_command $_ ] } @lines;
     if (@out) {
         @exec = @{shift @out}; # keep first command

@@ -1,0 +1,176 @@
+Return-path: <samuelgeffroy@example.com>
+Envelope-to: goat@example.com
+Delivery-date: Sun, 21 Jan 2024 11:12:27 +0000
+Received: from mail-wm1-f44.google.com ([209.85.128.44])
+	by localhost with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.96)
+	(envelope-from <samuelgeffroy@example.com>)
+	id 1rRVkZ-00B85H-0F
+	for goat@example.com;
+	Sun, 21 Jan 2024 11:12:27 +0000
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-40e490c2115so19514715e9.0
+        for <goat@example.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1705835546; x=1706440346; darn=rutschle.net;
+        h=date:to:in-reply-to:references:message-id:subject:mime-version:from
+         :content-transfer-encoding:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=W+M3+1ylfUvc+mXKDPSeuu7LNvLEHFKMu5FgTk8ceN4=;
+        b=eIM26/xxRaBQBKVfCbqEJopCytBmDSoScj0Qxec4jo+TTn6c3Lf+YfBmh4uRnuatIE
+         TkLWM7IHPwNL5CeQqM4SHzjJ/22t2qSE+fFARfxk5sCBFgfVfn+0junsdY3jbpbGbzaR
+         qKND3cGWvm+bRUZV5DT9MqcWTOUv4KZ8vA8T5AvIe8ymQ5WltvAdB2mPYsX7z1Id0JKm
+         ZVBzdHj/Ytnyk83MjIGx5H7QMax0TUt/tDV+SWyVeQAhp3G/9eI6cQPzeQXcOjxIeHIh
+         xsgcjOSCwZZg8Rm/wwt69RXvwSnpT4hno86xZlyi+WwD3N02tQNRTKfDijw6smkdjO/a
+         DDwg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1705835546; x=1706440346;
+        h=date:to:in-reply-to:references:message-id:subject:mime-version:from
+         :content-transfer-encoding:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=W+M3+1ylfUvc+mXKDPSeuu7LNvLEHFKMu5FgTk8ceN4=;
+        b=SruAK4QDiHy46BM4vTPc6ZVIPlceR7zMupnBVO8PVxqlCiXMT797lycytSqYYMBKyK
+         +Uuefk3lm6k+lKguyceOnIKefsoP+kQB6GkN4/3rdMhaWQzEUeipBL3CllwYvJMAHaOG
+         sXGeUqfK+IXcNMLHZzk9RpSiJtwdmOM0YAKWK3LaO1WLFllNU8kJ1NEzplVEfp1p9tL9
+         OjkAXIdWoBG2BFRWy/pm0uCMgd0lsUG4WiKW54szssy8BQaedR286oq9SQVFhCXkpEti
+         AQZcjhKHstbd0qgbCf2ClUXhsywrjb3mhNMK5XRc8aPaOrAeS8iuwKaIt03IoqyY4RBs
+         vQSA==
+X-Gm-Message-State: AOJu0YwEE8pEDrdJepoy979Whg20dMm9WSYz6vPMSE55eBTidTYVY1hH
+	3+rOBzvqCCGELYg3xq3GF5e1VIMBWI8HVym1vPI2UQbyZj1W2b810uY83ekf
+X-Google-Smtp-Source: AGHT+IEXhxSuUm5d3unr3FN4TVj8GMrfzZTS1YYRGOMvp3QM/7UTmmXVCk3rfOqJb/ekA/VD5olOGw==
+X-Received: by 2002:a05:600c:178a:b0:40e:364d:d526 with SMTP id x10-20020a05600c178a00b0040e364dd526mr1345387wmo.87.1705835546295;
+        Sun, 21 Jan 2024 03:12:26 -0800 (PST)
+Received: from smtpclient.apple ([2a01:e0a:461:7d30:a429:f4d4:5d94:bf27])
+        by smtp.gmail.com with ESMTPSA id l34-20020a05600c1d2200b0040e89ade84bsm14993753wms.4.2024.01.21.03.12.25
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 21 Jan 2024 03:12:25 -0800 (PST)
+Content-Type: multipart/alternative; boundary=Apple-Mail-D410C9EA-3CDA-42C1-95BB-7A81E94C26A3
+Content-Transfer-Encoding: 7bit
+From: s gmail <samuelgeffroy@example.com>
+Mime-Version: 1.0 (1.0)
+Subject: Re: [toperm] Partie: KGS, dimanche 21 janvier 2024 11:25
+Message-Id: <0016C353-CDB2-4608-9115-A6BC0A01A843@example.com>
+References: <E1rRUwQ-00B7X9-39@example.com>
+In-Reply-To: <E1rRUwQ-00B7X9-39@example.com>
+To: GO Assistant <goat@example.com>
+Date: Sun, 21 Jan 2024 12:12:24 +0100
+X-Mailer: iPhone Mail (19G82)
+
+
+--Apple-Mail-D410C9EA-3CDA-42C1-95BB-7A81E94C26A3
+Content-Type: text/plain;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+resultat noir
+
+Samuel Geffroy - =20
+Contact:  0640225584=20
+
+
+> Le 21 janv. 2024 =C3=A0 11:20, GO Assistant <goat@example.com=
+it :
+>=20
+> =EF=BB=BF
+> Vous avez re=C3=A7u ce courrier car vous =C3=AAtes inscrit au Tournoi perm=
+anent de Toulouse. Si vous avez re=C3=A7u ce mail par erreur, merci de conta=
+cter Yves Rutschle yves@example.com.
+>=20
+> samuelgeffroy@example.com:
+>=20
+> Lieu: KGS
+> Date: dimanche 21 janvier 2024 11:25
+> Noir: Samuel GEFFROY samuelgeffroy@example.com
+> Blanc: Bastien LARROUY bastien_larrouy@example.com
+> Handicap: 0
+> Apr=C3=A8s la partie, merci de publier le r=C3=A9sultat en r=C3=A9pondant =C3=
+=A0 ce mail en remplissant le sujet de votre r=C3=A9ponse de la fa=C3=A7on s=
+uivante :
+>=20
+> resultat blanc|noir
+>=20
+> Par exemple :
+>=20
+> resultat blanc
+>=20
+> Vous pouvez aussi simplement attcher le fichier SGF de la partie: il sera s=
+auvegard=C3=A9, et le r=C3=A9sultat sera celui indiqu=C3=A9 dans le SGF.
+>=20
+
+--Apple-Mail-D410C9EA-3CDA-42C1-95BB-7A81E94C26A3
+Content-Type: multipart/mixed;
+	boundary=Apple-Mail-F2544F2A-D3E5-445B-97C7-9BC6C1B7C214
+Content-Transfer-Encoding: 7bit
+
+
+--Apple-Mail-F2544F2A-D3E5-445B-97C7-9BC6C1B7C214
+Content-Type: text/html;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
+utf-8"></head><body dir=3D"auto"><span style=3D"-webkit-text-size-adjust: au=
+to; background-color: rgb(255, 255, 255);">resultat noir</span><br><br><div d=
+ir=3D"ltr">Samuel Geffroy - &nbsp;<div>Contact: &nbsp;0640225584&nbsp;</div>=
+<div><br></div></div><div dir=3D"ltr"><br><blockquote type=3D"cite">Le 21 ja=
+nv. 2024 =C3=A0 11:20, GO Assistant &lt;goat@example.com=
+bsp;:<br><br></blockquote></div><blockquote type=3D"cite"><div dir=3D"ltr">=EF=
+=BB=BF<p>Vous avez re=C3=A7u ce courrier car vous =C3=AAtes inscrit au Tourn=
+oi permanent de Toulouse.
+Si vous avez re=C3=A7u ce mail par erreur, merci de contacter Yves Rutschle <=
+a href=3D"mailto:yves@example.com>
+
+<p>samuelgeffroy@example.com>
+
+<ul>
+<li>Lieu: KGS</li>
+<li>Date: dimanche 21 janvier 2024 11:25</li>
+<li>Noir: Samuel GEFFROY <a href=3D"mailto:samuelgeffroy@example.com=
+ffroy@example.com>
+<li>Blanc: Bastien LARROUY <a href=3D"mailto:bastien_larrouy@example.com=
+en_larrouy@example.com>
+<li>Handicap: 0</li>
+</ul>
+
+<p>Apr=C3=A8s la partie, merci de publier le r=C3=A9sultat en r=C3=A9pondant=
+ =C3=A0
+ce mail en remplissant le sujet de votre r=C3=A9ponse de la fa=C3=A7on
+suivante :</p>
+
+<p>resultat blanc|noir</p>
+
+<p>Par exemple :</p>
+
+<p>resultat blanc</p>
+
+<p>Vous pouvez aussi simplement attcher le fichier SGF de la
+partie: il sera sauvegard=C3=A9, et le r=C3=A9sultat sera celui
+indiqu=C3=A9 dans le SGF.</p>
+</div></blockquote></body></html>=
+
+--Apple-Mail-F2544F2A-D3E5-445B-97C7-9BC6C1B7C214
+Content-Type: text/calendar;
+	name=mime-attachment.ics;
+	x-apple-part-url=BC00BD20-735B-4904-84EF-337C34E4AB49
+Content-Disposition: attachment;
+	filename=mime-attachment.ics
+Content-Transfer-Encoding: quoted-printable
+
+BEGIN:VCALENDAR=0D=0AVERSION:2.0=0D=0APRODID:Data::ICal=200.24=0D=0ABEGIN:VE=
+VENT=0D=0ADESCRIPTION:noir:=20Samuel=20GEFFROY=20<samuelgeffroy@example.com=
+blanc:=20Bastien=20=0D=0A=20LARROUY=20<bastien_larrouy@example.com=
+0\n=0D=0ADTEND;20240121T122500Z=0D=0ADTSTAMP:20240121T102038Z=0D=0ADTSTART;2=
+0240121T102500Z=0D=0ALOCATION:KGS=0D=0ASUMMARY:Tournoi=20permanent=20de=20To=
+ulouse=0D=0AUID:B90378EA-B846-11EE-8F5C-5A8FAE2583C7=0D=0ABEGIN:VALARM=0D=0A=
+ACTION:DISPLAY=0D=0ADESCRIPTION:Tournoi=20permanent=20de=20Toulouse=0D=0ATRI=
+GGER;RELATED=3DSTART:-PT1H=0D=0AEND:VALARM=0D=0AEND:VEVENT=0D=0AEND:VCALENDA=
+R=0D=0A=
+
+--Apple-Mail-F2544F2A-D3E5-445B-97C7-9BC6C1B7C214
+Content-Type: text/html;
+	charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+<html><head><meta http-equiv="content-type" content="text/html; charset=us-ascii"></head><body dir="auto"><blockquote type="cite"><div dir="ltr"></div></blockquote></body></html>
+--Apple-Mail-F2544F2A-D3E5-445B-97C7-9BC6C1B7C214--
+
+--Apple-Mail-D410C9EA-3CDA-42C1-95BB-7A81E94C26A3--
