@@ -708,7 +708,7 @@ sub update_fields {
         }
         if (not $player->is_licensed($TOURNAMENT_LICENSES)) {
             warn $player->fullname.": player is not licensed.\n";
-            warn $player->fullname.": player license: ".$player->status." is not allowed.\n"; 
+            warn $player->fullname.": player license: ".$player->status." (".$player->status_text.") is not allowed.\n"; 
         }
     }
 }

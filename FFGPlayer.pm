@@ -59,6 +59,18 @@ sub new_from_ech {
     return $ref;
 }
 
+# Returns license status as descriptive text
+sub status_text {
+    my ($self) = @_;
+    my %desc = (
+        "L" => "License normale",
+        "e" => "Etranger",
+        "-" => "Non licensie",
+        "X" => "?",
+        "C" => "License loisir");
+    return $desc{$self->status};
+}
+
 # alias line parsing: Parses additional information, at the end of the line
 # after the '#'. Info can be a level, a licence number.
 # Reports unknown options to stderr.
@@ -94,7 +106,7 @@ sub parse_additional_info {
 sub grep_echelle {
     my ($fn, $names, $license) = @_;
 
-    my $verbose_search = 0;
+    my $verbose_search = 1;
     my $checked = 0; # Counter for progress bar
     my @out;
 
