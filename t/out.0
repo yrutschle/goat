@@ -1,14 +1,14 @@
 line 4:Illegal: alias illegal Line with no address
 
 Not found "Joe Bloggs" in echelle -- adding anyway
-Joe Bloggs: player license: - is not allowed.
+Joe Bloggs: player license: - (Non licensie) is not allowed.
 Not found "Joey Bloggs" in echelle -- adding anyway
-Joey Bloggs: player license: - is not allowed.
+Joey Bloggs: player license: - (Non licensie) is not allowed.
 Not found "John Bloggs" in echelle -- adding anyway
-John Bloggs: player license: - is not allowed.
+John Bloggs: player license: - (Non licensie) is not allowed.
 Unknown option: 3b
 Not found "Jane Bloggs" in echelle -- adding anyway
-Jane Bloggs: player license: - is not allowed.
+Jane Bloggs: player license: - (Non licensie) is not allowed.
 Ambiguous name "Yves":
  ABADIE Yves                           -1500 - 0452000 31To
  BAILLY Yves                            -900 - 9516001 21Di
@@ -72,22 +72,22 @@ Ambiguous name "Yves":
  VALOIS Yves                           -1500 - 9954001 40Mo
 
 Try to add licence number to the end of the alias line.
-Laurent MEUNIER: player license: - is not allowed.
-Lionel BIDEO: player license: - is not allowed.
-Frédéric CAGNAZZO: player license: - is not allowed.
-Umberto POLVERINI: player license: - is not allowed.
-Jean-François ROUSSEL: player license: - is not allowed.
-Didier BELLOC: player license: - is not allowed.
-Frédéric MIRCOVICH: player license: - is not allowed.
-Michaël PALLANDRE: player license: - is not allowed.
-Nicolas DARQUE: player license: - is not allowed.
-Olivier ROUMEZI: player license: - is not allowed.
-Frédéric NASSE: player license: - is not allowed.
-Florence BORNET: player license: - is not allowed.
-Mathias ORTNER: player license: - is not allowed.
-Boreï ENG: player license: - is not allowed.
-Maxime GALLY: player license: - is not allowed.
-Hugues CAUBEL: player license: - is not allowed.
+Laurent MEUNIER: player license: - (Non licensie) is not allowed.
+Lionel BIDEO: player license: - (Non licensie) is not allowed.
+Frédéric CAGNAZZO: player license: - (Non licensie) is not allowed.
+Umberto POLVERINI: player license: - (Non licensie) is not allowed.
+Jean-François ROUSSEL: player license: - (Non licensie) is not allowed.
+Didier BELLOC: player license: - (Non licensie) is not allowed.
+Frédéric MIRCOVICH: player license: - (Non licensie) is not allowed.
+Michaël PALLANDRE: player license: - (Non licensie) is not allowed.
+Nicolas DARQUE: player license: - (Non licensie) is not allowed.
+Olivier ROUMEZI: player license: - (Non licensie) is not allowed.
+Frédéric NASSE: player license: - (Non licensie) is not allowed.
+Florence BORNET: player license: - (Non licensie) is not allowed.
+Mathias ORTNER: player license: - (Non licensie) is not allowed.
+Boreï ENG: player license: - (Non licensie) is not allowed.
+Maxime GALLY: player license: - (Non licensie) is not allowed.
+Hugues CAUBEL: player license: - (Non licensie) is not allowed.
 Registered 32 players.
 Joey Bloggs <joey@example.org> 250 ------- ---- -
 Umberto POLVERINI <polverini@example.org> -150 8850900 31To -
