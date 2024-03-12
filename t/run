@@ -294,18 +294,17 @@ push @tests,
       'doc' => 'Generate TOU for a single round',
   },
 
-  # send results by mail, with a city (and an hybrid
-  # submission as well)
+  # send results by mail, with a city
   { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.7 toperm; perl $perl_opts ../../goat --send-results --round 1 --test > out.202 2>&1",
       'test' => 'diff -u ../out.202 out.202',
-      'doc' => 'Send TOU by e-mail',
+      'doc' => 'Send TOU by e-mail, in-person',
   },
 
   # send results by mail, for Internet tournament (hybrid
   # only)
-  { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.7 toperm; cp internet.cfg goat.cfg;  perl $perl_opts ../../goat --send-results --round 1 --test > out.202 2>&1",
-      'test' => 'diff -u ../out.202 out.202',
-      'doc' => 'Send TOU by e-mail',
+  { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.7 toperm; cp ../internet.cfg goat.cfg;  perl $perl_opts ../../goat --send-results --round 1 --test > out.203 2>&1",
+      'test' => 'diff -u ../out.203 out.203',
+      'doc' => 'Send TOU by e-mail, Internet',
   },
 
   # Tests for mail_out

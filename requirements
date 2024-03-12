@@ -70,3 +70,10 @@ OUT_1
 OUT_2
         TOU date shall be the starting date of the round
         (Required by Sylvain Ravera, FFG, 19DEC2021)
+
+OUT_3
+        Internet games shall be in one file with =vill=Internet
+        In-person games shall be in a file with =vill=whatever
+        Mixed rounds would be sent in the same e-mail (not implemented)
+        (Discussed with Sylvain, 11MAR2024)
+

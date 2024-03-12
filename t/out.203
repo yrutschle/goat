@@ -32,7 +32,7 @@ Content-Transfer-Encoding: binary
 
 Hello,
 
-Voici les rÃ©sultats de la ronde 1 du Tournoi pÃ©rmanent de TÃ¸ulouse.
+Voici les rÃ©sultats de la ronde 1 du Tournoi Ãnternet.
 
 
 -----alternative-contents
@@ -42,22 +42,21 @@ Content-Transfer-Encoding: binary
 
 <p>Hello,</p>
 
-<p>Voici les rÃ©sultats de la ronde 1 du Tournoi pÃ©rmanent de TÃ¸ulouse.</p>
+<p>Voici les rÃ©sultats de la ronde 1 du Tournoi Ãnternet.</p>
 
 -----alternative-contents--
 
 -----testing42ftwtesting
 Content-Type: text/plain;
  charset="ISO-8859-1";
- name="Tournoi_pérmanent_de_Tøulouse_round1_Toulouse.tou"
-Content-Disposition: inline;
- filename="Tournoi_pérmanent_de_Tøulouse_round1_Toulouse.tou"
+ name="Tournoi_Ínternet_round1_Internet.tou"
+Content-Disposition: inline; filename="Tournoi_Ínternet_round1_Internet.tou"
 Content-Transfer-Encoding: binary
 
-;name=Tournoi pérmanent de Tøulouse - Ronde 1
+;name=Tournoi Ínternet - Ronde 1
 ;date=23/02/2018
-;vill=Toulouse
-;comm=Tournoi pérmanent de Tøulouse - Ronde 1
+;vill=Internet
+;comm=Tournoi Ínternet - Ronde 1
 ;prog=goatlib
 ;time=60+b
 ;ta=80
