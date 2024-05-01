@@ -294,6 +294,12 @@ push @tests,
       'doc' => 'Generate TOU for a single round',
   },
 
+  # TOU output with previously unsubmitted results
+  { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.14 toperm; perl $perl_opts ../../goat --tou --round 1,3,4,6 --test > out.204 2>&1",
+      'test' => 'diff -u ../out.204 out.204',
+      'doc' => 'Generate TOU for several rounds with unsubmitted games',
+  },
+
   # send results by mail, with a city
   { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.7 toperm; perl $perl_opts ../../goat --send-results --round 1 --test > out.202 2>&1",
       'test' => 'diff -u ../out.202 out.202',

@@ -438,9 +438,10 @@ sub tou_results{
                 # Yes -- create the corresponding text in $game
                 my $game;
                 # $oppid is the player id of opponent
-                if (defined $g->result) {
-                    my $oppid = $p->id eq $g->black->id ? 
-                    $g->white->id: $g->black->id;
+                my $oppid = $p->id eq $g->black->id ?  $g->white->id: $g->black->id;
+                # Opponent might not be in the list if they played in no
+                # unsubmitted games
+                if (defined $g->result and defined $player{$oppid}) {
                     $game .= ' ' if $player{$oppid} < 10;
                     $game .= $player{$oppid};
                     $game .= (not defined $g->result) ? '?' :
