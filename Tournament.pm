@@ -579,7 +579,7 @@ sub as_HTML {
                 $game->black->fullname." ($black_level) ".$game->black->club,
                 $game->handicap,
                 $result,
-                $sgf ?  a({href=> "/wgo/wgo.cgi?sgf=$sgf"}, 'SGF') : "",
+                $sgf ?  a({href=> "/wgo_cgi/wgo.cgi?sgf=$sgf"}, 'SGF') : "",
             );
             $table->setCellBGColor($table->getTableRows,
                 { 
