@@ -560,13 +560,16 @@ sub as_HTML {
 
     my $index_url = $INDEX_URL;
 
+    my $print_submitted = 0;  # To debug partially submitted games
     foreach my $round (@{$obj->Round}) {
         next unless ref $round eq 'Round';
 
         my $round_num = $round->number;
         $html .= "<h2>Appariements pour la ronde $round_num</h2>\n".a({href=>$index_url}, "Retour aux r&egrave;gles<br>");
         $table = new HTML::Table (-cols=>4, -border=>1 );
-        $table->addRow('Blanc', 'Noir', 'Handicap', 'R&eacute;sultat', 'SGF');
+        my @rows = ('Blanc', 'Noir', 'Handicap', 'R&eacute;sultat', 'SGF');
+        push @rows, 'Submitted' if $print_submitted;
+        $table->addRow(@rows);
         foreach my $game ($round->games) {
             my $result = $game->result // 0;
             $result = 'NC' unless $result;
@@ -574,13 +577,16 @@ sub as_HTML {
             my $white_level = $game->white->register_level($round_num) || $game->white->level || "NC";
             my $black_level = $game->black->register_level($round_num) || $game->black->level || "NC";
             my $sgf = uri_escape Encode::encode('UTF-8', $game->sgf) // 0;
-            $table->addRow(
+            my $submitted = $game->submitted;
+            @rows = (
                 $game->white->fullname." ($white_level) ".$game->white->club,
                 $game->black->fullname." ($black_level) ".$game->black->club,
                 $game->handicap,
                 $result,
                 $sgf ?  a({href=> "/wgo_cgi/wgo.cgi?sgf=$sgf"}, 'SGF') : "",
             );
+            push @rows, $submitted if $print_submitted;
+            $table->addRow(@rows);
             $table->setCellBGColor($table->getTableRows,
                 { 
                     "white" => 1,
