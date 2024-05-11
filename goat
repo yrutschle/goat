@@ -850,7 +850,7 @@ if (defined $param_schedule) {
 } elsif (defined $param_send_results) {
     my %opts;
     $opts{submitting} = 1;
-    $opts{round} = $Tournament->curr_round->number;
+    $opts{round} = $param_round;
     my $city = $Tournament->city;
     my $tou = $Tournament->tou(%opts);
 

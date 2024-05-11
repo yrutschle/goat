@@ -402,8 +402,9 @@ EOF
 Given a list of players and a list of rounds, returns the .TOU output for these
 players and those rounds.
 
-Options: 'submitting' => mark games as 'submitted'. These games will no longer
-be output.
+Options: 
+    'submitting' => mark games as 'submitted'. These games will no longer be output.
+    'include_submitted' => include all results, included those already submitted
 
 =cut
 sub tou_results{
@@ -411,6 +412,7 @@ sub tou_results{
     my @players = sort { $b->level <=> $a->level} @$r_p;
     my @rounds = @$r_r;
     my $submitting = $r_opts->{submitting};
+    my $include_submitted = $r_opts->{submitted};
 
     my ($black, $white, $out);
 
@@ -421,6 +423,11 @@ sub tou_results{
         $player{$p->id} = $i++;
     }
 
+    my @submitting;
+
+    # This is awkward: build each line, so for each player, go through each
+    # round, and then each game.
+    # A better algorithm would be to build all the lines at once, round after round
     foreach my $i (1..@players) {
         my $p = $players[$i-1];
 
@@ -428,12 +435,16 @@ sub tou_results{
         round:
         foreach my $r (@rounds)  {
             foreach my $g ($r->games) {
+                next if $g->submitted and not $include_submitted;
                 # Does $p play in this game?
                 $black = $p->id eq $g->black->id;
                 $white = $p->id eq $g->white->id;
                 next unless $black or $white;
 
-                $g->submitted(1) if $submitting;
+                # After we're done, we will need to mark the game as submitted.
+                # We cannot do that now, as we still need to include the other
+                # player's result
+                push @submitting, $g;
 
                 # Yes -- create the corresponding text in $game
                 my $game;
@@ -467,6 +478,7 @@ END
 
         $out .= $ACCUMULATOR;
     }
+    map { $_->submitted(1) } @submitting;
     return $out;
 }
 
@@ -487,26 +499,53 @@ sub check_unsubmitted {
     }
 }
 
+=item Tournament->incomplete_rounds()
+
+Return a list of rounds that contain games that have not been submitted
+
+=cut
+sub incomplete_rounds {
+    my ($tournament) = @_;
+
+    my @rounds;
+    round: foreach my $round ($tournament->rounds) {
+        foreach my $game ($round->games) {
+            if (defined $game->result and ! $game->submitted) {
+                push @rounds, $round;
+                next round;
+            }
+        }
+    }
+    return @rounds;
+}
 
 =item Tournament->tou( [full => 1], [submitted => 1], [round => n] )
 
 Returns the status of the tournament as a .TOU file
 (http://ffg.jeudego.org/echelle/format_res.php)
 
-By default, only the current round is returned. The round number can be
-specified by passing 'round => n', or a full status with all the rounds can be
-printed with 'full => 1' (careful: if registration levels have changed, you may
-not know about it as the .TOU format does not support that).
+By default, rounds containing unsubmitted games are included. The round number
+can be specified by passing 'round => n', or a full status with all the rounds
+can be printed with 'full => 1' (careful: if registration levels have changed,
+you may not know about it as the .TOU format does not support that).
 
 =cut
+
 sub tou {
     my ($obj, %opts) = @_;
 
-    my @rounds = (exists $opts{full}) ?  
-                        $obj->rounds : 
-                        (@{$obj->Round}[ exists $opts{round} ? split /\s*,\s*/, $opts{round} : -1 ]);
+    # Select rounds to include, based on options
+    my @rounds;
+    if ($opts{full}) {
+        @rounds = $obj->rounds;
+    } elsif (exists $opts{round}) {
+        my @list = split /\s*,\s*/, $opts{round};
+        @rounds = @{$obj->Round}[@list];
+    } else {
+        @rounds = $obj->incomplete_rounds;
+    }
 
-    $obj->check_unsubmitted(@rounds);
+    $obj->check_unsubmitted(@rounds);  # probably this can now be removed
 
     # Retrieve all players that played rated games not yet submitted in these rounds
     my @players = uniq_players map { $_->white, $_->black } 
