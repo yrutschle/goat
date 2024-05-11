@@ -49,8 +49,8 @@ Content-Transfer-Encoding: binary
 -----testing42ftwtesting
 Content-Type: text/plain;
  charset="ISO-8859-1";
- name="Tournoi_Ínternet_round1_Internet.tou"
-Content-Disposition: inline; filename="Tournoi_Ínternet_round1_Internet.tou"
+ name="Tournoi_Ínternet_round_1_Internet.tou"
+Content-Disposition: inline; filename="Tournoi_Ínternet_round_1_Internet.tou"
 Content-Transfer-Encoding: binary
 
 ;name=Tournoi Ínternet - Ronde 1
