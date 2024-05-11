@@ -850,11 +850,15 @@ if (defined $param_schedule) {
 } elsif (defined $param_send_results) {
     my %opts;
     $opts{submitting} = 1;
-    $opts{round} = $param_round;
+    $opts{round} = $param_round if defined $param_round;
     my $city = $Tournament->city;
+
+    my @rounds = $Tournament->tou_rounds(%opts);
+    my $rounds = join "_", map { $_->number } @rounds;
+
     my $tou = $Tournament->tou(%opts);
 
-    my $filename = $Tournament->name . " round$opts{round} $city.tou";
+    my $filename = $Tournament->name . " round_$rounds $city.tou";
     $filename =~ s/ /_/g;
 
     $mail_out->send_results(
