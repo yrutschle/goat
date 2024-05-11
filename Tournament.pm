@@ -519,6 +519,27 @@ sub incomplete_rounds {
     return @rounds;
 }
 
+=item $tournament->tou_rounds(%opts)
+
+Returns a list of rounds that would be included in the .TOU, based on options
+
+=cut
+sub tou_rounds {
+    my ($obj, %opts) = @_;
+
+    my @rounds;
+    if ($opts{full}) {
+        @rounds = $obj->rounds;
+    } elsif (exists $opts{round}) {
+        my @list = split /\s*,\s*/, $opts{round};
+        @rounds = @{$obj->Round}[@list];
+    } else {
+        @rounds = $obj->incomplete_rounds;
+    }
+    return @rounds;
+}
+
+
 =item Tournament->tou( [full => 1], [submitted => 1], [round => n] )
 
 Returns the status of the tournament as a .TOU file
@@ -529,21 +550,15 @@ can be specified by passing 'round => n', or a full status with all the rounds
 can be printed with 'full => 1' (careful: if registration levels have changed,
 you may not know about it as the .TOU format does not support that).
 
-=cut
+Side-effect: changes the status of games to "submitted" (so, calling
+$t->tou_rounds() afterwards will not return the same list)
 
+=cut
 sub tou {
     my ($obj, %opts) = @_;
 
     # Select rounds to include, based on options
-    my @rounds;
-    if ($opts{full}) {
-        @rounds = $obj->rounds;
-    } elsif (exists $opts{round}) {
-        my @list = split /\s*,\s*/, $opts{round};
-        @rounds = @{$obj->Round}[@list];
-    } else {
-        @rounds = $obj->incomplete_rounds;
-    }
+    my @rounds = $obj->tou_rounds(%opts);
 
     $obj->check_unsubmitted(@rounds);  # probably this can now be removed
 
