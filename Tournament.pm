@@ -510,7 +510,7 @@ sub incomplete_rounds {
     my @rounds;
     round: foreach my $round ($tournament->rounds) {
         foreach my $game ($round->games) {
-            if (defined $game->result and ! $game->submitted) {
+            if (defined $game->result and $game->rated and ! $game->submitted) {
                 push @rounds, $round;
                 next round;
             }

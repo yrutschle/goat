@@ -323,6 +323,16 @@ push @tests,
   },
 
 
+  # send results with previously unsubmitted results, with
+  # unrated past game
+  { 'run' => "export TEST_TIME=1122737400; " . "
+      cp ../toperm_in.14c toperm; ".
+      "perl $perl_opts ../../goat --send-results --test > out.204c 2>&1",
+      'test' => 'diff -u ../out.204c out.204c',
+      'doc' => 'Send TOU by e-mail with unsubmitted unrated games'
+  },
+
+
   # Tests for mail_out
   # 16: mail_in_illegal
   { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.1 letter; cat letter | perl $perl_opts ../../mail_in -t > out.70",

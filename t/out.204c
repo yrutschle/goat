@@ -1,0 +1,103 @@
+WARNING: Unsubmitted game David LABBE/Jean-Louis TU in round 6
+WARNING: Unsubmitted game Sylvain RASTOUL/Colin CARRERE in round 6
+WARNING: Unsubmitted game Lionel BREVIERE/Olivier DULAC in round 6
+WARNING: Unsubmitted game Serge EON/Christian BOYART in round 6
+WARNING: Unsubmitted game Jean-FranÃ§ois THOVERT/Dominique EAV in round 6
+WARNING: Unsubmitted game Alexis GOUZIN/Denis GRAMMONT in round 6
+WARNING: Unsubmitted game Van_Thuan DO/Thomas AMIOT in round 6
+WARNING: Unsubmitted game Sylvain LERAY/Bruno PERUS in round 6
+WARNING: Unsubmitted game Anne-Marie MONTAGNE/Antoine SOBOCINSKI in round 6
+WARNING: Unsubmitted game William DELAMARE/Jean-Luc GADAL in round 6
+WARNING: Unsubmitted game FranÃ§oise GRAMMONT/Eric IMBAULT in round 6
+WARNING: Unsubmitted game FranÃ§ois RIETTINI/Matthieu LEROY in round 6
+WARNING: Unsubmitted game Aude DELQUE/VÃ©ronique BORN in round 6
+WARNING: Unsubmitted game SÃ©verine ROGER/Lou-Hang BIMONT in round 6
+WARNING: Unsubmitted game Sylvie GOOSSENS/Sophie THOMAS in round 6
+Content-Transfer-Encoding: binary
+Content-Type: multipart/mixed; boundary="---testing42ftwtesting"
+From: GO Assistant <goat@rutschle.net>
+MIME-Version: 1.0
+Return-Path: GO Assistant <goat@rutschle.net>
+Subject: RÃ©sultats de tournoi
+To: Yves Rutschle <yves@rutschle.net>,echelle@example.org
+X-Loop: GO Assistant <goat@rutschle.net>
+X-Mailer: MIME-Tools with no versionThis is a multi-part message in MIME format...
+
+-----testing42ftwtesting
+Content-Type: multipart/alternative; boundary="---alternative-contents"
+Content-Transfer-Encoding: binary
+
+This is a multi-part message in MIME format...
+
+-----alternative-contents
+Content-Type: text/plain; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: binary
+
+Hello,
+
+Voici les rÃ©sultats de la ronde  du Tournoi pÃ©rmanent de TÃ¸ulouse.
+
+
+-----alternative-contents
+Content-Type: text/html; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: binary
+
+<p>Hello,</p>
+
+<p>Voici les rÃ©sultats de la ronde  du Tournoi pÃ©rmanent de TÃ¸ulouse.</p>
+
+-----alternative-contents--
+
+-----testing42ftwtesting
+Content-Type: text/plain;
+ charset="ISO-8859-1";
+ name="Tournoi_pérmanent_de_Tøulouse_round_6_Toulouse.tou"
+Content-Disposition: inline;
+ filename="Tournoi_pérmanent_de_Tøulouse_round_6_Toulouse.tou"
+Content-Transfer-Encoding: binary
+
+;name=Tournoi pérmanent de Tøulouse - Ronde 6
+;date=12/07/2024
+;vill=Toulouse
+;comm=Tournoi pérmanent de Tøulouse - Ronde 6
+;prog=goatlib
+;time=60+b
+;ta=80
+;size=19
+;komi=7.5
+;
+;Num Nom Pr&eacute;nom               Niv Licence Club
+   1 CARRERE Colin             2k 0900380 34Mo   8+w1
+   2 TU Jean-Louis             2k 1700014 92An  10+w2
+   3 BREVIERE Lionel           2k 2000243 xxxx   5+b0
+   4 EON Serge                 2k 2100010 64Pa   6-b0
+   5 DULAC Olivier             2k 0513000 38Gr   3-w0
+   6 BOYART Christian          3k 8696800 75Al   4+w0
+   7 EAV Dominique             3k 0321001 56Lo   9+w0
+   8 RASTOUL Sylvain           4k 0179401 00St   1-b1
+   9 THOVERT Jean-François     4k 9025075 86Po   7-b0
+  10 LABBE David               4k 9730003 17Ro   2-b2
+  11 GRAMMONT Denis            6k 2300293 00St  12-w1
+  12 GOUZIN Alexis             7k 2000063 86Po  11+b1
+  13 AMIOT Thomas              8k 2400203 54Na  15+w0
+  14 PERUS Bruno               8k 2400029 00St  18+w2
+  15 DO Van_Thuan              9k 2300291 xxxx  13-b0
+  16 GADAL Jean-Luc           10k 2300202 33Bo  19+w1
+  17 SOBOCINSKI Antoine       10k 1300293 17Ro  20-w2
+  18 LERAY Sylvain            11k 2000242 17Ro  14-b2
+  19 DELAMARE William         12k 2400011 64Ba  16-b1
+  20 MONTAGNE Anne-Marie      12k 0900172 58Ne  17+b2
+  21 GRAMMONT Françoise       13k 2400019 00St  22-b0
+  22 IMBAULT Eric             14k 1400017 18Vi  21+w0
+  23 LEROY Matthieu           15k 1800154 86Po  25+w2
+  24 THOMAS Sophie            17k 2000241 17Ro  27+w5
+  25 RIETTINI François        18k 1300316 17Ro  23-b2
+  26 BORN Véronique           18k 2000244 34Mo  29+w4
+  27 GOOSSENS Sylvie          19k 1700199 64Pa  24-b5
+  28 BIMONT Lou-Hang          22k 2400124 86Po  30-w4
+  29 DELQUE Aude              23k 2400117 17Ro  26-b4
+  30 ROGER Séverine           26k 2200120 18Vi  28+b4
+
+-----testing42ftwtesting--
