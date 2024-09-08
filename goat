@@ -862,7 +862,7 @@ if (defined $param_schedule) {
     $filename =~ s/ /_/g;
 
     $mail_out->send_results(
-        round => $opts{round},
+        round => "$rounds",
         attach => [{
             Charset => 'ISO-8859-1',
             Type => 'text/plain',
