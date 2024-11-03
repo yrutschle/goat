@@ -187,7 +187,7 @@ needed.
 Other commands
 ==============
 
-You can register users with the `register` script.  You can
+You can manage users with the `gplayer` script.  You can
 use Goat's built-in pairing algorithm using the `pair`
 script (all these scripts are self-documented: 
 ```
@@ -199,6 +199,5 @@ need.)
 To create a single game, use `add_game`.
 To remove a single game, use `del_game`.
 
-Same goes with `add_player` and `del_player`. In general all
-these only apply to the current round.
+In general all these only apply to the current round.
 

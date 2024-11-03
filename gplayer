@@ -1,7 +1,7 @@
 #! /usr/bin/perl -w
 
 # Goat: Gentil Organisateur et Administrateur de Tournois
-# Copyright (C) 2006-2018  Yves Rutschle
+# Copyright (C) 2006-2024  Yves Rutschle
 # 
 # This program is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public
@@ -154,7 +154,11 @@ while (<>) {
 #   map { [(stone_to_level $_->registering_level), $_] }
 #   @registered;
 
-$t->ffgplayers(\@registered);
+foreach my $p (@registered) {
+    $t->add_player($p);
+    warn "registering ".$p->fulladdress."\n";
+}
+
 $t->save($TOURNAMENT_FILE);
 
 warn "Registered ".(scalar @registered)." players.\n";

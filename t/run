@@ -53,7 +53,7 @@ push @tests,
    # pair: fail because of odd number of players 
    # Tests PAIR_4
    { 'run' => "cp ../toperm_in.1 toperm; cp ../ech_ffg_V3.txt . ; " .
-       "echo 'alias newplayer New Player <newplayer\@example.org> #6k' | perl $perl_opts ../../add_player > out.1b 2>&1 ; ".
+       "echo 'alias newplayer New Player <newplayer\@example.org> #6k' | perl $perl_opts ../../gplayer --add --no-getech > out.1b 2>&1 ; ".
        "perl $perl_opts ../../pair --test >> out.1b 2>&1 ; perl $perl_opts ../../goat --status >> out.1b",
        'test' => 'diff -u ../out.1b out.1b',
        'doc' => 'New round with odd number of players',
@@ -61,7 +61,7 @@ push @tests,
    # pair: pair with a bye player
    # Tests PAIR_4
    { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.1 toperm; cp ../ech_ffg_V3.txt . ; " .
-       "echo 'alias newplayer New Player <newplayer\@example.org> #6k' | perl $perl_opts ../../add_player > out.1c 2>&1 ; ".
+       "echo 'alias newplayer New Player <newplayer\@example.org> #6k' | perl $perl_opts ../../gplayer --add --no-getech > out.1c 2>&1 ; ".
        "perl $perl_opts ../../pair --test --bye newplayer\@example.org >> out.1c 2>&1 ; perl $perl_opts ../../goat --status >> out.1c",
        'test' => 'diff -u ../out.1c out.1c',
        'doc' => 'New round with bye player',
@@ -127,8 +127,8 @@ push @tests,
   },
   # add_game: adds a game (with 2 new players)
    { 'run' => "cp ../toperm_in.2 toperm; " .
-       "echo 'alias newplayer1 New Player <newplayer1\@example.org> #6k' | perl $perl_opts ../../add_player > out.1e 2>&1 ; ".
-       "echo 'alias newplayer2 New Player2 <newplayer2\@example.org> #6k' | perl $perl_opts ../../add_player > out.1e 2>&1 ; ".
+       "echo 'alias newplayer1 New Player <newplayer1\@example.org> #6k' | perl $perl_opts ../../gplayer --add --no-getech > out.1e 2>&1 ; ".
+       "echo 'alias newplayer2 New Player2 <newplayer2\@example.org> #6k' | perl $perl_opts ../../gplayer --add --no-getech > out.1e 2>&1 ; ".
        "perl $perl_opts ../../add_game --black newplayer1\@example.org --white newplayer2\@example.org --handicap 2 >> out.1e 2>&1 ; perl $perl_opts ../../goat --status >> out.1e",
        'test' => 'diff -u ../out.1e out.1e',
        'doc' => 'Add a game to an existing round',

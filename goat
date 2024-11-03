@@ -144,7 +144,7 @@ a result file).
 
 =item Add and remove players, if necessary:
 
- add_players -f toperm.cfg < mutt.newaliases
+ gplayer --add < mutt.newaliases
  del_player -f toperm.cfg sore@loser.com
 
 =item Create the new round:
