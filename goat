@@ -118,7 +118,7 @@ make an alias for each player into a file).
 
 =item Register all the players:
 
- register -f toperm.cfg < mutt.aliases
+ gplayer --newtournament < mutt.aliases
 
 =item Pair the players:
 

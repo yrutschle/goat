@@ -20,19 +20,29 @@
 
 =head1 NAME
 
- register -- processes tournament registrations
+ gplayer -- manage players in a tournament file
 
 =head1 SYNOPSIS
 
- register [--no-getech] [-f file] inscrits
+ gplayer [--newtournament] [--no-getech] --add players.txt
+
+ gplayer --del players.txt
+
+ gplayer --update <email>
+        [--email <new_email>]
+        [--license <license>]
+        [--level <level>]
+
+(Only I<--add> is implemented so far)
 
 =head1 DESCRIPTION
 
-WARNING! B<register> destroys any existing tournament file!
-to add players to an existing file, use B<add_player>.
+B<gplayer> ("goat player") manages players in a tournament
+file. It can be used to create a tournament from scratch,
+add players, delete players, or update player fields.
 
-Tournament registration is done from a simple text file that
-contains one line for each player.
+Players are added from a simple text file that contains one
+line for each player (or from I<stdin>)
 
 The format of each line is as follows:
 
@@ -50,7 +60,7 @@ This will register Joe Bloggs, licence number 0242149, at
 250 points. In most cases, the additional information does
 not need to be specified.
 
-B<register> knows how to parse B<mutt> alias lines directly,
+B<gplayer> knows how to parse B<mutt> alias lines directly,
 so B<mutt> users just need to press 'C<a>' when reading the
 mail of a player.  This registering method has three
 advantages: there can be no mistake in e-mail addresses,
@@ -58,12 +68,19 @@ it's simple to do from the mail program, and the operator is
 left with a mutt-usable list of players for further
 mass-mailing.
 
-B<register> takes the registered player list on its standard
-input or command line, and outputs a Tournament object in a
-file specified with -f.
+=head1 OPTIONS
+
+=over 4
+
+=item C<--no-getech>
 
 B<--no-getech> prevents downloading the echelle file.
+Default is to download the echelle file every time players
+are added.
 
+=item C<--testing>
+
+Do not download echeclle, 
 
 =cut
 
@@ -80,21 +97,32 @@ use Tournament;
 use GoatLib;
 use GoatConfig;
 
-my ($testing, $param_no_getech, $help);
+my ($testing, $param_no_getech, $help, $param_newtournament, 
+$param_add);
+
 GetOptions(
     'test' => \$testing,
     'help' => \$help,
     'no-getech' => \$param_no_getech,
+    'newtournament' => \$param_newtournament,
+    'add' => \$param_add,
 ) or die pod2usage();
 
 die pod2usage(-verbose=>2) if defined $help;
+die pod2usage(-verbose=>2) unless defined $param_add;
 
-# Tournament object
-my $t = new Tournament (
-    time=> 60,
-    size=> 19,
-    komi=> 7.5,
-);
+
+my $t;
+if ($param_newtournament) {
+    # Tournament object
+    $t = new Tournament (
+        time=> 60,
+        size=> 19,
+        komi=> 7.5,
+    );
+} else {
+    $t = load Tournament $TOURNAMENT_FILE;
+}
 
 my @registered;
 
