@@ -26,20 +26,54 @@
 
  gplayer [--newtournament] [--no-getech] --add players.txt
 
- gplayer --del players.txt
+ gplayer --del <player email>
 
  gplayer --update <email>
         [--email <new_email>]
         [--license <license>]
         [--level <level>]
 
-(Only I<--add> is implemented so far)
+(I<--update> is not implemented yet)
+
+
 
 =head1 DESCRIPTION
 
 B<gplayer> ("goat player") manages players in a tournament
 file. It can be used to create a tournament from scratch,
 add players, delete players, or update player fields.
+
+
+=head1 OPTIONS
+
+=over 4
+
+=item C<--no-getech>
+
+B<--no-getech> prevents downloading the echelle file.
+Default is to download the echelle file every time players
+are added.
+
+=item C<--testing>
+
+Do not download echelle. This may disable other behaviour in
+the future if required for the test suite, and should not be
+used. 
+
+=back
+
+=head1 COMMANDS
+
+At least one command is mandatory.
+
+=over 4
+
+=item C<--add>
+
+This adds one or more new players. It can be used at any
+time during the tournament: new players will get paired in
+subsequent rounds, and will appear as having not played in
+previous rounds.
 
 Players are added from a simple text file that contains one
 line for each player (or from I<stdin>)
@@ -68,19 +102,13 @@ it's simple to do from the mail program, and the operator is
 left with a mutt-usable list of players for further
 mass-mailing.
 
-=head1 OPTIONS
+=item C<--del> <email>
 
-=over 4
+This removes a player from subsequent rounds: the
+player will no longer be paired. Past games remain recorded
+and the player still appears in the full results.
 
-=item C<--no-getech>
-
-B<--no-getech> prevents downloading the echelle file.
-Default is to download the echelle file every time players
-are added.
-
-=item C<--testing>
-
-Do not download echeclle, 
+=back
 
 =cut
 
@@ -98,7 +126,7 @@ use GoatLib;
 use GoatConfig;
 
 my ($testing, $param_no_getech, $help, $param_newtournament, 
-$param_add);
+$param_add, $param_del);
 
 GetOptions(
     'test' => \$testing,
@@ -106,11 +134,56 @@ GetOptions(
     'no-getech' => \$param_no_getech,
     'newtournament' => \$param_newtournament,
     'add' => \$param_add,
+    'del=s' => \$param_del,
 ) or die pod2usage();
 
-die pod2usage(-verbose=>2) if defined $help;
-die pod2usage(-verbose=>2) unless defined $param_add;
+die pod2usage(-verbose=>3) if defined $help;
 
+################################################################################
+sub add {
+    my ($t) = @_;
+
+    my @registered;
+
+    # Download/update echelle
+    $t->update_ech() unless $testing or $param_no_getech;
+
+    while (<>) {
+        next if /^#/ or /^$/;
+        $_ = Encode::decode('UTF-8', $_);
+
+        my $player = FFGPlayer->new_from_alias($_, $t->ech_file());
+        next unless defined $player;
+
+        unless ($player->is_licensed($TOURNAMENT_LICENSES)) {
+            warn $player->fullname.": player license: ".$player->status.
+                " (".$player->status_text.") is not allowed.\n";
+        }
+
+        push @registered, $player;
+    }
+
+    # Sort by level
+    @registered = sort { $b->level <=> $a->level } @registered;
+
+    foreach my $p (@registered) {
+        $t->add_player($p);
+        warn "registering ".$p->fulladdress."\n";
+    }
+    warn "Registered ".(scalar @registered)." players.\n";
+}
+################################################################################
+sub del {
+    my ($t, $email) = @_;
+    my $p = $t->find_player_by_email($email);
+    die "player $email not found\n" unless defined $p;
+
+    $t->del_player($p);
+    print "deleting ".$p->fullname." <".$p->email.">\n";
+}
+################################################################################
+# MAIN
+################################################################################
 
 my $t;
 if ($param_newtournament) {
@@ -124,41 +197,12 @@ if ($param_newtournament) {
     $t = load Tournament $TOURNAMENT_FILE;
 }
 
-my @registered;
-
-# Download/update echelle
-$t->update_ech() unless $testing or $param_no_getech;
-
-while (<>) {
-    next if /^#/ or /^$/;
-    $_ = Encode::decode('UTF-8', $_);
-
-    my $player = FFGPlayer->new_from_alias($_, $t->ech_file());
-
-    next unless defined $player;
-
-    unless ($player->is_licensed($TOURNAMENT_LICENSES)) {
-        warn $player->fullname.": player license: ".$player->status." (".$player->status_text.") is not allowed.\n" 
-    }
-
-    push @registered, $player;
-}
-
-# Sort by level
-@registered = sort { $b->level <=> $a->level } @registered;
-
-# Sort by registration level
-#@registered = 
-#   map { $_->[1] } 
-#   sort { $b->[0] <=> $a->[0] } 
-#   map { [(stone_to_level $_->registering_level), $_] }
-#   @registered;
-
-foreach my $p (@registered) {
-    $t->add_player($p);
-    warn "registering ".$p->fulladdress."\n";
+if ($param_add) {
+    add($t);
+} elsif ($param_del) {
+    del($t, $param_del);
+} else {
+    die pod2usage(-verbose=>1);
 }
 
 $t->save($TOURNAMENT_FILE);
-
-warn "Registered ".(scalar @registered)." players.\n";

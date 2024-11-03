@@ -134,7 +134,7 @@ push @tests,
        'doc' => 'Add a game to an existing round',
    },
    # del_player: removes a player
-    { 'run' => "cp ../toperm_in.1 toperm; perl $perl_opts ../../del_player yves\@example.org > out.1f 2>&1 ; " .
+    { 'run' => "cp ../toperm_in.1 toperm; perl $perl_opts ../../gplayer --del yves\@example.org > out.1f 2>&1 ; " .
         "perl $perl_opts ../../goat --list-all >> out.1f 2>&1",
       'test' => 'diff -u ../out.1f out.1f',
       'doc' => 'Remove a player',
