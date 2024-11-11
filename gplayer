@@ -33,10 +33,6 @@
         [--license <license>]
         [--level <level>]
 
-(I<--update> is not implemented yet)
-
-
-
 =head1 DESCRIPTION
 
 B<gplayer> ("goat player") manages players in a tournament
@@ -135,6 +131,10 @@ GetOptions(
     'newtournament' => \$param_newtournament,
     'add' => \$param_add,
     'del=s' => \$param_del,
+    'update' => \$param_update,
+    'email=s' => \$param_email,
+    'license=s' => \$param_license,
+    'level=s' => \$param_level,
 ) or die pod2usage();
 
 die pod2usage(-verbose=>3) if defined $help;
@@ -182,6 +182,17 @@ sub del {
     print "deleting ".$p->fullname." <".$p->email.">\n";
 }
 ################################################################################
+sub update {
+    my ($t, $email, $new_email_new, $new_license_new, $new_level_new) = @_;
+
+    my $p = $t->find_player_by_email($email);
+    die "player $email not found\n" unless defined $p;
+
+    $p->email($new_email) if defined $new_email;
+    $p->license($new_license) if defined $new_license;
+    $p->level($new_level) if defined $new_level;
+}
+################################################################################
 # MAIN
 ################################################################################
 
@@ -201,6 +212,8 @@ if ($param_add) {
     add($t);
 } elsif ($param_del) {
     del($t, $param_del);
+} elsif ($param_udate) {
+    update($t, $email, $param_email, $param_license, $param_level);
 } else {
     die pod2usage(-verbose=>1);
 }

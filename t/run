@@ -140,6 +140,7 @@ push @tests,
       'doc' => 'Remove a player',
   },
 
+  # TODO: Tests for gplayer --update
    
    
    # 1: challenges and timing
