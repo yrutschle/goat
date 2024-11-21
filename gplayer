@@ -30,8 +30,9 @@
 
  gplayer --update <email>
         [--email <new_email>]
-        [--license <license>]
         [--level <level>]
+
+ gplayer --update <email> --license <license>
 
 =head1 DESCRIPTION
 
@@ -104,6 +105,13 @@ This removes a player from subsequent rounds: the
 player will no longer be paired. Past games remain recorded
 and the player still appears in the full results.
 
+=item C<--update> <email> <license>
+
+This updates the player registered with C<email>, using data
+from the current Echelle file from the player with the
+specified license number. This will update the name, club,
+and registering level of the player.
+
 =back
 
 =cut
@@ -122,7 +130,8 @@ use GoatLib;
 use GoatConfig;
 
 my ($testing, $param_no_getech, $help, $param_newtournament, 
-$param_add, $param_del);
+$param_add, $param_del, $param_update, $param_email,
+$param_license, $param_level);
 
 GetOptions(
     'test' => \$testing,
@@ -131,7 +140,7 @@ GetOptions(
     'newtournament' => \$param_newtournament,
     'add' => \$param_add,
     'del=s' => \$param_del,
-    'update' => \$param_update,
+    'update=s' => \$param_update,
     'email=s' => \$param_email,
     'license=s' => \$param_license,
     'level=s' => \$param_level,
@@ -182,15 +191,35 @@ sub del {
     print "deleting ".$p->fullname." <".$p->email.">\n";
 }
 ################################################################################
-sub update {
-    my ($t, $email, $new_email_new, $new_license_new, $new_level_new) = @_;
-
-    my $p = $t->find_player_by_email($email);
-    die "player $email not found\n" unless defined $p;
+sub update_from_params {
+    my ($p, $new_email, $new_level) = @_;
 
     $p->email($new_email) if defined $new_email;
-    $p->license($new_license) if defined $new_license;
     $p->level($new_level) if defined $new_level;
+}
+
+sub update_from_echelle {
+    my ($t, $p, $param_license) = @_;
+
+    my @res = FFGPlayer::grep_echelle($t->ech_file(), "null", $param_license);
+    die "Looking for $param_license finds ".scalar @res." results\n" if scalar @res != 1;
+
+    my $new_p = new_from_ech FFGPlayer $res[0];
+    die "player not found\n" unless defined $new_p;
+
+    foreach my $field (qw/familyname givenname level status club/) {
+        eval qq{
+            do {
+                my (\$old, \$new);
+                \$old = \$p->$field;
+                \$new = \$new_p->$field;
+                if (\$old ne \$new) {
+                    \$p->$field(\$new_p->$field);
+                    warn "updating $field from \$old to \$new\\n";
+                }
+            }
+        }
+    };
 }
 ################################################################################
 # MAIN
@@ -212,8 +241,17 @@ if ($param_add) {
     add($t);
 } elsif ($param_del) {
     del($t, $param_del);
-} elsif ($param_udate) {
-    update($t, $email, $param_email, $param_license, $param_level);
+} elsif ($param_update) {
+    my $p = $t->find_player_by_email($param_update);
+    die "player $param_update not found\n" unless defined $p;
+
+    if (defined $param_license) {
+        update_from_echelle($t, $p, $param_license);
+    } elsif (defined $param_email or $param_level) {
+        update_from_params($p, $param_email, $param_level);
+    } else {
+        die pod2usage(-verbose=>1);
+    }
 } else {
     die pod2usage(-verbose=>1);
 }

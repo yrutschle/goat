@@ -141,7 +141,14 @@ push @tests,
   },
 
   # TODO: Tests for gplayer --update
+  # --email|--license|--level
    
+  # gplayer --update from echelle with license
+    { 'run' => "cp ../toperm_in.16 toperm; cp ../ech_ffg_V3_16.txt ech_ffg_V3.txt; perl $perl_opts ../../gplayer --update naraul\@example.com --license 2500020 > out.16 2>&1 ; " ,
+      'test' => 'diff -u ../out.16 out.16 || diff -u ../toperm_out.16 toperm',
+      'doc' => 'Update a player from echelle',
+  },
+
    
    # 1: challenges and timing
    # Test GOAT_1, GOAT_2, GOAT_3, GOAT_4

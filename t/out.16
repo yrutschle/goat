@@ -1,25 +1,5 @@
-Sat Jul 30 17:30:00 2005: notify Jean-Jacques PORTAL <jean-jacques.portal@rutschle.net> and Yves RUTSCHLE <yves@rutschle.net> that their game has been scheduled on Sat Jul 30 21:00:00 2005 in Club Go Toulouse by yves@rutschle.net
-To: Jean-Jacques PORTAL <jean-jacques.portal@rutschle.net> Yves RUTSCHLE <yves@rutschle.net>
-Vous avez reçu ce courrier car vous êtes inscrit au tournoi
-permanent de Toulouse. Si vous avez reçu ce mail par erreur,
-merci de contacter Yves Rutschle <go@rutschle.net>
-
-
-yves@rutschle.net a programmé votre partie:
-
-Lieu: Club Go Toulouse
-Date: samedi 30 juillet 2005 21:00:00 Europe/Paris
-Noir: Jean-Jacques PORTAL <jean-jacques.portal@rutschle.net>
-Blanc: Yves RUTSCHLE <yves@rutschle.net>
-Handicap: 1
-
-Après la partie, merci de publier le résultat en répondant à
-ce mail en remplissant le sujet de votre réponse de la façon
-suivante :
-
-resultat <couleur gagnante>
-
-Par exemple :
-
-resultat blanc
-
+updating familyname from Laurent to CLÉMENT
+updating givenname from ClÃ©ment to Laurent
+updating level from -1050 to -9999
+updating status from - to L
+updating club from ---- to 86Po
