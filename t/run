@@ -210,6 +210,17 @@ push @tests,
       'test' => 'diff -u ../out.13d out.13d',
       'doc' => 'Receive results in body with nested parts',
   },
+  # E-mail is deceptive reply that should not be interpreted
+  # as a result
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.13e letter; cp ../toperm_in.13e toperm; cat letter | perl $perl_opts ../../mail_in -t > out.13e",
+      'test' => 'diff -u ../out.13e out.13e',
+      'doc' => 'Do not interpret help instructions as real commands',
+  },
+  # Correct command in e-mail from AppleMail, with no text/plain
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.13f letter; cp ../toperm_in.13e toperm; cat letter | perl $perl_opts ../../mail_in -t > out.13f",
+      'test' => 'diff -u ../out.13f out.13f',
+      'doc' => 'Command in text/html',
+  },
   # Receive an SGF: extract result and archive
     { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.30 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.30 ; perl $perl_opts ../../goat --status >> out.30 2>&1",
       'test' => 'diff -u ../out.30 out.30',

@@ -1,0 +1,64 @@
+Return-path: <info.vborn@example.com>
+Envelope-to: goat_ffg@example.com
+Delivery-date: Thu, 03 Jul 2025 20:33:10 +0000
+Received: from smtp5-g21.free.fr ([212.27.42.5])
+	by localhost with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <info.vborn@example.com>)
+	id 1uXQcH-00EWeQ-3A
+	for goat_ffg@example.com;
+	Thu, 03 Jul 2025 20:33:10 +0000
+Received: from smtpclient.apple (unknown [IPv6:2a02:8440:e50c:75e3:bdca:77f0:eee:e81e])
+	(Authenticated sender: info.vborn@example.com)
+	by smtp5-g21.free.fr (Postfix) with ESMTPSA id 670A360166
+	for <goat_ffg@example.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
+	s=smtp-20201208; t=1751574787;
+	bh=km47mNrnNj5Wtbdgbz2JUKVwWg91gBCK2qdvdMFIEh0=;
+	h=From:Subject:Date:References:In-Reply-To:To:From;
+	b=lejJDZ5K5yltfyZPCB9IvGb8z6oAnl4W43ib/NdPzaBKThi0p9YSzLt9hhpi0UNk8
+	 xaS/03mbDvsCWshQBfQb9HNdRzJ/3jUCYJaxhbcj+vxb2LYnrBSNLG2Wk7gEbg7Gbl
+	 HxUY8CZNeTr0CdGe1623sp9maU3VDQPgtYlCWtvf40oTVoK6CtTUzR2fV4noTz96eh
+	 ckHHc3m0TaU1fVlMz/a3Y1I/vJBHD/19eMDtAXHa68VgM5RWuxwx8sdeC/DeDvEqmX
+	 j3QtbvqrtSwcfNLzoCjm3BObTh5z5oUaCab7meR0pDUwXWM6zxVD1UDr4yni88dlwX
+	 +GzviITs9TR4A==
+Content-Type: multipart/alternative; boundary=Apple-Mail-B62799CE-DCFB-4834-8751-44964726E57D
+Content-Transfer-Encoding: 7bit
+From: Born <info.vborn@example.com>
+Mime-Version: 1.0 (1.0)
+Subject: Re: [goat_ffg] Erreur de date
+Date: Thu, 3 Jul 2025 22:32:56 +0200
+Message-Id: <8372CC77-5796-4586-A8BD-7478F540EA8B@example.com>
+References: <E1uXDyU-00EPz2-35@example.com>
+In-Reply-To: <E1uXDyU-00EPz2-35@example.com>
+To: GO Assistant <goat_ffg@example.com>
+X-Mailer: iPhone Mail (20H350)
+
+
+--Apple-Mail-B62799CE-DCFB-4834-8751-44964726E57D
+Content-Type: text/html;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
+utf-8"></head><body dir=3D"auto"><div dir=3D"ltr"></div><div dir=3D"ltr"><bl=
+ockquote type=3D"cite">rendezvous 09/07/2025 18:30<br><br></blockquote></div=
+><blockquote type=3D"cite"><div dir=3D"ltr">=EF=BB=BF<p>Vous avez re=C3=A7u c=
+e courrier car vous =C3=AAtes inscrit au Tournoi Lent Internet FFG.
+Si vous avez re=C3=A7u ce mail par erreur, merci de contacter Yves Rutschle <=
+a href=3D"mailto:goffg@example.com>
+
+<p>La date que vous avez sp=C3=A9cifi=C3=A9e: "09/07/2025 18:30</p><div dir=3D=
+"ltr"><br><blockquote type=3D"cite">Le 3 juil. 2025 =C3=83&nbsp; 09:01", n'e=
+st pas une date
+l=C3=A9gale. Merci d'essayer =C3=A0 nouveau, en suivant un des formats
+suivants:<p></p>
+
+<p>rendezvous 23/02/2018 16:08</p>
+
+<p>rendezvous 23 f=C3=A9vrier 2018 16:08</p>
+
+<p>rendezvous 23 fev 2018 16:08</p>
+</blockquote></div></div></blockquote></body></html>=
+
+--Apple-Mail-B62799CE-DCFB-4834-8751-44964726E57D--

@@ -13,7 +13,7 @@ Merci de répondre à ce courrier dès que vous aurez arrangé la
 rencontre, en remplissant le sujet de votre réponse de la
 façon suivante :
 
-rendezvous date, lieu
+> rendezvous date, lieu
 
 Par exemple:
 
@@ -22,11 +22,11 @@ rendezvous 23 février 2018 16:08, Auberge du Poney Fringant
 Vous pouvez également rapporter directement le résultat si
 vous avez omis de prévenir Goat de votre partie:
 
-resultat blanc|noir
+> resultat blanc|noir
 
 Par exemple :
 
-resultat blanc
+> resultat blanc
 
 Vous pouvez aussi simplement attcher le fichier SGF de la
 partie: il sera sauvegardé, et le résultat sera celui

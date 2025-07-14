@@ -37,11 +37,11 @@ Après la partie, merci de publier le résultat en répondant à
 ce mail en remplissant le sujet de votre réponse de la façon
 suivante :
 
-resultat blanc|noir
+> resultat blanc|noir
 
 Par exemple :
 
-resultat blanc
+> resultat blanc
 
 Vous pouvez aussi simplement attcher le fichier SGF de la
 partie: il sera sauvegardé, et le résultat sera celui
@@ -69,11 +69,15 @@ Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@ru
 ce mail en remplissant le sujet de votre réponse de la façon
 suivante :</p>
 
-<p>resultat blanc|noir</p>
+<blockquote class='goat'>
+  <p>resultat blanc|noir</p>
+</blockquote>
 
 <p>Par exemple :</p>
 
-<p>resultat blanc</p>
+<blockquote class='goat'>
+  <p>resultat blanc</p>
+</blockquote>
 
 <p>Vous pouvez aussi simplement attcher le fichier SGF de la
 partie: il sera sauvegardé, et le résultat sera celui

@@ -5,7 +5,7 @@ Subject: [[% subject_prefix %]] Erreur de couleur
 La commande "[% colour %]" que vous avez indiquée n'est pas
 légale. Merci d'essayer à nouveau, en utilisant:
 
-resultat blanc
+> resultat blanc
 
-resultat noir
+> resultat noir
 

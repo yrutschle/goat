@@ -30,9 +30,9 @@ envoyé à Goat. Le corps du message est ignoré.
 
 Goat gère les commandes suivantes:
 
-rendezvous date, lieu
+> rendezvous date, lieu
 
-resultat blanc|noir
+> resultat blanc|noir
 
 * *rendezvous*: Utilisez cette commande afin d'informer Goat de
 la date et du lieu choisi pour votre partie.
@@ -77,9 +77,11 @@ envoyé à Goat. Le corps du message est ignoré.</p>
 
 <p>Goat gère les commandes suivantes:</p>
 
-<p>rendezvous date, lieu</p>
-
-<p>resultat blanc|noir</p>
+<blockquote class='goat'>
+  <p>rendezvous date, lieu</p>
+  
+  <p>resultat blanc|noir</p>
+</blockquote>
 
 <ul>
 <li><p><em>rendezvous</em>: Utilisez cette commande afin d'informer Goat de

@@ -1,7 +1,7 @@
 #! /usr/bin/perl -w
 
 # Goat: Gentil Organisateur et Administrateur de Tournois
-# Copyright (C) 2006-2018  Yves Rutschle
+# Copyright (C) 2006-2025  Yves Rutschle
 # 
 # This program is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public
@@ -44,6 +44,7 @@ use Email::Valid;  # Package libemail-valid-perl
 use Email::Reply;  # Package libemail-reply-perl
 use Email::Sender::Simple qw/sendmail/; # Package libemail-sender-perl
 use MIME::Parser;
+use HTML::TreeBuilder;
 use Data::UUID;
 
 use Encode;
@@ -121,8 +122,7 @@ sub process_sgf {
 # Read incoming mail from stdin (see .forward)
 my $mail = Email::Filter->new;
 
-# First log the entire mail (maybe remove this when we gain
-# confidence in the system?). We remove ESC to prevent
+# First log the entire mail. We remove ESC to prevent
 # terminal ANSI sequence injections.
 record "Got mail";
 my $mail_text = $mail->simple->as_string;
@@ -194,18 +194,23 @@ sub parse_command {
     my ($line) = @_;
     my $exec;
     my @exec;
+    my $debug_parse_command = 0;
 
-    return if $line =~ /^>/;
+    print "parse [$line]\n" if $debug_parse_command;
+
+    return if $line =~ /^>/;    # Comments in Content-Type: text/plain
 
     if ($line =~ /(schedule|rendez[ -]?vous|rdv)\S*\s+(.*)/i) {
         my ($cmd, $rest) = ($1, $2);
         my ($date, $place) = split /\s*,\s*/, $rest;
+        print "parse_command [$cmd]($date)($place)\n" if $debug_parse_command;
 
         $place //= 'KGS';
 
         @exec = ($BIN_GOAT, @goat_opts, "--schedule", "$from,$date,$place");
     } elsif ($line =~ /(r.*?sult).*(blanc|noir|white|black)/i) { 
         my $winner = $2;
+        print "parse_command [$1]($winner))\n" if $debug_parse_command;
         # If we couldn't find the colour, pass the whole
         # command for the error message
         if (not defined $winner) {
@@ -217,14 +222,42 @@ sub parse_command {
     return @exec;
 }
 
+
+# Removes problematic parts of HTML, currently blockquote
+# blocks which may contains commands from the email we sent
+# to which the player replied.
+# Input: a MIME subpart
+# Output: the same subpart object, filtered if it's HTML
+sub filter_html {
+    my ($data) = @_;
+    return $data unless $data->content_type =~ /text\/html/;
+    my $tree = HTML::TreeBuilder->new();
+    $tree->parse_content($data->body_str);
+    for my $e ($tree->look_down(class => "goat")) {
+        $e->detach();
+        $e->delete();
+    }
+    $data->body_str_set($tree->as_HTML(undef, "\n  "));
+    return $data;
+}
+
+sub html_to_txt {
+    my ($data) = @_;
+    my $tree = HTML::TreeBuilder->new();
+    $tree->parse_content($data);
+    return $tree->as_text();
+}
+
 # Returns a hierarchy of nested MIME parts as one list of
 # unstructured strings
 sub flatten_mime {
     my ($msg) = @_;
 
+    return unless defined $msg;
+
     my @parts = $msg->subparts;
     if (@parts) {
-        return map { flatten_mime($_) } @parts;
+        return map { flatten_mime(filter_html $_) } @parts;
     }
 
     # body_str is decoded according to charset
@@ -233,6 +266,7 @@ sub flatten_mime {
     my $body = eval { $msg->body_str };
     return split /\n/, ($body // "");
 }
+
 
 # First try to parse the mail subject line
 my @exec = parse_command scalar decode("MIME-Header", $mail->subject);
@@ -244,7 +278,7 @@ if (not @exec) {
     # If it's multi-part, descend into each part
     my $mime = Email::MIME->new($mail->simple->as_string);
     @lines = flatten_mime $mime;
-    my @out = grep { @$_ } map { [ parse_command $_ ] } @lines;
+    my @out = grep { @$_ } map { [ parse_command html_to_txt $_ ] } @lines;
     if (@out) {
         @exec = @{shift @out}; # keep first command
     }

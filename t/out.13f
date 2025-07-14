@@ -1,0 +1,106 @@
+Sat Jul 30 15:30:00 2005: notify Séverine ROGER <severineroger18@example.com> and Véronique BORN <info.vborn@example.com> that their game has been scheduled on Wed Jul  9 16:30:00 2025 (GMT) in KGS by info.vborn@example.com
+ <info.vborn@example.com>
+Content-Transfer-Encoding: binary
+Content-Type: multipart/mixed; boundary="---testing42ftwtesting"
+From: GO Assistant <goat@rutschle.net>
+MIME-Version: 1.0
+Return-Path: GO Assistant <goat@rutschle.net>
+Subject: [goat] Partie: KGS, mercredi 09 juillet 2025 18:30
+To: Séverine ROGER <severineroger18@example.com>,Véronique BORN
+X-Loop: GO Assistant <goat@rutschle.net>
+X-Mailer: MIME-Tools with no versionThis is a multi-part message in MIME format...
+
+-----testing42ftwtesting
+Content-Type: multipart/alternative; boundary="---alternative-contents"
+Content-Transfer-Encoding: binary
+
+This is a multi-part message in MIME format...
+
+-----alternative-contents
+Content-Type: text/plain; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: binary
+
+Vous avez reçu ce courrier car vous êtes inscrit au Tournoi pérmanent de Tøulouse.
+Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@rutschle.net>.
+
+
+info.vborn@example.com a programmé votre partie:
+
+* Lieu: KGS
+* Date: mercredi 09 juillet 2025 18:30
+* Noir: Séverine ROGER <severineroger18@example.com>
+* Blanc: Véronique BORN <info.vborn@example.com>
+* Handicap: 4
+
+Après la partie, merci de publier le résultat en répondant à
+ce mail en remplissant le sujet de votre réponse de la façon
+suivante :
+
+> resultat blanc|noir
+
+Par exemple :
+
+> resultat blanc
+
+Vous pouvez aussi simplement attcher le fichier SGF de la
+partie: il sera sauvegardé, et le résultat sera celui
+indiqué dans le SGF.
+
+-----alternative-contents
+Content-Type: text/html; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: binary
+
+<p>Vous avez reçu ce courrier car vous êtes inscrit au Tournoi pérmanent de Tøulouse.
+Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@rutschle.net>.</p>
+
+<p>info.vborn@example.com a programmé votre partie:</p>
+
+<ul>
+<li>Lieu: KGS</li>
+<li>Date: mercredi 09 juillet 2025 18:30</li>
+<li>Noir: Séverine ROGER <severineroger18@example.com></li>
+<li>Blanc: Véronique BORN <info.vborn@example.com></li>
+<li>Handicap: 4</li>
+</ul>
+
+<p>Après la partie, merci de publier le résultat en répondant à
+ce mail en remplissant le sujet de votre réponse de la façon
+suivante :</p>
+
+<blockquote class='goat'>
+  <p>resultat blanc|noir</p>
+</blockquote>
+
+<p>Par exemple :</p>
+
+<blockquote class='goat'>
+  <p>resultat blanc</p>
+</blockquote>
+
+<p>Vous pouvez aussi simplement attcher le fichier SGF de la
+partie: il sera sauvegardé, et le résultat sera celui
+indiqué dans le SGF.</p>
+
+-----alternative-contents--
+
+-----testing42ftwtesting
+Content-Type: text/calendar; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: base64
+
+QkVHSU46VkNBTEVOREFSDQpWRVJTSU9OOjIuMA0KUFJPRElEOkdvYXQgdGVz
+dCBzdWl0ZQ0KQkVHSU46VkVWRU5UDQpERVNDUklQVElPTjpub2lyOiBTw6l2
+ZXJpbmUgUk9HRVIgPHNldmVyaW5lcm9nZXIxOEBleGFtcGxlLmNvbT5cbmJs
+YW5jOiBWw6lybw0KIG5pcXVlIEJPUk4gPGluZm8udmJvcm5AZXhhbXBsZS5j
+b20+XG5oYW5kaWNhcDogNFxuDQpEVEVORDsyMDI1MDcwOVQxODMwMDBaDQpE
+VFNUQU1QOjIwMDUwNzMwVDE1MzAwMFoNCkRUU1RBUlQ7MjAyNTA3MDlUMTYz
+MDAwWg0KTE9DQVRJT046S0dTDQpTVU1NQVJZOlRvdXJub2kgcMOpcm1hbmVu
+dCBkZSBUw7h1bG91c2UNClVJRDowMDAwMDAwMC0wMDAwLTAwMDAtSEVMTC0w
+V09STEQwMDAwMDANCkJFR0lOOlZBTEFSTQ0KQUNUSU9OOkRJU1BMQVkNCkRF
+U0NSSVBUSU9OOlRvdXJub2kgcMOpcm1hbmVudCBkZSBUw7h1bG91c2UNClRS
+SUdHRVI7UkVMQVRFRD1TVEFSVDotUFQxSA0KRU5EOlZBTEFSTQ0KRU5EOlZF
+VkVOVA0KRU5EOlZDQUxFTkRBUg0K
+
+-----testing42ftwtesting--

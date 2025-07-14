@@ -522,6 +522,8 @@ sub sendmail {
     }
 
     my $html_body = markdown($body);
+    # Mark the blockquote so we can remove it when the user replies
+    $html_body =~ s/<blockquote>/<blockquote class='goat'>/g;
 
     my $msg = MIME::Entity->build(%mime_parms);
     my $alternative = $msg->attach(

@@ -1,0 +1,395 @@
+Content-Transfer-Encoding: binary
+Content-Type: multipart/mixed; boundary="---testing42ftwtesting"
+From: GO Assistant <goat@rutschle.net>
+MIME-Version: 1.0
+Return-Path: GO Assistant <goat@rutschle.net>
+Subject: [goat] Commande illégale
+To: laurent.clement1@example.com
+X-Loop: GO Assistant <goat@rutschle.net>
+X-Mailer: MIME-Tools with no versionThis is a multi-part message in MIME format...
+
+-----testing42ftwtesting
+Content-Type: multipart/alternative; boundary="---alternative-contents"
+Content-Transfer-Encoding: binary
+
+This is a multi-part message in MIME format...
+
+-----alternative-contents
+Content-Type: text/plain; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: binary
+
+Vous avez reçu ce courrier car vous êtes inscrit au Tournoi pérmanent de Tøulouse.
+Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@rutschle.net>.
+
+
+Votre commande n'a pas pu être interpretée correctement.
+
+Les commandes doivent être écrites dans l'objet du courrier
+envoyé à Goat. Le corps du message est ignoré.
+
+Goat gère les commandes suivantes:
+
+> rendezvous date, lieu
+
+> resultat blanc|noir
+
+* *rendezvous*: Utilisez cette commande afin d'informer Goat de
+la date et du lieu choisi pour votre partie.
+
+* *resultat*: Après la partie, indiquez la couleur du joueur qui
+a gagné la partie. Vous pouvez aussi simplement attacher le
+fichier SGF de la partie: il sera sauvegardé, et le résultat
+sera celui indiqué dans le SGF.
+
+
+
+---- Votre message :
+Return-path: <laurent.clement1@example.com>
+Envelope-to: goat_ffg@example.com
+Delivery-date: Wed, 09 Jul 2025 09:59:57 +0000
+Received: from smtp-28.smtpout.orange.fr ([80.12.242.28] helo=smtp.smtpout.orange.fr)
+	by localhost with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <laurent.clement1@example.com>)
+	id 1uZRan-0003tC-19
+	for goat_ffg@example.com;
+	Wed, 09 Jul 2025 09:59:57 +0000
+Received: from [IPV6:2a01:cb18:1216:3200:5472:a6e4:ced0:8fd5]
+ ([IPv6:2a01:cb18:1216:3200:5472:a6e4:ced0:8fd5])
+	by smtp.orange.fr with ESMTPA
+	id ZRaku3tdbRL5QZRakuVwgN; Wed, 09 Jul 2025 11:59:54 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=orange.fr;
+	s=t20230301; t=1752055194;
+	bh=kzL8IegQAy1NHuz3epYn2Wj9pD0Ol+gd8XY0ZsyybFw=;
+	h=Message-ID:Date:MIME-Version:Subject:To:From;
+	b=j9rY11mwfhlYjARdUAp715yhvEAD0D+YC3DFjvoFhaLeoSUsNKY1QEG+RrQTMoKIt
+	 86pJmRv5oapc3Pv22pBwXad9t3CWFgudItCzSSJ4RxW28AW8ge7jK3MYKg5n8JO40W
+	 CYIkgijQF10Nt5rPthA46xsn+LeFKLSlhTLCTQ4h4RjhQ7SvnqgAuoG+OM+IzZddwG
+	 YoOTskHGoDbiDsvqQfeX5h/cUQdouc2kIuuiwbB/sOQRAuLjSllVC9bu5It7tel07q
+	 7vlhU6GwGBikgRIflEau16uEUxHhdPhfZmW05op+tdKLVSqkXLKw+w9NkGVpgpKntU
+	 6+jm+3vJ7OqGA==
+X-ME-Helo: [IPV6:2a01:cb18:1216:3200:5472:a6e4:ced0:8fd5]
+X-ME-Auth: bGF1cmVudC5jbGVtZW50MUBvcmFuZ2UuZnI=
+X-ME-Date: Wed, 09 Jul 2025 11:59:54 +0200
+X-ME-IP: 2a01:cb18:1216:3200:5472:a6e4:ced0:8fd5
+Content-Type: multipart/alternative;
+ boundary="------------2qTzkioES84FWzwXCZgDv9nr"
+Message-ID: <3521e8cf-aa1c-47b1-bd7b-f167bc3b0c06@example.com>
+Date: Wed, 9 Jul 2025 11:59:54 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: *** SPAM *** [goat_ffg] Partie: OGS, mercredi 09 juillet 2025
+ 20:00
+To: GO Assistant <goat_ffg@example.com>
+References: <E1uZOYC-0002Kf-1J@example.com>
+Content-Language: fr
+Cc: sylvain.t.menard@example.com
+From: laurent clement <laurent.clement1@example.com>
+In-Reply-To: <E1uZOYC-0002Kf-1J@example.com>
+
+This is a multi-part message in MIME format.
+--------------2qTzkioES84FWzwXCZgDv9nr
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+
+Malheureusement je ne peux pas ce soir jouer la partie.
+
+Et nous n'avons pas trouver d'autres dates avant le 15 Juillet avec 
+monsieur MÃÂ©nard.
+
+lui ne pouvant pas jouer le we et la journÃÂ©e des jours de semaine et moi 
+coincÃÂ© avec mon travail qui se termine tard le soir comme ce soir et le 15.
+
+Je peux par contre le 16 juilletÃÂ  ÃÂ  20h.
+
+Merci de votre comprÃÂ©hension.
+
+
+
+Le 09/07/2025 ÃÂ  08:45, GO Assistant a ÃÂ©critÃÂ :
+>
+> Vous avez reÃÂ§u ce courrier car vous ÃÂªtes inscrit au Tournoi Lent 
+> Internet FFG. Si vous avez reÃÂ§u ce mail par erreur, merci de contacter 
+> Yves Rutschle goffg@example.com.
+>
+> N'oubliez pas de jouer votre partie:
+>
+>   * Lieu: OGS
+>   * Date: mercredi 09 juillet 2025 20:00
+>   * Noir: Laurent CLÃÂMENT laurent.clement1@example.com
+>   * Blanc: Sylvain MENARD sylvain.t.menard@example.com
+>   * Handicap: 2
+>
+> AprÃÂ¨s la partie, merci de publier le rÃÂ©sultat en rÃÂ©pondant ÃÂ  ce mail 
+> en remplissant le sujet de votre rÃÂ©ponse de la faÃÂ§on suivante :
+>
+> > resultat noir|blanc
+>
+> Par exemple :
+>
+> > resultat blanc
+>
+> Vous pouvez aussi simplement envoyer le SGF de la partie en attachement.
+>
+--------------2qTzkioES84FWzwXCZgDv9nr
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p>Malheureusement je ne peux pas ce soir jouer la partie.</p>
+    <p>Et nous n'avons pas trouver d'autres dates avant le 15 JuilletÃÂ 
+      avec monsieur MÃÂ©nard.</p>
+    <p>lui ne pouvant pas jouer le we et la journÃÂ©e des jours de semaine
+      et moi coincÃÂ© avec mon travail qui se termine tard le soir comme
+      ce soir et le 15.</p>
+    <p>Je peux par contre le 16 juilletÃÂ  ÃÂ  20h.</p>
+    <p>Merci de votre comprÃÂ©hension.<br>
+    </p>
+    <p><br>
+    </p>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">Le 09/07/2025 ÃÂ  08:45, GO Assistant a
+      ÃÂ©critÃÂ :<br>
+    </div>
+    <blockquote type="cite" cite="mid:E1uZOYC-0002Kf-1J@example.com">
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <p>Vous avez reÃÂ§u ce courrier car vous ÃÂªtes inscrit au Tournoi
+        Lent Internet FFG.
+        Si vous avez reÃÂ§u ce mail par erreur, merci de contacter Yves
+        Rutschle <a href="mailto:goffg@example.com"
+          moz-do-not-send="true" class="moz-txt-link-freetext">goffg@example.com>
+      <p>N'oubliez pas de jouer votre partie:</p>
+      <ul>
+        <li>Lieu: OGS</li>
+        <li>Date: mercredi 09 juillet 2025 20:00</li>
+        <li>Noir: Laurent CLÃÂMENT <a
+            href="mailto:laurent.clement1@example.com"
+            moz-do-not-send="true" class="moz-txt-link-freetext">laurent.clement1@example.com>
+        <li>Blanc: Sylvain MENARD <a
+            href="mailto:sylvain.t.menard@example.com"
+            moz-do-not-send="true" class="moz-txt-link-freetext">sylvain.t.menard@example.com>
+        <li>Handicap: 2</li>
+      </ul>
+      <p>AprÃÂ¨s la partie, merci de publier le rÃÂ©sultat en rÃÂ©pondant ÃÂ 
+        ce mail en remplissant le sujet de votre rÃÂ©ponse de la faÃÂ§on
+        suivante :</p>
+            <blockquote class='goat'>
+            <p>resultat blanc|noir</p>
+            </blockquote>
+
+            <p>Par exemple :</p>
+
+            <blockquote class='goat'>
+            <p>resultat blanc</p>
+            </blockquote>
+      <p>Vous pouvez aussi simplement envoyer le SGF de la partie en
+        attachement.</p>
+    </blockquote>
+  </body>
+</html>
+
+--------------2qTzkioES84FWzwXCZgDv9nr--
+
+
+-----alternative-contents
+Content-Type: text/html; charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: binary
+
+<p>Vous avez reçu ce courrier car vous êtes inscrit au Tournoi pérmanent de Tøulouse.
+Si vous avez reçu ce mail par erreur, merci de contacter Yves Rutschle <yves@rutschle.net>.</p>
+
+<p>Votre commande n'a pas pu être interpretée correctement.</p>
+
+<p>Les commandes doivent être écrites dans l'objet du courrier
+envoyé à Goat. Le corps du message est ignoré.</p>
+
+<p>Goat gère les commandes suivantes:</p>
+
+<blockquote class='goat'>
+  <p>rendezvous date, lieu</p>
+  
+  <p>resultat blanc|noir</p>
+</blockquote>
+
+<ul>
+<li><p><em>rendezvous</em>: Utilisez cette commande afin d'informer Goat de
+la date et du lieu choisi pour votre partie.</p></li>
+<li><p><em>resultat</em>: Après la partie, indiquez la couleur du joueur qui
+a gagné la partie. Vous pouvez aussi simplement attacher le
+fichier SGF de la partie: il sera sauvegardé, et le résultat
+sera celui indiqué dans le SGF.</p></li>
+</ul>
+
+<p>---- Votre message :
+Return-path: <laurent.clement1@example.com>
+Envelope-to: goat_ffg@example.com
+Delivery-date: Wed, 09 Jul 2025 09:59:57 +0000
+Received: from smtp-28.smtpout.orange.fr ([80.12.242.28] helo=smtp.smtpout.orange.fr)
+    by localhost with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+    (Exim 4.96)
+    (envelope-from <laurent.clement1@example.com>)
+    id 1uZRan-0003tC-19
+    for goat_ffg@example.com;
+    Wed, 09 Jul 2025 09:59:57 +0000
+Received: from [IPV6:2a01:cb18:1216:3200:5472:a6e4:ced0:8fd5]
+ ([IPv6:2a01:cb18:1216:3200:5472:a6e4:ced0:8fd5])
+    by smtp.orange.fr with ESMTPA
+    id ZRaku3tdbRL5QZRakuVwgN; Wed, 09 Jul 2025 11:59:54 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=orange.fr;
+    s=t20230301; t=1752055194;
+    bh=kzL8IegQAy1NHuz3epYn2Wj9pD0Ol+gd8XY0ZsyybFw=;
+    h=Message-ID:Date:MIME-Version:Subject:To:From;
+    b=j9rY11mwfhlYjARdUAp715yhvEAD0D+YC3DFjvoFhaLeoSUsNKY1QEG+RrQTMoKIt
+     86pJmRv5oapc3Pv22pBwXad9t3CWFgudItCzSSJ4RxW28AW8ge7jK3MYKg5n8JO40W
+     CYIkgijQF10Nt5rPthA46xsn+LeFKLSlhTLCTQ4h4RjhQ7SvnqgAuoG+OM+IzZddwG
+     YoOTskHGoDbiDsvqQfeX5h/cUQdouc2kIuuiwbB/sOQRAuLjSllVC9bu5It7tel07q
+     7vlhU6GwGBikgRIflEau16uEUxHhdPhfZmW05op+tdKLVSqkXLKw+w9NkGVpgpKntU
+     6+jm+3vJ7OqGA==
+X-ME-Helo: [IPV6:2a01:cb18:1216:3200:5472:a6e4:ced0:8fd5]
+X-ME-Auth: bGF1cmVudC5jbGVtZW50MUBvcmFuZ2UuZnI=
+X-ME-Date: Wed, 09 Jul 2025 11:59:54 +0200
+X-ME-IP: 2a01:cb18:1216:3200:5472:a6e4:ced0:8fd5
+Content-Type: multipart/alternative;
+ boundary="------------2qTzkioES84FWzwXCZgDv9nr"
+Message-ID: &lt;3521e8cf-aa1c-47b1-bd7b-f167bc3b0c06@example.com>
+Date: Wed, 9 Jul 2025 11:59:54 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: <strong>* SPAM *</strong> [goat_ffg] Partie: OGS, mercredi 09 juillet 2025
+ 20:00
+To: GO Assistant <goat_ffg@example.com>
+References: <E1uZOYC-0002Kf-1J@example.com>
+Content-Language: fr
+Cc: sylvain.t.menard@example.com
+From: laurent clement <laurent.clement1@example.com>
+In-Reply-To: <E1uZOYC-0002Kf-1J@example.com></p>
+
+<p>This is a multi-part message in MIME format.
+--------------2qTzkioES84FWzwXCZgDv9nr
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit</p>
+
+<p>Malheureusement je ne peux pas ce soir jouer la partie.</p>
+
+<p>Et nous n'avons pas trouver d'autres dates avant le 15 Juillet avec 
+monsieur MÃÂ©nard.</p>
+
+<p>lui ne pouvant pas jouer le we et la journÃÂ©e des jours de semaine et moi 
+coincÃÂ© avec mon travail qui se termine tard le soir comme ce soir et le 15.</p>
+
+<p>Je peux par contre le 16 juilletÃÂ  ÃÂ  20h.</p>
+
+<p>Merci de votre comprÃÂ©hension.</p>
+
+<p>Le 09/07/2025 ÃÂ  08:45, GO Assistant a ÃÂ©critÃÂ :
+></p>
+
+<blockquote class='goat'>
+  <p>Vous avez reÃÂ§u ce courrier car vous ÃÂªtes inscrit au Tournoi Lent 
+  Internet FFG. Si vous avez reÃÂ§u ce mail par erreur, merci de contacter 
+  Yves Rutschle goffg@example.com.</p>
+  
+  <p>N'oubliez pas de jouer votre partie:</p>
+  
+  <ul>
+  <li>Lieu: OGS</li>
+  <li>Date: mercredi 09 juillet 2025 20:00</li>
+  <li>Noir: Laurent CLÃÂMENT laurent.clement1@example.com</li>
+  <li>Blanc: Sylvain MENARD sylvain.t.menard@example.com</li>
+  <li>Handicap: 2</li>
+  </ul>
+  
+  <p>AprÃÂ¨s la partie, merci de publier le rÃÂ©sultat en rÃÂ©pondant ÃÂ  ce mail 
+  en remplissant le sujet de votre rÃÂ©ponse de la faÃÂ§on suivante :</p>
+  
+  <blockquote class='goat'>
+    <p>resultat noir|blanc</p>
+  </blockquote>
+  
+  <p>Par exemple :</p>
+  
+  <blockquote class='goat'>
+    <p>resultat blanc</p>
+  </blockquote>
+  
+  <p>Vous pouvez aussi simplement envoyer le SGF de la partie en attachement.</p>
+  
+  <p>--------------2qTzkioES84FWzwXCZgDv9nr
+  Content-Type: text/html; charset=UTF-8
+  Content-Transfer-Encoding: 8bit</p>
+</blockquote>
+
+<p><!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p>Malheureusement je ne peux pas ce soir jouer la partie.</p>
+    <p>Et nous n'avons pas trouver d'autres dates avant le 15 JuilletÃÂ 
+      avec monsieur MÃÂ©nard.</p>
+    <p>lui ne pouvant pas jouer le we et la journÃÂ©e des jours de semaine
+      et moi coincÃÂ© avec mon travail qui se termine tard le soir comme
+      ce soir et le 15.</p>
+    <p>Je peux par contre le 16 juilletÃÂ  ÃÂ  20h.</p>
+    <p>Merci de votre comprÃÂ©hension.<br>
+    </p>
+    <p><br>
+    </p>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">Le 09/07/2025 ÃÂ  08:45, GO Assistant a
+      ÃÂ©critÃÂ :<br>
+    </div>
+    <blockquote type="cite" cite="mid:E1uZOYC-0002Kf-1J@example.com">
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <p>Vous avez reÃÂ§u ce courrier car vous ÃÂªtes inscrit au Tournoi
+        Lent Internet FFG.
+        Si vous avez reÃÂ§u ce mail par erreur, merci de contacter Yves
+        Rutschle <a href="mailto:goffg@example.com"
+          moz-do-not-send="true" class="moz-txt-link-freetext">goffg@example.com>
+      <p>N'oubliez pas de jouer votre partie:</p>
+      <ul>
+        <li>Lieu: OGS</li>
+        <li>Date: mercredi 09 juillet 2025 20:00</li>
+        <li>Noir: Laurent CLÃÂMENT <a
+            href="mailto:laurent.clement1@example.com"
+            moz-do-not-send="true" class="moz-txt-link-freetext">laurent.clement1@example.com>
+        <li>Blanc: Sylvain MENARD <a
+            href="mailto:sylvain.t.menard@example.com"
+            moz-do-not-send="true" class="moz-txt-link-freetext">sylvain.t.menard@example.com>
+        <li>Handicap: 2</li>
+      </ul>
+      <p>AprÃÂ¨s la partie, merci de publier le rÃÂ©sultat en rÃÂ©pondant ÃÂ 
+        ce mail en remplissant le sujet de votre rÃÂ©ponse de la faÃÂ§on
+        suivante :</p>
+            <blockquote class='goat'>
+            <p>resultat blanc|noir</p>
+            </blockquote></p>
+
+<pre><code>        &lt;p&gt;Par exemple :&lt;/p&gt;
+
+        &lt;blockquote class='goat'&gt;
+        &lt;p&gt;resultat blanc&lt;/p&gt;
+        &lt;/blockquote&gt;
+  &lt;p&gt;Vous pouvez aussi simplement envoyer le SGF de la partie en
+    attachement.&lt;/p&gt;
+&lt;/blockquote&gt;
+</code></pre>
+
+<p></body>
+</html></p>
+
+<p>--------------2qTzkioES84FWzwXCZgDv9nr--</p>
+
+-----alternative-contents--
+
+-----testing42ftwtesting--
