@@ -90,6 +90,8 @@ if (not defined $param_black or not defined $param_white) {
     die "$param_white not found in $param_file.\n" unless defined $white;
 }
 
+die $black->id . " is already playing a game in this round\n" if defined $Tournament->find_game_by_email($black->email);
+die $white->id . " is already playing a game in this round\n" if defined $Tournament->find_game_by_email($white->email);
 
 
 unless (defined $param_handi) {
