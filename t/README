@@ -16,3 +16,9 @@ too.
 To run all the tests:
 t/run
 from the top directory.
+
+To list the tests available:
+t/run -l
+
+And then to run just some tests:
+t/run 12 34 42
