@@ -292,6 +292,7 @@ while (@res) {
     my $handi = int(($white->level - $black->level)/100);
     $handi -= $CFG->{handicap} if $handi > $CFG->{handicap} - 1;
     $handi = 9 if $handi > 9;
+    $handi = 0 if $p1->level < -2000 or $p2->level < -2000;
     my $g = new GoGame $black, $white, $handi;
 
     $Tournament->curr_round->add_game($g);

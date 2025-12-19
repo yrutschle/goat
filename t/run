@@ -66,11 +66,11 @@ push @tests,
        'test' => 'diff -u ../out.1c out.1c',
        'doc' => 'New round with bye player',
    },
-   # pair: pair with handicap capping
-   # Tests PAIR_5
-   { 'run' => " export TEST_TIME=1122737400; cp ../ech_ffg_V3.txt . ; cp ../toperm_in.1c toperm; perl $perl_opts ../../pair --test > out.1m 2>&1 ; perl $perl_opts ../../goat --status > out.1m",
-       'test' => 'diff -u ../out.1m out.1m',
-       'doc' => 'Pair with handicap capping',
+   # pair: pair with handicap removed for low players
+   # Tests PAIR_6
+   { 'run' => " export TEST_TIME=1122737400; cp ../ech_ffg_V3.txt . ; cp ../toperm_in.34 toperm; perl $perl_opts ../../pair --test > out.1n 2>&1 ; perl $perl_opts ../../goat --status > out.1n",
+       'test' => 'diff -u ../out.1n out.1n',
+       'doc' => 'Pair with handicap removed for low players',
    },
    # pair: pair with a bye player, and unplayed games have
    # left the tournament (Normaly we pick bye players in

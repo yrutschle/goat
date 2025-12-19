@@ -43,6 +43,10 @@ PAIR_4
 PAIR_5
         pair shall limit handicap to 9.
 
+PAIR_6
+        pair shall set handicap to 0 if at least one player
+        has ranking below -2000 (FFG Echelle algorithm works
+        differently below 20k)
 
 GOAT_1
         goat shall send a notification of games that have
