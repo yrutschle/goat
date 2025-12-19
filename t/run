@@ -46,7 +46,7 @@ push @tests,
    },
    # pair: create a new round
    # Tests PAIR_1, PAIR_2, PAIR_3
-   { 'run' => " export TEST_TIME=1122737400; cp ../ech_ffg_V3.txt . ; cp ../toperm_in.1 toperm; perl $perl_opts ../../pair --test > out.1 2>&1 ; perl $perl_opts ../../goat --status >> out.1",
+   { 'run' => " export TEST_TIME=1122737400; cp ../ech_ffg_V3.txt . ; cp ../toperm_in.1 toperm; perl $perl_opts ../../pair --test 2>&1 | ../base64glue > out.1 ; perl $perl_opts ../../goat --status >> out.1",
        'test' => 'diff -u ../out.1 out.1',
        'doc' => 'New round',
    },
@@ -62,7 +62,7 @@ push @tests,
    # Tests PAIR_4
    { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.1 toperm; cp ../ech_ffg_V3.txt . ; " .
        "echo 'alias newplayer New Player <newplayer\@example.org> #6k' | perl $perl_opts ../../gplayer --add --no-getech > out.1c 2>&1 ; ".
-       "perl $perl_opts ../../pair --test --bye newplayer\@example.org >> out.1c 2>&1 ; perl $perl_opts ../../goat --status >> out.1c",
+       "perl $perl_opts ../../pair --test --bye newplayer\@example.org 2>&1 | ../base64glue >> out.1c ; perl $perl_opts ../../goat --status >> out.1c",
        'test' => 'diff -u ../out.1c out.1c',
        'doc' => 'New round with bye player',
    },
@@ -79,7 +79,7 @@ push @tests,
    # Clement Beni and Mickael Zizard have both not played
    # and unregistered, so can't be picked for bye
    { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.1b toperm; cp ../ech_ffg_V3.txt . ; " .
-       "perl $perl_opts ../../pair --test --bye random > out.1l 2>&1 ; perl $perl_opts ../../goat --status >> out.1l",
+       "perl $perl_opts ../../pair --test --bye random 2>&1 | ../base64glue > out.1l ; perl $perl_opts ../../goat --status >> out.1l",
        'test' => 'diff -u ../out.1l out.1l',
        'doc' => 'New round with bye player and left unplayed',
    },
@@ -87,9 +87,9 @@ push @tests,
    # (sending is required to check $round->bye is set properly)
    { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.9 toperm; " .
        "cp ../ech_ffg_V3b.txt ech_ffg_V3.txt ; ".
-       "perl $perl_opts ../../pair --test --bye random > out.1k 2>&1 ;".
-       "perl $perl_opts ../../goat --status >> out.1k ; ".
-       "perl $perl_opts ../../goat --test --send-pairings >> out.1k",
+       "perl $perl_opts ../../pair --test --bye random 2>&1 | ../base64glue > out.1k ;".
+       "perl $perl_opts ../../goat --status | ../base64glue >> out.1k ; ".
+       "perl $perl_opts ../../goat --test --send-pairings | ../base64glue >> out.1k",
        'test' => 'diff -u ../out.1k out.1k',
        'doc' => 'New round with random bye player and send pairings',
    },
@@ -217,7 +217,7 @@ push @tests,
       'doc' => 'Do not interpret help instructions as real commands',
   },
   # Correct command in e-mail from AppleMail, with no text/plain
-    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.13f letter; cp ../toperm_in.13e toperm; cat letter | perl $perl_opts ../../mail_in -t > out.13f",
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.13f letter; cp ../toperm_in.13e toperm; cat letter | perl $perl_opts ../../mail_in -t | ../base64glue > out.13f",
       'test' => 'diff -u ../out.13f out.13f',
       'doc' => 'Command in text/html',
   },
@@ -263,40 +263,40 @@ push @tests,
       'doc' => 'Drop mail without from address',
   },
   # Scheduling, command in subject
-    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.17 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.15b ; perl $perl_opts ../../goat --status >> out.15b 2>&1",
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.17 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t | ../base64glue > out.15b ; perl $perl_opts ../../goat --status >> out.15b 2>&1",
       'test' => 'diff -u ../out.15b out.15b',
       'doc' => 'Successful game scheduling',
   },
   # Scheduling, dd/MM/yyyy date format, summer time
-    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.17b letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.15d ; perl $perl_opts ../../goat --status >> out.15d 2>&1",
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.17b letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t | ../base64glue > out.15d ; perl $perl_opts ../../goat --status >> out.15d 2>&1",
       'test' => 'diff -u ../out.15d out.15d',
       'doc' => 'Successful game scheduling with dd/MM/YYYY format, summer time',
   },
   # Scheduling, dd/MM/yyyy date format, winter time
-    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.17c letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.15e ; perl $perl_opts ../../goat --status >> out.15e 2>&1",
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.17c letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t | ../base64glue > out.15e ; perl $perl_opts ../../goat --status >> out.15e 2>&1",
       'test' => 'diff -u ../out.15e out.15e',
       'doc' => 'Successful game scheduling with dd/MM/YYYY format, winter time',
   },
   # Scheduling with command in the body of the e-mail
-    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.18 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.15 ; perl $perl_opts ../../goat --status >> out.15 2>&1",
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.18 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t | ../base64glue > out.15 ; perl $perl_opts ../../goat --status >> out.15 2>&1",
       'test' => 'diff -u ../out.15 out.15',
       'doc' => 'game scheduling with command in body of mail (UTF8)',
   },
-    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.18b letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.15 ; perl $perl_opts ../../goat --status >> out.15 2>&1",
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.18b letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t | ../base64glue > out.15 ; perl $perl_opts ../../goat --status >> out.15 2>&1",
       'test' => 'diff -u ../out.15 out.15',
       'doc' => 'game scheduling with command in body of mail (ISO-8859-1)',
   },
-    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.18c letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.15 ; perl $perl_opts ../../goat --status >> out.15 2>&1",
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.18c letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t | ../base64glue > out.15 ; perl $perl_opts ../../goat --status >> out.15 2>&1",
       'test' => 'diff -u ../out.15 out.15',
       'doc' => 'game scheduling with command in body of mail (utf-8)',
   },
   # Scheduling, no location
-    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.18d letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.15c ; perl $perl_opts ../../goat --status >> out.15c 2>&1",
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.18d letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t | ../base64glue > out.15c ; perl $perl_opts ../../goat --status >> out.15c 2>&1",
       'test' => 'diff -u ../out.15c out.15c',
       'doc' => 'Game scheduling with no location',
   },
   # Same test as previous, with multi-part e-mail
-    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.19 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.15 ; perl $perl_opts ../../goat --status >> out.15 2>&1",
+    { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.19 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t | ../base64glue > out.15 ; perl $perl_opts ../../goat --status >> out.15 2>&1",
       'test' => 'diff -u ../out.15 out.15',
       'doc' => 'game scheduling with command in body of multi-part mail',
   },

@@ -1,0 +1,24 @@
+#! /usr/bin/perl -w
+
+# Concatenates base64 data blocks on one line, from stdin to
+# stdout. This allows for tests to work irrespective of the
+# version of encode_base64, which does not always output the
+# same line length.
+
+use strict;
+
+while (<>) {
+    print;
+    if (/^Content.*base64/) {
+        my $l = <>;
+        print $l;
+        my $base64;
+        while (<>) {
+            chop;
+            $base64 .= $_;
+            last if /^$/;
+        }
+        print "$base64\n\n";
+    }
+}
+
