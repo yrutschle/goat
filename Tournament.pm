@@ -300,11 +300,14 @@ sub find_player_by_email {
 
 =item $tournament->add_player($p)
 
-Adds a FFGPlayer
+Adds a FFGPlayer. Fail if it is duplicate.
 
 =cut
 sub add_player {
-    push @{$_[0]->ffgplayers}, $_[1];
+    my ($tournament, $player) = @_;
+    return 0 if grep { $player->id eq $_->id } @{$tournament->ffgplayers};
+    push @{$tournament->ffgplayers}, $player;
+    return 1;
 }
 
 =item $tournament->del_player($p)

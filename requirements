@@ -23,6 +23,9 @@ REGISTER_4
         register shall get club, license and other player
         information from the echelle file.
 
+REGISTER_5
+        register shall automatically drop duplicate players,
+        warning the user.
 
 
 PAIR_1        

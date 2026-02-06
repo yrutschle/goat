@@ -44,6 +44,12 @@ push @tests,
        'test' => 'diff -u ../out.0 out.0b',
        'doc' => 'Register players with text file',
    },
+   # register player and discard duplicate players
+   # REGISTER_5
+   { 'run' => "cp ../players2 players; cp ../ech_ffg_V3.txt .; perl $perl_opts ../../gplayer --test --newtournament --add players 2> out.0c ; perl $perl_opts ../../goat --list-players >> out.0c",
+       'test' => 'diff -u ../out.0c out.0c',
+       'doc' => 'Register players with duplicate players',
+   },
    # pair: create a new round
    # Tests PAIR_1, PAIR_2, PAIR_3
    { 'run' => " export TEST_TIME=1122737400; cp ../ech_ffg_V3.txt . ; cp ../toperm_in.1 toperm; perl $perl_opts ../../pair --test 2>&1 | ../base64glue > out.1 ; perl $perl_opts ../../goat --status >> out.1",

@@ -1,0 +1,157 @@
+line 4:Illegal: alias illegal Line with no address
+
+Not found "Joe Bloggs" in echelle -- adding anyway
+Joe Bloggs: player license: - (Non licensie) is not allowed.
+Not found "Joey Bloggs" in echelle -- adding anyway
+Joey Bloggs: player license: - (Non licensie) is not allowed.
+Not found "John Bloggs" in echelle -- adding anyway
+John Bloggs: player license: - (Non licensie) is not allowed.
+Unknown option: 3b
+Not found "Jane Bloggs" in echelle -- adding anyway
+Jane Bloggs: player license: - (Non licensie) is not allowed.
+Ambiguous name "Yves":
+ ABADIE Yves                           -1500 - 0452000 31To
+ BAILLY Yves                            -900 - 9516001 21Di
+ BEAUCHAMP Yves                         -400 - 8643000 00L9
+ BUREL Yves                            -9999 - 9433000 29Br
+ CASTEL Yves                           -9999 - 0288706 67SE
+ CAUTERMAN Yves-Michel                 -9999 - 0693011 59Li
+ CAVALLO Jean-Yves                     -9999 - 9212102 XXXX
+ CHARDARD Yves                          -900 - 0485001 54Na
+ CHRISTMANN Pierre-Yves                    0 - 0800364 91SM
+ CLABON Yves                            -200 - 0637204 35Re
+ CLAIR Yves                             -185 L 9951702 64Pa
+ COURSOLLE Pierre-Yves                  -877 L 1100166 58Ne
+ DECROIX Yves                              0 - 0070000 32Ea
+ DELAGNEAU Pierre-Yves                 -1100 - 9551005 33Bo
+ DENES Yves                             -200 - 8925003 93Mo
+ DOREMIEUX Yves                        -1800 - 0421210 75Al
+ FOSSATI Yves                          -1300 - 0900464 42Se
+ FRANCE-LANORD Yves                    -1000 - 0250201 81Al
+ GARINET Jean-Yves                     -1100 - 9752011 31To
+ GENDRON Yves                          -1400 - 9737500 37To
+ GIORDANO Jean-Yves                     -500 - 9177402 35Re
+ GOLHEN Yves                            -300 - 8737800 75Pa
+ GOURMOND Jean-Yves                      219 L 9025024 75Al
+ GUITER Yves                           -1200 - 9237009 44Na
+ JANIN Yves                             -300 - 0020006 00L2
+ JEAN Yves                              -900 - 9625007 75Pa
+ KEMPF Jean-Yves                       -1000 - 9724701 95Ta
+ KOLTER Yves-alexandre                 -1000 - 0800026 34Mo
+ LACOSTE Jean-Yves                     -1000 - 9200123 69Ly
+ LAVIGNASSE Yves                       -1400 - 9513504 38IG
+ LAYGUES Jean-Yves                     -2414 L 1500146 56Va
+ LE_CORRE Yves                         -1300 - 9191004 80Am
+ LE_MEUR Jean-Yves                      -400 - 0230001 00L3
+ LEDOUARON Yves                        -9999 - 1400115 42Se
+ LEGOFF Yves                           -9999 - 9125053 75Pa
+ LODS Jean-Yves                        -1000 - 9079001 30NJ
+ MAETZ Jean-Yves                        -700 - 0700078 38Gr
+ MAGADUR Jean-Yves                     -1100 - 0525505 75OB
+ MARCONNET Jean-Yves                    -500 - 8825003 75Pa
+ MERIEUX Yves                          -9999 - 9877816 06Pe
+ MEROT Yves                             -600 - 8828500 44Na
+ MOCQUARD Yves                          -300 - 9937203 35Re
+ MONTHOUX Pierre-Yves                  -9999 - 0800227 38Gr
+ OLLIEROU Yves                         -1200 - 1000117 92Bo
+ PAPAZOGLOU Jean-Yves                   -687 L 0700101 31Ba
+ PÉRÈS Yves-Marie                       -809 L 1400198 69Ly
+ PEZZETTA Yves                          -400 - 1000034 67SE
+ PHILIPPET Yves                        -1300 - 0127103 93Mo
+ PICHON Pierre-Yves                    -1500 - 0452013 31To
+ ROGEAT Yves                           -1300 - 0311000 74An
+ RUTSCHLE Yves                         -1272 L 0652029 31To
+ SCABA Yves                            -1300 - 9137012 44Na
+ SCHOENAHL Jean-Yves                   -9999 - 9288724 67SE
+ SERGEANT Yves                           -55 L 1400003 75Op
+ SIMCIC Yves                            -800 - 9525009 75Pa
+ SPINNER Yves                           -300 - 0688705 67SE
+ STALDER Yves                           -761 L 0800394 63Ce
+ TANGUY Yves                           -1400 - 0700405 44MN
+ TISSERAND Yves                        -9999 - 9021004 92An
+ VALOIS Yves                           -1500 - 9954001 40Mo
+
+Try to add licence number to the end of the alias line.
+Laurent MEUNIER: player license: - (Non licensie) is not allowed.
+Lionel BIDEO: player license: - (Non licensie) is not allowed.
+Frédéric CAGNAZZO: player license: - (Non licensie) is not allowed.
+Umberto POLVERINI: player license: - (Non licensie) is not allowed.
+Jean-François ROUSSEL: player license: - (Non licensie) is not allowed.
+Didier BELLOC: player license: - (Non licensie) is not allowed.
+Frédéric MIRCOVICH: player license: - (Non licensie) is not allowed.
+Michaël PALLANDRE: player license: - (Non licensie) is not allowed.
+Nicolas DARQUE: player license: - (Non licensie) is not allowed.
+Olivier ROUMEZI: player license: - (Non licensie) is not allowed.
+Frédéric NASSE: player license: - (Non licensie) is not allowed.
+Florence BORNET: player license: - (Non licensie) is not allowed.
+Mathias ORTNER: player license: - (Non licensie) is not allowed.
+Boreï ENG: player license: - (Non licensie) is not allowed.
+Maxime GALLY: player license: - (Non licensie) is not allowed.
+Hugues CAUBEL: player license: - (Non licensie) is not allowed.
+registering Joey Bloggs <joey@example.org>
+registering Umberto POLVERINI <polverini@example.org>
+registering Eric SAVES <esaves@example.org>
+registering Didier BELLOC <didier.belloc@example.org>
+registering Frédéric NASSE <fred.clubgo@example.org>
+registering Daniel DALLA_BARBA <daniel.dalla-barba@example.org>
+registering Laurent LAMÔLE <lorl@example.org>
+registering Joe Bloggs <joe@example.org>
+registering Thomas DUFOUR <naptod@example.org>
+registering Frédéric CAGNAZZO <fcagnazzo@example.org>
+registering Jean-François ROUSSEL <Jean-Francois.Roussel@example.org>
+registering Marc MAUREL <marco.m@example.org>
+registering Florian NIVET <briefsfly@example.org>
+registering Frédéric MIRCOVICH <frederic.mircovich@example.org>
+registering Michaël PALLANDRE <michael.pallandre@example.org>
+registering Jacques CARANICOLAS <1803.carajacq.1955@example.org>
+registering Lionel BIDEO <bideo.lionel@example.org>
+registering Mathias ORTNER <mathias.ortner@example.org>
+registering Laurent MEUNIER <laurent.meunier@example.org>
+registering Hugues CAUBEL <huguesc@example.org>
+registering François LEROY <fr.leroy@example.org>
+registering Florence BORNET <florence.bornet@example.org>
+registering Boreï ENG <boreieng@example.org>
+registering Maxime GALLY <maximegally@example.org>
+registering Jean-Yves PAPAZOGLOU <jeanyves.papazoglou@example.org>
+registering Yves RUTSCHLE <yves@example.org>
+Duplicate player Yves RUTSCHLE <yves@example.org>
+registering Laurent BOURDRON <laurent.bourdron@example.org>
+registering Olivier ROUMEZI <o_roumezi@example.org>
+registering John Bloggs <john@example.org>
+registering Jane Bloggs <jane@example.org>
+registering Nicolas DARQUE <nicolas.darque@example.org>
+registering Jean-Jacques PORTAL <jean-jacques.portal@example.org>
+Registered 32 players.
+Joey Bloggs <joey@example.org> 250 ------- ---- -
+Umberto POLVERINI <polverini@example.org> -150 8850900 31To -
+Eric SAVES <esaves@example.org> -450 0152006 31Pi C
+Didier BELLOC <didier.belloc@example.org> -450 0252005 31To -
+FrÃ©dÃ©ric NASSE <fred.clubgo@example.org> -550 0452018 31To -
+Daniel DALLA_BARBA <daniel.dalla-barba@example.org> -550 9652001 31To L
+Laurent LAMÃ”LE <lorl@example.org> -650 9721004 31Pi L
+Joe Bloggs <joe@example.org> -650 ------- ---- -
+Thomas DUFOUR <naptod@example.org> -650 0452010 31Pi L
+FrÃ©dÃ©ric CAGNAZZO <fcagnazzo@example.org> -750 0252001 31To -
+Jean-FranÃ§ois ROUSSEL <Jean-Francois.Roussel@example.org> -750 9752026 31Ba -
+Marc MAUREL <marco.m@example.org> -850 9352006 31To L
+Florian NIVET <briefsfly@example.org> -850 0552022 31To L
+FrÃ©dÃ©ric MIRCOVICH <frederic.mircovich@example.org> -850 0352035 31To -
+MichaÃ«l PALLANDRE <michael.pallandre@example.org> -850 0452025 31To -
+Jacques CARANICOLAS <1803.carajacq.1955@example.org> -950 8552001 31Ba L
+Lionel BIDEO <bideo.lionel@example.org> -950 0552019 31To -
+Mathias ORTNER <mathias.ortner@example.org> -950 0477800 31To -
+Laurent MEUNIER <laurent.meunier@example.org> -1050 0552007 31To -
+Hugues CAUBEL <huguesc@example.org> -1050 0352043 31To -
+FranÃ§ois LEROY <fr.leroy@example.org> -1136 9252006 31Pi L
+Florence BORNET <florence.bornet@example.org> -1250 0552025 31To -
+BoreÃ¯ ENG <boreieng@example.org> -1250 0638002 57Me -
+Maxime GALLY <maximegally@example.org> -1250 0552004 31To -
+Jean-Yves PAPAZOGLOU <jeanyves.papazoglou@example.org> -1250 0700101 31Ba L
+Yves RUTSCHLE <yves@example.org> -1272 0652029 31To L
+Laurent BOURDRON <laurent.bourdron@example.org> -1350 0552012 31To L
+Olivier ROUMEZI <o_roumezi@example.org> -1550 0452027 31To -
+John Bloggs <john@example.org> -1600 ------- ---- -
+Jane Bloggs <jane@example.org> -1600 ------- ---- -
+Nicolas DARQUE <nicolas.darque@example.org> -1650 0552014 31To -
+Jean-Jacques PORTAL <jean-jacques.portal@example.org> -1750 0652028 31Ba L
+

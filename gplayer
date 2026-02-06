@@ -175,11 +175,16 @@ sub add {
     # Sort by level
     @registered = sort { $b->level <=> $a->level } @registered;
 
+    my $cnt_player = 0;
     foreach my $p (@registered) {
-        $t->add_player($p);
-        warn "registering ".$p->fulladdress."\n";
+        if ($t->add_player($p)) {
+            warn "registering ".$p->fulladdress."\n";
+            $cnt_player++;
+        } else {
+            warn "Duplicate player ".$p->fulladdress."\n";
+        }
     }
-    warn "Registered ".(scalar @registered)." players.\n";
+    warn "Registered $cnt_player players.\n";
 }
 ################################################################################
 sub del {
