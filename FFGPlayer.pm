@@ -274,7 +274,6 @@ sub id {
     my ($self) = @_;
 
     my $id = $self->fullname;
-    $self->{id} = $id; # Store it in hash so it gets exported in XML dumps
 }
 
 # Returns givenname + familyname in one string
