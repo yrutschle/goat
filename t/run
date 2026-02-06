@@ -93,6 +93,17 @@ push @tests,
        'test' => 'diff -u ../out.1k out.1k',
        'doc' => 'New round with random bye player and send pairings',
    },
+  # Manual pairing management
+  { 'run' => " export TEST_TIME=1122737400; cp ../toperm_in.1 toperm; ".
+      "perl $perl_opts ../../add_round > out.21 2>&1 ; ".
+      "perl $perl_opts ../../add_game --black polverini\@example.org --white joey\@example.org >> out.21 2>&1 ; ".
+      "perl $perl_opts ../../add_game --black yves\@example.org --white lorl\@example.org >> out.21 2>&1 ; ".
+      "perl $perl_opts ../../goat --status >> out.21",
+      'test' => 'diff -u ../out.21 out.21',
+      'doc' => 'Manual new round',
+  },
+
+
    # send pairings
    { 'run' => "export TEST_TIME=1122737400; cp ../toperm_in.2 toperm; " .
        "perl $perl_opts ../../goat --test --send-pairings > out.1g 2>&1 ; ",
@@ -358,16 +369,6 @@ push @tests,
       'test' => 'diff -u ../out.70 out.70',
       'doc' => 'mail_out illegal mail and attach',
   },
-  # Manual pairing management
-  { 'run' => " export TEST_TIME=1122737400; cp ../toperm_in.1 toperm; ".
-      "perl $perl_opts ../../add_round > out.21 2>&1 ; ".
-      "perl $perl_opts ../../add_game --black polverini\@example.org --white joey\@example.org >> out.21 2>&1 ; ".
-      "perl $perl_opts ../../add_game --black yves\@example.org --white lorl\@example.org >> out.21 2>&1 ; ".
-      "perl $perl_opts ../../goat --status >> out.21",
-      'test' => 'diff -u ../out.21 out.21',
-      'doc' => 'Manual new round',
-  },
-
 
   ;
 
