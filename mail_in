@@ -107,6 +107,8 @@ sub process_sgf {
     foreach my $part ($mime->parts) {
         my $ct = $part->content_type // "";
         my $fn = $part->filename // "";
+        $ct = decode("MIME-Header", $ct);
+        $fn = decode("MIME-Header", $fn);
         if (($ct =~ /x-go-sgf/) or
             ($fn =~ /\.sgf$/)) {
             my $filename = "$TMP_DIR/sgf.$$";

@@ -1,0 +1,200 @@
+Envelope-to: goat_ffg@example.com
+Delivery-date: Sun, 19 Apr 2026 15:21:45 +0000
+Received: from yves by localhost with local (Exim 4.96)
+	(envelope-from <yves@example.com>)
+	id 1wETxx-000CGz-00
+	for goat_ffg@example.com;
+	Sun, 19 Apr 2026 15:21:45 +0000
+Resent-From: Yves Rutschle <yves@example.com>
+Resent-Date: Sun, 19 Apr 2026 15:21:44 +0000
+Resent-Message-ID: <aeTzCChanjGO7pO2@example.com>
+Resent-To: Goat FFG Assistant <goat_ffg@example.com>
+X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-25) on saaz
+X-Spam-Level: 
+X-Spam-Status: No, score=-6.9 required=5.0 tests=ARC_SIGNED,ARC_VALID,BAYES_00,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,DMARC_PASS,
+	FREEMAIL_FROM,HTML_MESSAGE,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,
+	RCVD_IN_VALIDITY_CERTIFIED,RCVD_IN_VALIDITY_RPBL,RCVD_IN_VALIDITY_SAFE,
+	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+Received: from mail-wr1-f49.google.com ([209.85.221.49])
+	by localhost with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.96)
+	(envelope-from <delacroixclem@example.com>)
+	id 1wEOwf-0009Uc-0r
+	for yves@example.com;
+	Sun, 19 Apr 2026 10:00:05 +0000
+Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-43cf7683a28so1324501f8f.2
+        for <yves@example.com)
+ARC-Seal: i=1; a=rsa-sha256; t=1776592795; cv=none;
+        d=google.com; s=arc-20240605;
+        b=KdLPRCtoW7GnDvqQpj7SbmtagUU7FpzVtnlsHqwX437S8Yhj3g5gOqcY+BDst7/sjF
+         fbiiKdTVxVklO9+XIiTtjIJ9dBb2PhosI8EHR5OVH8PUGFj+X0FtEyy6fAwlcuouywFv
+         ZLHopwEkBqZrBWEIdYBeC6BvD0RjPuAWmD4fFLsWizqg2+/41AUHOL+c5UFQ8a++FJdD
+         EB1mvrCzwoNO5jjf58fnDnBW/UoSF+vaw/6njhC2zq5CfB4RPXO9dH2H8TPa41B+BWqG
+         l0mtyw8vE+F29gonrItZnrjczA3b9zsKoytItzQJqzLGFTAYkSV3bs0ncPDkcY+7LHQ8
+         KIDQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=VvxWTVfL+GiotKyVp9a3UMkuTrcxjWAx1GZcDi5ccQc=;
+        fh=wJXlOpeL8WgC7VVUwjEEg/7ppwNoSJ6yy6gwqBJSLSc=;
+        b=S7UByV46VtIs3IoVKXYIoVXk2Em3x1+4H8uE7QYOoP/9+26dp5jddlXK+FJLBEYWQ9
+         0ap0FI+leLe2Yu2qft7drKefgYzv8qLsPF1spNNVOx+xuqUEToZmfg6YzKdH+2kmDXZ0
+         aio1iVMRy2I1s7iJCvV/NMWMbJWh8Fwbmpi5kojBgavSgzWX7tD30EVgQgWylvbPiv+9
+         K7pCOwPLekbZDos6dLFF7uxEBleCyhyRA7sBATeaOG+wHlOrMhkUcFbMiCeeAGzD4t6m
+         0yze6CkS1LANkSiyc1IP2wbPvTJAloy7bb7cmAB5RpQKfTy23Z+3CT+BDCMBmuJw4FH/
+         SVsg==;
+        darn=rutschle.net
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1776592795; x=1777197595; darn=rutschle.net;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=VvxWTVfL+GiotKyVp9a3UMkuTrcxjWAx1GZcDi5ccQc=;
+        b=e9M2MGvnkyf0/WQi8Kll80uC9AopJJ9nfbnsTs3JimZb0CppynBGoFutUm+nk+dYoP
+         28w5UHiftLUepDWUQfBWSsOC4tGdHkaVZb1X4fk8nypp5jadIR4a3BI+HL9rclHA/sbP
+         h2XQxOzuAXY++31QpXmHE1gU/KLafq5n4zxDZeC+b2NK3OJcYUE9g/o9zTBJ86pzyW/D
+         ceY8DyWd4F3g+x2zZB7gWJf+J6ahtfzX9ayoF24HMaHNH0nDMtfds34Tfdk4cpcLjA3o
+         8DIhYJbykAZ8L8hbbvk8tGvHV0oS11AnEEyLW8XikN2GSlzfVEOP0+0oOAG93NN8Fb1C
+         hazg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776592795; x=1777197595;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=VvxWTVfL+GiotKyVp9a3UMkuTrcxjWAx1GZcDi5ccQc=;
+        b=AeBpoh32DC4RMBv3vFKXUwH5km/Cl8vqHbIdxy73+eMc5ydleO8wFYnlhGQbZPUwrq
+         fuSI6TKfMwEp65GK/xbnGZY/maiGO4ztd+cpiloIK5iDerRDTsKseOkPrw+tyBoovtjD
+         k/jMblZEQr+7Vg9NUHktRKHGcTtWRH0Hfpz7QWAJv+Bj7J6jgeFI+dJcqZq6rTumD060
+         /frUT7YeYUisHq6sLMhVgOeZpGoO/1rLoKIkBfoRaE0aQiyVDWF5vMunTdhhyqiTkOKK
+         ho6UIPaQnaxrkCdCmDy/VDcXbWQzCl1jNAENz6OU+Dkw+k/J99QXryq5ezB/kCo6ztdz
+         e+ZQ==
+X-Gm-Message-State: AOJu0YzeqY0Ssxtfa30BFCTw4gZiEONWUFfQEs7GdX5NeCn/Q160MS4l
+	mQdwKQiRBbjCpREai89MgpGD4BVvVf2kcZaC+jh+2erQCvbGw3IfLmoJYT7zlxLTtoRR57LFSL5
+	Q3XyVWTfuBDWDuWLDs79QDxzWKNIwy6+7xw==
+X-Gm-Gg: AeBDietraQBFDZF9rriwNATp7PWLCFOuMB7Ogl59oCV1LYo7HiyUEtIwMI/g/6xNkIT
+	XKYBlt+739B9i108f9D6u5ZnzPg9Kt68eqTnYEw+H2nmK4OceqpDBt7hf45rhtGgaf2nEzATN3g
+	LP7rOGbppPNS0kheMeYTQkRFIwEvYn36tKK4m0/dFOjuQopjMrcMKwgFAUVChEv7cNmM1Q6XYsh
+	jKNdiQUnR5IwALY38T9YHv1bDmNOnF1jicaTY3MWFVwChuo1RK3pt1ip70d7H7JhMpPgxzzLLzX
+	IDdaH72PXiLvsVOLt5DkSs+v/F9NKqTePiTm9L2yD3JDgtmPpZCq1SQFDplM4YKc9CRLf7xwpKd
+	I0xsnMKQ=
+X-Received: by 2002:a05:6000:2dc8:b0:43c:fbfa:20a0 with SMTP id
+ ffacd0b85a97d-43fe3e077d4mr14153192f8f.25.1776592794641; Sun, 19 Apr 2026
+ 02:59:54 -0700 (PDT)
+MIME-Version: 1.0
+References: <CAD5NBfd-+UmMJuL8aCi5_Bpk8F9PwdDPNKHUfcSg2qqgB-tZnA@example.com>
+In-Reply-To: <CAD5NBfd-+UmMJuL8aCi5_Bpk8F9PwdDPNKHUfcSg2qqgB-tZnA@example.com>
+From: =?UTF-8?Q?Cl=C3=A9ment_Delacroix?= <delacroixclem@example.com>
+Date: Sun, 19 Apr 2026 11:59:42 +0200
+X-Gm-Features: AQROBzDxwDzX8qV7NUcZQ5Ic34AhRnsZtKttct_OXwNGgvm1Zf96MWH5VGDQwSE
+Message-ID: <CAD5NBfcEv53_pFteTxhw5jHrhGOoUvFa_rm=n06o0nfgGPa9Eg@example.com>
+Subject: =?UTF-8?Q?Fwd=3A_r=C3=A9sultats_round_3_tournoi_lent_=2DDelacroix_Cl=C3=A9?=
+	=?UTF-8?Q?ment_vs_Oc=C3=A9ane_Malavassi?=
+To: yves@example.com
+Content-Type: multipart/mixed; boundary="0000000000006f8027064fcd3ebf"
+
+--0000000000006f8027064fcd3ebf
+Content-Type: multipart/alternative; boundary="0000000000006f8027064fcd3ebd"
+
+--0000000000006f8027064fcd3ebd
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Bonjour Yves
+1=C3=A8re victoire, je ne sais pas si c'est =C3=A0 toi que je dois envoyer =
+le
+r=C3=A9sultat...
+
+Delacroix, blanc, gagne contre Malavassi noir
+
+Ci-joint le sdf
+
+Bon dimanche
+
+--=20
+*Cl=C3=A9ment Delacroix*
+
+
+--=20
+*Cl=C3=A9ment Delacroix*
+
+--0000000000006f8027064fcd3ebd
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><div class=3D"gmail_quote gmail_quote_container"><div =
+dir=3D"ltr"><div>Bonjour Yves</div><div>1=C3=A8re victoire, je ne sais pas =
+si c&#39;est =C3=A0 toi que je dois envoyer le r=C3=A9sultat...</div><div><=
+br></div><div>Delacroix, blanc, gagne contre Malavassi noir</div><div><br><=
+/div><div>Ci-joint le sdf</div><div><br></div><div>Bon dimanche</div><br><s=
+pan class=3D"gmail_signature_prefix">-- </span><br><div dir=3D"ltr" class=
+=3D"gmail_signature" data-smartmail=3D"gmail_signature"><div dir=3D"ltr"><d=
+iv><div dir=3D"ltr"><div><div dir=3D"ltr"><div><div dir=3D"ltr"><div><div d=
+ir=3D"ltr"><div><div dir=3D"ltr"><div><div dir=3D"ltr"><div><div><div dir=
+=3D"ltr"><font size=3D"1"><i><span style=3D"font-family:garamond,serif"><sp=
+an style=3D"color:rgb(0,0,0)">Cl=C3=A9ment Delacroix</span></span></i></fon=
+t><br></div></div></div></div></div></div></div></div></div></div></div></d=
+iv></div></div></div></div></div></div>
+</div><div><br clear=3D"all"></div><br><span class=3D"gmail_signature_prefi=
+x">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature" data-smartmail=
+=3D"gmail_signature"><div dir=3D"ltr"><div><div dir=3D"ltr"><div><div dir=
+=3D"ltr"><div><div dir=3D"ltr"><div><div dir=3D"ltr"><div><div dir=3D"ltr">=
+<div><div dir=3D"ltr"><div><div><div dir=3D"ltr"><font size=3D"1"><i><span =
+style=3D"font-family:garamond,serif"><span style=3D"color:rgb(0,0,0)">Cl=C3=
+=A9ment Delacroix</span></span></i></font><br></div></div></div></div></div=
+></div></div></div></div></div></div></div></div></div></div></div></div></=
+div>
+
+--0000000000006f8027064fcd3ebd--
+--0000000000006f8027064fcd3ebf
+Content-Type: application/octet-stream; 
+	name="=?UTF-8?Q?86207954=2D200=2Dcl=C3=A9mouille=2Dmenestrel=2Esgf?="
+Content-Disposition: attachment; 
+	filename="=?UTF-8?Q?86207954=2D200=2Dcl=C3=A9mouille=2Dmenestrel=2Esgf?="
+Content-Transfer-Encoding: base64
+Content-ID: <f_mo5lelun0>
+X-Attachment-Id: f_mo5lelun0
+
+KDtGRls0XQpDQVtVVEYtOF0KR01bMV0KRFRbMjAyNi0wNC0xOV0KUENbT0dTOiBodHRwczovL29u
+bGluZS1nby5jb20vZ2FtZS84NjIwNzk1NF0KR05bUGFydGllIGFtaWNhbGVdClBCW21lbmVzdHJl
+bF0KUFdbY2zDqW1vdWlsbGVdCkJSWzVrXQpXUls0a10KVE1bMTgwMF1PVFsyMCBmaXNjaGVyXQpS
+RVtXK1JdClNaWzE5XQpLTVs3LjVdClJVW0FHQV0KQ1tjbMOpbW91aWxsZTogYm9ubmUgcGFydGll
+IG1lbmVzdHJlbCAhCm1lbmVzdHJlbDogYm9ubmUgcGFydGllCl0KO0JbcGRdCig7V1tjcF0KKDtC
+W3BwXQooO1dbZGRdCig7QltlcV0KKDtXW2VwXQooO0JbZnBdCig7V1tlb10KKDtCW2RxXQooO1db
+Y3FdCig7QltocV0KKDtXW2RsXQooO0JbZmNdCig7V1tjZl0KKDtCW2pkXQooO1dbcWZdCig7Qltx
+aF0KKDtXW3FjXQooO0JbcWRdCig7V1tyZF0KKDtCW3JlXQooO1dbcmNdCig7QltxZV0KKDtXW3Bj
+XQooO0Jbb2RdCig7V1tuY10KKDtCW3FuXQooO1dbb3JdCig7Qltxcl0KKDtXW2xxXQooO0JbY2ld
+Cig7V1tlYl0KKDtCW2ZiXQooO1dbZWNdCig7QltmZF0KKDtXW2VnXQooO0JbYmxdCig7V1tibV0K
+KDtCW2NtXQooO1dbY2xdCig7Qltibl0KKDtXW2JrXQooO0JbYW1dCig7V1tjal0KKDtCW2RwXQoo
+O1dbY29dCig7Qltkb10KKDtXW2NuXQooO0JbZG1dCig7V1tkbl0KKDtCW2VsXQooO1dbZW1dCig7
+QltibV0KKDtXW2RqXQooO0JbZm1dCig7V1tlbl0KKDtCW2ZrXQooO1dbZ25dCig7QltlaV0KKDtX
+W2RpXQooO0JbZWhdCig7V1tkaF0KKDtCW2ZnXQooO1dbZ29dCig7QltpbF0KKDtXW2dsXQooO0Jb
+aGtdCig7V1ttZF0KKDtCW21lXQooO1dbbGVdCig7QltsZF0KKDtXW2xjXQooO0Jba2RdCig7V1tu
+ZV0KKDtCW21mXQooO1dbbmRdCig7QltuZl0KKDtXW3JmXQooO0JbcGZdCig7V1tzZV0KKDtCW3Fn
+XQooO1dbbG1dCig7Qltsb10KKDtXW21vXQooO0JbbW5dCig7V1tsbl0KKDtCW2tvXQooO1dbbm5d
+Cig7QlttcF0KKDtXW25vXQooO0JbbnBdCig7V1tscF0KKDtCW2puXQooO1dbcHFdCig7QltvcV0K
+KDtXW25xXQooO0Jbb3BdCig7V1txcV0KKDtCW3ByXQooO1dbbnJdCig7QltycV0KKDtXW25rXQoo
+O0Jbb21dCig7V1tubV0KKDtCW2xrXQooO1dbbWxdCig7QltvbF0KKDtXW25pXQooO0Jbb2VdCig7
+V1tvY10KKDtCW3BqXQooO1dbbWpdCig7Qltval0KKDtXW2trXQooO0JbbGpdCig7V1tpbV0KKDtC
+W2ptXQooO1dbamxdCig7Qltqa10KKDtXW2tsXQooO0JbaW9dCig7V1tqal0KKDtCW2lrXQpDW2Ns
+w6ltb3VpbGxlOiBkZXNvbMOpIGplIG1ldHMgdW4gcGV1IGRlIHRlbXBzLi4uCm1lbmVzdHJlbDog
+cGFzIGRlIHByb2JsZW1lIGMnZXN0IGZhaXQgcG91ciDDp2EKXQooO1dbbGldCig7Qltral0KKDtX
+W2tpXQooO0JbamldCig7V1tta10KKDtCW2lqXQooO1dbb2ddCig7QlttaF0KKDtXW29mXQooO0Jb
+cmddCig7V1twZV0KKDtCW25oXQooO1dbb2hdCig7QltvaV0KKDtXW21pXQooO0JbbGZdCig7V1tq
+cF0KKDtCW2pvXQooO1dbaG1dCig7QltpcF0KKDtXW2pxXQooO0JbaXJdCig7V1tqcl0KKDtCW2tw
+XQooO1dba3FdCig7QltpcV0KKDtXW21xXQooO0JbbXNdCig7V1tscl0KKDtCW2tzXQooO1dbanNd
+Cig7Qltsc10KKDtXW2NyXQooO0JbZ3JdCig7V1tlcl0KKDtCW2ZxXQooO1dbZHJdCig7QltncF0K
+KDtXW2hzXQooO0JbaXNdCig7V1tnc10KKDtCW2ZzXQooO1dbZnJdCig7Qltocl0KKDtXW2hvXQoo
+O0JbaHBdCig7V1tnc10KKDtCW2toXQooO1dba21dCig7Qltoc10KKDtXW2ZvXQooO0JbbGhdCig7
+V1tpbl0KKDtCW2pqXQooO1dbZXNdCig7QltsbF0KKDtXW21tXQooO0Jbb25dCig7V1trbl0KKDtC
+W29rXQooO1dbZ3NdCig7QltlZF0KKDtXW2RjXQooO0JbZnNdCig7V1tmZl0KKDtCW29vXQooO1db
+Z3NdCig7QltkZV0KKDtXW2NlXQooO0JbZnNdCig7V1tka10KKDtCW2VlXQooO1dbZ3NdCig7Qltl
+Zl0KKDtXW2dxXQooO0JbZGddCig7V1tjZ10KQ1tjbMOpbW91aWxsZTogbWVyY2kKbWVuZXN0cmVs
+OiBtZXJjaSBwb3VyIGxhIHBhcnRpZQpjbMOpbW91aWxsZTogaidhaSBldSBiY3AgZGUgY2hhbmNl
+IGVuIGJhcyDDoCBnYXVjaGUuLi4KXQopKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkp
+KSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkp
+KSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkp
+KSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKQ==
+--0000000000006f8027064fcd3ebf--
+
+

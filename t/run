@@ -74,7 +74,7 @@ push @tests,
    },
    # pair: pair with handicap removed for low players
    # Tests PAIR_6
-   { 'run' => " export TEST_TIME=1122737400; cp ../ech_ffg_V3.txt . ; cp ../toperm_in.34 toperm; perl $perl_opts ../../pair --test > out.1n 2>&1 ; perl $perl_opts ../../goat --status > out.1n",
+   { 'run' => " export TEST_TIME=1122737400; cp ../ech_ffg_V3.txt . ; cp ../toperm_in.1n toperm; perl $perl_opts ../../pair --test > out.1n 2>&1 ; perl $perl_opts ../../goat --status > out.1n",
        'test' => 'diff -u ../out.1n out.1n',
        'doc' => 'Pair with handicap removed for low players',
    },
@@ -262,6 +262,11 @@ push @tests,
     { 'run' => "rm sgf/*; export TEST_TIME=1122737400; cp ../letter_in.33b letter; cp ../toperm_in.33 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.33b 2>&1 ; perl $perl_opts ../../goat --status >> out.33b 2>&1 ; file sgf/2021-06-29*.sgf >> out.33b",
       'test' => 'diff -u ../out.33b out.33b',
       'doc' => 'Receive one-line jumbo SGF',
+  },
+  # SGF with encoded filename with accents
+    { 'run' => "rm sgf/*; export TEST_TIME=1122737400; cp ../letter_in.34 letter; cp ../toperm_in.34 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.34 2>&1 ; perl $perl_opts ../../goat --status >> out.34 2>&1 ; file sgf/2026-04-19*.sgf >> out.34",
+      'test' => 'diff -u ../out.34 out.34',
+      'doc' => 'SGF filename has accents',
   },
   # Check for loops
     { 'run' => "export TEST_TIME=1122737400; cp ../letter_in.14 letter; cp ../toperm_in.2 toperm; cat letter | perl $perl_opts ../../mail_in -t > out.12",
